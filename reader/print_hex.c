@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:16:39 by user              #+#    #+#             */
-/*   Updated: 2020/03/31 17:49:04 by user             ###   ########.fr       */
+/*   Updated: 2020/04/04 12:31:30 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,10 @@ static t_bool	line_equal_to_prev(const char *line, size_t lenght)
 	if (!prev_lenght || lenght != prev_lenght)
 		equals = FALSE;
 	pos = 0;
-	while (pos < lenght)
+	while (equals != FALSE && pos < lenght)
 	{
 		if (line[pos] != prev_line[pos])
-		{
 			equals = FALSE;
-			break ;
-		}
 		++pos;
 	}
 	ft_memcpy(prev_line, line, lenght + 1);
@@ -59,7 +56,6 @@ static void		print_line(const char *line, size_t lenght)
 	}
 	buf_add_strn(hex_line, pos);
 	buf_add_chr('\n', 1);
-	buf_flush();
 }
 
 static void		print_total_symbols(size_t symbols)
