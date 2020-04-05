@@ -6,7 +6,7 @@
 /*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/03 19:31:10 by enshertid         #+#    #+#             */
-/*   Updated: 2020/04/05 16:46:44 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/04/05 16:57:56 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,23 @@ static void			valid_champ_name(t_pars *pars, t_players *players)
 		ft_error("NULL oktet's are invalid", "valid_champ_name", 2);
 }
 
-// static void			valid_exc_size(t_pars *pars, t_players *players)
-// {
-// 	char			buf[5];
-// 	size_t			ret;
-// 	int			exc_size;
+static void			valid_exc_size(t_pars *pars, t_players *players)
+{
+	char			buf[5];
+	size_t			ret;
+	int			exc_size;
 
-// 	if ((ret = read(pars->fd, buf, 4)) != 4)
-// 		ft_error ("ex_code size is wrong", "valid_exc_size", 2);
-// 	buf[4] = '\0';
-// 	*((char*)&exc_size) = buf[3];
-// 	*((char*)&exc_size + 1) = buf[2];
-// 	*((char*)&exc_size + 2) = buf[1];
-// 	*((char*)&exc_size + 3) = buf[0];
-// 	if (exc_size > CHAMP_MAX_SIZE)
-// 		ft_error("ex code is too large", "valid_ex_size", 2);
-// 	players->arr[players->iter]->ex_size = exc_size;
-// }
+	if ((ret = read(pars->fd, buf, 4)) != 4)
+		ft_error ("ex_code size is wrong", "valid_exc_size", 2);
+	buf[4] = '\0';
+	*((char*)&exc_size) = buf[3];
+	*((char*)&exc_size + 1) = buf[2];
+	*((char*)&exc_size + 2) = buf[1];
+	*((char*)&exc_size + 3) = buf[0];
+	if (exc_size > CHAMP_MAX_SIZE)
+		ft_error("ex code is too large", "valid_ex_size", 2);
+	players->arr[players->iter]->ex_size = exc_size;
+}
 static void			check_comment(t_pars *pars, t_players *players)
 {
 	char			buf[COMMENT_LENGTH + 1];
@@ -102,7 +102,7 @@ void				pars_champ(t_pars *pars, t_players *players)
 {
 	check_m_h(pars);
 	valid_champ_name(pars, players);
-	// valid_exc_size(pars, players);
+	valid_exc_size(pars, players);
 	check_comment(pars, players);
 	valid_ex_code(pars,players);
 	players->iter++;
