@@ -22,7 +22,7 @@ typedef struct			s_player
 	char				*ex_code;
 	size_t				id;
 	t_bool				flag_of_n;
-	int					size;
+	size_t				ex_size;
 }						t_player;
 
 typedef struct			s_players

@@ -6,7 +6,7 @@
 /*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/03 19:31:10 by enshertid         #+#    #+#             */
-/*   Updated: 2020/04/05 14:39:11 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/04/05 16:46:44 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void			valid_champ_name(t_pars *pars, t_players *players)
 	name[size] = '\0';
 	ft_memcpy(name, buf, size);
 	players->arr[players->iter]->name = name;
-	printf("\n\nname ==> %s \n\n", name);
 	if ((ret = read(pars->fd, buf, 4)) != 4)
 		ft_error("NULL oktet's are invalid", "valid_champ_name", 2);
 }
@@ -63,39 +62,49 @@ static void			valid_champ_name(t_pars *pars, t_players *players)
 // 	*((char*)&exc_size + 1) = buf[2];
 // 	*((char*)&exc_size + 2) = buf[1];
 // 	*((char*)&exc_size + 3) = buf[0];
-// 	// if (exc_size > CHAMP_MAX_SIZE)
-// 		// ft_error("ex code is too large", "valid_ex_size", 2);
-// 	players->arr[players->iter]->size = exc_size;
+// 	if (exc_size > CHAMP_MAX_SIZE)
+// 		ft_error("ex code is too large", "valid_ex_size", 2);
+// 	players->arr[players->iter]->ex_size = exc_size;
 // }
-// static void			check_comment(t_pars *pars, t_players *players)
-// {
-// 	char			buf[COMMENT_LENGTH + 1];
-// 	char			*comment;
-// 	size_t			ret;
+static void			check_comment(t_pars *pars, t_players *players)
+{
+	char			buf[COMMENT_LENGTH + 1];
+	char			*comment;
+	size_t			ret;
 
-// 	if ((ret = read(pars->fd, buf, COMMENT_LENGTH)) != COMMENT_LENGTH)
-// 		ft_error ("wrong size of champion's name", "valid_champ_name", 2);
-// 	buf[COMMENT_LENGTH] = '\0';
-// 	comment = ft_calloc(ft_strlen(buf), sizeof(char));
-// 	comment[ft_strlen(buf) - 1] = '\0';
-// 	ft_memcpy(comment, buf, ft_strlen(buf));
-// 	players->arr[players->iter]->comment = comment;
-// 	if ((ret = read(pars->fd, buf, 4)) != 4)
-// 		ft_error("NULL oktet's are invalid", "valid_champ_name", 2);
-// }
+	if ((ret = read(pars->fd, buf, COMMENT_LENGTH)) != COMMENT_LENGTH)
+		ft_error ("wrong size of champion's name", "valid_champ_name", 2);
+	buf[COMMENT_LENGTH] = '\0';
+	comment = ft_calloc(ft_strlen(buf), sizeof(char));
+	comment[ft_strlen(buf) - 1] = '\0';
+	ft_memcpy(comment, buf, ft_strlen(buf));
+	players->arr[players->iter]->comment = comment;
+	if ((ret = read(pars->fd, buf, 4)) != 4)
+		ft_error("NULL oktet's are invalid", "valid_champ_name", 2);
+}
 
-// static void			valid_ex_code(t_pars *pars, t_players *players)
-// {
+static void			valid_ex_code(t_pars *pars, t_players *players)
+{
+	char			buf[players->arr[players->iter]->ex_size + 1];
+	char			*ex_code;
+	size_t			ret;
 
-// }
+	if ((ret = read(pars->fd, buf, players->arr[players->iter]->ex_size)) != players->arr[players->iter]->ex_size)
+		ft_error ("wrong size of champion's name", "valid_champ_name", 2);
+	buf[players->arr[players->iter]->ex_size] = '\0';
+	ex_code = ft_calloc(ft_strlen(buf), sizeof(char));
+	ex_code[ft_strlen(buf) - 1] = '\0';
+	ft_memcpy(ex_code, buf, ft_strlen(buf));
+	players->arr[players->iter]->ex_code = ex_code;
+}
 
 void				pars_champ(t_pars *pars, t_players *players)
 {
 	check_m_h(pars);
 	valid_champ_name(pars, players);
 	// valid_exc_size(pars, players);
-	// check_comment(players);
-	// valid_ex_code(pars,players);
+	check_comment(pars, players);
+	valid_ex_code(pars,players);
 	players->iter++;
 	pars->i++;
 }

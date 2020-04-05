@@ -6,7 +6,7 @@
 /*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 19:21:59 by enshertid         #+#    #+#             */
-/*   Updated: 2020/04/05 14:29:46 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/04/05 14:52:43 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void			parsing(t_pars *pars, t_players *players)
 			valid_name(pars, players);
 		pars_champ(pars, players);
 	}
-	// validate_id(players);
+	validate_id(players);
 }
