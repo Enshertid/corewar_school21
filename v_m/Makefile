@@ -6,14 +6,14 @@
 #    By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/02 18:51:40 by enshertid         #+#    #+#              #
-#    Updated: 2020/04/03 19:48:40 by enshertid        ###   ########.fr        #
+#    Updated: 2020/04/04 14:38:59 by enshertid        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Corewar
 
-SRCS =	main.c	parsing.c	players.c	ft_memalloc.c	\
-pars_id.c		pars_champ.c							\
+SRCS =	main.c	parsing.c	players.c	\
+pars_argv.c		pars_champ.c			\
 
 SRCS_DIR =			./srcs/
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:16:39 by user              #+#    #+#             */
-/*   Updated: 2020/03/31 17:49:04 by user             ###   ########.fr       */
+/*   Updated: 2020/04/04 10:52:04 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void		print_total_symbols(size_t symbols)
 	buf_add_str(a);
 }
 
-void			print_hex(const int fd)
+void		print_hex(const int fd)
 {
 	char	cur_line[17];
 	size_t	ret;

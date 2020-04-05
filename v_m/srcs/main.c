@@ -6,7 +6,7 @@
 /*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 18:58:47 by enshertid         #+#    #+#             */
-/*   Updated: 2020/04/03 19:51:58 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/04/05 14:07:23 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,21 @@ void			init_data(t_data *data, int ac, char **av)
 	init_players(&data->players);
 	data->pars.ac = ac;
 	data->pars.av = av;
-	parsing(&data->pars, &data->players);
+	data->pars.i = 1;
+}
+
+void			destroy_data(t_data *data)
+{
+	size_t i = 0;
+	while(i < data->players.iter)
+	{
+		free(data->players.arr[i]->name);
+		free(data->players.arr[i]->comment);
+		// free(data->players.arr[i]->ex_code);
+		free(data->players.arr[i]);
+		i++;
+	}
+	free(data->players.arr);
 }
 
 int				main(int ac, char **av)
@@ -27,5 +41,7 @@ int				main(int ac, char **av)
 	t_data			data;
 
 	init_data(&data, ac, av);
+	parsing(&data.pars, &data.players);
+	destroy_data(&data);
 	return (0);
 }
