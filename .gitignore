@@ -1,2 +1,6 @@
 *Cmake*
 *cmake*
+*.o
+a.out
+file*
+.*

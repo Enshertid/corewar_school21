@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+         #
+#    By: user <user@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/02 18:51:40 by enshertid         #+#    #+#              #
-#    Updated: 2020/04/03 19:48:40 by enshertid        ###   ########.fr        #
+#    Updated: 2020/04/04 12:12:35 by user             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Corewar
 
-SRCS =	main.c	parsing.c	players.c	ft_memalloc.c	\
-pars_id.c		pars_champ.c							\
+SRCS =	main.c	parsing.c	players.c		\
+		pars_champ.c					validate_id.c		\
 
 SRCS_DIR =			./srcs/
 
@@ -33,15 +33,15 @@ FLAGS =			-g -Wall -Werror -Wextra $(addprefix -I , $(HEAD_LIB)) $(addprefix -I 
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@make -C $(LIB_DIR) -s
-	@gcc $(FLAGS) $(OBJ) $(LIB_DIR)libft.a -o $(NAME)
+	make -C $(LIB_DIR) -s
+	gcc $(FLAGS) $(OBJ) $(LIB_DIR)libft.a -o $(NAME)
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)
 
 
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
-	@gcc $(FLAGS) -o $@ -c $<
+	gcc $(FLAGS) -o $@ -c $<
 
 clean:
 	@rm -rf $(OBJ_DIR)
