@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:16:39 by user              #+#    #+#             */
-/*   Updated: 2020/04/04 15:22:24 by user             ###   ########.fr       */
+/*   Updated: 2020/04/21 19:30:59 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void		print_total_symbols(size_t symbols)
 	buf_add_str(a);
 }
 
-void			print_hex(const int fd)
+void		print_hex(const int fd)
 {
 	char	cur_line[17];
 	size_t	ret;

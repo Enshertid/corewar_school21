@@ -6,14 +6,14 @@
 #    By: user <user@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/02 18:51:40 by enshertid         #+#    #+#              #
-#    Updated: 2020/04/04 12:12:35 by user             ###   ########.fr        #
+#    Updated: 2020/04/21 19:32:02 by user             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Corewar
 
-SRCS =	main.c	parsing.c	players.c		\
-		pars_champ.c					validate_id.c		\
+SRCS =	main.c	parsing.c	players.c	\
+pars_argv.c		pars_champ.c			\
 
 SRCS_DIR =			./srcs/
 

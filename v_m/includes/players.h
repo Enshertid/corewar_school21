@@ -18,8 +18,11 @@
 typedef struct			s_player
 {
 	char				*name;
+	char				*comment;
+	char				*ex_code;
 	size_t				id;
 	t_bool				flag_of_n;
+	size_t				ex_size;
 }						t_player;
 
 typedef struct			s_players
