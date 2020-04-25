@@ -1,50 +1,59 @@
 #include <sys/stat.h>
 #include "assembler.h"
 
-static void		check_file_extension(const char *file_name)
+static bool			is_file_extension_correct(const char *file_name)
 {
 	const size_t	name_lenght = ft_strlen(file_name);
 	const char		*file_extension = file_name + name_lenght - 2;
 
 	if (name_lenght < 2 || !ft_strequ(file_extension, ".s"))
-		warning_add(WARNING, 2, "Incorrect file extension: ", file_name);
+		return (false);
+	return (true);
 }
 
-static t_bool	is_dir(const char *filename)
+static bool			is_dir(const char *filename)
 {
 	struct stat	statbuf;
 
-	if (stat(filename, &statbuf) == 0)
-	{
-		if (S_ISDIR(statbuf.st_mode))
-		{
-			warning_add(ERROR, 3, "\"", filename, "\" is directory");
-			return (TRUE);
-		}
-	}
-	return (FALSE);
+	if (stat(filename, &statbuf) != 0)
+		return (false);
+	if (S_ISDIR(statbuf.st_mode))
+		return (true);
+	else
+		return (false);
 }
 
-void			assembler(char **files)
+static inline void	file_reset(t_file *file)
+{
+	ft_memset(file, 0, sizeof(t_file));
+}
+
+void				assembler(const char * const *files)
 {
 	t_file		file;
 
+	warning_create();
 	while (*files)
 	{
-		if (!is_dir(*files))
+		if (is_dir(*files))
+			warning_add(ERROR, 3, "file \"", *files, "\" is directory");
+		else
 		{
-			ft_memset(&file, 0, sizeof(t_file));
+			file_reset(&file);
 			file.fd = open(*files, O_RDONLY);
-			if (file.fd < 0)
-				warning_add(ERROR, 3, "Can\'t open file \"", *files, "\"");
-			else
+			if (file.fd >= 0)
 			{
 				file.name = *files;
-				check_file_extension(*files);
+				if (is_file_extension_correct(*files) == false)
+					warning_add(WARNING, 2, "Incorrect extension: ", *files);
 				assembly(&file);
 				close(file.fd);
 			}
+			else
+				warning_add(ERROR, 3, "Can\'t open file \"", *files, "\"");
 		}
-		++files;
+		files += 1;
 	}
+	warning_print();
+	warning_destroy();
 }

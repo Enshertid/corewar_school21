@@ -1,41 +1,28 @@
 #include "assembler.h"
 
-static void		usage(void)
+static void	usage(void)
 {
 	write(1, "usage: ./asm [files]\n", 21);
 }
 
-static t_bool	is_op_h_valid(void)
+static void	check_op_h(void)
 {
 	if (ft_strchr(LABEL_CHARS, LABEL_CHAR))
-	{
-		warning_add(ERROR, 1, "LABEL_CHAR exist in LABEL_CHARS");
-		return (FALSE);
-	}
+		ft_error("LABEL_CHAR exist in LABEL_CHARS", "check_op_h", 0);
 	if (ft_strchr(LABEL_CHARS, SEPARATOR_CHAR))
-	{
-		warning_add(ERROR, 1, "SEPARATOR CHAR exist in LABEL_CHARS");
-		return (FALSE);
-	}
+		ft_error("SEPARATOR CHAR exist in LABEL_CHARS", "check_op_h", 0);
 	if (ft_strchr(LABEL_CHARS, DIRECT_CHAR))
-	{
-		warning_add(ERROR, 1, "LABEL CHAR exist in LABEL_CHARS");
-		return (FALSE);
-	}
-	return (TRUE);
+		ft_error("LABEL CHAR exist in LABEL_CHARS", "check_op_h", 0);
 }
 
-int				main(int argc, char **argv)
+int			main(int argc, const char * const *argv)
 {
-	if (argc < 2)
-		usage();
-	else
+	if (argc > 1)
 	{
-		warning_create();
-		if (is_op_h_valid() == TRUE)
-			assembler(argv + 1);
-		warning_print();
-		warning_destroy();
+		check_op_h();
+		assembler(argv + 1);
 	}
+	else
+		usage();
 	return (0);
 }

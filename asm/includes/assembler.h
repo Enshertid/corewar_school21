@@ -9,7 +9,7 @@
 // #include "token.h"
 #include "file.h"
 
-void		assembler(char **files);
+void		assembler(const char * const *files);
 void		assembly(t_file *file);
 
 #endif
