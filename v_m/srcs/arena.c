@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 18:32:44 by ediego            #+#    #+#             */
-/*   Updated: 2020/04/30 14:01:51 by ediego           ###   ########.fr       */
+/*   Updated: 2020/04/30 15:21:40 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		init_carriages(t_vm *vm, t_data *data)
 		new->id_player = (i + 1);
 		new->registers[0] = - (i + 1);
 		new->position = ((VM_SIZE)/data->players.iter) * i;
-		new->code = vm->arena[new->position];
+		// new->code = vm->arena[new->position];
 		vm->carriages = new;
 	}
 }
@@ -99,11 +99,51 @@ void		init_vm_arena(t_vm *vm, t_data *data)
 	copy_excode(vm, data);
 }
 
+void		run_carriages(t_vm *vm, int cycle)
+{
+	t_car *iter;
+
+	iter = vm->carriages;
+	while (iter)
+	{
+		if (cycle == 0)
+			iter->code = vm->arena[iter->position];
+		if (!iter->cycle_to_action && iter->code >= 1 && iter->code <= 16)
+		{
+			iter->code = vm->arena[iter->position];
+			iter->cycle_to_action = GET_C[iter->code];
+			iter->cycle_to_action -= 1;
+			iter->position = VM_SIZE;
+			if (iter->code >= 1 && iter->code <= 16)
+				printf("Code %d = %d cycle to action\n", iter->code, iter->cycle_to_action);
+		}
+		else
+		{
+			iter->cycle_to_action -= 1;
+		}
+		iter = iter->next;
+	}
+}
+
+void		run_game(t_vm *vm)
+{
+	int cycle;
+
+	cycle = 0;
+	while (cycle < 1000)
+	{
+		run_carriages(vm, cycle);
+		cycle++;
+	}
+}
+
 void	 	init_vm(t_vm *vm, t_data *data)
 {
 	init_vm_arena(vm, data);
 	init_carriages(vm, data);
 	// init_ops(vm);
+	run_game(vm);
+
 	print_arena(vm->arena, VM_SIZE);
-	printf("%d\n", vm->carriages->code);
+	// printf("%d\n", vm->carriages->code);
 }
