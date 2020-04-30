@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 18:58:47 by enshertid         #+#    #+#             */
-/*   Updated: 2020/04/05 14:07:23 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/04/16 16:33:24 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int				main(int ac, char **av)
 
 	init_data(&data, ac, av);
 	parsing(&data.pars, &data.players);
+	init_vm(&data.vm, &data);
 	destroy_data(&data);
 	return (0);
 }

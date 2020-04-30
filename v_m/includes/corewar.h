@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 18:44:23 by enshertid         #+#    #+#             */
-/*   Updated: 2020/04/05 13:01:43 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/04/16 22:17:06 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@
 #include "op.h"
 #include "parsing.h"
 #include "players.h"
+#include "vm.h"
 
 typedef struct			s_data
 {
 	t_pars				pars;
 	t_players			players;
+	t_vm 				vm;
 }						t_data;
 
 void					parsing(t_pars *pars, t_players *players);
+void	 	init_vm(t_vm *vm, t_data *data);
+void		print_arena(const void *arena, size_t size);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_argv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/03 18:44:19 by enshertid         #+#    #+#             */
-/*   Updated: 2020/04/05 16:45:17 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/04/15 22:11:17 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static void			sort_id(t_players *players, size_t i, size_t j)
 	i = -1;
 	while (++i < players->iter)
 	{
-		printf("\nname==>%s\nid==>%zu\ncomment==>%s\nex_code==>%s\n",
-		players->arr[i]->name,players->arr[i]->id, players->arr[i]->comment, players->arr[i]->ex_code);
+		// printf("\nname==>%s\nid==>%zu\ncomment==>%s\nex_code==>%s\n",
+		// players->arr[i]->name,players->arr[i]->id, players->arr[i]->comment, players->arr[i]->ex_code);
 	}
 	free(ar);
 }

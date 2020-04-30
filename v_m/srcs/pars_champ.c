@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   pars_champ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/03 19:31:10 by enshertid         #+#    #+#             */
-/*   Updated: 2020/04/05 16:57:56 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/04/16 15:32:45 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "op.h"
 #include "stdio.h"
+#include "corewar.h"
+#include "vm.h"
 
 static void			check_m_h(t_pars *pars)
 {
@@ -85,17 +87,20 @@ static void			check_comment(t_pars *pars, t_players *players)
 
 static void			valid_ex_code(t_pars *pars, t_players *players)
 {
-	char			buf[players->arr[players->iter]->ex_size + 1];
+	char			buf[players->arr[players->iter]->ex_size];
 	char			*ex_code;
 	size_t			ret;
 
 	if ((ret = read(pars->fd, buf, players->arr[players->iter]->ex_size)) != players->arr[players->iter]->ex_size)
 		ft_error ("wrong size of champion's name", "valid_champ_name", 2);
-	buf[players->arr[players->iter]->ex_size] = '\0';
-	ex_code = ft_calloc(ft_strlen(buf), sizeof(char));
-	ex_code[ft_strlen(buf) - 1] = '\0';
-	ft_memcpy(ex_code, buf, ft_strlen(buf));
+	// buf[players->arr[players->iter]->ex_size] = '\0';
+	// print_arena((unsigned char *)buf, players->arr[players->iter]->ex_size);
+	ex_code = ft_calloc(players->arr[players->iter]->ex_size, sizeof(char));
+	// ex_code[ft_strlen(buf) - 1] = '\0';
+	ft_memcpy(ex_code, buf, players->arr[players->iter]->ex_size);
 	players->arr[players->iter]->ex_code = ex_code;
+	// ft_putstr("\nBefore memcpy in parsing\n\n");
+	// print_arena((unsigned char *)players->arr[players->iter]->ex_code, players->arr[players->iter]->ex_size);
 }
 
 void				pars_champ(t_pars *pars, t_players *players)
