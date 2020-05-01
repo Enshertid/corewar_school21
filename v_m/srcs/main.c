@@ -43,6 +43,7 @@ int				main(int ac, char **av)
 	init_data(&data, ac, av);
 	parsing(&data.pars, &data.players);
 	init_vm(&data.vm, &data);
+	cycle_of_game(&data);
 	destroy_data(&data);
 	return (0);
 }

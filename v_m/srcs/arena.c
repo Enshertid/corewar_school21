@@ -83,7 +83,6 @@ void		init_carriages(t_vm *vm, t_data *data)
 	while (++i < (int)data->players.iter)
 	{
 		new = new_carriage(vm->carriages);
-		new->id_player = (i + 1);
 		new->registers[0] = - (i + 1);
 		new->position = ((VM_SIZE)/data->players.iter) * i;
 		// new->code = vm->arena[new->position];

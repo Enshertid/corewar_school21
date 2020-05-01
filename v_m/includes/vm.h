@@ -12,37 +12,24 @@
 
 #ifndef VM_H
 # define VM_H
-#define VM_SIZE (MEM_SIZE / 4)
-// #include "op.h"
+# define VM_SIZE (MEM_SIZE / 4)
+
+#include "carets.h"
 
 static int GET_C[17] = {0, 10, 5, 5, 10, 10, 6, 6, 6, 20, 25, 25, 800, 10, 50, 1000, 2};
 
-typedef struct 			s_car
-{
-	int32_t				id;
-	int32_t 			id_player;
-	int32_t 			position;
-	t_bool 				carry;
-	int8_t				code;
-	int32_t 			last_live_cycle;
-	int32_t 			cycle_to_action;
-	uint8_t 			step;
-	int32_t 			registers[REG_NUMBER];
-	struct s_car		*next;
-}						t_car;
-
-
-typedef struct  		s_vm
+typedef struct			s_vm
 {
 	char			arena[MEM_SIZE];
 	int				last_live_id;
 	int				current_cycle;
-	int 			count_live;
+	int				count_live;
 	int				cycle_to_die;
-	int 			count_checks;
-	t_car 			*carriages;
-	
-
+	int				count_checks;
+	int				iter;
+	size_t			dump_count;
+	size_t			dump_value;
+	t_car			*carriages;
 }						t_vm;
 
 #endif
