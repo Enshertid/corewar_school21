@@ -6,7 +6,7 @@
 #    By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/02 18:51:40 by enshertid         #+#    #+#              #
-#    Updated: 2020/04/24 12:37:14 by ediego           ###   ########.fr        #
+#    Updated: 2020/05/02 19:31:59 by ediego           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,12 @@ NAME = Corewar
 
 SRCS =	main.c	parsing.c	players.c	\
 pars_argv.c		pars_champ.c			\
-arena.c 								\
+arena.c 		cycle_of_game.c			\
+delete_from_list_of_carets.c 			\
+functions_for_op.c op/op_live.c op/op_ld.c op/op_st.c op/op_add.c \
+op/op_sub.c op/op_and.c op/op_or.c op/op_xor.c op/op_zjmp.c op/op_ldi.c \
+op/op_sti.c  op/op_fork.c op/op_lld.c op/op_lldi.c op/op_lfork.c \
+op/op_aff.c \
 
 SRCS_DIR =			./srcs/
 

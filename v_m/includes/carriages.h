@@ -2,8 +2,10 @@
 // Created by Daniil&Ekaterina Naumenko on 01/05/2020.
 //
 
-#ifndef COREWAR_CARETS_H
-#define COREWAR_CARETS_H
+#ifndef CARRIAGES_H
+# define CARRIAGES_H
+
+#include "corewar.h"
 
 typedef struct 			s_car
 {
