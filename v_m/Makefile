@@ -6,7 +6,7 @@
 #    By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/02 18:51:40 by enshertid         #+#    #+#              #
-#    Updated: 2020/05/02 19:31:59 by ediego           ###   ########.fr        #
+#    Updated: 2020/05/02 19:53:05 by ediego           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ $(NAME): $(OBJ_DIR) $(OBJ)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
-
+	@mkdir -p $(OBJ_DIR)/op
 
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 	@gcc $(FLAGS) -o $@ -c $<
