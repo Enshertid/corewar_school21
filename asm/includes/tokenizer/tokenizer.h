@@ -15,6 +15,6 @@
 
 # include "token.h"
 
-t_vector_token	*tokenizer(t_vector_char *lines);
+t_vector_token	*tokenizer(t_vector_char *lines, t_validation	*validation);
 
 #endif

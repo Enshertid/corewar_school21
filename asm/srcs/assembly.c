@@ -39,14 +39,19 @@ static void	free_file(t_file *file)
 	line = 0;
 	while (line < lines_amount)
 	{
-		free(file->lines[line]);
+//		printf("line before free: %s\n", file->lines[line]);
+		if (file->lines[line][0] != '\0') // иначе фришится то, что не замолочено (.name / .comment == '\0')
+		{
+//			printf("freed line:%s\n", file->lines[line]);
+			free(file->lines[line]);
+		}
 		line += 1;
 	}
 	vec_destroy(&file->lines);
 	token_line = 0;
 	while (token_line < tokens_amount)
 	{
-		for (size_t i = 0; i < vec_size(&file->tokens[token_line]); ++i) {
+		for (int i = 0; i < vec_size(&file->tokens[token_line]); ++i) {
 			free(file->tokens[token_line][i].value);
 		}
 		vec_destroy(&file->tokens[token_line]);
@@ -66,19 +71,21 @@ static void	error_handle(const t_file *file)
 
 static void print(t_vector_char *lines, t_vector_token *tokens)
 {
-	const char types[7][15] = {
+	const char types[9][15] = {
 		"LABEL",
 		"INSTRUCTION",
 		"ARGUMENT",
 		"SEPARATOR",
+		"NAME",
+		"COMMENT",
 		"UNKNOWN"
 	};
 
-	for (size_t row = 0; row < vec_size(&tokens); ++row)
+	for (int row = 0; row < vec_size(&tokens); ++row)
 	{
-		printf("Line %zu: %s\n", row, lines[row]);
+		printf("Line %d: %s\n", row, lines[row]);
 		printf("Tokens:\n");
-		for (size_t col = 0; col < vec_size(&tokens[row]); ++col) {
+		for (int col = 0; col < vec_size(&tokens[row]); ++col) {
 			printf("\tType: %s, value: \"%s\"\n", types[tokens[row][col].type],
 											tokens[row][col].value);
 		}
@@ -86,7 +93,7 @@ static void print(t_vector_char *lines, t_vector_token *tokens)
 	}
 }
 
-void		assembly(t_file *file)
+void		assembly(t_file *file, t_validation	*validation)
 {
 	file->status = FILE_OK;
 	read_file(file);
@@ -94,7 +101,9 @@ void		assembly(t_file *file)
 		error_handle(file);
 	else
 	{
-		file->tokens = tokenizer(file->lines);
+		file->tokens = tokenizer(file->lines, validation);
+		ft_check_labels(file->tokens, validation);
+//		ft_check_instructions(file->lines, file->tokens, validation);
 		print(file->lines, file->tokens);
 		// tokens_analysis(file);
 		// if (file->status == FILE_OK)

@@ -18,6 +18,8 @@ static bool	if_register_skip(const char **lineptr)
 
 	if (line[0] == 'r' && ft_isdigit(line[1]))
 	{
+		if (line[1] == '0') //проверка на r0
+			return (false);
 		line += 1;
 		while (ft_isdigit(*line))
 			line += 1;

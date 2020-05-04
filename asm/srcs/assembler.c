@@ -28,7 +28,7 @@ static inline void	file_reset(t_file *file)
 	ft_memset(file, 0, sizeof(t_file));
 }
 
-void				assembler(const char * const *files)
+void				assembler(const char * const *files, t_validation	*validation)
 {
 	t_file		file;
 
@@ -46,7 +46,7 @@ void				assembler(const char * const *files)
 				file.name = *files;
 				if (is_file_extension_correct(*files) == false)
 					warning_add(WARNING, 2, "Incorrect extension: ", *files);
-				assembly(&file);
+				assembly(&file, validation);
 				close(file.fd);
 			}
 			else

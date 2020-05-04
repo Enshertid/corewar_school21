@@ -20,7 +20,7 @@ const size_t	g_instructions_lenghts[16] = {
 	4, 3, 3, 3, 3, 3, 3, 5, 2, 4, 3, 4, 3, 2, 2, 4
 };
 
-bool	is_instruction(const char **lineptr, t_token *token)
+bool	is_instruction(const char **lineptr, t_token *token, t_validation	*validation)
 {
 	const char	*line = *lineptr;
 	size_t		iter;
@@ -31,6 +31,7 @@ bool	is_instruction(const char **lineptr, t_token *token)
 		if (ft_strnequ(line, g_instructions[iter],
 						g_instructions_lenghts[iter]))
 		{
+			validation->have_instructions = 1; // флаг для проверки файла на наличие инструкций
 			token->type = INSTRUCTION;
 			token->value = ft_strdup(g_instructions[iter]);
 			*lineptr += g_instructions_lenghts[iter];

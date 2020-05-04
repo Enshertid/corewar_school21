@@ -20,7 +20,8 @@ int			main(int argc, const char * const *argv)
 	if (argc > 1)
 	{
 		check_op_h();
-		assembler(argv + 1);
+		if (ft_validation(argv) == 0)
+			exit (0);
 	}
 	else
 		usage();
