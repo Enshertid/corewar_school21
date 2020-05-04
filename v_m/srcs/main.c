@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 18:58:47 by enshertid         #+#    #+#             */
-/*   Updated: 2020/04/16 16:33:24 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/02 18:49:50 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int				main(int ac, char **av)
 	parsing(&data.pars, &data.players);
 	init_vm(&data.vm, &data);
 	cycle_of_game(&data);
+	// print_arena(&data.vm.arena, VM_SIZE);
 	destroy_data(&data);
 	return (0);
 }

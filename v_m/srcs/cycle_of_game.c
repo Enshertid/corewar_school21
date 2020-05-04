@@ -1,8 +1,9 @@
 #include "corewar.h"
 
-t_bool			end_dump()
+t_bool			end_dump(char *arena)
 {
 	write(1, "end bcs dump flag used\n", 23);
+	print_arena(arena, VM_SIZE);
 	return (TRUE);
 }
 
@@ -54,15 +55,15 @@ void			cycle_of_game(t_data *data)
 	data->vm.iter = 0;
 	data->vm.dump_count = 0;
 	flag_of_end = FALSE;
+	data->vm.dump_value = 1000; // делать дамп через 1000 циклов
 	while (!flag_of_end)
 	{
 		tmp = data->vm.carriages;
 		while(tmp)
 			tmp = check_caret(tmp);
 		if (++data->vm.dump_count == data->vm.dump_value)
-			flag_of_end = end_dump();
+			flag_of_end = end_dump(data->vm.arena);
 		else if (++data->vm.iter >= data->vm.cycle_to_die && !check_live(data))
 			flag_of_end = end_game();
 	}
 }
-

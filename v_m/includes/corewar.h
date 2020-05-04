@@ -18,6 +18,8 @@
 #include "parsing.h"
 #include "players.h"
 #include "vm.h"
+#include "carriages.h"
+#include "operations.h"
 
 typedef struct			s_data
 {
@@ -30,5 +32,6 @@ void		parsing(t_pars *pars, t_players *players);
 void		init_vm(t_vm *vm, t_data *data);
 void		print_arena(const void *arena, size_t size);
 void		cycle_of_game(t_data *data);
+void		functions_for_op(t_data *data, t_car *car);
 
 #endif

@@ -2,7 +2,7 @@
 // Created by Daniil&Ekaterina Naumenko on 01/05/2020.
 //
 
-#include "carets.h"
+#include "corewar.h"
 
 t_car			*delete_from_end(t_car *cur_car)
 {
