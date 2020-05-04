@@ -3,7 +3,13 @@
 //
 
 #ifndef COREWAR_CARETS_H
-#define COREWAR_CARETS_H
+# define COREWAR_CARETS_H
+
+#include "libft.h"
+#include "op.h"
+# define OP_NUM 16
+
+//typedef void (*operations(struct s_car *car));
 
 typedef struct 			s_car
 {

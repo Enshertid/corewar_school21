@@ -14,6 +14,7 @@ t_bool			end_game()
 
 t_car			*check_caret(t_car *caret)
 {
+	
 	return (caret->next);
 }
 
