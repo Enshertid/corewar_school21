@@ -45,9 +45,6 @@ void			init_data(t_data *data, int ac, char **av)
 	ft_memset(data, 0, sizeof(t_data));
 	set_array_of_operations(data);
 	init_players(&data->players);
-	data->pars.ac = ac;
-	data->pars.av = av;
-	data->pars.i = 1;
-	parsing(&data->pars, &data->players);
+	parsing(&data->players, ac, av);
 	init_vm(&data->vm, data);
 }

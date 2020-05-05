@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "pars.h"
-#include <stdio.h>
 #include "op.h"
 
 static t_bool		is_dir(const char *filename)

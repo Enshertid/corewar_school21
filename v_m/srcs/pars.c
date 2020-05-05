@@ -13,19 +13,25 @@
 #include "pars.h"
 #include "corewar.h"
 
-void			parsing(t_pars *pars, t_players *players)
+void			parsing(t_players *players, int ac, char **av)
 {
-	if (pars->ac < 2)
+	t_pars		pars;
+	
+	ft_memset(&pars, 0, sizeof(t_pars));
+	pars.ac = ac;
+	pars.av = av;
+	pars.i = 1;
+	if (pars.ac < 2)
 		ft_error("Have no champions", NULL, 1);
-	else if (pars->ac > (MAX_PLAYERS * 3) + 1)
+	else if (pars.ac > (MAX_PLAYERS * 3) + 1)
 		ft_error("To many arguments", NULL, 1);
-	while (pars->i < pars->ac)
+	while (pars.i < pars.ac)
 	{
-		if (ft_strequ(pars->av[pars->i], "-n"))
-			valid_flag(pars, players);
+		if (ft_strequ(pars.av[pars.i], "-n"))
+			valid_flag(&pars, players);
 		else
-			valid_name(pars, players);
-		pars_champ(pars, players);
+			valid_name(&pars, players);
+		pars_champ(&pars, players);
 	}
 	validate_id(players);
 }

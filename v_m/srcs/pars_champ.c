@@ -12,9 +12,6 @@
 
 #include "pars.h"
 #include "op.h"
-#include "stdio.h"
-#include "corewar.h"
-#include "vm.h"
 
 static void			check_m_h(t_pars *pars)
 {

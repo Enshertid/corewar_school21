@@ -21,12 +21,11 @@
 
 typedef struct			s_data
 {
-	t_pars				pars;
 	t_players			players;
 	t_vm 				vm;
 }						t_data;
 
-void		parsing(t_pars *pars, t_players *players);
+void		parsing(t_players *players, int ac, char **av);
 
 void		init_data(t_data *data, int ac, char **av);
 
