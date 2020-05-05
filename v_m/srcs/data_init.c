@@ -8,16 +8,13 @@
 static void		init_carriages(t_vm *vm, int iter)
 {
 	int i;
-	t_car *new;
+	t_car *list;
 	
-	i = -1;
+	i = 0;
+	list = create_caret(0, 1);
 	while (++i < iter)
-	{
-		new = new_carriage(vm->carriages);
-		new->registers[0] = (i + 1);
-		new->position = ((VM_SIZE) / iter) * i;
-		vm->carriages = new;
-	}
+		add_caret(&list, create_caret((MEM_SIZE / iter) * i, i + 1));
+	vm->carriages = list;
 }
 
 static void		init_vm_arena(t_vm *vm, t_players *players)
