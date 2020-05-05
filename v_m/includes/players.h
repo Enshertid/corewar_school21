@@ -32,7 +32,4 @@ typedef struct			s_players
 	size_t				iter;
 }						t_players;
 
-
-void			init_players(t_players *players);
-
 #endif

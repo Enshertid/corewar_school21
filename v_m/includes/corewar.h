@@ -14,12 +14,10 @@
 # define COREWAR_H
 
 #include "libft.h"
-#include "op.h"
-#include "parsing.h"
+#include "pars.h"
 #include "players.h"
 #include "vm.h"
-#include "carriages.h"
-#include "operations.h"
+#include "op.h"
 
 typedef struct			s_data
 {
@@ -29,9 +27,15 @@ typedef struct			s_data
 }						t_data;
 
 void		parsing(t_pars *pars, t_players *players);
-void		init_vm(t_vm *vm, t_data *data);
+
+void		init_data(t_data *data, int ac, char **av);
+
+void		set_array_of_operations(t_data *data);
+
 void		print_arena(const void *arena, size_t size);
-void		cycle_of_game(t_data *data);
-void		functions_for_op(t_data *data, t_car *car);
+
+void		cycle_of_game(t_vm *vm);
+
+void		destroy_data(t_data *data);
 
 #endif

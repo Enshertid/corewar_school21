@@ -14,8 +14,10 @@
 # define VM_H
 # define VM_SIZE (MEM_SIZE / 4)
 
+#include "op.h"
 #include "corewar.h"
 #include "carriages.h"
+#include "operations.h"
 
 typedef struct		s_vm
 {
@@ -23,12 +25,17 @@ typedef struct		s_vm
 	int				last_live_id;
 	int				current_cycle;
 	int				count_live;
-	int				cycle_to_die;
 	int				count_checks;
+	int				cycle_to_die;
 	int				iter;
 	size_t			dump_count;
 	size_t			dump_value;
 	t_car			*carriages;
+	t_op			operations;
 }					t_vm;
+
+void		print_arena(const void *arena, size_t size);
+void		copy_excode(t_vm *vm, t_players *players);
+t_car		*new_carriage(t_car *head);
 
 #endif

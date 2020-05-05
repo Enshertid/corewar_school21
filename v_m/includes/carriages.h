@@ -9,8 +9,6 @@
 #include "op.h"
 # define OP_NUM 16
 
-//typedef void (*operations(struct s_car *car));
-
 typedef struct 			s_car
 {
 	int32_t				id;
@@ -28,5 +26,6 @@ typedef struct 			s_car
 t_car			*delete_from_begin(t_car *cur_car);
 t_car			*delete_from_end(t_car *cur_car);
 t_car			*delete_from_body(t_car *cur_car);
-
+t_car			*try_to_kill_the_carret(t_car *cur_car, int cycle_to_die);0
+t_car			*new_carriage(t_car *head);
 #endif

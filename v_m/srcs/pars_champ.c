@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "pars.h"
 #include "op.h"
 #include "stdio.h"
 #include "corewar.h"

@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "pars.h"
 #include "corewar.h"
-#include "stdio.h"
 
 void			parsing(t_pars *pars, t_players *players)
 {
