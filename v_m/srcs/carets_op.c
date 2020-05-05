@@ -11,6 +11,7 @@ t_car		*create_caret(int position_on_arena, int id)
 	node = ft_calloc(1, sizeof(t_car));
 	node->position = position_on_arena;
 	node->id = id;
+	node->num_of_carets = 1;
 	node->registers[0] = -id;
 	return (node);
 }
@@ -30,5 +31,5 @@ void		add_caret(t_car **head, t_car *new_node)
 	(*head)->prev = new_node;
 	new_node->next = *head;
 	*head = new_node;
-	(*head)->id = (*head)->next->id + 1;
+	(*head)->num_of_carets = (*head)->next->num_of_carets + 1;
 }
