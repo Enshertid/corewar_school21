@@ -30,6 +30,7 @@ void		parsing(t_players *players, int ac, char **av);
 void		init_data(t_data *data, int ac, char **av);
 
 void		set_array_of_operations(t_data *data);
+void		set_array_of_cycles_to_op(t_data *data);
 
 void		print_arena(const void *arena, size_t size);
 

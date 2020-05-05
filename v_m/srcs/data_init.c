@@ -44,6 +44,7 @@ void			init_data(t_data *data, int ac, char **av)
 {
 	ft_memset(data, 0, sizeof(t_data));
 	set_array_of_operations(data);
+	set_array_of_cycles_to_op(data);
 	init_players(&data->players);
 	parsing(&data->players, ac, av);
 	init_vm(&data->vm, data);

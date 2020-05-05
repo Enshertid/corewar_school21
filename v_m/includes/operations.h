@@ -17,7 +17,8 @@ typedef struct		s_vm t_vm;
 
 typedef struct		s_operations
 {
-	void			(*func[16])(t_vm *vm, t_car *);
+	void			(*func[17])(t_vm *vm, t_car *);
+	int				op_cycles[17];
 }					t_op;
 
 void		op_live(t_vm *vm, t_car *car);

@@ -3,6 +3,11 @@
 //
 #include "game.h"
 
+t_bool			use_op(t_car *caret, t_op op)
+{
+	if (caret->code >)
+}
+
 t_bool			check_live(t_vm *vm)
 {
 	t_car *tmp;
@@ -17,14 +22,18 @@ t_bool			check_live(t_vm *vm)
 		return(TRUE);
 }
 
-t_car			*check_caret(t_car *caret, t_op op)
+t_car			*check_caret(t_vm *vm, t_car *caret, t_op op)
 {
-	t_bool flag_of_killed;
-	
-	flag_of_killed = FALSE;
-	if (caret->cycle_to_action)
-		caret->cycle_to_action--;
 	if (!caret->cycle_to_action)
-		flag_of_killed == use_op(caret, op);
-	return (flag_of_killed ? caret : caret->next);
+	{
+		caret->code = vm->arena[caret->position];
+		if (caret->code > 0 && caret->code < 17)
+			caret->cycle_to_action = vm->operations.op_cycles[caret->code];
+		else
+			caret->position++;
+	}
+	caret->cycle_to_action--;
+	if (!caret->cycle_to_action)
+		use_operation(caret, op);
+	return(caret->next);
 }

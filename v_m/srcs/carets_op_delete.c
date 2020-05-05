@@ -36,7 +36,8 @@ t_car			*delete_from_body(t_car *cur_car)
 	return (cur_car);
 }
 
-t_car			*try_to_kill_the_carret(t_car *cur_car, int cycle_to_die)
+t_car			*try_to_kill_the_carret(t_car *head, t_car *cur_car,
+													int cycle_to_die)
 {
 	if (cur_car->last_live_cycle >= cycle_to_die)
 	{
@@ -46,6 +47,7 @@ t_car			*try_to_kill_the_carret(t_car *cur_car, int cycle_to_die)
 			return (delete_from_begin(cur_car));
 		else
 			return(delete_from_body(cur_car));
+		head->id--;
 	}
 	return (cur_car->next);
 }

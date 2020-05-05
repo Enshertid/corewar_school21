@@ -36,6 +36,7 @@ typedef struct		s_vm
 
 void		print_arena(const void *arena, size_t size);
 void		copy_excode(t_vm *vm, t_players *players);
+
 t_car		*new_carriage(t_car *head);
 
 #endif

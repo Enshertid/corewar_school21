@@ -11,7 +11,7 @@ void			cycle_of_game(t_vm *vm)
 	{
 		tmp = vm->carriages;
 		while(tmp)
-			tmp = check_caret(tmp, vm->operations);
+			tmp = check_caret(vm, tmp, vm->operations);
 		if (++vm->dump_count == vm->dump_value)
 			flag_of_end = end_dump(vm->arena);
 		else if (++vm->iter >= vm->cycle_to_die && !check_live(vm))
