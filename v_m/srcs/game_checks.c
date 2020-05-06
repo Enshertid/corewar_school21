@@ -11,24 +11,27 @@ t_bool			check_live(t_vm *vm)
 	while (tmp)
 		tmp = try_to_kill_the_carret(&vm->carriages, tmp, vm->cycle_to_die);
 	vm->iter = 0;
+	if (vm->count_live >= NBR_LIVE || vm->count_checks >= MAX_CHECKS)
+	{
+		vm->cycle_to_die -= CYCLE_DELTA;
+		vm->count_checks = 0;
+	}
+	vm->count_checks++;
+	vm->count_live = 0;
 	return (vm->carriages ? TRUE : FALSE);
 }
 
-t_car			*check_caret(t_vm *vm, t_car *caret, t_op op)
+t_car			*check_caret(t_vm *vm, t_car *caret)
 {
 	if (!caret->cycle_to_action)
 	{
-		caret->code = vm->arena[caret->position];
+		caret->code = vm->arena[caret->position] - 1;
 		if (caret->code >= 0 && caret->code < 16)
-			caret->cycle_to_action = vm->operations.op_cycles[caret->code];
+			caret->cycle_to_action = vm->operations.op_cycles[caret->code] - 1;
 		else
 			caret->position++;
 	}
-	else
-	{
-		caret->cycle_to_action--;
-		if (!caret->cycle_to_action)
+	else if (!(--caret->cycle_to_action))
 			vm->operations.func[caret->code](vm, caret);
-	}
 	return(caret->next);
 }

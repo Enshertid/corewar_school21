@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-t_car			*check_caret(t_vm *vm, t_car *caret, t_op op);
+t_car			*check_caret(t_vm *vm, t_car *caret);
 t_bool			check_live(t_vm *vm);
 
 t_bool			end_dump(char *arena);
