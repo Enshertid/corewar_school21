@@ -13,7 +13,10 @@ static void		init_carriages(t_vm *vm, int iter)
 	i = 0;
 	list = create_caret(0, 1);
 	while (++i < iter)
+	{
 		add_caret(&list, create_caret((MEM_SIZE / iter) * i, i + 1));
+		vm->num_cars++;
+	}
 	vm->carriages = list;
 }
 
@@ -21,6 +24,7 @@ static void		init_vm_arena(t_vm *vm, t_players *players)
 {
 	vm->cycle_to_die = CYCLE_TO_DIE;
 	vm->last_live_id = players->iter;
+	vm->players = players;
 	copy_excode(vm, players);
 }
 
@@ -28,7 +32,6 @@ static void	 	init_vm(t_vm *vm, t_data *data)
 {
 	init_vm_arena(vm, &data->players);
 	init_carriages(vm, data->players.iter);
-	// print_arena(vm->arena, VM_SIZE);
 }
 
 static void			init_players(t_players *players)

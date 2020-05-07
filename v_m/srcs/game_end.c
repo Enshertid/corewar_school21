@@ -7,7 +7,7 @@
 t_bool			end_dump(char *arena)
 {
 	write(1, "end bcs dump flag used\n", 23);
-	print_arena(arena, VM_SIZE);
+	print_arena(arena, MEM_SIZE);
 	return (TRUE);
 }
 

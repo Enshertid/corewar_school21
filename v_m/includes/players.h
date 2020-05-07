@@ -23,6 +23,7 @@ typedef struct			s_player
 	int					id;
 	t_bool				flag_of_n;
 	size_t				ex_size;
+	size_t 				live;
 }						t_player;
 
 typedef struct			s_players

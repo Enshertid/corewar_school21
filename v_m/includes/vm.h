@@ -6,13 +6,13 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 16:31:22 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/02 16:55:28 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/07 13:36:27 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VM_H
 # define VM_H
-# define VM_SIZE (MEM_SIZE / 4)
+// # define VM_SIZE (MEM_SIZE / 4)
 
 #include "op.h"
 #include "carriages.h"
@@ -30,8 +30,10 @@ typedef struct		s_vm
 	size_t			dump_value;
 	size_t			current_cycle;
 	t_bool			dump_flag;
+	size_t 			id_cars;
 	t_car			*carriages;
 	t_op			operations;
+	t_players 		*players;
 }					t_vm;
 
 void		print_arena(const void *arena, size_t size);
