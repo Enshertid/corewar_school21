@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:57:24 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/07 17:30:56 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/07 18:01:26 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,6 @@ int 		check_arg1(t_vm *vm, t_car *car)
 	b2 = 0x02;
 	b3 = 0x03;
 	arg = vm->arena[(car->position + 1) % MEM_SIZE];
-	if (b1 &= (arg >> 6))
-		return (1);
-	else if (b2 &= (arg >> 6))
-		return (2);
-	else if (b3 &= (arg >> 6))
-		return (3);
-}
-
-int 		check_arg2(t_vm *vm, t_car *car)
-{
-	char b1;
-	char b2;
-	char b3;
-	int arg;
-	
-	b1 = 0x01;
-	b2 = 0x02;
-	b3 = 0x03;
-	arg = vm->arena[(car->position + 1) % MEM_SIZE];
-	arg = arg << 2;
 	if (b1 &= (arg >> 6))
 		return (1);
 	else if (b2 &= (arg >> 6))
@@ -91,7 +71,7 @@ void 		op_ld(t_vm *vm, t_car *car)
 	int8_t reg;
 	int ind;
 
-	if (check_arg1 == 2)
+	if (check_arg1(vm, car) == 2)
 	{
 		value = get_value(vm, ++car->position);
 		reg = vm->arena[car->position + 6];
@@ -105,7 +85,7 @@ void 		op_ld(t_vm *vm, t_car *car)
 		}
 		car->position = (car->position + 7) % MEM_SIZE;
 	}
-	else if (check_arg1 == 3)
+	else if (check_arg1(vm, car) == 3)
 	{
 		ind = (car->position + get_pos(vm, car)) % IDX_MOD;
 		value = get_value(vm, ind);
