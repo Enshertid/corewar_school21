@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:31:33 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/07 13:43:31 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/07 14:25:50 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ void 		op_fork(t_vm *vm, t_car *car)
 	pos = get_pos(vm, car);
 	new = copy_caret(car, (pos % IDX_MOD), ++vm->id_cars);
 	add_caret(vm->carriages, new);
-	car->position += 2;
+	car->position = (car->position + 3) % MEM_SIZE;
 }
 
