@@ -21,6 +21,7 @@ static void		init_vm_arena(t_vm *vm, t_players *players)
 {
 	vm->cycle_to_die = CYCLE_TO_DIE;
 	vm->last_live_id = players->iter;
+	vm->players = players;
 	copy_excode(vm, players);
 }
 
