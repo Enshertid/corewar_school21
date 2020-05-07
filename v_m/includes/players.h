@@ -28,8 +28,8 @@ typedef struct			s_player
 typedef struct			s_players
 {
 	t_player			**arr;
-	size_t				size;
-	size_t				iter;
+	int				size;
+	int				iter;
 }						t_players;
 
 #endif

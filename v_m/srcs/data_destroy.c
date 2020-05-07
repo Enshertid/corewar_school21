@@ -6,7 +6,8 @@
 
 void			destroy_data(t_data *data)
 {
-	size_t i = 0;
+	int i = 0;
+	
 	while(i < data->players.iter)
 	{
 		free(data->players.arr[i]->name);

@@ -12,78 +12,44 @@
 
 #include "corewar.h"
 
-# define REG 1
-# define DIR 2
-# define IND 3
-
-void miss_arguments(t_vm *pVm, t_car *pCar, int arg, int arg1, int i);
-
-int			determine_arg(unsigned char byte, int index)
-{
-	const char pos = 0b11000000;
-	byte = (byte << (index << 1));
-	byte = (byte & pos);
-	if (byte == 0b01000000)
-		return (REG);
-	if (byte == 0b10000000)
-		return (DIR);
-	if (byte == 0b11000000)
-		return (IND);
-	else
-		return(-1);
-}
-
-unsigned char		read_reg_arg(t_vm *vm, int position)
-{
-	unsigned char		value;
-	
-	value = vm->arena[position];
-	return (value);
-}
-
-//int16_t				read_ind_arg(t_vm *vm, int position)
-//{
-//	int16_t			value;
-//
-//	(*(char))
-//}
-
-static t_bool		reg_reg(t_vm *vm, t_car *car)
+static void		reg_reg(t_vm *vm, t_car *car)
 {
 	int32_t second_index;
 	int32_t first_index;
 	
-	second_index = vm->arena[(car->position + ARG_CHECK + REG * 2) % MEM_SIZE];
-	first_index = vm->arena[(car->position + ARG_CHECK + REG) % MEM_SIZE];
+	second_index =
+			read_reg_arg(vm, (car->position + ARG_CHECK + REG * 2) % MEM_SIZE);
+	first_index =
+			read_reg_arg(vm, (car->position + ARG_CHECK + REG) % MEM_SIZE);
 	if (first_index >= 1 && first_index < REG_NUMBER &&
 								second_index >= 1 && second_index < REG_NUMBER)
 		car->registers[first_index] = car->registers[second_index];
-	return (TRUE);
 }
 
-static t_bool		reg_ind(t_vm *vm, t_car *car)
+static void		reg_ind(t_vm *vm, t_car *car)
 {
-	return (0);
-}
-void miss_arguments(t_vm *pVm, t_car *pCar, int arg, int arg1, int i)
-{
-
+	int16_t		ind_arg;
+	int8_t		first_arg;
+	
+	first_arg = read_reg_arg(vm, (car->position + 2) % MEM_SIZE);
+	ind_arg = (read_ind_arg(vm, (car->position + 3) % MEM_SIZE) % IDX_MOD);
+	write_reg_to_arena(vm, first_arg, get_new_pos(car->position, ind_arg));
 }
 
 void		op_st(t_vm *vm, t_car *car)
 {
-	char	code_arg;
-	int		first_arg, second_arg;
-	t_bool	done;
-	
-	done = FALSE;
+	char		code_arg;
+	int			first_arg, second_arg;
+
 	code_arg = vm->arena[(car->position + 1) % MEM_SIZE];
 	first_arg = determine_arg(code_arg, 0);
 	second_arg = determine_arg(code_arg, 1);
 	if (first_arg == REG && second_arg == REG)
-		done = reg_reg(vm, car);
+		reg_reg(vm, car);
 	else if (first_arg == REG && second_arg == IND)
-		done = reg_ind(vm, car);
-	else
-		miss_arguments(vm, car, first_arg, second_arg, 0);
+		reg_ind(vm, car);
+	car->position = (car->position + first_arg + second_arg + 2) % MEM_SIZE;
+	car->code = vm->arena[car->position] - 1;
+	if (car->code >= 0 && car->code < 16)
+		car->cycle_to_action = vm->operations.op_cycles[car->code] - 1;
 }

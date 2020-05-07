@@ -19,7 +19,7 @@
 #include "vm.h"
 #include "op.h"
 
-#define ARG_CHECK 1
+# define ARG_CHECK 1
 
 typedef struct			s_data
 {

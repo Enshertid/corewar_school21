@@ -28,7 +28,7 @@ static t_bool		is_dir(const char *filename)
 	return (FALSE);
 }
 
-static void			sort_id(t_players *players, size_t i, size_t j)
+static void			sort_id(t_players *players, int i, int j)
 {
 	t_player		*tmp;
 	t_player		**ar;
@@ -58,8 +58,8 @@ static void			sort_id(t_players *players, size_t i, size_t j)
 
 void				validate_id(t_players *players)
 {
-	size_t			i;
-	size_t			j;
+	int			i;
+	int			j;
 
 	i = -1;
 	while (++i < players->iter)
