@@ -23,6 +23,7 @@ t_car		*copy_caret(t_car *parent, int32_t position, int32_t id)
 	node = ft_calloc(1, sizeof(t_car));
 	ft_memcpy(node, parent, sizeof(t_car));
 	node->position = position;
+	node->id = id;
 	return(node);
 }
 

@@ -13,7 +13,7 @@ void		copy_excode(t_vm *vm, t_players *players)
 	i = 0;
 	while (i < (int)players->iter)
 	{
-		pos = ((VM_SIZE)/(int)players->iter) * i;
+		pos = ((MEM_SIZE)/(int)players->iter) * i;
 		ft_memcpy(&(vm->arena[pos]), players->arr[i]->ex_code, players->arr[i]->ex_size);
 		i++;
 	}
