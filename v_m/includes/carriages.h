@@ -40,6 +40,7 @@ t_car			*try_to_kill_the_carret(t_car **head, t_car *cur_car,
 													int cycle_to_die);
 t_car			*create_caret(int position_on_arena, int id);
 t_car			*copy_caret(t_car *parent, int32_t position, int32_t id);
+
 void			add_caret(t_car **head, t_car *new_node);
 
 #endif

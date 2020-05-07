@@ -14,7 +14,9 @@
 
 void 		op_live(t_vm *vm, t_car *car)
 {
-	vm->dump_value = 1000; // delete this
+	//done
+	vm->count_live++;
+	car->last_live_cycle = 0;
 	if (!car->registers[1])
 		car->cycle_to_action = 10;
 }

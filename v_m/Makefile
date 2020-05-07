@@ -15,10 +15,11 @@ NAME = Corewar
 SRCS =	main.c	parsing.c	players.c	\
 pars_argv.c		pars_champ.c			\
 arena.c 		cycle_of_game.c			\
-delete_from_list_of_carets.c 			\
-functions_for_op.c op/op_live.c op/op_ld.c op/op_st.c op/op_add.c \
-op/op_sub.c op/op_and.c op/op_or.c op/op_xor.c op/op_zjmp.c op/op_ldi.c \
-op/op_sti.c  op/op_fork.c op/op_lld.c op/op_lldi.c op/op_lfork.c \
+delete_from_list_of_carets.c			\
+functions_for_op.c\
+op/op_live.c	op/op_ld.c		op/op_st.c	op/op_add.c		op/op_ldi.c		\
+op/op_sub.c		op/op_and.c		op/op_or.c	op/op_xor.c		op/op_zjmp.c	\
+op/op_sti.c		op/op_fork.c	op/op_lld.c	op/op_lldi.c	op/op_lfork.c	\
 op/op_aff.c \
 
 SRCS_DIR =			./srcs/

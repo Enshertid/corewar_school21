@@ -14,6 +14,7 @@
 
 void 		op_zjmp(t_vm *vm, t_car *car)
 {
+	//done
 	vm->dump_value = 1000; // delete this
 	if (!car->registers[1])
 		car->cycle_to_action = 20;

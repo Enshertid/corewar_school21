@@ -12,10 +12,9 @@ void			cycle_of_game(t_vm *vm)
 		tmp = vm->carriages;
 		while(tmp)
 			tmp = check_caret(vm, tmp);
-		if (++vm->dump_count == vm->dump_value)
+		if (++vm->current_cycle == vm->dump_value && vm->dump_flag)
 			flag_of_end = end_dump(vm->arena);
 		else if (++vm->iter >= vm->cycle_to_die && !check_live(vm))
 			flag_of_end = end_game();
-		vm->current_cycle++;
 	}
 }

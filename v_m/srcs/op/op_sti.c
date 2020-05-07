@@ -14,6 +14,7 @@
 
 void 		op_sti(t_vm *vm, t_car *car)
 {
+	//done
 	vm->dump_value = 1000; // delete this
 	car->cycle_to_action = 25;
 }
