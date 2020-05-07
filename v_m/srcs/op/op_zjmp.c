@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:39:34 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/07 18:35:32 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/07 18:41:51 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,6 @@ void 		op_zjmp(t_vm *vm, t_car *car)
 		car->position += get_pos(vm, car);
 		car->position %= IDX_MOD;
 	}
+	else
+		car->position++;
 }
