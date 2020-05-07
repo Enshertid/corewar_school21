@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:39:34 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/07 18:41:51 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/07 21:55:21 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ int 		get_pos(t_vm *vm, t_car *car)
 
 void 		op_zjmp(t_vm *vm, t_car *car)
 {
-<<<<<<< HEAD
-	//done
-	vm->dump_value = 1000; // delete this
-	if (!car->registers[1])
-		car->cycle_to_action = 20;
-=======
 	if (car->carry)
 	{
 		car->position += get_pos(vm, car);
@@ -41,5 +35,4 @@ void 		op_zjmp(t_vm *vm, t_car *car)
 	}
 	else
 		car->position++;
->>>>>>> fcb35621be3e46b074df0cb9c856c36e57defe67
 }

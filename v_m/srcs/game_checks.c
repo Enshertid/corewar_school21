@@ -29,7 +29,7 @@ t_car			*check_caret(t_vm *vm, t_car *caret)
 		if (caret->code >= 0 && caret->code < 16)
 			caret->cycle_to_action = vm->operations.op_cycles[caret->code] - 1;
 		else
-			caret->position = ++caret->position % MEM_SIZE;
+			caret->position = (++caret->position) % MEM_SIZE;
 	}
 	else if (!(--caret->cycle_to_action))
 			vm->operations.func[caret->code](vm, caret);

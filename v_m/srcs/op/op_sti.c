@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:30:32 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/07 18:01:00 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/07 21:55:23 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,8 @@ int 		check_arg1(t_vm *vm, t_car *car)
 
 void 		op_sti(t_vm *vm, t_car *car)
 {
-<<<<<<< HEAD
-	//done
 	vm->dump_value = 1000; // delete this
-	car->cycle_to_action = 25;
-=======
-	if (check_arg1 == 1);
->>>>>>> fcb35621be3e46b074df0cb9c856c36e57defe67
+	if (!car->registers[1])
+		car->cycle_to_action = 6;
 }
 

@@ -6,28 +6,19 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:57:24 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/07 18:01:26 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/07 21:55:39 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int 		check_arg1(t_vm *vm, t_car *car)
+int 		check_arg(int arg)
 {
-	char b1;
-	char b2;
-	char b3;
-	int arg;
-	
-	b1 = 0x01;
-	b2 = 0x02;
-	b3 = 0x03;
-	arg = vm->arena[(car->position + 1) % MEM_SIZE];
-	if (b1 &= (arg >> 6))
+	if (0x01 & (arg >> 6))
 		return (1);
-	else if (b2 &= (arg >> 6))
+	else if (0x02 & (arg >> 6))
 		return (2);
-	else if (b3 &= (arg >> 6))
+	else if (0x03 & (arg >> 6))
 		return (3);
 }
 
@@ -65,13 +56,35 @@ int 		get_pos(t_vm *vm, t_car *car)
 	return(pos);
 }
 
+int 		get_arg_step(int args, int num)
+{
+	int sum;
+	int bit;
+
+	sum = 1;
+	bit = 0;
+	while (num--)
+	{
+		if (check_arg(args << bit) == 1)
+			sum += 1;
+		else if (check_arg(args << bit) == 2)
+			sum += 4;
+		else if (check_arg(args << bit) == 3)
+			sum += 2;
+		bit += 2;
+	}
+	return (sum);
+}
+
 void 		op_ld(t_vm *vm, t_car *car)
 {
 	int value;
 	int8_t reg;
 	int ind;
+	int args;
 
-	if (check_arg1(vm, car) == 2)
+	args = vm->arena[(car->position + 1) % MEM_SIZE];
+	if (check_arg(args) == 2 && check_arg(args << 2) == 1)
 	{
 		value = get_value(vm, ++car->position);
 		reg = vm->arena[car->position + 6];
@@ -83,9 +96,8 @@ void 		op_ld(t_vm *vm, t_car *car)
 				car->carry = 0;
 			car->registers[reg] = value;
 		}
-		car->position = (car->position + 7) % MEM_SIZE;
 	}
-	else if (check_arg1(vm, car) == 3)
+	else if (check_arg(args) == 3 && check_arg(args << 2) == 1)
 	{
 		ind = (car->position + get_pos(vm, car)) % IDX_MOD;
 		value = get_value(vm, ind);
@@ -98,6 +110,6 @@ void 		op_ld(t_vm *vm, t_car *car)
 				car->carry = 0;
 			car->registers[reg] = value;
 		}
-		car->position = (car->position + 5) % MEM_SIZE;
 	}
+	car->position = get_arg_step(args, 2);
 }
