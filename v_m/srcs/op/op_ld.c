@@ -6,20 +6,20 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:57:24 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/08 11:11:14 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/08 21:13:50 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int 		check_arg(int arg)
+int 		check_arg(int8_t arg)
 {
-	if (0x01 & (arg >> 6))
-		return (T_REG);
-	else if (0x02 & (arg >> 6))
-		return (T_DIR);
-	else if (0x03 & (arg >> 6))
-		return (T_IND);
+	if ((int8_t)0x01 & (arg >> 6))
+		return (REG_CODE);
+	else if ((int8_t)0x02 & (arg >> 6))
+		return (DIR_CODE);
+	else if ((int8_t)0x03 & (arg >> 6))
+		return (IND_CODE);
 }
 
 int 		get_value(t_vm *vm, int position)
@@ -81,10 +81,10 @@ void 		op_ld(t_vm *vm, t_car *car)
 	int32_t value;
 	int8_t reg;
 	int ind;
-	int args;
+	int8_t args;
 
 	args = vm->arena[(car->position + 1) % MEM_SIZE];
-	if (check_arg(args) == T_DIR && check_arg(args << 2) == T_REG)
+	if (check_arg(args) == DIR_CODE && check_arg(args << 2) == REG_CODE)
 	{
 		value = get_value(vm, ++car->position);
 		reg = vm->arena[car->position + 6];
@@ -97,7 +97,7 @@ void 		op_ld(t_vm *vm, t_car *car)
 			car->registers[reg] = value;
 		}
 	}
-	else if (check_arg(args) == T_IND && check_arg(args << 2) == T_REG)
+	else if (check_arg(args) == IND_CODE && check_arg(args << 2) == REG_CODE)
 	{
 		ind = (car->position + get_pos(vm, car)) % IDX_MOD;
 		value = get_value(vm, ind);
@@ -111,5 +111,5 @@ void 		op_ld(t_vm *vm, t_car *car)
 			car->registers[reg] = value;
 		}
 	}
-	car->position = get_arg_step(args, 2);
+	car->position += get_arg_step(args, 2);
 }
