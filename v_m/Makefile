@@ -6,7 +6,7 @@
 #    By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/02 18:51:40 by enshertid         #+#    #+#              #
-#    Updated: 2020/05/07 12:18:14 by ediego           ###   ########.fr        #
+#    Updated: 2020/05/09 01:03:24 by ediego           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = Corewar
 SRCS =	main.c	pars.c pars_argv.c	pars_champ.c	op_with_args.c			\
 game.c	carets_op_delete.c	op_functions.c	data_init.c	vm_init.c			\
 carets_op.c	output.c	data_destroy.c	game_checks.c	game_end.c			\
-op_with_dif_args.c															\
+op_with_dif_args.c		op_with_args2.c										\
 op/op_live.c	op/op_ld.c		op/op_st.c	op/op_add.c		op/op_ldi.c		\
 op/op_sub.c		op/op_and.c		op/op_or.c	op/op_xor.c		op/op_zjmp.c	\
 op/op_sti.c		op/op_fork.c	op/op_lld.c	op/op_lldi.c	op/op_lfork.c	\

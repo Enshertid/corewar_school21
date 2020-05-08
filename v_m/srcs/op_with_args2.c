@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 21:28:51 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/09 00:35:46 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/09 01:07:24 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int 		check_arg(int8_t arg)
 		return (DIR_CODE);
 	else if ((int8_t)0x03 & (arg >> 6))
 		return (IND_CODE);
+	return (0);
 }
 
 int 		get_2byte(t_vm *vm, int position)
@@ -50,11 +51,13 @@ int 		get_4byte(t_vm *vm, int position)
 int 		get_arg_n(t_vm *vm, t_car *car, int8_t args)
 {
 	int32_t res;
+	int32_t reg;
 
 	res = 0;
 	if (check_arg(args) == REG_CODE)
 	{
-		res = car->registers[vm->arena[(car->position + car->step) % MEM_SIZE]];
+		reg = vm->arena[(car->position + car->step) % MEM_SIZE];
+		res = car->registers[reg];
 		car->step += 1;
 	}
 	else if (check_arg(args) == DIR_CODE)
