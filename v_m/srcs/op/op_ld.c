@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:57:24 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/07 21:55:39 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/08 11:11:14 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int 		check_arg(int arg)
 {
 	if (0x01 & (arg >> 6))
-		return (1);
+		return (T_REG);
 	else if (0x02 & (arg >> 6))
-		return (2);
+		return (T_DIR);
 	else if (0x03 & (arg >> 6))
-		return (3);
+		return (T_IND);
 }
 
 int 		get_value(t_vm *vm, int position)
@@ -78,13 +78,13 @@ int 		get_arg_step(int args, int num)
 
 void 		op_ld(t_vm *vm, t_car *car)
 {
-	int value;
+	int32_t value;
 	int8_t reg;
 	int ind;
 	int args;
 
 	args = vm->arena[(car->position + 1) % MEM_SIZE];
-	if (check_arg(args) == 2 && check_arg(args << 2) == 1)
+	if (check_arg(args) == T_DIR && check_arg(args << 2) == T_REG)
 	{
 		value = get_value(vm, ++car->position);
 		reg = vm->arena[car->position + 6];
@@ -97,7 +97,7 @@ void 		op_ld(t_vm *vm, t_car *car)
 			car->registers[reg] = value;
 		}
 	}
-	else if (check_arg(args) == 3 && check_arg(args << 2) == 1)
+	else if (check_arg(args) == T_IND && check_arg(args << 2) == T_REG)
 	{
 		ind = (car->position + get_pos(vm, car)) % IDX_MOD;
 		value = get_value(vm, ind);
