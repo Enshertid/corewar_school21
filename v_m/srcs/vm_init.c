@@ -3,7 +3,6 @@
 //
 
 #include "vm.h"
-#include "players.h"
 
 void		copy_excode(t_vm *vm, t_players *players)
 {

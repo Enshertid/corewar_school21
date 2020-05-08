@@ -2,7 +2,8 @@
 // Created by Daniil&Ekaterina Naumenko on 07/05/2020.
 //
 
-#include "corewar.h"
+#include "operations.h"
+#include "vm.h"
 
 int			determine_arg(unsigned char byte, unsigned int index)
 {
@@ -20,7 +21,7 @@ int			determine_arg(unsigned char byte, unsigned int index)
 		return(0);
 }
 
-unsigned char		read_reg_arg(t_vm *vm, int position)
+unsigned char		read_reg(t_vm *vm, int position)
 {
 	unsigned char		value;
 	
@@ -28,7 +29,7 @@ unsigned char		read_reg_arg(t_vm *vm, int position)
 	return (value);
 }
 
-int16_t				read_ind_arg(t_vm *vm, int position)
+int16_t				read_ind(t_vm *vm, int position)
 {
 	int16_t			value;
 	
@@ -37,7 +38,7 @@ int16_t				read_ind_arg(t_vm *vm, int position)
 	return (value);
 }
 
-int32_t				read_dir_arg(t_vm *vm, int position)
+int32_t				read_dir(t_vm *vm, int position)
 {
 	int32_t		value;
 	
@@ -58,13 +59,4 @@ void			write_reg_to_arena(t_vm *vm, int32_t value, int position)
 		vm->arena[(position + i) % MEM_SIZE] = *((char*)&value + i);
 		i++;
 	}
-}
-
-int32_t			get_new_pos(int32_t position, int32_t step)
-{
-	position += step;
-	if (position < 0)
-		return (MEM_SIZE + position);
-	else
-		return (position % MEM_SIZE);
 }

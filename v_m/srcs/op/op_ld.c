@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-int 		check_arg(int arg)
+static int 		check_arg(int arg)
 {
 	if (0x01 & (arg >> 6))
 		return (T_REG);
@@ -22,7 +22,7 @@ int 		check_arg(int arg)
 		return (T_IND);
 }
 
-int 		get_value(t_vm *vm, int position)
+static int 		get_value(t_vm *vm, int position)
 {
 	int32_t	pos;
 	int8_t 	b1;
@@ -42,7 +42,7 @@ int 		get_value(t_vm *vm, int position)
 	return(pos);
 }
 
-int 		get_pos(t_vm *vm, t_car *car)
+static int 		get_pos(t_vm *vm, t_car *car)
 {
 	int32_t	pos;
 	int8_t 	b1;
@@ -56,7 +56,7 @@ int 		get_pos(t_vm *vm, t_car *car)
 	return(pos);
 }
 
-int 		get_arg_step(int args, int num)
+static int 		get_arg_step(int args, int num)
 {
 	int sum;
 	int bit;

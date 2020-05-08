@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "operations.h"
+#include "vm.h"
 
-int 		get_pos(t_vm *vm, t_car *car)
+static int 		get_pos(t_vm *vm, t_car *car)
 {
 	int32_t	pos;
 	int8_t 	b1;

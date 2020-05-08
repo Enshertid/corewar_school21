@@ -1,4 +1,4 @@
-#include "corewar.h"
+
 #include "game.h"
 
 void			cycle_of_game(t_vm *vm)

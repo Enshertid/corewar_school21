@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "operations.h"
+#include "vm.h"
 
 int 		check_arg1(t_vm *vm, t_car *car)
 {
@@ -29,6 +30,7 @@ int 		check_arg1(t_vm *vm, t_car *car)
 		return (2);
 	else if (b3 &= (arg >> 6))
 		return (3);
+	return (0);
 }
 
 void 		op_sti(t_vm *vm, t_car *car)

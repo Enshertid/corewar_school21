@@ -3,7 +3,13 @@
 //
 
 #include "corewar.h"
+#include "pars.h"
+#include "vm.h"
 #include "carriages.h"
+#include "op.h"
+#include "libft.h"
+#include "players.h"
+#include "operations.h"
 
 static void		init_carriages(t_vm *vm, int iter)
 {
@@ -43,8 +49,8 @@ static void			init_players(t_players *players)
 void			init_data(t_data *data, int ac, char **av)
 {
 	ft_memset(data, 0, sizeof(t_data));
-	set_array_of_operations(data);
-	set_array_of_cycles_to_op(data);
+	set_array_of_operations(&data->vm);
+	set_array_of_cycles_to_op(&data->vm);
 	init_players(&data->players);
 	parsing(&data->players, ac, av);
 	init_vm(&data->vm, data);

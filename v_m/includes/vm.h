@@ -12,12 +12,12 @@
 
 #ifndef VM_H
 # define VM_H
-// # define VM_SIZE (MEM_SIZE / 4)
 
-#include "op.h"
+#include "libft.h"
 #include "carriages.h"
 #include "players.h"
 #include "operations.h"
+#include "op.h"
 
 typedef struct		s_vm
 {

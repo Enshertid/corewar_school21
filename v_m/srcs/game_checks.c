@@ -1,6 +1,7 @@
 //
 // Created by Daniil&Ekaterina Naumenko on 05/05/2020.
 //
+
 #include "game.h"
 
 t_bool			check_live(t_vm *vm)

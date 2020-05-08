@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "operations.h"
+#include "vm.h"
 
 int 		check_arg(int arg)
 {
@@ -20,6 +21,7 @@ int 		check_arg(int arg)
 		return (T_DIR);
 	else if (0x03 & (arg >> 6))
 		return (T_IND);
+	return (0);
 }
 
 int 		get_value(t_vm *vm, int position)
@@ -42,7 +44,7 @@ int 		get_value(t_vm *vm, int position)
 	return(pos);
 }
 
-int 		get_pos(t_vm *vm, t_car *car)
+static int 		get_pos(t_vm *vm, t_car *car)
 {
 	int32_t	pos;
 	int8_t 	b1;

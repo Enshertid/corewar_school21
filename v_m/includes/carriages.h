@@ -8,8 +8,6 @@
 #include "libft.h"
 #include "op.h"
 
-# define ZERO_POS MEM_SIZE
-
 #if (REG_SIZE == 4)
 	typedef int32_t reg_type;
 #elif (REG_SIZE == 2)

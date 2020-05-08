@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "operations.h"
+#include "vm.h"
 
 static void		reg_reg(t_vm *vm, t_car *car)
 {
@@ -18,9 +19,9 @@ static void		reg_reg(t_vm *vm, t_car *car)
 	int32_t first_index;
 	
 	second_index =
-			read_reg_arg(vm, (car->position + ARG_CHECK + REG * 2) % MEM_SIZE);
+			read_reg(vm, (car->position + ARG_CHECK + REG * 2) % MEM_SIZE);
 	first_index =
-			read_reg_arg(vm, (car->position + ARG_CHECK + REG) % MEM_SIZE);
+			read_reg(vm, (car->position + ARG_CHECK + REG) % MEM_SIZE);
 	if (first_index >= 1 && first_index < REG_NUMBER &&
 								second_index >= 1 && second_index < REG_NUMBER)
 		car->registers[first_index] = car->registers[second_index];
@@ -31,9 +32,11 @@ static void		reg_ind(t_vm *vm, t_car *car)
 	int16_t		ind_arg;
 	int8_t		first_arg;
 	
-	first_arg = read_reg_arg(vm, (car->position + 2) % MEM_SIZE);
-	ind_arg = (read_ind_arg(vm, (car->position + 3) % MEM_SIZE) % IDX_MOD);
-	write_reg_to_arena(vm, first_arg, get_new_pos(car->position, ind_arg));
+	first_arg = read_reg(vm, (car->position + 2) % MEM_SIZE) - 1;
+	ind_arg = (read_ind(vm, (car->position + 3) % MEM_SIZE) % IDX_MOD);
+	if (first_arg >= 0 && first_arg < 16)
+		write_reg_to_arena(vm, car->registers[first_arg],
+										get_new_pos(car->position, ind_arg));
 }
 
 void		op_st(t_vm *vm, t_car *car)

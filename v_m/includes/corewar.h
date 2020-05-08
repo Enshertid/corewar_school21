@@ -13,31 +13,17 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 
-#include "libft.h"
-#include "pars.h"
 #include "players.h"
 #include "vm.h"
-#include "op.h"
-
-# define ARG_CHECK 1
 
 typedef struct			s_data
 {
 	t_players			players;
-	t_vm 				vm;
+	t_vm				vm;
 }						t_data;
 
-void		parsing(t_players *players, int ac, char **av);
-
 void		init_data(t_data *data, int ac, char **av);
-
-void		set_array_of_operations(t_data *data);
-void		set_array_of_cycles_to_op(t_data *data);
-
-void		print_arena(const void *arena, size_t size);
-
 void		cycle_of_game(t_vm *vm);
-
 void		destroy_data(t_data *data);
 
 #endif

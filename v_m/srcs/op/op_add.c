@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "operations.h"
+#include "vm.h"
 
 void 		op_add(t_vm *vm, t_car *car)
 {
@@ -18,9 +19,9 @@ void 		op_add(t_vm *vm, t_car *car)
 	int8_t second;
 	int8_t third;
 	
-	first = read_reg_arg(vm, ((car->position + REG) % MEM_SIZE));
-	second = read_reg_arg(vm, ((car->position + REG * 2) % MEM_SIZE));
-	third = read_reg_arg(vm, ((car->position + REG * 3) % MEM_SIZE));
+	first = read_reg(vm, ((car->position + REG) % MEM_SIZE));
+	second = read_reg(vm, ((car->position + REG * 2) % MEM_SIZE));
+	third = read_reg(vm, ((car->position + REG * 3) % MEM_SIZE));
 	if (first >= 1 && first < 16 && second >= 1 && second < 16 &&
 											third >= 1 && third < 16)
 	{
