@@ -29,7 +29,7 @@ void 		op_xor(t_vm *vm, t_car *car)
 		if (get_arg(vm, car, first, &first_arg))
 			if (get_arg(vm, car, second, &second_arg))
 				use_args(vm, car, ((unsigned)first_arg ^ (unsigned)second_arg),
-						 third);
+						third);
 	car->position = get_new_pos(car->position,
 								first + second + third + ARG_CHECK + OP_BYTE);
 	car->code = vm->arena[car->position] - 1;

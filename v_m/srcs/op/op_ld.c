@@ -20,6 +20,7 @@ static int 		check_arg(int arg)
 		return (T_DIR);
 	else if (0x03 & (arg >> 6))
 		return (T_IND);
+	return (0);
 }
 
 static int 		get_value(t_vm *vm, int position)
