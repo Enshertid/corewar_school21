@@ -1,5 +1,6 @@
 
 #include "game.h"
+#include "stdio.h"
 
 void			cycle_of_game(t_vm *vm)
 {

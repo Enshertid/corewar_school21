@@ -54,6 +54,7 @@ t_car			*try_to_kill_the_carret(t_car **head, t_car *cur_car,
 {
 	if (cur_car->last_live_cycle >= cycle_to_die)
 	{
+		write(1,"\nhello\n", 7);
 		if (cur_car->prev && !cur_car->next)
 			return (delete_from_end(head, cur_car));
 		else if (!cur_car->prev)

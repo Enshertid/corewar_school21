@@ -3,11 +3,14 @@
 //
 
 #include "game.h"
+#include "stdio.h"
 
 t_bool			check_live(t_vm *vm)
 {
 	t_car *tmp;
 	
+	printf("cycles to live==>%d\n", vm->cycle_to_die);
+	printf("count live ==> %d\n", vm->count_live);
 	tmp = vm->carriages;
 	while (tmp)
 		tmp = try_to_kill_the_carret(&vm->carriages, tmp, vm->cycle_to_die);
@@ -24,6 +27,7 @@ t_bool			check_live(t_vm *vm)
 
 t_car			*check_caret(t_vm *vm, t_car *caret)
 {
+	caret->last_live_cycle++;
 	if (!caret->cycle_to_action)
 	{
 		caret->code = vm->arena[caret->position] - 1;
@@ -33,6 +37,6 @@ t_car			*check_caret(t_vm *vm, t_car *caret)
 			caret->position = (++caret->position) % MEM_SIZE;
 	}
 	else if (!(--caret->cycle_to_action))
-			vm->operations.func[caret->code](vm, caret);
+		vm->operations.func[caret->code](vm, caret);
 	return(caret->next);
 }

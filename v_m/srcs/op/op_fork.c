@@ -34,7 +34,7 @@ void 		op_fork(t_vm *vm, t_car *car)
 
 	pos = get_pos(vm, car);
 	new = copy_caret(car, (pos % IDX_MOD), ++vm->id_cars);
-	add_caret(vm->carriages, new);
+	add_caret(&vm->carriages, new);
 	car->position = (car->position + 3) % MEM_SIZE;
 }
 
