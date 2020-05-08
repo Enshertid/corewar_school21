@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "operations.h"
+#include "vm.h"
 #include "stdio.h"
 
 void 		op_aff(t_vm *vm, t_car *car)

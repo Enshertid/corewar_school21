@@ -29,8 +29,16 @@ t_car		*copy_caret(t_car *parent, int32_t position, int32_t id)
 
 void		add_caret(t_car **head, t_car *new_node)
 {
-	(*head)->prev = new_node;
-	new_node->next = *head;
-	*head = new_node;
-	(*head)->num_of_carets = (*head)->next->num_of_carets + 1;
+	if (*head)
+	{
+		(*head)->prev = new_node;
+		new_node->next = *head;
+		*head = new_node;
+		(*head)->num_of_carets = (*head)->next->num_of_carets + 1;
+	}
+	else
+	{
+		*head = new_node;
+		(*head)->num_of_carets = 1;
+	}
 }

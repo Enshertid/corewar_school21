@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "pars.h"
-#include "op.h"
 
 static void			check_m_h(t_pars *pars)
 {

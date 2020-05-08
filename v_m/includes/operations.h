@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   operations.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:10:42 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/05 11:39:11 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/05/08 22:56:50 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPERATIONS_H
 # define OPERATIONS_H
 
-
 # define REG 1
 # define DIR 4
 # define IND 2
+# define ARG_CHECK 1
+# define OP_BYTE 1
 
+#include "libft.h"
+#include "carriages.h"
 
 typedef struct		s_vm t_vm;
 
@@ -45,12 +48,24 @@ void				op_lfork(t_vm *vm, t_car *car);
 void				op_aff(t_vm *vm, t_car *car);
 
 int					determine_arg(unsigned char byte, unsigned int index);
+void				set_array_of_operations(t_vm *vm);
+void				set_array_of_cycles_to_op(t_vm *vm);
 
-unsigned char		read_reg_arg(t_vm *vm, int position);
-int16_t				read_ind_arg(t_vm *vm, int position);
-int32_t				read_dir_arg(t_vm *vm, int position);
-
-void				write_reg_to_arena(t_vm *vm, int value, int position);
+unsigned char		read_reg(t_vm *vm, int position);
+int16_t				read_ind(t_vm *vm, int position);
+int32_t				read_dir(t_vm *vm, int position);
 int32_t				get_new_pos(int32_t position, int32_t step);
+
+t_bool				get_arg(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg);
+void				use_args(t_vm *vm, t_car *car, int32_t result, int8_t third);
+void				write_reg_to_arena(t_vm *vm, int value, int position);
+
+int 				check_arg(int8_t arg);
+int 				get_2byte(t_vm *vm, int position);
+int 				get_4byte(t_vm *vm, int position);
+int 				get_arg_n(t_vm *vm, t_car *car, int8_t args);
+void 				set_reg(t_car *car, int8_t reg, int32_t value);
+int 				get_arg_step(int args, int num, int dir_size);
+
 
 #endif

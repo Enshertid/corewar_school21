@@ -28,7 +28,7 @@ typedef struct			s_player
 
 typedef struct			s_players
 {
-	t_player			**arr;
+	t_player		**arr;
 	int				size;
 	int				iter;
 }						t_players;

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "pars.h"
-#include "corewar.h"
 
 void			parsing(t_players *players, int ac, char **av)
 {

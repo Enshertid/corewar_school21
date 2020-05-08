@@ -6,34 +6,21 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:31:33 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/07 21:55:32 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/09 00:03:34 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
-
-int 		get_pos(t_vm *vm, t_car *car)
-{
-	int32_t	pos;
-	int8_t 	b1;
-	int8_t 	b2;
-
-	pos = 0;
-	b1 = (vm->arena[car->position + 1]) % MEM_SIZE;
-	b2 = (vm->arena[car->position + 2]) % MEM_SIZE;
-	pos = (pos | b2) >> 8;
-	pos = (pos | b1);
-	return(pos);
-}
+#include "operations.h"
+#include "vm.h"
 
 void 		op_fork(t_vm *vm, t_car *car)
 {
 	t_car	*new;
 	int32_t pos;
 
-	pos = get_pos(vm, car);
+	pos = get_2byte(vm, car->position + 2);
 	new = copy_caret(car, (pos % IDX_MOD), ++vm->id_cars);
-	add_caret(vm->carriages, new);
+	add_caret(&vm->carriages, new);
 	car->position = (car->position + 3) % MEM_SIZE;
 }
 

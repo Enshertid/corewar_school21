@@ -18,6 +18,8 @@
 #include <fcntl.h>
 #include "players.h"
 #include "libft.h"
+#include "op.h"
+
 
 typedef struct			s_pars
 {
@@ -32,5 +34,6 @@ void					valid_flag(t_pars *pars, t_players *players);
 void					valid_name(t_pars *pars, t_players *players);
 
 void					pars_champ(t_pars *pars, t_players *players);
+void					parsing(t_players *players, int ac, char **av);
 
 #endif

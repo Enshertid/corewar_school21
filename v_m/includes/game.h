@@ -5,7 +5,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "corewar.h"
+#include "carriages.h"
+#include "vm.h"
+#include "op.h"
 
 t_car			*check_caret(t_vm *vm, t_car *caret);
 t_bool			check_live(t_vm *vm);
