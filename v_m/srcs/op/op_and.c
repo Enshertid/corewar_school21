@@ -22,8 +22,8 @@ void 		op_and(t_vm *vm, t_car *car)
 	int32_t	second_arg;
 	
 	first  = determine_arg(vm->arena[get_new_pos(car->position, ARG_CHECK)], 0);
-	second = determine_arg(vm->arena[get_new_pos(car->position, ARG_CHECK)], 0);
-	third = determine_arg(vm->arena[get_new_pos(car->position, ARG_CHECK)], 0);
+	second = determine_arg(vm->arena[get_new_pos(car->position, ARG_CHECK)], 1);
+	third = determine_arg(vm->arena[get_new_pos(car->position, ARG_CHECK)], 2);
 	car->step = OP_BYTE + ARG_CHECK;
 	if (first != 0 && second != 0 && third != 0)
 		if (get_arg(vm, car, first, &first_arg))

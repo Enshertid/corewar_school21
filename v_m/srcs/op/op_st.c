@@ -34,7 +34,7 @@ static void		reg_ind(t_vm *vm, t_car *car)
 	
 	first_arg = read_reg(vm, (car->position + 2) % MEM_SIZE) - 1;
 	ind_arg = (read_ind(vm, (car->position + 3) % MEM_SIZE) % IDX_MOD);
-	if (first_arg >= 0 && first_arg < 16)
+	if (first_arg >= 0 && first_arg < REG_NUMBER)
 		write_reg_to_arena(vm, car->registers[first_arg],
 										get_new_pos(car->position, ind_arg));
 }

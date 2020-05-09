@@ -13,30 +13,41 @@
 #include "operations.h"
 #include "vm.h"
 
-int 		check_arg1(t_vm *vm, t_car *car)
+static t_bool	check_reg(t_vm *vm, t_car *car, int8_t *arg)
 {
-	char b1;
-	char b2;
-	char b3;
-	int arg;
-	
-	b1 = 0x01;
-	b2 = 0x02;
-	b3 = 0x03;
-	arg = vm->arena[(car->position + 1) % MEM_SIZE];
-	if (b1 &= (arg >> 6))
-		return (1);
-	else if (b2 &= (arg >> 6))
-		return (2);
-	else if (b3 &= (arg >> 6))
-		return (3);
-	return (0);
+	if (*arg != REG)
+		return (FALSE);
+	*arg = vm->arena[get_new_pos(car->position, car->step)] - 1;
+	car->step++;
+	if (*arg >= 0 && *arg < REG_NUMBER)
+		return (TRUE);
+	else
+		return (FALSE);
 }
 
-void 		op_sti(t_vm *vm, t_car *car)
+void 			op_sti(t_vm *vm, t_car *car)
 {
-	vm->dump_value = 1000; // delete this
-	if (!car->registers[1])
-		car->cycle_to_action = 6;
+	int8_t	first;
+	int8_t	second;
+	int8_t	third;
+	int32_t second_val;
+	int32_t third_val;
+	
+	first = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 0);
+	second = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 1);
+	third = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 2);
+	car->step = OP_BYTE + ARG_CHECK;
+	if (first != 0 && second != 0 && third != 0)
+		if (check_reg(vm, car, &first))
+			if (get_arg(vm, car, second, &second_val))
+				if (get_arg(vm, car, third, &third_val))
+					write_reg_to_arena(vm, car->registers[first], get_new_pos
+								(car->position, (second + third) % IDX_MOD));
+	car->position = get_new_pos(car->position,
+								first + second + third + ARG_CHECK + OP_BYTE);
+	car->code = vm->arena[car->position] - 1;
+	if (car->code >= 0 && car->code < 16)
+		car->cycle_to_action = vm->operations.op_cycles[car->code] - 1;
+	car->step = 0;
 }
 
