@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "operations.h"
+#include "vm.h"
 
 void 		op_lfork(t_vm *vm, t_car *car)
 {

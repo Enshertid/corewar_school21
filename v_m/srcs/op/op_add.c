@@ -30,9 +30,9 @@ void			op_add(t_vm *vm, t_car *car)
 	int8_t third;
 	
 	car->step = OP_BYTE;
-	first = read_reg(vm, ((car->position + car->step) % MEM_SIZE));
-	second = read_reg(vm, ((car->position + car->step + REG) % MEM_SIZE));
-	third = read_reg(vm, ((car->position + car->step + REG * 2) % MEM_SIZE));
+	first = read_byte(vm, ((car->position + car->step) % MEM_SIZE));
+	second = read_byte(vm, ((car->position + car->step + REG) % MEM_SIZE));
+	third = read_byte(vm, ((car->position + car->step + REG * 2) % MEM_SIZE));
 	if (first >= 1 && first < 16 && second >= 1 && second < 16 &&
 											third >= 1 && third < 16)
 		write_to_reg(car, first, second, third);

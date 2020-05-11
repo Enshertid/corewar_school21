@@ -21,7 +21,7 @@ int			determine_arg(unsigned char byte, unsigned int index)
 		return(0);
 }
 
-unsigned char		read_reg(t_vm *vm, int position)
+unsigned char		read_byte(t_vm *vm, int position)
 {
 	unsigned char		value;
 	
@@ -29,7 +29,7 @@ unsigned char		read_reg(t_vm *vm, int position)
 	return (value);
 }
 
-int16_t				read_ind(t_vm *vm, int position)
+int16_t				read_two_bytes(t_vm *vm, int position)
 {
 	int16_t			value;
 	
@@ -38,7 +38,7 @@ int16_t				read_ind(t_vm *vm, int position)
 	return (value);
 }
 
-int32_t				read_dir(t_vm *vm, int position)
+int32_t				read_four_bytes(t_vm *vm, int position)
 {
 	int32_t		value;
 	

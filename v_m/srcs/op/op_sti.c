@@ -36,17 +36,14 @@ void 			op_sti(t_vm *vm, t_car *car)
 	first = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 0);
 	second = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 1);
 	third = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 2);
-	second = second == DIR ? IND : second;
-	third = third == DIR ? IND : third;
 	car->step = OP_BYTE + ARG_CHECK;
 	if (first != 0 && second != 0 && third != 0)
 		if (check_reg(vm, car, &first))
-			if (get_arg(vm, car, second, &second_val))
-				if (get_arg(vm, car, third, &third_val))
+			if (get_arg_dir_two(vm, car, second, &second_val))
+				if (get_arg_dir_two(vm, car, third, &third_val))
 					write_reg_to_arena(vm, car->registers[first], get_new_pos
-								(car->position, (second + third) % IDX_MOD));
-	car->position = get_new_pos(car->position,
-								first + second + third + ARG_CHECK + OP_BYTE);
+								(car->position, (second_val + third_val) % IDX_MOD));
+	car->position = get_new_pos(car->position, car->step);
 	car->code = vm->arena[car->position] - 1;
 	if (car->code >= 0 && car->code < 16)
 		car->cycle_to_action = vm->operations.op_cycles[car->code] - 1;

@@ -12,7 +12,7 @@ void			use_args(t_vm *vm, t_car *car, int32_t result,
 	
 	if (third == REG)
 	{
-		reg = read_reg(vm, get_new_pos(car->position, car->step)) - 1;
+		reg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 		if (reg >= 0 && reg < REG_NUMBER)
 		{
 			car->registers[reg] = result;
@@ -24,18 +24,38 @@ void			use_args(t_vm *vm, t_car *car, int32_t result,
 	}
 }
 
-t_bool		get_arg(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg)
+t_bool 		get_arg_dir_two(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg)
 {
 	if (sw_arg == REG)
 	{
-		*arg = read_reg(vm, get_new_pos(car->position, car->step)) - 1;
+		*arg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 		if (*arg >= 0 && *arg < REG_NUMBER)
 			return (FALSE);
 	}
 	else if (sw_arg == IND)
-		*arg = read_dir(vm, read_ind(vm, get_new_pos(car->position, car->step)));
+		*arg = read_four_bytes(vm,
+				read_two_bytes(vm, get_new_pos(car->position, car->step)));
 	else if (sw_arg == DIR)
-		*arg = read_dir(vm, get_new_pos(car->position, car->step));
+		*arg = read_two_bytes(vm, get_new_pos(car->position, car->step));
+	else
+		return (FALSE);
+	car->step += sw_arg;
+	return (TRUE);
+}
+
+t_bool		get_arg_dir_four(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg)
+{
+	if (sw_arg == REG)
+	{
+		*arg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
+		if (*arg >= 0 && *arg < REG_NUMBER)
+			return (FALSE);
+	}
+	else if (sw_arg == IND)
+		*arg = read_four_bytes(vm,
+				read_two_bytes(vm, get_new_pos(car->position, car->step)));
+	else if (sw_arg == DIR)
+		*arg = read_four_bytes(vm, get_new_pos(car->position, car->step));
 	else
 		return (FALSE);
 	car->step += sw_arg;

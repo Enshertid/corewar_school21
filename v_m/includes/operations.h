@@ -52,12 +52,13 @@ int					determine_arg(unsigned char byte, unsigned int index);
 void				set_array_of_operations(t_vm *vm);
 void				set_array_of_cycles_to_op(t_vm *vm);
 
-unsigned char		read_reg(t_vm *vm, int position);
-int16_t				read_ind(t_vm *vm, int position);
-int32_t				read_dir(t_vm *vm, int position);
+unsigned char		read_byte(t_vm *vm, int position);
+int16_t				read_two_bytes(t_vm *vm, int position);
+int32_t				read_four_bytes(t_vm *vm, int position);
 int32_t				get_new_pos(int32_t position, int32_t step);
 
-t_bool				get_arg(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg);
+t_bool				get_arg_dir_four(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg);
+t_bool				get_arg_dir_two(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg);
 void				use_args(t_vm *vm, t_car *car, int32_t result, int8_t third);
 void				write_reg_to_arena(t_vm *vm, int value, int position);
 

@@ -26,8 +26,8 @@ void 		op_xor(t_vm *vm, t_car *car)
 	third = determine_arg(vm->arena[get_new_pos(car->position, ARG_CHECK)], 2);
 	car->step = OP_BYTE + ARG_CHECK;
 	if (first != 0 && second != 0 && third != 0)
-		if (get_arg(vm, car, first, &first_arg))
-			if (get_arg(vm, car, second, &second_arg))
+		if (get_arg_dir_four(vm, car, first, &first_arg))
+			if (get_arg_dir_four(vm, car, second, &second_arg))
 				use_args(vm, car, ((unsigned)first_arg ^ (unsigned)second_arg),
 						third);
 	car->position = get_new_pos(car->position,
