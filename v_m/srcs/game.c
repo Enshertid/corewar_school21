@@ -8,6 +8,8 @@ void			cycle_of_game(t_vm *vm)
 	t_car		*tmp;
 
 	flag_of_end = FALSE;
+	vm->dump_value = 150;
+	vm->dump_flag = 1;
 	while (!flag_of_end)
 	{
 		tmp = vm->carriages;

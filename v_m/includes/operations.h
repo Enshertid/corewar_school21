@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:10:42 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/08 22:56:50 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/10 21:08:33 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 #include "libft.h"
 #include "carriages.h"
+#include <stdio.h>
 
 typedef struct		s_vm t_vm;
 
@@ -60,7 +61,7 @@ t_bool				get_arg(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg);
 void				use_args(t_vm *vm, t_car *car, int32_t result, int8_t third);
 void				write_reg_to_arena(t_vm *vm, int value, int position);
 
-int 				check_arg(int8_t arg);
+int 				check_arg(uint8_t arg);
 int 				get_2byte(t_vm *vm, int position);
 int 				get_4byte(t_vm *vm, int position);
 int 				get_arg_n(t_vm *vm, t_car *car, int8_t args);

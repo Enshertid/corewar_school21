@@ -6,20 +6,21 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 21:28:51 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/09 01:07:24 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/11 14:13:13 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "vm.h"
 
-int 		check_arg(int8_t arg)
+int 		check_arg(uint8_t arg)
 {
-	if ((int8_t)0x01 & (arg >> 6))
+	arg = (arg >> 6) & 0x03;
+	if ((uint8_t)0x01 == arg)
 		return (REG_CODE);
-	else if ((int8_t)0x02 & (arg >> 6))
+	else if ((uint8_t)0x02 == arg)
 		return (DIR_CODE);
-	else if ((int8_t)0x03 & (arg >> 6))
+	else if ((uint8_t)0x03 == arg)
 		return (IND_CODE);
 	return (0);
 }
@@ -30,8 +31,8 @@ int 		get_2byte(t_vm *vm, int position)
 
 	res = 0;
 	position = position % MEM_SIZE;
-	res = (res | ((vm->arena[position + 1]) % MEM_SIZE)) >> 8;
-	res = (res | ((vm->arena[position]) % MEM_SIZE));
+	res = (res | ((vm->arena[position]) % MEM_SIZE)) >> 8;
+	res = (res | ((vm->arena[position + 1]) % MEM_SIZE));
 	return(res);
 }
 
@@ -41,10 +42,10 @@ int 		get_4byte(t_vm *vm, int position)
 
 	res = 0;
 	position = position % MEM_SIZE;
-	res = (res | ((vm->arena[position + 3]) % MEM_SIZE)) >> 8;
-	res = (res | ((vm->arena[position + 2]) % MEM_SIZE)) >> 8;
-	res = (res | ((vm->arena[position + 1]) % MEM_SIZE)) >> 8;
 	res = (res | ((vm->arena[position]) % MEM_SIZE)) >> 8;
+	res = (res | ((vm->arena[position + 1]) % MEM_SIZE)) >> 8;
+	res = (res | ((vm->arena[position + 2]) % MEM_SIZE)) >> 8;
+	res = (res | ((vm->arena[position + 3]) % MEM_SIZE));
 	return(res);
 }
 
@@ -95,14 +96,14 @@ int 		get_arg_step(int args, int num, int dir_size)
 	while (num--)
 	{
 		if (check_arg(args << bit) == REG_CODE)
-			sum += 2;
+			sum += 1;
 		else if (check_arg(args << bit) == DIR_CODE)
-			sum += dir_size + 1;
+			sum += dir_size;
 		else if (check_arg(args << bit) == IND_CODE)
-			sum += 3;
+			sum += 2;
 		else
 			break ;
 		bit += 2;
 	}
-	return (sum);
+	return (++sum);
 }

@@ -7,7 +7,8 @@
 t_bool			end_dump(char *arena)
 {
 	write(1, "end bcs dump flag used\n", 23);
-	print_arena(arena, MEM_SIZE);
+	// arena[0] = 'x'; // delete this
+	print_arena(arena, MEM_SIZE/8);
 	return (TRUE);
 }
 
