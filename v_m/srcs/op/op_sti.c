@@ -36,6 +36,8 @@ void 			op_sti(t_vm *vm, t_car *car)
 	first = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 0);
 	second = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 1);
 	third = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 2);
+	second = second == DIR ? IND : third;
+	third = third == DIR ? IND : third;
 	car->step = OP_BYTE + ARG_CHECK;
 	if (first != 0 && second != 0 && third != 0)
 		if (check_reg(vm, car, &first))
