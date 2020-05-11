@@ -17,13 +17,15 @@ void 		op_live(t_vm *vm, t_car *car)
 {
 	int32_t arg;
 	
-	arg = get_4byte(vm, car->position + 1);
+	arg = get_4byte(vm, get_new_pos(car->position, OP_BYTE));
 	printf("LIFE: Car->pos = %d DIR = %d", car->position, arg);
 	vm->count_live++;
 	car->last_live_cycle = 0;
-	car->position = (car->position + 5) % MEM_SIZE;
+	car->position = get_new_pos(car->position, 5);
 	if (arg <= -1 && arg >= -(vm->players->size))
 	{
+		arg *= -1;
+		arg--;
 		vm->players->arr[arg]->live = vm->current_cycle;
 		vm->last_live_id = arg;
 	}

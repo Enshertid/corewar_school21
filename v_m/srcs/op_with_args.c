@@ -33,8 +33,9 @@ int16_t				read_two_bytes(t_vm *vm, int position)
 {
 	int16_t			value;
 	
-	*((char*)&value) = vm->arena[position];
-	*((char*)&value + 1) = vm->arena[(position + 1) % MEM_SIZE];
+	value = 0;
+	*((char*)&value + 1) = vm->arena[position];
+	*((char*)&value) = vm->arena[(position + 1) % MEM_SIZE];
 	return (value);
 }
 
@@ -42,10 +43,11 @@ int32_t				read_four_bytes(t_vm *vm, int position)
 {
 	int32_t		value;
 	
-	*((char*)&value) = vm->arena[position];
-	*((char*)&value + 1) = vm->arena[(position + 1) % MEM_SIZE];
-	*((char*)&value + 2) = vm->arena[(position + 2) % MEM_SIZE];
-	*((char*)&value + 3) = vm->arena[(position + 3) % MEM_SIZE];
+	value = 0;
+	*((char*)&value + 3) = vm->arena[position];
+	*((char*)&value + 2) = vm->arena[(position + 1) % MEM_SIZE];
+	*((char*)&value + 1) = vm->arena[(position + 2) % MEM_SIZE];
+	*((char*)&value) = vm->arena[(position + 3) % MEM_SIZE];
 	return(value);
 }
 

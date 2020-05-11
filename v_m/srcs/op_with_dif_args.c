@@ -33,13 +33,17 @@ t_bool 		get_arg_dir_two(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg)
 			return (FALSE);
 	}
 	else if (sw_arg == IND)
-		*arg = read_four_bytes(vm,
-				read_two_bytes(vm, get_new_pos(car->position, car->step)));
-	else if (sw_arg == DIR)
+		*arg = read_four_bytes(vm, get_new_pos(car->position,
+				read_two_bytes(vm, get_new_pos(car->position, car->step))));
+	else if (sw_arg == DIR) {
 		*arg = read_two_bytes(vm, get_new_pos(car->position, car->step));
+	}
 	else
 		return (FALSE);
-	car->step += sw_arg;
+	if (sw_arg == DIR)
+		car->step += 2;
+	else
+		car->step += sw_arg;
 	return (TRUE);
 }
 
@@ -53,7 +57,8 @@ t_bool		get_arg_dir_four(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg)
 	}
 	else if (sw_arg == IND)
 		*arg = read_four_bytes(vm,
-				read_two_bytes(vm, get_new_pos(car->position, car->step)));
+				get_new_pos(car->position, read_two_bytes(vm,
+						get_new_pos(car->position, car->step))));
 	else if (sw_arg == DIR)
 		*arg = read_four_bytes(vm, get_new_pos(car->position, car->step));
 	else
