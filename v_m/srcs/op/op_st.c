@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:58:35 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/10 20:54:36 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/11 22:09:54 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static t_bool		get_second(t_vm *vm, t_car *car, int8_t type, int16_t *arg)
 	else
 		*arg = read_two_bytes(vm, get_new_pos(car->position, car->step)) % IDX_MOD;
 	car->step += type;
+	return (TRUE);
 }
 
 static t_bool		get_first(t_vm *vm, t_car *car, int8_t byte, int8_t *arg)
