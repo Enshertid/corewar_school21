@@ -20,6 +20,8 @@
 #include "libft.h"
 #include "op.h"
 
+# define DUMP 2
+
 
 typedef struct			s_pars
 {
@@ -30,6 +32,7 @@ typedef struct			s_pars
 }						t_pars;
 
 void					validate_id(t_players *players);
+void					valid_dump(t_pars *pars, t_players *players);
 void					valid_flag(t_pars *pars, t_players *players);
 void					valid_name(t_pars *pars, t_players *players);
 
