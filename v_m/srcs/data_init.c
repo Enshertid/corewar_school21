@@ -37,7 +37,12 @@ static void		init_vm_arena(t_vm *vm, t_players *players)
 static void	 	init_vm(t_vm *vm, t_data *data)
 {
 	init_vm_arena(vm, &data->players);
-	init_carriages(vm, data->players.iter);
+	init_carriages(vm, data->players.size);
+	if (data->players.dump_flag)
+	{
+		vm->dump_value = data->players.dump_num;
+		vm->dump_flag = TRUE;
+	}
 }
 
 static void			init_players(t_players *players)

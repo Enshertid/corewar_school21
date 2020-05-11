@@ -29,8 +29,10 @@ typedef struct			s_player
 typedef struct			s_players
 {
 	t_player		**arr;
-	int				size;
-	int				iter;
+	int8_t				size;
+	int8_t				iter;
+	int32_t			dump_num;
+	t_bool			dump_flag;
 }						t_players;
 
 #endif
