@@ -13,46 +13,57 @@
 #include "operations.h"
 #include "vm.h"
 
-static void		reg_reg(t_vm *vm, t_car *car)
+static t_bool		get_second(t_vm *vm, t_car *car, int8_t type, int16_t *arg)
 {
-	int32_t second_index;
-	int32_t first_index;
-	
-	second_index =
-			read_byte(vm, (car->position + ARG_CHECK + REG * 2) % MEM_SIZE);
-	first_index =
-			read_byte(vm, (car->position + ARG_CHECK + REG) % MEM_SIZE);
-	if (first_index >= 1 && first_index < REG_NUMBER &&
-								second_index >= 1 && second_index < REG_NUMBER)
-		car->registers[first_index] = car->registers[second_index];
+	if (type != REG && type != IND)
+		return (FALSE);
+	if (type == REG)
+	{
+		*arg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
+		if (*arg < 0 || *arg >= REG_NUMBER)
+			return (FALSE);
+	}
+	else
+		*arg = read_two_bytes(vm, get_new_pos(car->position, car->step)) % IDX_MOD;
+	car->step += type;
 }
 
-static void		reg_ind(t_vm *vm, t_car *car)
+static t_bool		get_first(t_vm *vm, t_car *car, int8_t byte, int8_t *arg)
 {
-	int16_t		ind_arg;
-	int8_t		first_arg;
-	
-	first_arg = read_byte(vm, (car->position + 2) % MEM_SIZE) - 1;
-	ind_arg = (read_four_bytes(vm, (car->position + 3) % MEM_SIZE) % IDX_MOD);
-	if (first_arg >= 0 && first_arg < REG_NUMBER)
-		write_reg_to_arena(vm, car->registers[first_arg],
-										get_new_pos(car->position, ind_arg));
+	if (byte != REG)
+		return (FALSE);
+	*arg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
+	car->step += REG;
+	if (*arg >= 0 && *arg < REG_NUMBER)
+		return (TRUE);
+	else
+		return (FALSE);
 }
 
 void		op_st(t_vm *vm, t_car *car)
 {
-	char		code_arg;
-	int			first_arg, second_arg;
-
-	code_arg = vm->arena[(car->position + 1) % MEM_SIZE];
-	first_arg = determine_arg(code_arg, 0);
-	second_arg = determine_arg(code_arg, 1);
-	if (first_arg == REG && second_arg == REG)
-		reg_reg(vm, car);
-	else if (first_arg == REG && second_arg == IND)
-		reg_ind(vm, car);
-	car->position = (car->position + first_arg + second_arg + 2) % MEM_SIZE;
-	car->code = vm->arena[car->position] - 1;
-	if (car->code >= 0 && car->code < 16)
-		car->cycle_to_action = vm->operations.op_cycles[car->code] - 1;
+	int8_t		first;
+	int8_t 		second;
+	int8_t		first_value;
+	int16_t		second_value;
+	
+	first = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 0);
+	second = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 1);
+	car->step += OP_BYTE + ARG_CHECK;
+	if (get_first(vm, car, first, &first_value))
+	{
+		if (get_second(vm, car, second, &second_value))
+		{
+			if (second == REG)
+				car->registers[second_value] = car->registers[first_value];
+			else
+				write_reg_to_arena(vm, car->registers[first_value],
+								   get_new_pos(car->position, second_value));
+		}
+	}
+	car->position = get_new_pos(car->position, car->step);
+	car->code = read_byte(vm, car->position) - 1;
+	if (car->code >= 0 && car->code < OP_NUM)
+		car->cycle_to_action = vm->operations.op_cycles[car->code];
+	car->step = 0;
 }

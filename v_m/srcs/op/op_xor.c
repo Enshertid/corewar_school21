@@ -30,10 +30,9 @@ void 		op_xor(t_vm *vm, t_car *car)
 			if (get_arg_dir_four(vm, car, second, &second_arg))
 				use_args(vm, car, ((unsigned)first_arg ^ (unsigned)second_arg),
 						third);
-	car->position = get_new_pos(car->position,
-								first + second + third + ARG_CHECK + OP_BYTE);
-	car->code = vm->arena[car->position] - 1;
-	if (car->code >= 0 && car->code < 16)
-		car->cycle_to_action = vm->operations.op_cycles[car->code] - 1;
+	car->position = get_new_pos(car->position, car->step + REG);
+	car->code = read_byte(vm, car->position) - 1;
+	if (car->code >= 0 && car->code < OP_NUM)
+		car->cycle_to_action = vm->operations.op_cycles[car->code];
 	car->step = 0;
 }

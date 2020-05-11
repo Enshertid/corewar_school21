@@ -9,6 +9,7 @@ void			cycle_of_game(t_vm *vm)
 	flag_of_end = FALSE;
 	vm->dump_value = 150;
 	vm->dump_flag = 1;
+	vm->current_cycle = 1;
 	while (!flag_of_end)
 	{
 		tmp = vm->carriages;

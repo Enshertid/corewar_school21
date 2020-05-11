@@ -18,6 +18,7 @@
 # define IND 2
 # define ARG_CHECK 1
 # define OP_BYTE 1
+# define OP_NUM 16
 
 #include "libft.h"
 #include "carriages.h"

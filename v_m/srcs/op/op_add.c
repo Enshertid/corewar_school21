@@ -30,15 +30,18 @@ void			op_add(t_vm *vm, t_car *car)
 	int8_t third;
 	
 	car->step = OP_BYTE;
-	first = read_byte(vm, ((car->position + car->step) % MEM_SIZE));
-	second = read_byte(vm, ((car->position + car->step + REG) % MEM_SIZE));
-	third = read_byte(vm, ((car->position + car->step + REG * 2) % MEM_SIZE));
+	first = read_byte(vm, get_new_pos(car->position, car->step));
+	car->step += REG;
+	second = read_byte(vm, get_new_pos(car->position, car->step));
+	car->step += REG;
+	third = read_byte(vm, get_new_pos(car->position, car->step));
+	car->step += REG;
 	if (first >= 1 && first < 16 && second >= 1 && second < 16 &&
 											third >= 1 && third < 16)
 		write_to_reg(car, first, second, third);
-	car->step += REG * 2;
-	car->position = (car->position + car->step) % MEM_SIZE;
-	car->code = vm->arena[car->position] - 1;
-	if (car->code >= 0 && car->code < 16)
-		car->cycle_to_action = vm->operations.op_cycles[car->code] - 1;
+	car->position = get_new_pos(car->position, car->step);
+	car->code = read_byte(vm, car->position) - 1;
+	if (car->code >= 0 && car->code < OP_NUM)
+		car->cycle_to_action = vm->operations.op_cycles[car->code];
+	car->step = 0;
 }

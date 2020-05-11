@@ -44,9 +44,9 @@ void 			op_sti(t_vm *vm, t_car *car)
 					write_reg_to_arena(vm, car->registers[first], get_new_pos
 								(car->position, (second_val + third_val) % IDX_MOD));
 	car->position = get_new_pos(car->position, car->step);
-	car->code = vm->arena[car->position] - 1;
-	if (car->code >= 0 && car->code < 16)
-		car->cycle_to_action = vm->operations.op_cycles[car->code] - 1;
+	car->code = read_byte(vm, car->position) - 1;
+	if (car->code >= 0 && car->code < OP_NUM)
+		car->cycle_to_action = vm->operations.op_cycles[car->code];
 	car->step = 0;
 }
 

@@ -16,11 +16,11 @@
 
 void 		op_aff(t_vm *vm, t_car *car)
 {
-	printf ("%c", (char)vm->arena[(car->position + 1) % MEM_SIZE]);
-	car->position = (car->position + 2) % MEM_SIZE;
-	car->code = vm->arena[car->position] - 1;
-	if (car->code >= 0 && car->code < 16)
-		car->cycle_to_action = vm->operations.op_cycles[car->code] - 1;
-	else
-		car->position = (car->position + 1) % MEM_SIZE;
+	printf ("%c", (char)read_byte(vm, get_new_pos(car->position, OP_BYTE)));
+	car->step = OP_BYTE + REG;
+	car->position = get_new_pos(car->position, car->step);
+	car->code = read_byte(vm, car->position) - 1;
+	if (car->code >= 0 && car->code < OP_NUM)
+		car->cycle_to_action = vm->operations.op_cycles[car->code];
+	car->step = 0;
 }
