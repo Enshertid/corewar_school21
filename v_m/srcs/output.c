@@ -12,6 +12,18 @@ void		print_arena(const void *arena, size_t size)
 	
 	str = "0123456789abcdef";
 	p = (unsigned char *)arena;
+	i = -1;
+	while (++i < 192)
+	{
+		if (i == 137)
+			write(1, "48", 2);
+		else if (i == 91)
+			write(1, "32", 2);
+		else if (i == 45)
+			write(1, "16", 2);
+		write(1, " ", 1);
+	}
+	write(1, "\n", 1);
 	i = 0;
 	while (i < size)
 	{

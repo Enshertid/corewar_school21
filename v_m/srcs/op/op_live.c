@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:53:09 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/11 14:44:32 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/11 22:06:22 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void 		op_live(t_vm *vm, t_car *car)
 	int32_t arg;
 	
 	arg = get_4byte(vm, get_new_pos(car->position, OP_BYTE));
-	printf("LIFE: Car->pos = %d DIR = %d", car->position, arg);
+	printf("LIFE: Id = %d Cycle = %ld Car->pos = %d DIR = %d", car->id, vm->current_cycle, car->position, arg);
 	vm->count_live++;
 	car->last_live_cycle = 0;
 	car->position = get_new_pos(car->position, 5);
@@ -31,6 +31,6 @@ void 		op_live(t_vm *vm, t_car *car)
 	}
 	car->code = vm->arena[car->position] - 1;
 	if (car->code >= 0 && car->code < 16)
-		car->cycle_to_action = vm->operations.op_cycles[car->code] - 1;
+		car->cycle_to_action = vm->operations.op_cycles[car->code];
 	printf(" In end: Car->pos = %d\n", car->position);
 }

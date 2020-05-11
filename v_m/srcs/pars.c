@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 19:21:59 by enshertid         #+#    #+#             */
-/*   Updated: 2020/05/10 17:42:48 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/11 15:24:57 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void				parsing(t_players *players, int ac, char **av)
 	{
 		if (ft_strequ(pars.av[pars.i], "-n"))
 			valid_flag(&pars, players);
-		else if (ft_strequ(pars.av[pars.i], "-dump"))
-			valid_dump(&pars, players);
+		// else if (ft_strequ(pars.av[pars.i], "-dump"))
+		// 	valid_dump(&pars, players);
 		else
 			valid_name(&pars, players);
 		pars_champ(&pars, players);

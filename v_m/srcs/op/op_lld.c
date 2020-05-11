@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:45:07 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/09 01:08:58 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/11 22:07:40 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ void 		op_lld(t_vm *vm, t_car *car)
 		reg = vm->arena[(car->position + 4) % MEM_SIZE];
 		set_reg(car, reg, value);
 	}
+	car->code = vm->arena[car->position] - 1;
+	if (car->code >= 0 && car->code < 16)
+		car->cycle_to_action = vm->operations.op_cycles[car->code];
 	car->position += get_arg_step(args, 2, DIR_SIZE);
 }
