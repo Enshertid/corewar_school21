@@ -125,17 +125,17 @@ void		assembly(t_file *file, t_validation	*validation)
 	else
 	{
 		file->tokens = tokenizer(file->lines, validation);
-		 print(file->lines, file->tokens);
+//		 print(file->lines, file->tokens);
 		ft_check_labels(file->tokens, validation);
 		ft_check_sizes(file->tokens, validation);
 		ft_check_instructions(file->tokens, validation);
 		print(file->lines, file->tokens);
 		// tokens_analysis(file);
-		if (file->status == FILE_OK)
-		{
-			bytecode = convert_to_bytecode(file->tokens);
-			write_to_file(file, bytecode, file->tokens);
-		}
+//		if (file->status == FILE_OK)
+//		{
+//			bytecode = convert_to_bytecode(file->tokens);
+//			write_to_file(file, bytecode, file->tokens);
+//		}
 
 	}
 	free_file(file);

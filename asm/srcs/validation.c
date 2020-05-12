@@ -167,6 +167,12 @@ void	ft_check_arg(t_check_args *checker, t_validation *val, int row)
 {
 	int		i;
 
+	if (checker->i == -1)
+	{
+		val->error = 1;
+		warning_add(ERROR, 2, "no arguments in line: ", ft_itoa_static(row + 1, 10));
+		return ;
+	}
 	i = checker->i;
 	if (i == 0) // если 1 арг
 		ft_check_one_arg(checker, val, row);
@@ -176,7 +182,7 @@ void	ft_check_arg(t_check_args *checker, t_validation *val, int row)
 		ft_check_three_arg(checker, val, row);
 	else
 	{
-		warning_add(ERROR, 2, "лишняя проверка? too many arguments in line: ", ft_itoa_static(row + 1, 10)); // ЛИШНЯЯ ПРОВЕРКА
+		warning_add(ERROR, 2, "ft_check_arg лишняя проверка? too many arguments in line: ", ft_itoa_static(row + 1, 10)); // ЛИШНЯЯ ПРОВЕРКА
 		val->error = 1;
 	}
 	while (i > -1) // ЧТО ЭТО? =)
@@ -205,14 +211,14 @@ void	ft_check_instructions(t_vector_token *tokens, t_validation *val)
 //				printf("Instr:%s; ", tokens[row][col].value);
 				checker->instr = tokens[row][col].value;
 				col++;
-				i = 0; // сделать -1 и ++ в цикле
+				checker->i = -1; // сделать -1 и ++ в цикле
 				while (col < vec_size(&tokens[row]))
 				{
 					if (tokens[row][col].type == 2)
 					{
-						checker->i = i;
-						checker->arg[i] = ft_strdup(tokens[row][col].value);
-						i++;
+						checker->i++;
+//						checker->i = i;
+						checker->arg[checker->i] = ft_strdup(tokens[row][col].value);
 					}
 					col++;
 				}
@@ -221,13 +227,13 @@ void	ft_check_instructions(t_vector_token *tokens, t_validation *val)
 			}
 			col++;
 		}
-		col--;
-		col--;
-		if (tokens[row][col].type != 2 && tokens[row][0].type != 4 && tokens[row][0].type != 5 && col != -1) // проверка что в конце аргумент стоит, добавить когда на строке один LABEL
-		{
-			val->error = 1;
-			warning_add(ERROR, 3, "last token in line ", ft_itoa_static(row + 1, 10), " is not argument. Лишняя проверка?"); // ЛИШНЯЯ ПРОВЕРКА?
-		}
+//		col--;
+//		col--;
+//		if (tokens[row][col].type != 2 && tokens[row][0].type != 4 && tokens[row][0].type != 5 && col != -1) // проверка что в конце аргумент стоит, добавить когда на строке один LABEL
+//		{
+//			val->error = 1;
+//			warning_add(ERROR, 3, "last token in line ", ft_itoa_static(row + 1, 10), " is not argument. Лишняя проверка?"); // ЛИШНЯЯ ПРОВЕРКА?
+//		}
 		row++;
 	}
 	free(checker->arg);
@@ -271,9 +277,11 @@ void	ft_check_string(t_vector_token *tokens, int row, t_validation *val)
 	int 	col;
 	int		prev;
 
-	if (vec_size(&tokens[row]) > 6 || (vec_size(&tokens[row]) == 1 && tokens[row][0].type != 0 &&
-			tokens[row][0].type != 4 && tokens[row][0].type != 5))
+//	if (vec_size(&tokens[row]) > 7 || (vec_size(&tokens[row]) == 1 && tokens[row][0].type != 0 &&
+//			tokens[row][0].type != 4 && tokens[row][0].type != 5))
+	if (vec_size(&tokens[row]) > 7)
 	{
+//		printf("vec_size:%d\n", vec_size(&tokens[row]));
 		val->error = 1;
 		warning_add(ERROR, 2, "ft_check_string Syntax error in line: ", ft_itoa_static(row + 1, 10));
 	}
@@ -287,37 +295,41 @@ void	ft_check_string(t_vector_token *tokens, int row, t_validation *val)
 			if (tokens[row][col].type != 1) // если не инструкция
 			{
 				val->error = 1;
-				warning_add(ERROR, 2, "wrong tokens in line: ", ft_itoa_static(row + 1, 10));
+				warning_add(ERROR, 2, "1 wrong tokens in line: ", ft_itoa_static(row + 1, 10));
 			}
 			else
 			{
 				col++;
-				if (tokens[row][col].type != 2 && tokens[row][0].type != 4 && tokens[row][0].type != 5) // если не арг
+				if (tokens[row][col].value) // чекаем есть ли аргументы или пусто
 				{
-					val->error = 1;
-					warning_add(ERROR, 2, "wrong tokens in line: ", ft_itoa_static(row + 1, 10));
-				}
-				else
-				{
-					col++;
-					prev = 2; // 2-арг, 3-сеп
-					while (col < vec_size(&tokens[row]))
+					if (tokens[row][col].type != 2 && tokens[row][0].type != 4 && tokens[row][0].type != 5) // если не арг
 					{
-						if (prev == 2 && tokens[row][col].type == 3)
+//						printf("type: %d, row: %d, col: %d, value: %s\n", tokens[row][col].type, row, col, tokens[row][col].value);
+						val->error =1;
+						warning_add(ERROR, 2, "2 wrong tokens in line: ", ft_itoa_static(row + 1, 10));
+					}
+					else
+					{
+						col++;
+						prev = 2; // 2-арг, 3-сеп
+						while (col < vec_size(&tokens[row]))
 						{
-							prev = 3;
-							col++;
-						}
-						else if (prev == 3 && tokens[row][col].type == 2)
-						{
-							prev = 2;
-							col++;
-						}
-						else
-						{
-							val->error = 1;
-							warning_add(ERROR, 2, "wrong tokens order in line: ", ft_itoa_static(row + 1, 10));
-							break;
+							if (prev == 2 && tokens[row][col].type == 3)
+							{
+								prev = 3;
+								col++;
+							}
+							else if (prev == 3 && tokens[row][col].type == 2)
+							{
+								prev = 2;
+								col++;
+							}
+							else
+							{
+								val->error = 1;
+								warning_add(ERROR, 2, "wrong tokens order in line: ", ft_itoa_static(row + 1, 10));
+								break;
+							}
 						}
 					}
 				}
@@ -391,7 +403,7 @@ bool	is_name(const char **str, t_token *token, t_validation	*val)
 	argument = false;
 	if (ft_strncmp(val->lines[*val->line_index], NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0 && val->lines[*val->line_index][ft_strlen(NAME_CMD_STRING)] == ' ')
 	{
-		if (val->name == 1) //проверка на дубль
+		if (val->name == 1 && val->dbl_n == 0) //проверка на дубль
 		{
 			warning_add(ERROR, 2, "is_name Double name in line ", ft_itoa_static(*val->line_index + 1, 10)); //создать новый флаг чтобы не дублировать еррор в токен-детерм?
 			while (*val->lines[*val->line_index])
@@ -463,7 +475,7 @@ bool	is_comment(const char **str, t_token *token, t_validation	*val)
 	argument = false;
 	if (ft_strncmp(val->lines[*val->line_index], COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0 && val->lines[*val->line_index][ft_strlen(COMMENT_CMD_STRING)] == ' ')
 	{
-		if (val->comment == 1) //проверка на дубль
+		if (val->comment == 1 && val->dbl_c == 0) //проверка на дубль
 		{
 			warning_add(ERROR, 1, "Double comment."); //создать новый флаг чтобы не дублировать еррор в токен-детерм?
 			while (*val->lines[*val->line_index])
@@ -532,6 +544,7 @@ int 	ft_validation(const char * const *argv)
 {
 	t_validation	*validation;
 
+	warning_create();
 	validation = (t_validation*)malloc(sizeof(*validation));
 	validation->have_instructions = 0;
 	validation->name = 0;
@@ -539,15 +552,27 @@ int 	ft_validation(const char * const *argv)
 	validation->error = 0;
 	validation->dbl_c = 0;
 	validation->dbl_n = 0;
+	validation->no_n_start = 0;
+	validation->no_c_start = 0;
 	assembler(argv + 1, validation);
 	if (validation->have_instructions == 0 || validation->name == 0 || validation->comment == 0 || validation->error == 1)
 	{
+		if (validation->name == 0)
+			warning_add(ERROR, 1, "no name found.");
+		if (validation->comment == 0)
+			warning_add(ERROR, 1, "no comment found.");
+		if (validation->have_instructions == 0)
+			warning_add(ERROR, 1, "no instruction found.");
 		write(1, "fail\n", 5);
 		free(validation);
+		warning_print();
+		warning_destroy();
 		return (0);
 	}
 	else
 		write(1, "OK\n", 3);
 	free(validation);
+	warning_print();
+	warning_destroy();
 	return (1);
 }

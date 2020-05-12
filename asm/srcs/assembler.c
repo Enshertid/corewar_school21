@@ -32,7 +32,6 @@ void				assembler(const char * const *files, t_validation *validation)
 {
 	t_file		file;
 
-	warning_create();
 	while (*files)
 	{
 		if (is_dir(*files))
@@ -53,7 +52,5 @@ void				assembler(const char * const *files, t_validation *validation)
 				warning_add(ERROR, 3, "Can\'t open file \"", *files, "\"");
 		}
 		files += 1;
-	}
-	warning_print();
-	warning_destroy();
+	} // перенес варнинг на функцию выше
 }

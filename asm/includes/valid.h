@@ -6,6 +6,8 @@ typedef struct			s_validation
 	int					have_instructions;
 	int 				name;
 	int 				comment;
+	int					no_n_start;
+	int					no_c_start;
 	char 				**lines;
 	int 				*line_index;
 	int					error;
