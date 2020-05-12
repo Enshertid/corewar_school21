@@ -29,18 +29,16 @@ static void		init_carriages(t_vm *vm, int iter)
 static void		init_vm_arena(t_vm *vm, t_players *players)
 {
 	vm->cycle_to_die = CYCLE_TO_DIE;
-	vm->last_live_id = players->iter;
-	vm->players = players;
 	copy_excode(vm, players);
 }
 
-static void	 	init_vm(t_vm *vm, t_data *data)
+static void	 	init_vm(t_vm *vm, t_players *players)
 {
-	init_vm_arena(vm, &data->players);
-	init_carriages(vm, data->players.size);
-	if (data->players.dump_flag)
+	init_vm_arena(vm, players);
+	init_carriages(vm, players->size);
+	if (players->dump_flag)
 	{
-		vm->dump_value = data->players.dump_num;
+		vm->dump_value = players->dump_num;
 		vm->dump_flag = TRUE;
 	}
 }
@@ -51,12 +49,12 @@ static void			init_players(t_players *players)
 	players->size = MAX_PLAYERS;
 }
 
-void			init_data(t_data *data, int ac, char **av)
+void			init_data(t_vm *vm, int ac, char **av)
 {
-	ft_memset(data, 0, sizeof(t_data));
-	set_array_of_operations(&data->vm);
-	set_array_of_cycles_to_op(&data->vm);
-	init_players(&data->players);
-	parsing(&data->players, ac, av);
-	init_vm(&data->vm, data);
+	ft_memset(vm, 0, sizeof(t_vm));
+	set_array_of_operations(vm);
+	set_array_of_cycles_to_op(vm);
+	init_players(&vm->players);
+	parsing(&vm->players, ac, av);
+	init_vm(vm, &vm->players);
 }

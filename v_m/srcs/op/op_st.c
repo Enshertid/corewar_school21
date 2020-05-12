@@ -44,18 +44,18 @@ static t_bool		get_first(t_vm *vm, t_car *car, int8_t byte, int8_t *arg)
 void		op_st(t_vm *vm, t_car *car)
 {
 	int8_t		first;
-	int8_t 		second;
+	int8_t 		sec;
 	int8_t		first_value;
 	int16_t		second_value;
 	
-	first = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 0);
-	second = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 1);
-	car->step += OP_BYTE + ARG_CHECK;
+	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
+	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
+	car->step += ARG_CHECK;
 	if (get_first(vm, car, first, &first_value))
 	{
-		if (get_second(vm, car, second, &second_value))
+		if (get_second(vm, car, sec, &second_value))
 		{
-			if (second == REG)
+			if (sec == REG)
 				car->registers[second_value] = car->registers[first_value];
 			else
 				write_reg_to_arena(vm, car->registers[first_value],
@@ -66,5 +66,5 @@ void		op_st(t_vm *vm, t_car *car)
 	car->code = read_byte(vm, car->position) - 1;
 	if (car->code >= 0 && car->code < OP_NUM)
 		car->cycle_to_action = vm->operations.op_cycles[car->code];
-	car->step = 0;
+	car->step = OP_BYTE;
 }

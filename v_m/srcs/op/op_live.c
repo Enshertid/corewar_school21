@@ -13,24 +13,32 @@
 #include "operations.h"
 #include "vm.h"
 
-void 		op_live(t_vm *vm, t_car *car)
+static void	check_register(t_vm *vm, t_car *car)
 {
 	int32_t arg;
 	
-	arg = get_4byte(vm, get_new_pos(car->position, OP_BYTE));
+	arg = get_4byte(vm, get_new_pos(car->position, car->step)) * -1;
+	if (arg > 0 && arg < vm->players.size)
+		vm->players.arr[arg - 1]->live = vm->current_cycle;
 	printf("LIFE: Id = %d Cycle = %ld Car->pos = %d DIR = %d", car->id, vm->current_cycle, car->position, arg);
+}
+
+void 		op_live(t_vm *vm, t_car *car)
+{
+	int8_t	type;
+	
+	printf(" In start: Car->pos = %d\n", car->position);
 	vm->count_live++;
 	car->last_live_cycle = 0;
-	car->position = get_new_pos(car->position, 5);
-	if (arg <= -1 && arg >= -(vm->players->size))
-	{
-		arg *= -1;
-		arg--;
-		vm->players->arr[arg]->live = vm->current_cycle;
-		vm->last_live_id = arg;
-	}
-	car->code = vm->arena[car->position] - 1;
-	if (car->code >= 0 && car->code < 16)
+	type = determine_arg(read_byte(vm,
+			get_new_pos(car->position, car->step)), 0);
+	car->step += ARG_CHECK;
+	if (type == DIR)
+		check_register(vm, car);
+	car->position = get_new_pos(car->position, car->step);
+	car->code = read_byte(vm, car->position) - 1;
+	if (car->code >= 0 && car->code < OP_NUM)
 		car->cycle_to_action = vm->operations.op_cycles[car->code];
+	car->step = OP_BYTE;
 	printf(" In end: Car->pos = %d\n", car->position);
 }

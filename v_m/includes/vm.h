@@ -21,8 +21,8 @@
 
 typedef struct		s_vm
 {
+	t_players 		players;
 	char			arena[MEM_SIZE];
-	int				last_live_id;
 	int				count_live;
 	int				count_checks;
 	int				cycle_to_die;
@@ -33,7 +33,6 @@ typedef struct		s_vm
 	size_t 			id_cars;
 	t_car			*carriages;
 	t_op			operations;
-	t_players 		*players;
 }					t_vm;
 
 void		print_arena(const void *arena, size_t size);

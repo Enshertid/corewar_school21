@@ -29,7 +29,8 @@ static t_bool		check_determine(t_vm *vm, t_car *car)
 	return (FALSE);
 }
 
-void 		op_sub(t_vm *vm, t_car *car) {
+void 		op_sub(t_vm *vm, t_car *car)
+{
 	int8_t first;
 	int8_t second;
 	int8_t third;
@@ -54,5 +55,5 @@ void 		op_sub(t_vm *vm, t_car *car) {
 	car->code = read_byte(vm, car->position) - 1;
 	if (car->code >= 0 && car->code < OP_NUM)
 		car->cycle_to_action = vm->operations.op_cycles[car->code];
-	car->step = 0;
+	car->step = OP_BYTE;
 }

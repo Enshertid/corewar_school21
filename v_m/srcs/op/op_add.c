@@ -44,7 +44,6 @@ void			op_add(t_vm *vm, t_car *car) {
 	int8_t second;
 	int8_t third;
 	
-	car->step = OP_BYTE;
 	if (check_determine(vm, car))
 	{
 		first = read_byte(vm, get_new_pos(car->position, car->step));
@@ -61,5 +60,5 @@ void			op_add(t_vm *vm, t_car *car) {
 	car->code = read_byte(vm, car->position) - 1;
 	if (car->code >= 0 && car->code < OP_NUM)
 		car->cycle_to_action = vm->operations.op_cycles[car->code];
-	car->step = 0;
+	car->step = OP_BYTE;
 }

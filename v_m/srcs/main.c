@@ -14,10 +14,10 @@
 
 int				main(int ac, char **av)
 {
-	t_data			data;
-
-	init_data(&data, ac, av);
-	cycle_of_game(&data.vm);
-	destroy_data(&data);
+	t_vm vm;
+	
+	init_data(&vm, ac, av);
+	cycle_of_game(&vm);
+	destroy_data(&vm);
 	return (0);
 }

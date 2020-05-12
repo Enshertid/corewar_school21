@@ -4,17 +4,17 @@
 
 #include "corewar.h"
 
-void			destroy_data(t_data *data)
+void			destroy_data(t_vm *vm)
 {
 	int i = 0;
 	
-	while(i < data->players.iter)
+	while(i < vm->players.iter)
 	{
-		free(data->players.arr[i]->name);
-		free(data->players.arr[i]->comment);
-		// free(data->players.arr[i]->ex_code);
-		free(data->players.arr[i]);
+		free(vm->players.arr[i]->name);
+		free(vm->players.arr[i]->comment);
+		// free(vm->players.arr[i]->ex_code);
+		free(vm->players.arr[i]);
 		i++;
 	}
-	free(data->players.arr);
+	free(vm->players.arr);
 }

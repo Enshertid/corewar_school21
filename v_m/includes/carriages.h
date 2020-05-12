@@ -8,6 +8,8 @@
 #include "libft.h"
 #include "op.h"
 
+# define OP_BYTE 1
+
 #if (REG_SIZE == 4)
 	typedef int32_t reg_type;
 #elif (REG_SIZE == 2)

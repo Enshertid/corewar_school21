@@ -13,6 +13,7 @@ t_car		*create_caret(int position_on_arena, int id)
 	node->id = id;
 	node->num_of_carets = 1;
 	node->registers[0] = -id;
+	node->step = OP_BYTE;
 	return (node);
 }
 

@@ -38,9 +38,6 @@ t_car			*check_caret(t_vm *vm, t_car *caret)
 			caret->position = (caret->position + 1) % MEM_SIZE;
 	}
 	else if (!(--caret->cycle_to_action))
-	{
-		// printf("going to operation ==> \n current cycle ==> %ld\n", vm->current_cycle);
 		vm->operations.func[caret->code](vm, caret);
-	}
 	return(caret->next);
 }

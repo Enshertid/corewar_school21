@@ -25,52 +25,14 @@ int 		check_arg(uint8_t arg)
 	return (0);
 }
 
-void 			bit_representation(int16_t in)
-{
-	int i;
-	// int res;
-	// char *data;
-
-	i = 0;
-	// data = (char *)in;
-	while (i < 16)
-	{
-		if (in & 0x80)
-			write (1, "1", 1);
-		else
-			write (1, "0", 1);
-		i++;
-		if (i == 8)
-			write (1, " ", 1);
-		in = in << 1;
-	}
-	write (1, "\n", 1);
-}
-
-void bit_representation2(int32_t num)
-{
-    for (int i = 31; i >= 0; i--)
-    {
-        if (num & (1 << i))
-            write(1, "1", 1);
-        else
-            write(1, "0", 1);
-        if (!(i % 8))
-            write (1, " ", 1);
-    }
-}
-
 int16_t 		get_2byte(t_vm *vm, int position)
 {
 	int16_t	res;
 
 	res = 0;
-	bit_representation((int32_t)res);
 	position = position % MEM_SIZE;
-	res = (res | (vm->arena[position])) >> 8;
-	bit_representation((int32_t)res);
-	res = res ^ (vm->arena[(position + 1) % MEM_SIZE]);
-	bit_representation((int32_t)res);
+	res = ((res | (vm->arena[position])));
+	res = (res ^ (vm->arena[(position + 1) % MEM_SIZE]));
 	if (vm->arena[position] & 0x80)
 		res = ~res;
 	printf("\nRES = %d", res);

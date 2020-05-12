@@ -28,18 +28,18 @@ static t_bool	check_reg(t_vm *vm, t_car *car, int8_t *arg)
 void 			op_sti(t_vm *vm, t_car *car)
 {
 	int8_t	first;
-	int8_t	second;
+	int8_t	sec;
 	int8_t	third;
 	int32_t second_val;
 	int32_t third_val;
 	
-	first = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 0);
-	second = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 1);
-	third = determine_arg(vm->arena[(car->position + OP_BYTE) % MEM_SIZE], 2);
-	car->step = OP_BYTE + ARG_CHECK;
-	if (first != 0 && second != 0 && third != 0)
+	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
+	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
+	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);
+	car->step += ARG_CHECK;
+	if (first != 0 && sec != 0 && third != 0)
 		if (check_reg(vm, car, &first))
-			if (get_arg_dir_two(vm, car, second, &second_val))
+			if (get_arg_dir_two(vm, car, sec, &second_val))
 				if (get_arg_dir_two(vm, car, third, &third_val))
 					write_reg_to_arena(vm, car->registers[first], get_new_pos
 								(car->position, (second_val + third_val) % IDX_MOD));
@@ -47,6 +47,6 @@ void 			op_sti(t_vm *vm, t_car *car)
 	car->code = read_byte(vm, car->position) - 1;
 	if (car->code >= 0 && car->code < OP_NUM)
 		car->cycle_to_action = vm->operations.op_cycles[car->code];
-	car->step = 0;
+	car->step = OP_BYTE;
 }
 
