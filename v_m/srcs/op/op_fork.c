@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:31:33 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/11 22:06:18 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/12 13:39:38 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void 		op_fork(t_vm *vm, t_car *car)
 {
 	t_car	*new;
 	int32_t pos;
+	int32_t x;
 
 	printf("FORK: Cycle = %ld Car->pos = %d ",vm->current_cycle, car->position);
-	pos = car->position + get_2byte(vm, car->position + 1) % IDX_MOD;
+	x = get_2byte(vm, car->position + 1) % IDX_MOD;
+	pos = car->position + x;
+	printf("\nX = %d \n", x);
 	new = copy_caret(car, (pos % MEM_SIZE), ++vm->id_cars);
 	add_caret(&vm->carriages, new);
 	car->position = (car->position + 3) % MEM_SIZE;

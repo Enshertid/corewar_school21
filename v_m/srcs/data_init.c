@@ -17,7 +17,7 @@ static void		init_carriages(t_vm *vm, int iter)
 	t_car *list;
 	
 	i = 0;
-	list = create_caret(0, 1);
+	list = create_caret(0, 0);
 	while (++i < iter)
 	{
 		add_caret(&list, create_caret((MEM_SIZE / iter) * i, i + 1));
