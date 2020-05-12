@@ -27,7 +27,7 @@ t_player		*define_winner(t_players *players)
 t_bool			end_dump(char *arena)
 {
 	write(1, "end bcs dump flag used\n", 23);
-	print_arena(arena, MEM_SIZE/8);
+	print_arena(arena, MEM_SIZE/6);
 	return (TRUE);
 }
 
