@@ -33,6 +33,8 @@ int 		get_2byte(t_vm *vm, int position)
 	position = position % MEM_SIZE;
 	res = (res | ((vm->arena[position]) % MEM_SIZE)) >> 8;
 	res = (res | ((vm->arena[position + 1]) % MEM_SIZE));
+	printf("\n\nbefore cast ==> %d", res);
+	printf("after cast==>%d\n\n", (int32_t)res);
 	return(res);
 }
 

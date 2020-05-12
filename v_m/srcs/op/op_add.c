@@ -23,22 +23,40 @@ static void		write_to_reg(t_car *car, int8_t first,
 		car->carry = FALSE;
 }
 
-void			op_add(t_vm *vm, t_car *car)
+static t_bool		check_determine(t_vm *vm, t_car *car)
 {
+	if (determine_arg(read_byte(vm,
+								get_new_pos(car->position, car->step)), 0) == REG)
+		if (determine_arg(read_byte(vm,
+									get_new_pos(car->position, car->step)), 1) != REG)
+			if (determine_arg(read_byte(vm,
+										get_new_pos(car->position, car->step)), 2) != REG)
+			{
+				car->step++;
+				return(TRUE);
+			}
+	car->step++;
+	return (FALSE);
+}
+
+void			op_add(t_vm *vm, t_car *car) {
 	int8_t first;
 	int8_t second;
 	int8_t third;
 	
 	car->step = OP_BYTE;
-	first = read_byte(vm, get_new_pos(car->position, car->step));
-	car->step += REG;
-	second = read_byte(vm, get_new_pos(car->position, car->step));
-	car->step += REG;
-	third = read_byte(vm, get_new_pos(car->position, car->step));
-	car->step += REG;
-	if (first >= 1 && first < 16 && second >= 1 && second < 16 &&
-											third >= 1 && third < 16)
-		write_to_reg(car, first, second, third);
+	if (check_determine(vm, car))
+	{
+		first = read_byte(vm, get_new_pos(car->position, car->step));
+		car->step += REG;
+		second = read_byte(vm, get_new_pos(car->position, car->step));
+		car->step += REG;
+		third = read_byte(vm, get_new_pos(car->position, car->step));
+		car->step += REG;
+		if (first >= 1 && first < 16 && second >= 1 && second < 16 &&
+			third >= 1 && third < 16)
+			write_to_reg(car, first, second, third);
+	}
 	car->position = get_new_pos(car->position, car->step);
 	car->code = read_byte(vm, car->position) - 1;
 	if (car->code >= 0 && car->code < OP_NUM)

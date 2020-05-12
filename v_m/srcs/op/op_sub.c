@@ -13,25 +13,44 @@
 #include "operations.h"
 #include "vm.h"
 
-void 		op_sub(t_vm *vm, t_car *car)
+static t_bool		check_determine(t_vm *vm, t_car *car)
 {
+	if (determine_arg(read_byte(vm,
+			get_new_pos(car->position, car->step)), 0) == REG)
+		if (determine_arg(read_byte(vm,
+				get_new_pos(car->position, car->step)), 1) == REG)
+			if (determine_arg(read_byte(vm,
+					get_new_pos(car->position, car->step)), 2) == REG)
+			{
+				car->step++;
+				return(TRUE);
+			}
+	car->step++;
+	return (FALSE);
+}
+
+void 		op_sub(t_vm *vm, t_car *car) {
 	int8_t first;
 	int8_t second;
 	int8_t third;
 	
-	first = read_byte(vm, ((car->position + REG) % MEM_SIZE));
-	second = read_byte(vm, ((car->position + REG * 2) % MEM_SIZE));
-	third = read_byte(vm, ((car->position + REG * 3) % MEM_SIZE));
-	if (first >= 1 && first < 16 && second >= 1 && second < 16 &&
-										third >= 1 && third < 16)
+	if (check_determine(vm, car))
 	{
-		car->registers[third] = car->registers[first] - car->registers[second];
-		if (!car->registers[third])
-			car->carry = TRUE;
-		else
-			car->carry = FALSE;
+		first = read_byte(vm, get_new_pos(car->position, car->step));
+		second = read_byte(vm, get_new_pos(car->position, car->step + REG));
+		third = read_byte(vm, get_new_pos(car->position, car->step + REG * 2));
+		car->step += REG * 3;
+		if (first >= 1 && first < 16 && second >= 1 && second < 16 &&
+											third >= 1 && third < 16)
+		{
+			car->registers[third] = car->registers[first] - car->registers[second];
+			if (!car->registers[third])
+				car->carry = TRUE;
+			else
+				car->carry = FALSE;
+		}
 	}
-	car->position = get_new_pos(car->position, REG * 4);
+	car->position = get_new_pos(car->position, car->step);
 	car->code = read_byte(vm, car->position) - 1;
 	if (car->code >= 0 && car->code < OP_NUM)
 		car->cycle_to_action = vm->operations.op_cycles[car->code];
