@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:53:09 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/11 22:06:22 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/12 21:12:00 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ void 		op_live(t_vm *vm, t_car *car)
 	if (car->code >= 0 && car->code < OP_NUM)
 		car->cycle_to_action = vm->operations.op_cycles[car->code];
 	car->step = OP_BYTE;
+	// printf(" REG = %d\n", car->registers[0]);
 	printf(" In end: Car->pos = %d\n", car->position);
+
 }

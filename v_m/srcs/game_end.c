@@ -15,7 +15,7 @@ t_player		*define_winner(t_players *players)
 	live_cycle = players->arr[iter]->live;
 	while (++iter < players->size)
 	{
-		if (live_cycle <= players->arr[iter]->live)
+		if ((uint32_t)live_cycle <= players->arr[iter]->live)
 		{
 			winner_id = iter;
 			live_cycle = players->arr[iter]->live;
@@ -37,5 +37,6 @@ t_bool			end_game(t_vm *vm, t_players *players)
 	
 	write(1, "game has been end and the winner is bla-bla-bla\n", 49);
 	winner = define_winner(players);
+	printf("ID WINNER = %d, vm cycle = %ld", winner->id, vm->current_cycle);
 	return (TRUE);
 }
