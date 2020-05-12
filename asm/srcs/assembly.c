@@ -133,8 +133,8 @@ void		assembly(t_file *file, t_validation	*validation)
 		// tokens_analysis(file);
 //		if (file->status == FILE_OK)
 //		{
-//			bytecode = convert_to_bytecode(file->tokens);
-//			write_to_file(file, bytecode, file->tokens);
+			bytecode = convert_to_bytecode(file->tokens);
+			write_to_file(file, bytecode);
 //		}
 
 	}

@@ -47,7 +47,8 @@ uint8_t		build_args_byte(t_vector_token const tokens, int pos)
 	args_byte = 0;
 	args_byte |= ((determine_arg(tokens + pos)) << 6);
 	pos += 2;
-	args_byte |= ((determine_arg(tokens + pos)) << 4);
+	if (pos < vec_size((t_vector)&tokens))
+		args_byte |= ((determine_arg(tokens + pos)) << 4);
 	pos += 2;
 	if (pos < vec_size((t_vector)&tokens))
 		args_byte |= ((determine_arg(tokens + pos)) << 2);
@@ -72,4 +73,3 @@ void		add_command(t_byteline *byteline,
 	}
 	vec_pushback(&byteline->bytetokens, &byte_token);
 }
-

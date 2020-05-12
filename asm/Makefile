@@ -40,7 +40,12 @@ FLAGS =				-g -Wall -Werror -Wextra $(addprefix -I , $(INCLUDES))
 
 
 
-all: $(NAME)
+# all: $(NAME)
+
+all:
+	gcc -Wall -Werror -Wextra -g \
+	tokenizer/srcs/*.c srcs/*.c converter/srcs/*.c converter/byte_tokenizer/srcs/*.c \
+	-I includes -I tokenizer/includes -I converter/includes -I converter/byte_tokenizer/includes -I ../libft/includes -L ../libft -lft
 
 
 $(NAME): $(DIR_OBJS) $(OBJS)

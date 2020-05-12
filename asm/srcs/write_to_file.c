@@ -104,8 +104,7 @@ static void	write_exec_code(const int fd, const t_vector_char *bytecode)
 }
 
 void		write_to_file(const t_file *file,
-						const t_vector_char *bytecode,
-						const t_vector_token *tokens)
+						const t_vector_char *bytecode)
 {
 	const int	exec_code_size = count_exec_code_size(bytecode);
 	char		*cor_name;

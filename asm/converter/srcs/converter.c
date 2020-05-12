@@ -6,10 +6,12 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 19:18:18 by user              #+#    #+#             */
-/*   Updated: 2020/05/10 14:56:53 by user             ###   ########.fr       */
+/*   Updated: 2020/05/12 22:11:43 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+   #include <stdio.h>
 #include "libft.h"
 #include "byte_tokenizer.h"
 #include "converter_utils.h"
@@ -32,19 +34,19 @@ static void		destroy_bytelines(t_vector_byteline lines)
 	vec_destroy(&lines);
 }
 
-static void print(const t_vector_char *lines)
-{
-	printf("BYTECODE:\n");
-	for (int i = 0; i < vec_size(&lines); ++i) {
-		for (int j = 0; j < vec_size((t_vector)&lines[i]); ++j) {
-			char *str = num_to_bits(&lines[i][j], 1);
-//			printf("%x", lines[i][j]);
-			printf("%s ", str);
-			free(str);
-		}
-		printf("\n");
-	}
-}
+// static void print(const t_vector_char *lines)
+// {
+// 	printf("BYTECODE:\n");
+// 	for (int i = 0; i < vec_size(&lines); ++i) {
+// 		for (int j = 0; j < vec_size((t_vector)&lines[i]); ++j) {
+// 			char *str = num_to_bits(&lines[i][j], 1);
+// //			printf("%x", lines[i][j]);
+// 			printf("%s ", str);
+// 			free(str);
+// 		}
+// 		printf("\n");
+// 	}
+// }
 
 
 t_vector_char	*convert_to_bytecode(const t_vector_token *tokens)

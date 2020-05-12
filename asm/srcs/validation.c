@@ -195,7 +195,6 @@ void	ft_check_instructions(t_vector_token *tokens, t_validation *val)
 {
 	int 			row;
 	int 			col;
-	int 			i;
 	t_check_args	*checker;
 
 	checker = (t_check_args*)malloc(sizeof(t_check_args));
@@ -401,7 +400,7 @@ bool	is_name(const char **str, t_token *token, t_validation	*val)
 	bool		argument;
 
 	argument = false;
-	if (ft_strncmp(val->lines[*val->line_index], NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0 && val->lines[*val->line_index][ft_strlen(NAME_CMD_STRING)] == ' ')
+	if (ft_strncmp(val->lines[*val->line_index], NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0 && (val->lines[*val->line_index][ft_strlen(NAME_CMD_STRING)] == ' ' || val->lines[*val->line_index][ft_strlen(NAME_CMD_STRING)] == '\t'))
 	{
 		if (val->name == 1 && val->dbl_n == 0) //проверка на дубль
 		{
@@ -473,7 +472,7 @@ bool	is_comment(const char **str, t_token *token, t_validation	*val)
 	bool		argument;
 
 	argument = false;
-	if (ft_strncmp(val->lines[*val->line_index], COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0 && val->lines[*val->line_index][ft_strlen(COMMENT_CMD_STRING)] == ' ')
+	if (ft_strncmp(val->lines[*val->line_index], COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0 && (val->lines[*val->line_index][ft_strlen(COMMENT_CMD_STRING)] == ' ' || val->lines[*val->line_index][ft_strlen(COMMENT_CMD_STRING)] == '\t'))
 	{
 		if (val->comment == 1 && val->dbl_c == 0) //проверка на дубль
 		{

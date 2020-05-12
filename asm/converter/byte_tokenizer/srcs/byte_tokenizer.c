@@ -30,6 +30,7 @@ static int			convert_to_byteline(t_byteline *byteline,
 	byteline->labels = vec_create(2, sizeof(char*));
 	while (cur_line < lines_count)
 	{
+		byteline->bytetokens = NULL;
 		tokens_count = vec_size((t_vector)&tokens[cur_line]);
 		cur_token = 0;
 		while (cur_token < tokens_count)
@@ -89,7 +90,7 @@ t_vector_byteline	byte_tokenizer(const t_vector_token *tokens)
 
 	bytelines = vec_create(lines_count, sizeof(t_byteline));
 	bytes_before = 0;
-	line = 2;
+	line = 2;		// cause 0 - name and 1 - comment
 	while (line < lines_count)
 	{
 		line = convert_to_byteline(&byteline, tokens, line);
@@ -97,8 +98,11 @@ t_vector_byteline	byte_tokenizer(const t_vector_token *tokens)
 		vec_pushback(&bytelines, &byteline);
 		bytes_before += byteline_lenght(&byteline);
 		line += 1;
+		printf("line %d ok\n", line);
 	}
 	fill_labels(bytelines);
+	if (bytelines[vec_size(&bytelines) - 1].bytetokens == NULL)
+		vec_popback(&bytelines);
 	print(bytelines);
 	return (bytelines);
 }
