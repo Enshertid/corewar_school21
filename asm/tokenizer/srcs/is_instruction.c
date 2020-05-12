@@ -6,15 +6,15 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/25 13:01:16 by user              #+#    #+#             */
-/*   Updated: 2020/04/25 14:18:15 by user             ###   ########.fr       */
+/*   Updated: 2020/05/05 13:11:36 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token_determinator.h"
+#include "../includes/token_determinator.h"
 
 const char		g_instructions[16][6] = {
 	"live", "ldi", "add", "sub", "and", "xor", "lld", "lfork",
-	"ld", "fork", "sti", "lldi", "aff", "or", "st", "zjmp",
+	"ld", "fork", "sti", "lldi", "aff", "or", "st", "zjmp"
 };
 const size_t	g_instructions_lenghts[16] = {
 	4, 3, 3, 3, 3, 3, 3, 5, 2, 4, 3, 4, 3, 2, 2, 4

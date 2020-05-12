@@ -1,5 +1,5 @@
-#include "tokenizer.h"
-#include "token_determinator.h"
+#include "../includes/tokenizer.h"
+#include "../includes/token_determinator.h"
 
 t_vector_token		line_to_tokens(const char *line, t_validation	*validation)
 //t_vector_token		line_to_tokens(t_vector_char *lines, int *line_index, t_validation	*validation)
@@ -22,7 +22,6 @@ t_vector_token		line_to_tokens(const char *line, t_validation	*validation)
 	return (tokens);
 }
 
-#include <stdio.h> // DELETE
 t_vector_token		*tokenizer(t_vector_char *lines, t_validation	*validation)
 {
 	const size_t	lines_count = vec_size(&lines);

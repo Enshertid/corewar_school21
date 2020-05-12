@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token_determinator.h"
+#include "../includes/token_determinator.h"
 
 static void	skip_unknown_token(const char **lineptr)
 {
@@ -29,9 +29,9 @@ t_token		token_determinator(const char **lineptr, t_validation	*validation)
 	token_determined = false;
 	token_determined = is_separator(lineptr, &token);
 	if (!token_determined)
-		token_determined = is_instruction(lineptr, &token, validation);
-	if (!token_determined)
 		token_determined = is_label(lineptr, &token);
+	if (!token_determined)
+		token_determined = is_instruction(lineptr, &token, validation);
 	if (!token_determined)
 		token_determined = is_argument(lineptr, &token);
 	if (!token_determined)

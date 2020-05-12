@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token_determinator.h"
+#include "../includes/token_determinator.h"
 
 static bool	if_register_skip(const char **lineptr)
 {

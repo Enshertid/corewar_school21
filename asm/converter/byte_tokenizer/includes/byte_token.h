@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_separator.c                                     :+:      :+:    :+:   */
+/*   byte_token.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/25 13:43:14 by user              #+#    #+#             */
-/*   Updated: 2020/04/25 14:08:24 by user             ###   ########.fr       */
+/*   Created: 2020/05/08 13:18:10 by user              #+#    #+#             */
+/*   Updated: 2020/05/10 16:53:52 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token_determinator.h"
+#ifndef BYTE_TOKEN_H
+# define BYTE_TOKEN_H
 
-bool	is_separator(const char **lineptr, t_token *token)
+# include "token.h"
+
+typedef struct			s_byte_token
 {
-	if (**lineptr == SEPARATOR_CHAR)
-	{
-		token->type = SEPARATOR;
-		token->value = ft_strndup(*lineptr, 1);
-		*lineptr += 1;
-		return (true);
-	}
-	else
-		return (false);
-}
+	const t_token		*token;
+	int32_t			value;
+	short				value_size;
+}						t_byte_token;
+
+typedef t_byte_token*	t_vector_bytetoken;
+
+#endif
