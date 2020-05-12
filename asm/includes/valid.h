@@ -9,8 +9,16 @@ typedef struct			s_validation
 	char 				**lines;
 	int 				*line_index;
 	int					error;
-//	int 				max_lines;
+	int 				dbl_n;
+	int 				dbl_c;
 }						t_validation;
+
+typedef struct			s_check_args
+{
+	int					i;
+	char 				*instr;
+	char 				**arg;
+}						t_check_args;
 
 int 					ft_validation(const char * const *argv);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
