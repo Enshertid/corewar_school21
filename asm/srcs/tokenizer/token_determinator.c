@@ -21,7 +21,7 @@ static void	skip_unknown_token(const char **lineptr)
 	*lineptr = line;
 }
 
-t_token		token_determinator(const char **lineptr, t_validation	*validation)
+t_token		token_determinator(const char **lineptr, t_validation *validation)
 {
 	t_token	token;
 	bool	token_determined;
@@ -29,9 +29,9 @@ t_token		token_determinator(const char **lineptr, t_validation	*validation)
 	token_determined = false;
 	token_determined = is_separator(lineptr, &token);
 	if (!token_determined)
-		token_determined = is_instruction(lineptr, &token, validation);
-	if (!token_determined)
 		token_determined = is_label(lineptr, &token);
+	if (!token_determined)
+		token_determined = is_instruction(lineptr, &token, validation);
 	if (!token_determined)
 		token_determined = is_argument(lineptr, &token);
 	if (!token_determined)
@@ -43,6 +43,8 @@ t_token		token_determinator(const char **lineptr, t_validation	*validation)
 		token.type = UNKNOWN;
 		token.value = NULL;
 		validation->error = 1;
+		if (validation->dbl_c == 0 && validation->dbl_n == 0)
+			warning_add(ERROR, 1, "token_determinator Syntax error.");
 		skip_unknown_token(lineptr);
 	}
 	return (token);

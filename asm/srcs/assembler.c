@@ -28,7 +28,7 @@ static inline void	file_reset(t_file *file)
 	ft_memset(file, 0, sizeof(t_file));
 }
 
-void				assembler(const char * const *files, t_validation	*validation)
+void				assembler(const char * const *files, t_validation *validation)
 {
 	t_file		file;
 

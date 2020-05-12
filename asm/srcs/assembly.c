@@ -103,7 +103,8 @@ void		assembly(t_file *file, t_validation	*validation)
 	{
 		file->tokens = tokenizer(file->lines, validation);
 		ft_check_labels(file->tokens, validation);
-//		ft_check_instructions(file->lines, file->tokens, validation);
+		ft_check_sizes(file->tokens, validation);
+		ft_check_instructions(file->tokens, validation);
 		print(file->lines, file->tokens);
 		// tokens_analysis(file);
 		// if (file->status == FILE_OK)
