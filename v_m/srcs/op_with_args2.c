@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 21:28:51 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/12 14:44:38 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/13 15:30:44 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,6 @@ int 		check_arg(uint8_t arg)
 	return (0);
 }
 
-int16_t 		get_2byte(t_vm *vm, int position)
-{
-	int16_t	res;
-
-	res = 0;
-	position = position % MEM_SIZE;
-	res = ((res | (vm->arena[position])));
-	res = (res ^ (vm->arena[(position + 1) % MEM_SIZE]));
-	if (vm->arena[position] & 0x80)
-		res = ~res;
-	printf("\nRES = %d", res);
-	return(res);
-}
-
-int 		get_4byte(t_vm *vm, int position)
-{
-	uint32_t	res;
-
-	res = 0;
-	position = position % MEM_SIZE;
-	res = (res | ((vm->arena[position]) % MEM_SIZE)) >> 8;
-	res = (res | ((vm->arena[position + 1]) % MEM_SIZE)) >> 8;
-	res = (res | ((vm->arena[position + 2]) % MEM_SIZE)) >> 8;
-	res = (res | ((vm->arena[position + 3]) % MEM_SIZE));
-	return(res);
-}
-
 int 		get_arg_n(t_vm *vm, t_car *car, int8_t args)
 {
 	int32_t res;
@@ -66,12 +39,12 @@ int 		get_arg_n(t_vm *vm, t_car *car, int8_t args)
 	}
 	else if (check_arg(args) == DIR_CODE)
 	{
-		res = get_2byte(vm, car->position + car->step);
+		res = read_two_bytes(vm, car->position + car->step);
 		car->step += 2;
 	}
 	else if (check_arg(args) == IND_CODE)
 	{
-		res = (get_2byte(vm, car->position + car->step)) % IDX_MOD;
+		res = (read_two_bytes(vm, car->position + car->step)) % IDX_MOD;
 		car->step += 4;
 	}
 	return (res);

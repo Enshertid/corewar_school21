@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:47:13 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/02 18:47:25 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/13 15:30:14 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 
 void 		op_aff(t_vm *vm, t_car *car)
 {
-	int8_t	type;
-	
 	printf ("%c", (char)read_byte(vm, get_new_pos(car->position, car->step)));
-	car->step += type;
+	car->step += REG;
 	car->position = get_new_pos(car->position, car->step);
 	car->code = read_byte(vm, car->position) - 1;
 	if (car->code >= 0 && car->code < OP_NUM)

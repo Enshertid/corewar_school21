@@ -6,28 +6,12 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 17:47:33 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/02 17:48:39 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/13 15:29:01 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "vm.h"
-
-static t_bool		check_determine(t_vm *vm, t_car *car)
-{
-	if (determine_arg(read_byte(vm,
-			get_new_pos(car->position, car->step)), 0) == REG)
-		if (determine_arg(read_byte(vm,
-				get_new_pos(car->position, car->step)), 1) == REG)
-			if (determine_arg(read_byte(vm,
-					get_new_pos(car->position, car->step)), 2) == REG)
-			{
-				car->step++;
-				return(TRUE);
-			}
-	car->step++;
-	return (FALSE);
-}
 
 void 		op_sub(t_vm *vm, t_car *car)
 {
