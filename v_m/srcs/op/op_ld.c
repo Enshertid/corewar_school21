@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:57:24 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/12 20:41:13 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/13 11:19:39 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void 		op_ld(t_vm *vm, t_car *car)
 	int ind;
 	int8_t args;
 
-	printf("LD: Cycle = %ld  POS = %d ", vm->current_cycle, car->position);
+	printf("LD(%d): Cycle = %ld  POS = %d ", car->id, vm->current_cycle, car->position);
 	args = vm->arena[(car->position + 1) % MEM_SIZE];
 	if (check_arg(args) == DIR_CODE && check_arg(args << 2) == REG_CODE)
 	{

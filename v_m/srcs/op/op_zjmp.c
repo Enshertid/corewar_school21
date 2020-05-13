@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:39:34 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/12 21:03:28 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/13 11:19:45 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void 		op_zjmp(t_vm *vm, t_car *car)
 {
-	printf("ZJMP: Cycle = %ld Pos = %d", vm->current_cycle, car->position);
+	printf("ZJMP(%d): Cycle = %ld Pos = %d", car->id, vm->current_cycle, car->position);
 	if (car->carry)
 		car->position += (read_two_bytes(vm, car->position + 1) % IDX_MOD) % MEM_SIZE;
 	else

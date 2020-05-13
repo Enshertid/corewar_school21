@@ -6,11 +6,11 @@
 #    By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/02 18:51:40 by enshertid         #+#    #+#              #
-#    Updated: 2020/05/09 01:03:24 by ediego           ###   ########.fr        #
+#    Updated: 2020/05/13 10:28:56 by ediego           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Corewar
+NAME = corewar
 
 SRCS =	main.c	pars.c pars_argv.c	pars_champ.c	op_with_args.c			\
 game.c	carets_op_delete.c	op_functions.c	data_init.c	vm_init.c			\
