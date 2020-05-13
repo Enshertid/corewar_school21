@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:40:20 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/11 22:07:53 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/12 22:40:41 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void 		op_ldi(t_vm *vm, t_car *car)
 	args = vm->arena[(car->position + 1) % MEM_SIZE];
 	arg1 = get_arg_n(vm, car, args);
 	addr = car->position + (arg1 + get_arg_n(vm, car, args << 2) % IDX_MOD);
-	value = get_4byte(vm, addr);
+	value = read_four_bytes(vm, addr);
 	set_reg(car, vm->arena[(car->position + car->step) % MEM_SIZE], value);
 	car->code = vm->arena[car->position] - 1;
 	if (car->code >= 0 && car->code < 16)

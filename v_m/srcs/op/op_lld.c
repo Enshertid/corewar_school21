@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:45:07 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/11 22:07:40 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/12 22:41:52 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void 		op_lld(t_vm *vm, t_car *car)
 	args = vm->arena[(car->position + 1) % MEM_SIZE];
 	if (check_arg(args) == DIR_CODE && check_arg(args << 2) == REG_CODE)
 	{
-		value = get_4byte(vm, car->position + 2);
+		value = read_four_bytes(vm, car->position + 2);
 		reg = vm->arena[(car->position + 6) % MEM_SIZE];
 		set_reg(car, reg, value);
 	}
 	else if (check_arg(args) == IND_CODE && check_arg(args << 2) == REG_CODE)
 	{
-		ind = car->position + (get_2byte(vm, car->position + 2));
-		value = get_4byte(vm, ind);
+		ind = car->position + (read_two_bytes(vm, car->position + 2));
+		value = read_four_bytes(vm, ind);
 		reg = vm->arena[(car->position + 4) % MEM_SIZE];
 		set_reg(car, reg, value);
 	}
