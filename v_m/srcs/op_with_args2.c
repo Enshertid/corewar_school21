@@ -32,7 +32,7 @@ int16_t 		get_2byte(t_vm *vm, int position)
 	res = 0;
 	position = position % MEM_SIZE;
 	res = ((res | (vm->arena[position])));
-	res = (res ^ (vm->arena[(position + 1) % MEM_SIZE]));
+	res = (res ^ (vm->arena[(position + 1) % MEM_SIZE]));ч
 	if (vm->arena[position] & 0x80)
 		res = ~res;
 	printf("\nRES = %d", res);
