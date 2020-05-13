@@ -29,6 +29,7 @@ typedef struct			s_pars
 	int					ac;
 	int					fd;
 	int					i;
+	t_bool				dump_flag;
 }						t_pars;
 
 void					validate_id(t_players *players);

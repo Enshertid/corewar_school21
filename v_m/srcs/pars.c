@@ -44,8 +44,8 @@ void				parsing(t_players *players, int ac, char **av)
 	{
 		if (ft_strequ(pars.av[pars.i], "-n"))
 			valid_flag(&pars, players);
-		// else if (ft_strequ(pars.av[pars.i], "-dump"))
-		// 	valid_dump(&pars, players);
+		 else if (ft_strequ(pars.av[pars.i], "-dump"))
+		 	valid_dump(&pars, players);
 		else
 			valid_name(&pars, players);
 		pars_champ(&pars, players);

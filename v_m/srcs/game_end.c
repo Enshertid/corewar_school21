@@ -8,7 +8,7 @@ t_player		*define_winner(t_players *players)
 {
 	int8_t		iter;
 	int8_t		winner_id;
-	int32_t		live_cycle;
+	size_t		live_cycle;
 	
 	iter = 0;
 	winner_id = iter;
@@ -24,10 +24,15 @@ t_player		*define_winner(t_players *players)
 	return(players->arr[winner_id]);
 }
 
-t_bool			end_dump(char *arena)
+t_bool			end_dump(t_vm *vm, t_players *players)
 {
+	t_player	*winner;
+	
+	winner = define_winner(players);
 	write(1, "end bcs dump flag used\n", 23);
-	print_arena(arena, MEM_SIZE/8);
+	print_arena(vm->arena, MEM_SIZE/8);
+	printf("%s (player %d) won!\n", winner->name,
+		   winner->id);
 	return (TRUE);
 }
 
@@ -37,5 +42,8 @@ t_bool			end_game(t_vm *vm, t_players *players)
 	
 	write(1, "game has been end and the winner is bla-bla-bla\n", 49);
 	winner = define_winner(players);
+	print_arena(vm->arena, MEM_SIZE / 8);
+	printf("%s (player %d) won!\n", winner->name,
+		   winner->id);
 	return (TRUE);
 }

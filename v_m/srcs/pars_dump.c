@@ -31,7 +31,11 @@ void			valid_dump(t_pars *pars, t_players *players)
 	int64_t		long_dump_number;
 	int32_t 	dump_number;
 	
-	str = pars->av[pars->i];
+	if (!pars->dump_flag)
+		pars->dump_flag = TRUE;
+	else
+		ft_error("second dump flag, error", "valid dump", 2);
+	str = pars->av[++pars->i];
 	while(*str)
 	{
 		if (!ft_isdigit(*str))
