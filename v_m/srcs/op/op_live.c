@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:53:09 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/13 11:20:49 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/13 12:10:45 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void 	check_player(t_vm *vm, t_car *car)
 
 void 			op_live(t_vm *vm, t_car *car)
 {
-	printf("Live(%d) start = %d Cycle = %ld ", car->id, car->position, vm->current_cycle);
+	printf("Live(%d) Cycle = %ld Pos = %d ", car->id, vm->current_cycle, car->position);
 	vm->count_live++;
 	car->last_live_cycle = 0;
 	check_player(vm, car);
@@ -63,5 +63,5 @@ void 			op_live(t_vm *vm, t_car *car)
 	car->code = read_byte(vm, car->position) - 1;
 	if (car->code >= 0 && car->code < OP_NUM)
 		car->cycle_to_action = vm->operations.op_cycles[car->code];
-	printf("End: %d\n", car->position);
+	printf("End pos: %d\n", car->position);
 }

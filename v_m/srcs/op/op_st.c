@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:58:35 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/10 20:54:36 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/13 12:21:37 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		op_st(t_vm *vm, t_car *car)
 	int8_t		first_value;
 	int16_t		second_value;
 	
+	printf("ST(%d): Cycle = %ld  POS = %d ", car->id, vm->current_cycle, car->position);
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	car->step += ARG_CHECK;
@@ -63,6 +64,7 @@ void		op_st(t_vm *vm, t_car *car)
 		}
 	}
 	car->position = get_new_pos(car->position, car->step);
+	printf(" END pos = %d\n", car->position);
 	car->code = read_byte(vm, car->position) - 1;
 	if (car->code >= 0 && car->code < OP_NUM)
 		car->cycle_to_action = vm->operations.op_cycles[car->code];
