@@ -7,7 +7,7 @@ void			cycle_of_game(t_vm *vm)
 	t_car		*tmp;
 
 	flag_of_end = FALSE;
-	vm->dump_value = 78;
+	vm->dump_value = 100;
 	vm->dump_flag = 1;
 	vm->current_cycle = 1;
 	while (!flag_of_end)

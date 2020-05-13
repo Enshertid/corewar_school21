@@ -30,7 +30,7 @@ t_bool			end_dump(t_vm *vm, t_players *players)
 	
 	winner = define_winner(players);
 	write(1, "end bcs dump flag used\n", 23);
-	print_arena(vm->arena, MEM_SIZE/8);
+	print_arena(vm->arena, MEM_SIZE / 8);
 	printf("%s (player %d) won!\n", winner->name,
 		   winner->id);
 	return (TRUE);
