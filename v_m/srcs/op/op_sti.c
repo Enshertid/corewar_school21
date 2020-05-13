@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:30:32 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/07 21:55:23 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/13 12:38:07 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void 			op_sti(t_vm *vm, t_car *car)
 	int8_t	third;
 	int32_t second_val;
 	int32_t third_val;
-	
+
+	printf("STI(%d): Cycle = %ld  POS = %d ", car->id, vm->current_cycle, car->position);
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);
@@ -45,6 +46,7 @@ void 			op_sti(t_vm *vm, t_car *car)
 								(car->position, (second_val + third_val) % IDX_MOD));
 	car->position = get_new_pos(car->position, car->step);
 	car->code = read_byte(vm, car->position) - 1;
+	printf(" END pos = %d\n", car->position);
 	if (car->code >= 0 && car->code < OP_NUM)
 		car->cycle_to_action = vm->operations.op_cycles[car->code];
 	car->step = OP_BYTE;

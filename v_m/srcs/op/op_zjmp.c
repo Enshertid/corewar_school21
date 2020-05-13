@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:39:34 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/13 11:19:45 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/13 12:46:19 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void 		op_zjmp(t_vm *vm, t_car *car)
 	car->code = vm->arena[car->position] - 1;
 	if (car->code >= 0 && car->code < 16)
 		car->cycle_to_action = vm->operations.op_cycles[car->code];
-	printf(" jump to %d\n", car->position);
+	printf(" carry = %d jump to %d\n", car->carry, car->position);
 }
