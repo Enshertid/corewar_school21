@@ -18,12 +18,7 @@ void 		op_aff(t_vm *vm, t_car *car)
 {
 	int8_t	type;
 	
-	type = determine_arg(read_byte(vm,
-			get_new_pos(car->position, car->step)), 0);
-	car->step += ARG_CHECK;
-	if (type == REG)
-		printf ("%c", (char)read_byte(vm,
-				get_new_pos(car->position, car->step)));
+	printf ("%c", (char)read_byte(vm, get_new_pos(car->position, car->step)));
 	car->step += type;
 	car->position = get_new_pos(car->position, car->step);
 	car->code = read_byte(vm, car->position) - 1;

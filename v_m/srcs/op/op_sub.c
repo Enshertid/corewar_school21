@@ -35,21 +35,20 @@ void 		op_sub(t_vm *vm, t_car *car)
 	int8_t second;
 	int8_t third;
 	
-	if (check_determine(vm, car))
+	first = read_byte(vm, get_new_pos(car->position, car->step));
+	car->step += REG;
+	second = read_byte(vm, get_new_pos(car->position, car->step));
+	car->step += REG;
+	third = read_byte(vm, get_new_pos(car->position, car->step));
+	car->step += REG * 3;
+	if (first >= 1 && first < 16 && second >= 1 && second < 16 &&
+	third >= 1 && third < 16)
 	{
-		first = read_byte(vm, get_new_pos(car->position, car->step));
-		second = read_byte(vm, get_new_pos(car->position, car->step + REG));
-		third = read_byte(vm, get_new_pos(car->position, car->step + REG * 2));
-		car->step += REG * 3;
-		if (first >= 1 && first < 16 && second >= 1 && second < 16 &&
-											third >= 1 && third < 16)
-		{
-			car->registers[third] = car->registers[first] - car->registers[second];
-			if (!car->registers[third])
-				car->carry = TRUE;
-			else
-				car->carry = FALSE;
-		}
+		car->registers[third] = car->registers[first] - car->registers[second];
+		if (!car->registers[third])
+			car->carry = TRUE;
+		else
+			car->carry = FALSE;
 	}
 	car->position = get_new_pos(car->position, car->step);
 	car->code = read_byte(vm, car->position) - 1;
