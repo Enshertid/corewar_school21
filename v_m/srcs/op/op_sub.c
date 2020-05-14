@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 17:47:33 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/13 15:29:01 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/14 16:28:22 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void 		op_sub(t_vm *vm, t_car *car)
 	int8_t second;
 	int8_t third;
 	
+	car->step++;
 	first = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 	car->step += REG;
 	second = read_byte(vm, get_new_pos(car->position, car->step)) - 1;

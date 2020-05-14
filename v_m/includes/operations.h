@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:10:42 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/13 15:33:35 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/14 17:13:59 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int 				check_arg(uint8_t arg);
 int 				get_arg_n(t_vm *vm, t_car *car, int8_t args);
 void 				set_reg(t_car *car, int8_t reg, int32_t value);
 int 				get_arg_step(int args, int num, int dir_size);
-
+t_bool 				valid_args(t_vm *vm, t_car *car, int8_t args);
+t_bool		 		invalid_reg(t_vm *vm, t_car *car, int8_t args, int num);
 
 #endif

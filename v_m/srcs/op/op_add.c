@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 17:45:14 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/14 16:15:40 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/14 16:27:48 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void			op_add(t_vm *vm, t_car *car) {
 	int8_t third;
 	
 	printf("ADD(%d) Cycle = %ld Pos = %d ", car->id, vm->current_cycle, car->position);
+	car->step++;
 	first = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 	car->step += REG;
 	second = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
@@ -44,5 +45,5 @@ void			op_add(t_vm *vm, t_car *car) {
 	if (car->code >= 0 && car->code < OP_NUM)
 		car->cycle_to_action = vm->operations.op_cycles[car->code];
 	car->step = OP_BYTE;
-	printf(" End %d ", car->position);
+	printf(" End %d \n", car->position);
 }
