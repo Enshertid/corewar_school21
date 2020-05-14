@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:30:32 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/14 14:50:10 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/14 15:57:47 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void 			op_sti(t_vm *vm, t_car *car)
 	int32_t second_val;
 	int32_t third_val;
 	
-	printf("STI(%d): Cycle = %ld ", car->id, vm->current_cycle);
+	printf("STI(%d): Cycle = %ld POS = %d", car->id, vm->current_cycle, car->position);
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);
