@@ -13,11 +13,11 @@
 #include "../includes/token_determinator.h"
 
 const char		g_instructions[16][6] = {
-	"live", "ldi", "add", "sub", "and", "xor", "lld", "lfork",
-	"ld", "fork", "sti", "lldi", "aff", "or", "st", "zjmp"
+	"live", "ldi", "add", "sub", "and", "xor", "lfork",
+	"ld", "fork", "sti", "lldi", "aff", "or", "st", "lld", "zjmp"
 };
 const size_t	g_instructions_lenghts[16] = {
-	4, 3, 3, 3, 3, 3, 3, 5, 2, 4, 3, 4, 3, 2, 2, 4
+	4, 3, 3, 3, 3, 3, 5, 2, 4, 3, 4, 3, 2, 2, 3, 4
 };
 
 bool	is_instruction(const char **lineptr, t_token *token, t_validation	*val)

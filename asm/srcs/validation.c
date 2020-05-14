@@ -306,7 +306,7 @@ void	ft_check_string(t_vector_token *tokens, int row, t_validation *val)
 					{
 //						printf("type: %d, row: %d, col: %d, value: %s\n", tokens[row][col].type, row, col, tokens[row][col].value);
 						val->error =1;
-						warning_add(ERROR, 2, "2 wrong tokens in line: ", ft_itoa_static(row + 1, 10));
+//						warning_add(ERROR, 2, "2 wrong tokens in line: ", ft_itoa_static(row + 1, 10));
 					}
 					else
 					{
