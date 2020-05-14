@@ -19,14 +19,14 @@ void 		op_sub(t_vm *vm, t_car *car)
 	int8_t second;
 	int8_t third;
 	
-	first = read_byte(vm, get_new_pos(car->position, car->step));
+	first = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 	car->step += REG;
-	second = read_byte(vm, get_new_pos(car->position, car->step));
+	second = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 	car->step += REG;
-	third = read_byte(vm, get_new_pos(car->position, car->step));
-	car->step += REG * 3;
-	if (first >= 1 && first < 16 && second >= 1 && second < 16 &&
-	third >= 1 && third < 16)
+	third = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
+	car->step += REG;
+	if (first >= 0 && first < REG_NUMBER && second >= 0 && second <
+	        REG_NUMBER && third >= 0 && third < REG_NUMBER)
 	{
 		car->registers[third] = car->registers[first] - car->registers[second];
 		if (!car->registers[third])

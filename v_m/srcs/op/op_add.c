@@ -29,14 +29,14 @@ void			op_add(t_vm *vm, t_car *car) {
 	int8_t second;
 	int8_t third;
 	
-	first = read_byte(vm, get_new_pos(car->position, car->step));
+	first = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 	car->step += REG;
-	second = read_byte(vm, get_new_pos(car->position, car->step));
+	second = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 	car->step += REG;
-	third = read_byte(vm, get_new_pos(car->position, car->step));
+	third = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 	car->step += REG;
-	if (first >= 1 && first < 16 && second >= 1 && second < 16 &&
-							third >= 1 && third < 16)
+	if (first >= 0 && first < REG_NUMBER && second >= 0 && second <
+	        REG_NUMBER && third >= 0 && third < REG_NUMBER)
 		write_to_reg(car, first, second, third);
 	car->position = get_new_pos(car->position, car->step);
 	car->code = read_byte(vm, car->position) - 1;
