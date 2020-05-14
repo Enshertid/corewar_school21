@@ -55,6 +55,7 @@ t_bool		get_arg_dir_four(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg)
 		*arg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 		if (*arg >= 0 && *arg < REG_NUMBER)
 			return (FALSE);
+		*arg = car->registers[*arg];
 	}
 	else if (sw_arg == IND)
 		*arg = read_four_bytes(vm,
