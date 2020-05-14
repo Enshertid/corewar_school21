@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 21:28:51 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/13 15:30:44 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/14 15:00:46 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,40 @@ int 		check_arg(uint8_t arg)
 int 		get_arg_n(t_vm *vm, t_car *car, int8_t args)
 {
 	int32_t res;
-	int32_t reg;
+	int32_t value;
 
 	res = 0;
 	if (check_arg(args) == REG_CODE)
 	{
-		reg = vm->arena[(car->position + car->step) % MEM_SIZE];
-		res = car->registers[reg];
+		value = (vm->arena[(car->position + car->step) % MEM_SIZE]);
+		// printf(" value = %d ", value);
+		res = car->registers[--value];
 		car->step += 1;
 	}
 	else if (check_arg(args) == DIR_CODE)
 	{
-		res = read_two_bytes(vm, car->position + car->step);
+		res = read_two_bytes(vm, (car->position + car->step) % MEM_SIZE);
 		car->step += 2;
+		// printf(" here 2 ");
 	}
 	else if (check_arg(args) == IND_CODE)
 	{
-		res = (read_two_bytes(vm, car->position + car->step)) % IDX_MOD;
+		value = read_two_bytes(vm, (car->position + car->step) % MEM_SIZE);
+		res = read_four_bytes(vm, (car->position + value) % MEM_SIZE);
 		car->step += 4;
+		// printf(" here 3 ");
 	}
 	return (res);
 }
 
 void 		set_reg(t_car *car, int8_t reg, int32_t value)
 {
-	if (reg >= 0 && reg <= 15)
-	{
-		if (!value)
-			car->carry = 1;
-		else
-			car->carry = 0;
-		car->registers[reg] = value;
-	}	
+	if (!value)
+		car->carry = 1;
+	else
+		car->carry = 0;
+	car->registers[--reg] = value;
+	printf(" reg = %d value = %d ", ++reg, value);
 }
 
 int 		get_arg_step(int args, int num, int dir_size)

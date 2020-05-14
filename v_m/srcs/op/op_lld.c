@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:45:07 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/12 22:41:52 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/14 00:25:13 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ void 		op_lld(t_vm *vm, t_car *car)
 	{
 		value = read_four_bytes(vm, car->position + 2);
 		reg = vm->arena[(car->position + 6) % MEM_SIZE];
-		set_reg(car, reg, value);
+		if (reg > 0 && reg <= REG_NUMBER)
+			set_reg(car, reg, value);
 	}
 	else if (check_arg(args) == IND_CODE && check_arg(args << 2) == REG_CODE)
 	{
 		ind = car->position + (read_two_bytes(vm, car->position + 2));
 		value = read_four_bytes(vm, ind);
 		reg = vm->arena[(car->position + 4) % MEM_SIZE];
-		set_reg(car, reg, value);
+		if (reg > 0 && reg <= REG_NUMBER)
+			set_reg(car, reg, value);
 	}
 	car->code = vm->arena[car->position] - 1;
 	if (car->code >= 0 && car->code < 16)

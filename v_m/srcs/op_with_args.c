@@ -54,11 +54,12 @@ int32_t				read_four_bytes(t_vm *vm, int position)
 void			write_reg_to_arena(t_vm *vm, int32_t value, int position)
 {
 	int8_t		i;
-	
+
 	i = 0;
 	while (i < 4)
 	{
 		vm->arena[(position + i) % MEM_SIZE] = *((char*)&value + 3 - i);
 		i++;
 	}
+	// printf(" value = %d pos = %d ", value, position);
 }

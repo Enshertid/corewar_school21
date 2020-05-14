@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:10:42 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/12 15:45:43 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/13 15:33:35 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void				use_args(t_vm *vm, t_car *car, int32_t result, int8_t third);
 void				write_reg_to_arena(t_vm *vm, int value, int position);
 
 int 				check_arg(uint8_t arg);
-// int16_t				get_2byte(t_vm *vm, int position);
-int 				get_4byte(t_vm *vm, int position);
 int 				get_arg_n(t_vm *vm, t_car *car, int8_t args);
 void 				set_reg(t_car *car, int8_t reg, int32_t value);
 int 				get_arg_step(int args, int num, int dir_size);
