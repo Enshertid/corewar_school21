@@ -16,7 +16,7 @@
 static void		write_to_reg(t_car *car, int8_t first,
 								int8_t second, int8_t third)
 {
-	car->registers[first] = car->registers[second] + car->registers[third];
+	car->registers[third] = car->registers[first] + car->registers[second];
 	if (!car->registers[first])
 		car->carry = TRUE;
 	else
