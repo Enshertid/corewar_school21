@@ -24,13 +24,26 @@ t_player		*define_winner(t_players *players)
 	return(players->arr[winner_id]);
 }
 
+void			print_car(t_vm *vm)
+{
+	t_car *car;
+
+	car = vm->carriages;
+	while(car)
+	{
+		printf(" OP:%d(%d) POS = %d \n", (car->code + 1), car->id, car->position);
+		car = car->next;
+	}
+}
+
 t_bool			end_dump(t_vm *vm, t_players *players)
 {
 	t_player	*winner;
 	
 	winner = define_winner(players);
 	write(1, "end bcs dump flag used\n", 23);
-	print_arena(vm->arena, MEM_SIZE / 4);
+	print_car(vm);
+	print_arena(vm->arena, MEM_SIZE / 8);
 	printf("%s (player %d) won!\n", winner->name,
 		   winner->id);
 	return (TRUE);

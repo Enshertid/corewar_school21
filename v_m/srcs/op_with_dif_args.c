@@ -13,6 +13,7 @@ void			use_args(t_vm *vm, t_car *car, int32_t result,
 	if (third == REG)
 	{
 		reg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
+		printf(" REG = %d ", reg);
 		if (reg >= 0 && reg < REG_NUMBER)
 		{
 			car->registers[reg] = result;

@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 21:28:51 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/14 17:14:23 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/16 10:40:10 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int 		get_arg_n(t_vm *vm, t_car *car, int8_t args)
 {
 	int32_t res;
 	int32_t value;
+	int32_t pos;
 
 	res = 0;
 	if (check_arg(args) == REG_CODE)
@@ -47,19 +48,23 @@ int 		get_arg_n(t_vm *vm, t_car *car, int8_t args)
 	else if (check_arg(args) == IND_CODE)
 	{
 		value = read_two_bytes(vm, (car->position + car->step) % MEM_SIZE);
-		res = read_four_bytes(vm, (car->position + value) % MEM_SIZE);
+		pos = car->position + get_pos(value);
+		res = read_four_bytes(vm, pos);
 		car->step += 4;
 		// printf(" here 3 ");
 	}
 	return (res);
 }
 
-void 		set_reg(t_car *car, int8_t reg, int32_t value)
+void 		set_reg(t_car *car, int8_t reg, int32_t value, t_bool carry)
 {
-	if (!value)
-		car->carry = 1;
-	else
-		car->carry = 0;
+	if (carry)
+	{
+		if (!value)
+			car->carry = 1;
+		else
+			car->carry = 0;
+	}
 	car->registers[--reg] = value;
 	printf(" reg = %d value = %d ", ++reg, value);
 }
@@ -80,7 +85,10 @@ int 		get_arg_step(int args, int num, int dir_size)
 		else if (check_arg(args << bit) == IND_CODE)
 			sum += 2;
 		else
+		{
+			sum = 0; // maybe delete this ?
 			break ;
+		}
 		bit += 2;
 	}
 	return (++sum);
@@ -121,4 +129,58 @@ t_bool 	valid_args(t_vm *vm, t_car *car, int8_t args)
 		res = FALSE;
 	car->step = 2;
 	return(res);
+}
+
+t_bool 	valid_args2(t_vm *vm, t_car *car, int8_t args)
+{
+	t_bool res;
+	int8_t arg1;
+	int8_t arg2;
+	int8_t arg3;
+	
+	arg1 = check_arg(args);
+	arg2 = check_arg(args << 2);
+	arg3 = check_arg(args << 4);
+	res = FALSE;
+	if ((arg1 == REG_CODE || arg1 == DIR_CODE ||	arg1 == IND_CODE) &&
+	(arg2 == REG_CODE || arg2 == DIR_CODE || arg2 == IND_CODE) &&
+	(arg3 == REG_CODE))
+		res = TRUE;
+	if (arg1 == REG_CODE && invalid_reg(vm, car, args, 0))
+		res = FALSE;
+	if (arg2 == REG_CODE && invalid_reg(vm, car, args, 1))
+		res = FALSE;
+	if (arg3 == REG_CODE && invalid_reg(vm, car, args, 2))
+		res = FALSE;
+	car->step = 2;
+	return(res);
+}
+
+int 		calc_pos(t_car *car, int pos)
+{
+	pos = car->position + pos;
+	if (pos < 0 && -pos > MEM_SIZE)
+	{
+		pos = -pos % MEM_SIZE;
+		pos *= -1;
+	}
+	else if(pos < 0)
+		pos = MEM_SIZE + pos;
+	else
+		pos = pos % MEM_SIZE;
+	return(pos);
+}
+
+int 	get_pos(int value)
+{
+	int result;
+
+	if (value < 0)
+	{
+		result = (-1 * value) % IDX_MOD;
+		result *= -1;
+	}
+	else
+		result = value % IDX_MOD;
+	return(result);
 }
