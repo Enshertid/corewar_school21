@@ -20,7 +20,7 @@ static void	skip_unknown_token(const char **lineptr)
 		line += 1;
 	*lineptr = line;
 }
-
+#include <stdio.h> // DELETE
 t_token		token_determinator(const char **lineptr, t_validation *validation)
 {
 	t_token	token;
@@ -44,7 +44,10 @@ t_token		token_determinator(const char **lineptr, t_validation *validation)
 		token.value = NULL;
 		validation->error = 1;
 		if (validation->dbl_c == 0 && validation->dbl_n == 0)
+		{
 			warning_add(ERROR, 2, "token_determinator Syntax error. Line: ", validation->line_index);
+			printf("%s\n", *lineptr);
+		}
 		skip_unknown_token(lineptr);
 	}
 	return (token);

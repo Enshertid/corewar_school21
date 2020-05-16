@@ -1,16 +1,11 @@
-.name           "abc"
+.name           "42Just a "
 .comment        "Just a basic Winner Program"
 
-entree:	aff	r1
-	live	%42		# entree
+entree:   live %42
 	ld	%0,r5
 	ld	%0,r5
 	zjmp	%:bite
 
-
-#comment
-
-      #comment
 tir:	sti	r1,%:tirb,%1
 	ld	%2304,r10
 	ld	%1,r5

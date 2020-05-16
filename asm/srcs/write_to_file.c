@@ -74,8 +74,6 @@ static void	write_name_comment(const int fd,
 	const char		*comment = file->tokens[1][0].value;
 	size_t	comment_len = ft_strlen(comment);
 
-	printf("NAME: %s\nCOMMENT: %s\n", name, comment);
-
 	write_num(fd, COREWAR_EXEC_MAGIC);
 	write(fd, name, name_len);
 	if (name_len < PROG_NAME_LENGTH)

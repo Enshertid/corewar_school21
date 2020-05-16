@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 17:35:15 by user              #+#    #+#             */
-/*   Updated: 2020/05/10 17:37:37 by user             ###   ########.fr       */
+/*   Updated: 2020/05/12 23:01:41 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 typedef struct			s_byteline
 {
 	t_vector_bytetoken	bytetokens;
-	int32_t			bytes_before;
-	t_vector_char		*labels;
+	uint8_t				lenght;
+	int32_t				bytes_before;
 }						t_byteline;
 
 typedef t_byteline*		t_vector_byteline;
