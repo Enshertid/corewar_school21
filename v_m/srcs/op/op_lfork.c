@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:46:32 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/14 17:24:45 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/16 21:30:22 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void 		op_lfork(t_vm *vm, t_car *car)
 	add_caret(&vm->carriages, new);
 	car->position = (car->position + 3) % MEM_SIZE;
 	printf("In end: Car->pos = %d NEW->pos = %d\n", car->position, new->position);
-	car->code = vm->arena[car->position] - 1;
-	if (car->code >= 0 && car->code < 16)
-		car->cycle_to_action = vm->operations.op_cycles[car->code];
+	// car->code = vm->arena[car->position] - 1;
+	// if (car->code >= 0 && car->code < 16)
+	// 	car->cycle_to_action = vm->operations.op_cycles[car->code];
 }

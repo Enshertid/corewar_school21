@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:53:09 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/13 12:10:45 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/16 21:30:18 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void 	check_player(t_vm *vm, t_car *car)
 {
 	int32_t player;
 
-	player = read_four_bytes(vm, car->position + 1) * -1;
+	player = read_four_bytes(vm, (car->position + 1) % MEM_SIZE) * -1;
 	if (player > 0 && player <= vm->players.size)
 		vm->players.arr[player - 1]->live = vm->current_cycle;
 }
@@ -59,9 +59,9 @@ void 			op_live(t_vm *vm, t_car *car)
 	vm->count_live++;
 	car->last_live_cycle = 0;
 	check_player(vm, car);
-	car->position += 5;
-	car->code = read_byte(vm, car->position) - 1;
-	if (car->code >= 0 && car->code < OP_NUM)
-		car->cycle_to_action = vm->operations.op_cycles[car->code];
+	car->position = (car->position + 5) % MEM_SIZE;
+	// car->code = read_byte(vm, car->position) - 1;
+	// if (car->code >= 0 && car->code < OP_NUM)
+	// 	car->cycle_to_action = vm->operations.op_cycles[car->code];
 	printf("End pos: %d\n", car->position);
 }

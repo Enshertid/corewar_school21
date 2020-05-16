@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:57:24 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/16 16:14:39 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/16 21:30:33 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void 		op_ld(t_vm *vm, t_car *car)
 			set_reg(car, reg, value, 1);
 	}
 	car->position += get_arg_step(args, 2, DIR_SIZE);
-	car->code = vm->arena[car->position] - 1;
-	if (car->code >= 0 && car->code < OP_NUM)
-		car->cycle_to_action = vm->operations.op_cycles[car->code];
+	// car->code = vm->arena[car->position] - 1;
+	// if (car->code >= 0 && car->code < OP_NUM)
+	// 	car->cycle_to_action = vm->operations.op_cycles[car->code];
 	car->step = OP_BYTE;
 	printf(" carry = %d END pos = %d\n", car->carry, car->position);
 }

@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:44:25 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/16 16:26:06 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/16 21:28:34 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void 		op_lldi(t_vm *vm, t_car *car)
 	{
 		sum = get_arg_n(vm, car, args) + get_arg_n(vm, car, args << 2);
 		pos = calc_pos(car, sum);
-		value = read_four_bytes(vm, pos);
+		value = read_four_bytes(vm, pos % MEM_SIZE);
 		reg3 = vm->arena[(car->position + car->step) % MEM_SIZE];
 		printf(" SUM = %d POS = %d VALUE = %d ", sum, pos, value);
 		set_reg(car, reg3, value, 0);
