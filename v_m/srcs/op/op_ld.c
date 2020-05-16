@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:57:24 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/15 22:15:32 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/16 13:29:38 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void 		op_ld(t_vm *vm, t_car *car)
 	}
 	else if (check_arg(args) == IND_CODE && check_arg(args << 2) == REG_CODE)
 	{
-		pos = car->position + get_pos(read_two_bytes(vm, (car->position + 2) % MEM_SIZE));
-		// pos = car->position + (read_two_bytes(vm, car->position + 2) % IDX_MOD);
+		pos = car->position + get_idx(read_two_bytes(vm, (car->position + 2) % MEM_SIZE));
 		value = read_four_bytes(vm, pos);
 		reg = vm->arena[(car->position + 4) % MEM_SIZE];
 		if (reg > 0 && reg <= REG_NUMBER)

@@ -16,11 +16,16 @@
 
 void 		op_aff(t_vm *vm, t_car *car)
 {
-	printf ("%c", (char)read_byte(vm, get_new_pos(car->position, car->step)));
-	car->step += REG;
-	car->position = get_new_pos(car->position, car->step);
-	car->code = read_byte(vm, car->position) - 1;
-	if (car->code >= 0 && car->code < OP_NUM)
-		car->cycle_to_action = vm->operations.op_cycles[car->code];
-	car->step = OP_BYTE;
+	int8_t		arg;
+	int8_t		reg;
+	
+	arg = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
+	car->step += ARG_CHECK;
+	if (arg == REG)
+	{
+		reg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
+		if (reg >= 0 && reg < REG_NUMBER)
+			printf ("%c", (char)car->registers[reg]);
+	}
+	change_position(vm, car, OP_BYTE + ARG_CHECK + arg);
 }

@@ -24,15 +24,11 @@ void 		op_or(t_vm *vm, t_car *car)
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);
-	car->step = OP_BYTE + ARG_CHECK;
+	car->step = ARG_CHECK;
 	if (first != 0 && sec != 0 && third != 0)
 		if (get_arg_dir_four(vm, car, first, &first_arg))
 			if (get_arg_dir_four(vm, car, sec, &second_arg))
-				use_args(vm, car, ((unsigned)first_arg | (unsigned)second_arg),
+				use_args(vm, car, (first_arg | second_arg),
 						 third);
-	car->position = get_new_pos(car->position, car->step + REG);
-	car->code = read_byte(vm, car->position) - 1;
-	if (car->code >= 0 && car->code < OP_NUM)
-		car->cycle_to_action = vm->operations.op_cycles[car->code];
-	car->step = OP_BYTE;
+	change_position(vm, car, OP_BYTE + ARG_CHECK + first + sec + third);
 }

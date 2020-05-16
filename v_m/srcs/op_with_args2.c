@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 21:28:51 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/16 10:40:10 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/16 13:30:05 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int 		get_arg_n(t_vm *vm, t_car *car, int8_t args)
 	if (check_arg(args) == REG_CODE)
 	{
 		value = (vm->arena[(car->position + car->step) % MEM_SIZE]);
-		// printf(" value = %d ", value);
 		res = car->registers[--value];
 		car->step += 1;
 	}
@@ -43,15 +42,13 @@ int 		get_arg_n(t_vm *vm, t_car *car, int8_t args)
 	{
 		res = read_two_bytes(vm, (car->position + car->step) % MEM_SIZE);
 		car->step += 2;
-		// printf(" here 2 ");
 	}
 	else if (check_arg(args) == IND_CODE)
 	{
 		value = read_two_bytes(vm, (car->position + car->step) % MEM_SIZE);
-		pos = car->position + get_pos(value);
+		pos = car->position + get_idx(value);
 		res = read_four_bytes(vm, pos);
 		car->step += 4;
-		// printf(" here 3 ");
 	}
 	return (res);
 }
@@ -158,20 +155,17 @@ t_bool 	valid_args2(t_vm *vm, t_car *car, int8_t args)
 
 int 		calc_pos(t_car *car, int pos)
 {
-	pos = car->position + pos;
-	if (pos < 0 && -pos > MEM_SIZE)
-	{
-		pos = -pos % MEM_SIZE;
-		pos *= -1;
-	}
-	else if(pos < 0)
-		pos = MEM_SIZE + pos;
-	else
-		pos = pos % MEM_SIZE;
-	return(pos);
+	int32_t		new_pos;
+	
+	new_pos = car->position + pos;
+	if (new_pos > MEM_SIZE || -new_pos > MEM_SIZE)
+		new_pos %= MEM_SIZE;
+	if (new_pos < 0)
+		new_pos += MEM_SIZE;
+	return(new_pos);
 }
 
-int 	get_pos(int value)
+int 	get_idx(int value)
 {
 	int result;
 

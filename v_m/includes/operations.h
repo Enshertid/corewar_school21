@@ -6,13 +6,15 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:10:42 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/16 00:06:39 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/16 13:29:24 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPERATIONS_H
 # define OPERATIONS_H
 
+# define MINUS 0
+# define PLUS 1
 # define REG 1
 # define DIR 4
 # define IND 2
@@ -59,7 +61,11 @@ int32_t				read_four_bytes(t_vm *vm, int position);
 int32_t				get_new_pos(int32_t position, int32_t step);
 
 t_bool				get_arg_dir_four(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg);
-t_bool				get_arg_dir_two(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg);
+t_bool				get_arg_dir_two(t_vm *vm, t_car *car, int8_t *sw_arg,
+		int32_t *arg);
+void				change_position(t_vm *vm, t_car *car, int32_t step);
+void				write_to_reg_a_s(t_vm *vm, t_car *car, int8_t type);
+
 void				use_args(t_vm *vm, t_car *car, int32_t result, int8_t third);
 void				write_reg_to_arena(t_vm *vm, int value, int position);
 
@@ -69,7 +75,7 @@ void 				set_reg(t_car *car, int8_t reg, int value, t_bool carry);
 int 				get_arg_step(int args, int num, int dir_size);
 t_bool 				valid_args(t_vm *vm, t_car *car, int8_t args);
 t_bool		 		invalid_reg(t_vm *vm, t_car *car, int8_t args, int num);
-int 				get_pos(int position);
+int 				get_idx(int position);
 t_bool			 	valid_args2(t_vm *vm, t_car *car, int8_t args);
 int			 		calc_pos(t_car *car, int pos);
 

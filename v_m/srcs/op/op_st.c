@@ -24,7 +24,8 @@ static t_bool		get_second(t_vm *vm, t_car *car, int8_t type, int16_t *arg)
 			return (FALSE);
 	}
 	else
-		*arg = read_two_bytes(vm, get_new_pos(car->position, car->step)) % IDX_MOD;
+		*arg = read_two_bytes(vm,
+				get_new_pos(car->position, car->step)) % IDX_MOD;
 	car->step += type;
 	return (TRUE);
 }
@@ -48,7 +49,6 @@ void		op_st(t_vm *vm, t_car *car)
 	int8_t		first_value;
 	int16_t		second_value;
 	
-	// printf("ST(%d): Cycle = %ld \n", car->id, vm->current_cycle);
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	car->step += ARG_CHECK;
@@ -60,12 +60,8 @@ void		op_st(t_vm *vm, t_car *car)
 				car->registers[second_value] = car->registers[first_value];
 			else
 				write_reg_to_arena(vm, car->registers[first_value],
-								   get_new_pos(car->position, second_value));
+						get_new_pos(car->position, second_value));
 		}
 	}
-	car->position = get_new_pos(car->position, car->step);
-	car->code = read_byte(vm, car->position) - 1;
-	if (car->code >= 0 && car->code < OP_NUM)
-		car->cycle_to_action = vm->operations.op_cycles[car->code];
-	car->step = OP_BYTE;
+	change_position(vm, car, OP_BYTE + ARG_CHECK + first + sec);
 }
