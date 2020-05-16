@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 12:47:35 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/15 17:26:22 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/16 13:18:00 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	set_array_of_cycles_to_op(t_vm *vm)
 int32_t			get_new_pos(int32_t position, int32_t step)
 {
 	position += step;
-	if (position < 0) // (-200 % 4096) == (4096 - 200)
+	if (position < 0)
 		return (MEM_SIZE + position);
 	else
 		return (position % MEM_SIZE);
