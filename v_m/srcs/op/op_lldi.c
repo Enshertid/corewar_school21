@@ -72,6 +72,7 @@ static void	get_op(t_vm *vm, t_car *car, int32_t step, int8_t arg)
 		return ;
 	car->registers[arg] = read_four_bytes(vm,
 										  get_new_pos(car->position, step));
+	car->carry = car->registers[arg] ? FALSE : TRUE;
 }
 
 static t_bool	get_second(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *val)
