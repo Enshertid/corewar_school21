@@ -15,25 +15,26 @@
 
 void 		op_xor(t_vm *vm, t_car *car)
 {
-	int8_t args;
-	int32_t arg1;
-	int32_t arg2;
-	int32_t value;
-	int32_t reg3;
-
-	printf("XOR(%d): Cycle = %ld  POS = %d ", car->id, vm->current_cycle, car->position);
-	car->step = 2;
-	args = vm->arena[(car->position + 1) % MEM_SIZE];
-	if (valid_args2(vm, car, args))
-	{
-		arg1 = get_arg_n(vm, car, args);
-		arg2 = get_arg_n(vm, car, args << 2);
-		value = arg1 ^ arg2;
-		reg3 = vm->arena[(car->position + car->step) % MEM_SIZE];
-		set_reg(car, reg3, value, 1);
-		printf(" ARG1 = %d ARG2 = %d REG3 = %d XOR = %d CARRY = %d", arg1, arg2, reg3, value, car->carry);
-	}
-	car->position += get_arg_step(args, 3, DIR_SIZE);
+	int8_t	first;
+	int8_t	sec;
+	int8_t	third;
+	int32_t	first_arg;
+	int32_t	second_arg;
+	
+	printf ("XOR(%d):cycle=%zu", car->id, vm->current_cycle);
+	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
+	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
+	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);
+	car->step += ARG_CHECK;
+	if (first != 0 && sec != 0 && third != 0)
+		if (get_arg_dir_four(vm, car, first, &first_arg))
+			if (get_arg_dir_four(vm, car, sec, &second_arg))
+				use_args(vm, car, (first_arg ^ second_arg),
+						 third);
+	car->step = OP_BYTE + ARG_CHECK + first + sec + third;
+	car->position = get_new_pos(car->position, car->step);
+	car->code = read_byte(vm, car->position) - 1;
+	if (car->code >= 0 && car->code < OP_NUM)
+		car->cycle_to_action = vm->operations.op_cycles[car->code];
 	car->step = OP_BYTE;
-	printf(" END pos = %d\n", car->position);
 }
