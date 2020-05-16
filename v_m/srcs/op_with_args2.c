@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 21:28:51 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/16 13:30:05 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/16 18:08:30 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,6 @@ int 		get_arg_step(int args, int num, int dir_size)
 			sum += dir_size;
 		else if (check_arg(args << bit) == IND_CODE)
 			sum += 2;
-		else
-		{
-			sum = 0; // maybe delete this ?
-			break ;
-		}
 		bit += 2;
 	}
 	return (++sum);
@@ -167,14 +162,5 @@ int 		calc_pos(t_car *car, int pos)
 
 int 	get_idx(int value)
 {
-	int result;
-
-	if (value < 0)
-	{
-		result = (-1 * value) % IDX_MOD;
-		result *= -1;
-	}
-	else
-		result = value % IDX_MOD;
-	return(result);
+	return(value % IDX_MOD);
 }

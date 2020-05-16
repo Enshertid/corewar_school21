@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:39:34 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/16 13:28:35 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/16 16:01:42 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void 		op_zjmp(t_vm *vm, t_car *car)
 		dir = read_two_bytes(vm, (car->position + 1) % MEM_SIZE);
 		new_pos = get_idx(dir);
 		car->position = calc_pos(car, new_pos);
-		// car->position = (car->position + new_pos) % MEM_SIZE;
 		printf(" DIR = %d jump to %d \n", dir, car->position);
 	}
 	else
