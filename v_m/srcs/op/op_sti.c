@@ -47,4 +47,3 @@ void 			op_sti(t_vm *vm, t_car *car)
 	change_position(vm, car, car->step);
 	printf(" End = %d\n", car->position);
 }
-

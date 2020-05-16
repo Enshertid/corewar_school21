@@ -30,7 +30,7 @@ static t_bool		get_second(t_vm *vm, t_car *car, int8_t type, int16_t *arg)
 	return (TRUE);
 }
 
-static t_bool		get_first(t_vm *vm, t_car *car, int8_t byte, int8_t *arg)
+static t_bool		check_reg(t_vm *vm, t_car *car, int8_t byte, int8_t *arg)
 {
 	if (byte != REG)
 		return (FALSE);
@@ -52,7 +52,7 @@ void		op_st(t_vm *vm, t_car *car)
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	car->step += ARG_CHECK;
-	if (get_first(vm, car, first, &first_value))
+	if (check_reg(vm, car, first, &first_value))
 	{
 		if (get_second(vm, car, sec, &second_value))
 		{
