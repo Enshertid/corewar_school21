@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:53:09 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/16 21:30:18 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/17 15:38:45 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,5 @@ void 			op_live(t_vm *vm, t_car *car)
 	car->last_live_cycle = 0;
 	check_player(vm, car);
 	car->position = (car->position + 5) % MEM_SIZE;
-	// car->code = read_byte(vm, car->position) - 1;
-	// if (car->code >= 0 && car->code < OP_NUM)
-	// 	car->cycle_to_action = vm->operations.op_cycles[car->code];
 	printf("End pos: %d\n", car->position);
 }

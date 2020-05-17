@@ -6,7 +6,7 @@
 #    By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/02 18:51:40 by enshertid         #+#    #+#              #
-#    Updated: 2020/05/13 10:28:56 by ediego           ###   ########.fr        #
+#    Updated: 2020/05/17 14:42:08 by ediego           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ FLAGS =			-g -Wall -Werror -Wextra $(addprefix -I , $(HEAD_LIB)) $(addprefix -I 
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@make -C $(LIB_DIR) -s
+	# @make -C $(LIB_DIR) -s
 	@gcc $(FLAGS) $(OBJ) $(LIB_DIR)libft.a -o $(NAME)
 
 $(OBJ_DIR):
@@ -51,11 +51,11 @@ $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@make c -C $(LIB_DIR) -s
+	# @make c -C $(LIB_DIR) -s
 
 fclean: clean
 	@rm -f $(NAME)
-	@make f -C $(LIB_DIR) -s
+	# @make f -C $(LIB_DIR) -s
 
 re: fclean all
 
