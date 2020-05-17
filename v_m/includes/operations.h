@@ -66,7 +66,8 @@ t_bool				get_arg_dir_two(t_vm *vm, t_car *car, int8_t *sw_arg,
 void				change_position(t_vm *vm, t_car *car, int32_t step);
 void				write_to_reg_a_s(t_vm *vm, t_car *car, int8_t type);
 
-void				use_args(t_vm *vm, t_car *car, int32_t result, int8_t third);
+void				write_to_reg(t_vm *vm, t_car *car, int32_t result, int8_t
+third);
 void				write_reg_to_arena(t_vm *vm, int value, int position);
 
 int 				check_arg(uint8_t arg);
