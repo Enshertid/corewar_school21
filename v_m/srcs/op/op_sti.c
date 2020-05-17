@@ -13,12 +13,32 @@
 #include "operations.h"
 #include "vm.h"
 
+static t_bool	get_third(t_vm *vm, t_car *car, int8_t *sw_arg, int32_t *value)
+{
+	if (*sw_arg != REG && *sw_arg != DIR)
+		return (FALSE);
+	if (*sw_arg == REG)
+	{
+		*value = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
+		if (*value < 0 && *value >= REG_NUMBER)
+			return (FALSE);
+		*value = car->registers[*value];
+	}
+	else
+	{
+		*value = read_two_bytes(vm, get_new_pos(car->position, car->step));
+		*sw_arg = DIR / 2;
+	}
+	car->step += *sw_arg;
+	return (TRUE);
+}
+
 static t_bool	check_reg(t_vm *vm, t_car *car, int8_t *arg)
 {
 	if (*arg != REG)
 		return (FALSE);
-	*arg = vm->arena[get_new_pos(car->position, car->step)] - 1;
-	car->step++;
+	*arg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
+	car->step += REG;
 	if (*arg >= 0 && *arg < REG_NUMBER)
 		return (TRUE);
 	else
@@ -41,9 +61,15 @@ void 			op_sti(t_vm *vm, t_car *car)
 	if (first != 0 && sec != 0 && third != 0)
 		if (check_reg(vm, car, &first))
 			if (get_arg_dir_two(vm, car, &sec, &sec_val))
-				if (get_arg_dir_two(vm, car, &third, &third_val))
+				if (get_third(vm, car, &third, &third_val))
 					write_reg_to_arena(vm, car->registers[first],
 					get_new_pos(car->position,get_idx(sec_val + third_val)));
-	change_position(vm, car, car->step);
+	first = determine_arg(vm->arena[get_new_pos(car->position, OP_BYTE)],
+			0);
+	if (third == DIR)
+		third = DIR / 2;
+	if (sec == DIR)
+		sec = DIR / 2;
+	change_position(vm, car, OP_BYTE + ARG_CHECK + first + sec + third);
 	printf(" End = %d\n", car->position);
 }

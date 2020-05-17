@@ -56,9 +56,9 @@ void	set_array_of_cycles_to_op(t_vm *vm)
 int32_t			get_new_pos(int32_t position, int32_t step)
 {
 	position += step;
-	if (position > MEM_SIZE || -position > MEM_SIZE)
+	if (position >= MEM_SIZE || -position >= MEM_SIZE)
 		position %= MEM_SIZE;
 	if (position < 0)
 		position += MEM_SIZE;
-	return(position);
+	return (position);
 }
