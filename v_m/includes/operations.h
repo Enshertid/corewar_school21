@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:10:42 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/16 13:29:24 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/17 15:28:45 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void				write_reg_to_arena(t_vm *vm, int value, int position);
 
 int 				check_arg(uint8_t arg);
 int 				get_arg_n(t_vm *vm, t_car *car, int8_t args);
-void 				set_reg(t_car *car, int8_t reg, int value, t_bool carry);
+void 				set_reg(t_car *car, int8_t reg, int value, t_bool edit_carry);
 int 				get_arg_step(int args, int num, int dir_size);
 t_bool 				valid_args(t_vm *vm, t_car *car, int8_t args);
 t_bool		 		invalid_reg(t_vm *vm, t_car *car, int8_t args, int num);
 int 				get_idx(int position);
-t_bool			 	valid_args2(t_vm *vm, t_car *car, int8_t args);
+// t_bool			 	valid_args2(t_vm *vm, t_car *car, int8_t args);
 int			 		calc_pos(t_car *car, int pos);
 
 #endif
