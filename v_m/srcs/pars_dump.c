@@ -52,4 +52,5 @@ void			valid_dump(t_pars *pars, t_players *players)
 		players->dump_flag = TRUE;
 		players->dump_num = dump_number;
 	}
+	pars->i++;
 }
