@@ -76,13 +76,13 @@ static void print(t_vector_char *lines, t_vector_token *tokens)
 
 	for (size_t row = 0; row < vec_size(&tokens); ++row)
 	{
-		printf("Line %zu: %s\n", row, lines[row]);
-		printf("Tokens:\n");
+		//printf("Line %zu: %s\n", row, lines[row]);
+		//printf("Tokens:\n");
 		for (size_t col = 0; col < vec_size(&tokens[row]); ++col) {
-			printf("\tType: %s, value: \"%s\"\n", types[tokens[row][col].type],
+			//printf("\tType: %s, value: \"%s\"\n", types[tokens[row][col].type],
 											tokens[row][col].value);
 		}
-		printf("\n");
+		//printf("\n");
 	}
 }
 

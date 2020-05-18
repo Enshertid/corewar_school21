@@ -25,7 +25,6 @@ typedef struct 			s_car
 	uint8_t				step;
 	t_bool				carry;
 	int32_t				position;
-	int32_t				num_of_carets;
 	int32_t				last_live_cycle;
 	int32_t				cycle_to_action;
 	reg_type			registers[REG_NUMBER];
@@ -34,8 +33,8 @@ typedef struct 			s_car
 }						t_car;
 
 t_car			*delete_from_begin(t_car **head, t_car *cur_car);
-t_car			*delete_from_end(t_car **head, t_car *cur_car);
-t_car			*delete_from_body(t_car **head, t_car *cur_car);
+t_car			*delete_from_end(t_car *cur_car);
+t_car			*delete_from_body(t_car *cur_car);
 t_car			*try_to_kill_the_carret(t_car **head, t_car *cur_car,
 													int cycle_to_die);
 t_car			*create_caret(int position_on_arena, int id);

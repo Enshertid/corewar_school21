@@ -31,7 +31,7 @@ void			print_car(t_vm *vm)
 	car = vm->carriages;
 	while(car)
 	{
-		printf(" OP:%d(%d) POS = %d \n", (car->code + 1), car->id, car->position);
+		//printf(" OP:%d(%d) POS = %d \n", (car->code + 1), car->id, car->position);
 		car = car->next;
 	}
 }

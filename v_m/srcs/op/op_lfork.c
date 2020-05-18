@@ -15,15 +15,15 @@
 
 void 		op_lfork(t_vm *vm, t_car *car)
 {
-	t_car	*new;
 	int32_t pos;
 	int32_t x;
 
-	printf("LFORK(%d): Cycle = %ld Car->pos = %d carry = %d ", car->id, vm->current_cycle, car->position, car->carry);
+//	printf("LFORK(%d): Cycle = %ld Car->pos = %d carry = %d ", car->id, vm->current_cycle, car->position, car->carry);
 	x = read_two_bytes(vm, (car->position + 1) % MEM_SIZE);
 	pos = calc_pos(car, x);
+	t_car *new;
 	new = copy_caret(car, pos, ++vm->id_cars);
 	add_caret(&vm->carriages, new);
 	car->position = (car->position + 3) % MEM_SIZE;
-	printf("In end: Car->pos = %d NEW->pos = %d\n", car->position, new->position);
+//	printf("In end: Car->pos = %d NEW->pos = %d\n", car->position, new->position);
 }

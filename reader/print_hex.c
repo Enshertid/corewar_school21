@@ -65,7 +65,7 @@ static void		print_total_symbols(size_t symbols)
 
 	if (symbols > 0xfffffe && ((symbols + 1) & symbols) == 0)
 		field_width += 1;
-	sprintf(a, "%0*lx ", field_width, symbols);
+	s//printf(a, "%0*lx ", field_width, symbols);
 	buf_add_str(a);
 }
 

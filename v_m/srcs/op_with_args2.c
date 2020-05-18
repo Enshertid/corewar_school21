@@ -63,7 +63,7 @@ void 		set_reg(t_car *car, int8_t reg, int32_t value, t_bool edit_carry)
 			car->carry = 0;
 	}
 	car->registers[--reg] = value;
-	printf(" reg = %d value = %d ", ++reg, value);
+	//printf(" reg = %d value = %d ", ++reg, value);
 }
 
 int 		get_arg_step(int args, int num, int dir_size)

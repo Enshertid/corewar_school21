@@ -18,12 +18,12 @@ void			op_add(t_vm *vm, t_car *car) {
 	int8_t sec;
 	int8_t third;
 	
-	printf("ADD(%d) Cycle = %ld Pos = %d ", car->id, vm->current_cycle, car->position);
+//	printf("ADD(%d) Cycle = %ld Pos = %d ", car->id, vm->current_cycle, car->position);
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);
 	if (first == REG && sec == REG && third == REG)
 		write_to_reg_a_s(vm, car, PLUS);
 	change_position(vm, car, OP_BYTE + ARG_CHECK + first + sec + third);
-	printf(" End %d \n", car->position);
+//	printf(" End %d \n", car->position);
 }

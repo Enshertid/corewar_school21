@@ -33,13 +33,13 @@ static t_bool	get_third(t_vm *vm, t_car *car, int8_t *sw_arg, int32_t *value)
 	return (TRUE);
 }
 
-static t_bool	check_reg(t_vm *vm, t_car *car, int8_t *arg)
+static t_bool	check_reg(t_vm *vm, t_car *car, int8_t arg, int8_t *val)
 {
-	if (*arg != REG)
+	if (arg != REG)
 		return (FALSE);
-	*arg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
+	*val = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 	car->step += REG;
-	if (*arg >= 0 && *arg < REG_NUMBER)
+	if (*val >= 0 && *val < REG_NUMBER)
 		return (TRUE);
 	else
 		return (FALSE);
@@ -50,26 +50,27 @@ void 			op_sti(t_vm *vm, t_car *car)
 	int8_t	first;
 	int8_t	sec;
 	int8_t	third;
+	int8_t	first_val;
 	int32_t sec_val;
 	int32_t third_val;
 	
-	printf("STI(%d): Cycle = %ld POS = %d", car->id, vm->current_cycle, car->position);
+//	printf("STI(%d): Cycle = %ld POS = %d", car->id, vm->current_cycle, car->position);
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);
+//	printf(" first %d, second %d, third %d", first, sec, third);
 	car->step += ARG_CHECK;
 	if (first != 0 && sec != 0 && third != 0)
-		if (check_reg(vm, car, &first))
+		if (check_reg(vm, car, first, &first_val))
 			if (get_arg_dir_two(vm, car, &sec, &sec_val))
 				if (get_third(vm, car, &third, &third_val))
-					write_reg_to_arena(vm, car->registers[first],
+					write_reg_to_arena(vm, car->registers[first_val],
 					get_new_pos(car->position,get_idx(sec_val + third_val)));
-	first = determine_arg(vm->arena[get_new_pos(car->position, OP_BYTE)],
-			0);
 	if (third == DIR)
 		third = DIR / 2;
 	if (sec == DIR)
 		sec = DIR / 2;
+//	printf(" first %d, second %d, third %d", first, sec, third);
 	change_position(vm, car, OP_BYTE + ARG_CHECK + first + sec + third);
-	printf(" End = %d\n", car->position);
+//	printf(" End = %d\n", car->position);
 }

@@ -10,8 +10,8 @@ t_bool			check_live(t_vm *vm)
 {
 	t_car *tmp;
 	
-	printf("cycles to live==>%d\n", vm->cycle_to_die);
-	printf("count live ==> %d\n", vm->count_live);
+	//printf("cycles to live==>%d\n", vm->cycle_to_die);
+	//printf("count live ==> %d\n", vm->count_live);
 	tmp = vm->carriages;
 	while (tmp)
 		tmp = try_to_kill_the_carret(&vm->carriages, tmp, vm->cycle_to_die);

@@ -21,7 +21,7 @@ void 		op_xor(t_vm *vm, t_car *car)
 	int32_t	first_arg;
 	int32_t	second_arg;
 	
-	printf ("XOR(%d):cycle=%zu", car->id, vm->current_cycle);
+	//printf ("XOR(%d):cycle=%zu", car->id, vm->current_cycle);
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);

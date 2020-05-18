@@ -55,10 +55,10 @@ static void 	check_player(t_vm *vm, t_car *car)
 
 void 			op_live(t_vm *vm, t_car *car)
 {
-	printf("Live(%d) Cycle = %ld Pos = %d ", car->id, vm->current_cycle, car->position);
+	//printf("Live(%d) Cycle = %ld Pos = %d ", car->id, vm->current_cycle, car->position);
 	vm->count_live++;
 	car->last_live_cycle = 0;
 	check_player(vm, car);
 	car->position = (car->position + 5) % MEM_SIZE;
-	printf("End pos: %d\n", car->position);
+	//printf("End pos: %d\n", car->position);
 }

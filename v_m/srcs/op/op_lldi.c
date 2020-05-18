@@ -20,7 +20,7 @@ void 		op_lldi(t_vm *vm, t_car *car)
 	int32_t value;
 	int32_t reg3;
 
-	printf("LLDI(%d): Cycle = %ld  POS = %d ", car->id, vm->current_cycle, car->position);
+	//printf("LLDI(%d): Cycle = %ld  POS = %d ", car->id, vm->current_cycle, car->position);
 	car->step = 2;
 	args = vm->arena[(car->position + 1) % MEM_SIZE];
 	if (valid_args(vm, car, args))
@@ -29,10 +29,10 @@ void 		op_lldi(t_vm *vm, t_car *car)
 		pos = calc_pos(car, sum);
 		value = read_four_bytes(vm, pos % MEM_SIZE);
 		reg3 = vm->arena[(car->position + car->step) % MEM_SIZE];
-		printf(" SUM = %d POS = %d VALUE = %d ", sum, pos, value);
+		//printf(" SUM = %d POS = %d VALUE = %d ", sum, pos, value);
 		set_reg(car, reg3, value, 1);
 	}
 	car->position += get_arg_step(args, 3, DIR_SIZE / 2);
 	car->step = OP_BYTE;
-	printf(" END pos = %d\n", car->position);
+	//printf(" END pos = %d\n", car->position);
 }
