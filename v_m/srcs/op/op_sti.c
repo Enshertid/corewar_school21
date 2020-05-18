@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:30:32 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/17 23:03:04 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/18 16:58:08 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ void             op_sti(t_vm *vm, t_car *car)
     int32_t sec_val;
     int32_t third_val;
 
-    printf("STI(%d): Cycle = %ld POS = %d", car->id, vm->current_cycle, car->position);
+	if (vm->debug)
+    	printf("STI(%d): Cycle = %ld POS = %d", car->id, vm->current_cycle, car->position);
     first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
     sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
     third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);
-    printf(" first %d, second %d, third %d", first, sec, third);
+	if (vm->debug)
+    	printf(" first %d, second %d, third %d", first, sec, third);
     car->step += ARG_CHECK;
     if (first != 0 && sec != 0 && third != 0)
         if (check_reg(vm, car, first, &first_val))
@@ -70,7 +72,7 @@ void             op_sti(t_vm *vm, t_car *car)
         third = DIR / 2;
     if (sec == DIR)
         sec = DIR / 2;
-    printf(" first %d, second %d, third %d", first, sec, third);
     change_position(vm, car, OP_BYTE + ARG_CHECK + first + sec + third);
-    printf(" End = %d\n", car->position);
+	if (vm->debug)
+    	printf(" first %d, second %d, third %d End = %d \n", first, sec, third, car->position);
 }

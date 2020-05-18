@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 16:31:22 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/11 15:07:30 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/18 16:45:02 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_vm
 	size_t 			id_cars;
 	t_car			*carriages;
 	t_op			operations;
+	t_bool 			debug;
 }					t_vm;
 
 void		print_arena(const void *arena, size_t size);

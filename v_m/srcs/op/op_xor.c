@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 17:58:35 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/17 22:00:08 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/18 16:49:24 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void 		op_xor(t_vm *vm, t_car *car)
 	int32_t	first_arg;
 	int32_t	second_arg;
 	
-	printf ("XOR(%d):cycle=%zu", car->id, vm->current_cycle);
+	if (vm->debug)
+		printf ("XOR(%d):cycle=%zu", car->id, vm->current_cycle);
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);
