@@ -37,7 +37,6 @@ t_car			*delete_from_body(t_car *cur_car)
 	cur_car = cur_car->next;
 	cur_car->prev = tmp->prev;
 	cur_car->prev->next = cur_car;
-	printf("%d\n", tmp->id);
 	free(tmp);
 	return cur_car;
 }

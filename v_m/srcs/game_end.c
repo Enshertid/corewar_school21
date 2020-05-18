@@ -41,7 +41,7 @@ t_bool			end_dump(t_vm *vm, t_players *players)
 	t_player	*winner;
 	
 	winner = define_winner(players);
-	write(1, "end bcs dump flag used\n", 23);
+//	write(1, "end bcs dump flag used\n", 23);
 	if (vm->debug)
 		print_car(vm);
 	print_arena(vm->arena, MEM_SIZE / 1);
