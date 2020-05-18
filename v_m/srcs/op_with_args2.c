@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 21:28:51 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/17 22:00:17 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/18 16:47:51 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void 		set_reg(t_car *car, int8_t reg, int32_t value, t_bool edit_carry)
 			car->carry = 0;
 	}
 	car->registers[--reg] = value;
-	//printf(" reg = %d value = %d ", ++reg, value);
+	// printf(" reg = %d value = %d ", ++reg, value);
 }
 
 int 		get_arg_step(int args, int num, int dir_size)

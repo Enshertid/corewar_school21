@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:53:09 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/17 15:38:45 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/18 16:47:06 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@ static void 	check_player(t_vm *vm, t_car *car)
 
 void 			op_live(t_vm *vm, t_car *car)
 {
-	printf("Live(%d) Cycle = %ld Pos = %d ", car->id, vm->current_cycle, car->position);
+	if (vm->debug)		
+		printf("Live(%d) Cycle = %ld Pos = %d ", car->id, vm->current_cycle, car->position);
 	vm->count_live++;
 	car->last_live_cycle = 0;
 	check_player(vm, car);
 	car->position = (car->position + 5) % MEM_SIZE;
-	printf("End pos: %d\n", car->position);
+	if (vm->debug)
+		printf("End pos: %d\n", car->position);
 }
