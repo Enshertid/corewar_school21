@@ -20,7 +20,7 @@ void 		op_lld(t_vm *vm, t_car *car)
 	int ind;
 	int8_t args;
 
-//	printf("LLD(%d): Cycle = %ld  POS = %d ", car->id, vm->current_cycle, car->position);
+	printf("LLD(%d): Cycle = %ld  POS = %d ", car->id, vm->current_cycle, car->position);
 	args = vm->arena[(car->position + 1) % MEM_SIZE];
 	if (check_arg(args) == DIR_CODE && check_arg(args << 2) == REG_CODE)
 	{
