@@ -44,20 +44,17 @@ t_bool			end_dump(t_vm *vm, t_players *players)
 	if (vm->debug)
 		print_car(vm);
 	print_arena(vm->arena, MEM_SIZE / 1);
-	printf("%s (player %d) won!\n", winner->name, winner->id);
-	if (vm->debug)
-		printf("num_of_cars==>%d\n", vm->num_of_car);
+//	printf("Contestant %d, \"%s\", has won!\n", winner->id, winner->name);
 	return (TRUE);
 }
 
-t_bool			end_game(t_vm *vm, t_players *players)
+t_bool			end_game(t_players *players)
 {
 	t_player	*winner;
 	
-	write(1, "game has been end and the winner is bla-bla-bla\n", 49);
+//	write(1, "game has been end and the winner is bla-bla-bla\n", 49);
 	winner = define_winner(players);
-	print_arena(vm->arena, MEM_SIZE / 8);
-	printf("%s (player %d) won!\n", winner->name,
-		   winner->id);
+//	print_arena(vm->arena, MEM_SIZE / 8);
+	printf("Contestant %d, \"%s\", has won!\n", winner->id, winner->name);
 	return (TRUE);
 }
