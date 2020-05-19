@@ -6,14 +6,15 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 17:45:14 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/18 16:45:22 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/19 21:21:51 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "vm.h"
 
-void			op_add(t_vm *vm, t_car *car) {
+void			op_add(t_vm *vm, t_car *car) 
+{
 	int8_t first;
 	int8_t sec;
 	int8_t third;

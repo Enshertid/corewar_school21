@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 21:28:51 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/18 16:47:51 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/19 22:38:02 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_bool 		invalid_reg(t_vm *vm, t_car *car, int8_t args, int num)
 
 	pos = (calc_pos(car, get_arg_step(args, num, DIR_SIZE/2)));
 	reg = (vm->arena[pos]);
-	if (reg < 1 || reg > 16)
+	if (reg < 1 || reg > REG_NUMBER)
 		return(TRUE);
 	car->step += 1;
 	return(FALSE);

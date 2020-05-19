@@ -59,7 +59,7 @@ t_bool		get_arg_dir_four(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg)
 	}
 	else if (sw_arg == IND)
 		*arg = read_four_bytes(vm, get_new_pos(car->position,
-		read_two_bytes(vm, get_new_pos(car->position, car->step) % IDX_MOD)));
+		read_two_bytes(vm, get_new_pos(car->position, car->step)) % IDX_MOD));
 	else if (sw_arg == DIR)
 		*arg = read_four_bytes(vm, get_new_pos(car->position, car->step));
 	else
