@@ -18,6 +18,8 @@
 	typedef int64_t reg_type;
 #endif
 
+typedef struct s_vm t_vm;
+
 typedef struct 			s_car
 {
 	int32_t				id;
@@ -35,7 +37,7 @@ typedef struct 			s_car
 t_car			*delete_from_begin(t_car **head, t_car *cur_car);
 t_car			*delete_from_end(t_car *cur_car);
 t_car			*delete_from_body(t_car *cur_car);
-t_car			*try_to_kill_the_carret(t_car **head, t_car *cur_car,
+t_car			*try_to_kill_the_carret(t_vm *vm, t_car **head, t_car *cur_car,
 													int cycle_to_die);
 t_car			*create_caret(int position_on_arena, int id);
 t_car			*copy_caret(t_car *parent, int32_t position, int32_t id);

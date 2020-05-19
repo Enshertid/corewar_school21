@@ -15,7 +15,7 @@
 int				main(int ac, char **av)
 {
 	t_vm vm;
-
+	
 	init_data(&vm, ac, av);
 	cycle_of_game(&vm);
 	destroy_data(&vm);

@@ -27,6 +27,7 @@ typedef struct		s_vm
 	int				count_checks;
 	int				cycle_to_die;
 	int				iter;
+	int				num_of_car;
 	size_t			dump_value;
 	size_t			current_cycle;
 	t_bool			dump_flag;

@@ -40,4 +40,5 @@ void 		op_lld(t_vm *vm, t_car *car)
 			set_reg(car, reg, value, 1);
 	}
 	car->position = calc_pos(car, get_arg_step(args, 2, DIR_SIZE));
+	car->step = OP_BYTE;
 }

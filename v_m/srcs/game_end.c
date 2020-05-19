@@ -41,12 +41,12 @@ t_bool			end_dump(t_vm *vm, t_players *players)
 	t_player	*winner;
 	
 	winner = define_winner(players);
-//	write(1, "end bcs dump flag used\n", 23);
 	if (vm->debug)
 		print_car(vm);
 	print_arena(vm->arena, MEM_SIZE / 1);
-	printf("%s (player %d) won!\n", winner->name,
-		   winner->id);
+	printf("%s (player %d) won!\n", winner->name, winner->id);
+	if (vm->debug)
+		printf("num_of_cars==>%d\n", vm->num_of_car);
 	return (TRUE);
 }
 

@@ -9,7 +9,7 @@ void			cycle_of_game(t_vm *vm)
 	flag_of_end = FALSE;
 	if (vm->players.debug_mode)
 		vm->debug = TRUE;
-	vm->current_cycle = 0;
+	vm->current_cycle = 1;
 	while (!flag_of_end)
 	{
 		tmp = vm->carriages;

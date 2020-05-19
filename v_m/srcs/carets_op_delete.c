@@ -1,6 +1,7 @@
 //
 // Created by Daniil&Ekaterina Naumenko on 01/05/2020.
 //
+#include <vm.h>
 #include "stdio.h"
 #include "carriages.h"
 
@@ -41,11 +42,12 @@ t_car			*delete_from_body(t_car *cur_car)
 	return cur_car;
 }
 
-t_car			*try_to_kill_the_carret(t_car **head, t_car *cur_car,
+t_car			*try_to_kill_the_carret(t_vm *vm, t_car **head, t_car *cur_car,
 													int cycle_to_die)
 {
 	if (cur_car->last_live_cycle >= cycle_to_die)
 	{
+		--vm->num_of_car;
 		if (cur_car->prev && !cur_car->next)
 			return (delete_from_end(cur_car));
 		else if (cur_car == *head)

@@ -23,16 +23,9 @@ t_car		*copy_caret(t_car *parent, int32_t position, int32_t id)
 	
 	node = ft_calloc(1, sizeof(t_car));
 	i = 0;
-	while (i < REG_NUMBER)
-	{
-		node->registers[i] = parent->registers[i];
-		i++;
-	}
-	node->carry = parent->carry;
-	node->last_live_cycle = parent->last_live_cycle;
+	ft_memcpy(node,parent, sizeof(t_car));
 	node->position = position;
 	node->id = id;
-	node->step = OP_BYTE;
 	return(node);
 }
 

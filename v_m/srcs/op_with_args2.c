@@ -48,7 +48,7 @@ int 		get_arg_n(t_vm *vm, t_car *car, int8_t args)
 		value = read_two_bytes(vm, (car->position + car->step) % MEM_SIZE);
 		pos = calc_pos(car, get_idx(value));
 		res = read_four_bytes(vm, pos);
-		car->step += 4;
+		car->step += 2;
 	}
 	return (res);
 }

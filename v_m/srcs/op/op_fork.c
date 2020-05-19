@@ -26,6 +26,7 @@ void 		op_fork(t_vm *vm, t_car *car)
 	new = copy_caret(car, pos, ++vm->id_cars);
 	add_caret(&vm->carriages, new);
 	car->position = (car->position + 3) % MEM_SIZE;
+	vm->num_of_car++;
 	if (vm->debug)
 		printf("In end: Car->pos = %d NEW->pos = %d\n", car->position, new->position);
 }
