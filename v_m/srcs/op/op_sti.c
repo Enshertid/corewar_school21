@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:30:32 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/18 16:58:08 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/19 20:52:30 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,12 @@ void			op_sti(t_vm *vm, t_car *car)
 	if (third == DIR)
 		third = DIR / 2;
 	if (sec == DIR)
+	{
 		sec = DIR / 2;
+	}
+	if (vm->debug)
+		printf(" write to = %d ", get_new_pos(car->position,get_idx(sec_val + third_val)));
 	change_position(vm, car, OP_BYTE + ARG_CHECK + first + sec + third);
 	if (vm->debug)
-		printf(" first %d, second %d, third %d End = %d \n", first, sec, third, car->position);
+		printf(" End = %d \n", first, sec, third, car->position);
 }
