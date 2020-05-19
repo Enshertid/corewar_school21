@@ -8,7 +8,7 @@
 void			write_to_reg(t_vm *vm, t_car *car, int32_t result,
 								int8_t third)
 {
-	int32_t reg;
+	int8_t reg;
 	
 	if (third == REG)
 	{
@@ -29,7 +29,7 @@ t_bool 		get_arg_dir_two(t_vm *vm, t_car *car, int8_t *sw_arg, int32_t *arg)
 	if (*sw_arg == REG)
 	{
 		*arg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
-		if (*arg < 0 && *arg >= REG_NUMBER)
+		if (*arg < 0 || *arg >= REG_NUMBER)
 			return (FALSE);
 		*arg = car->registers[*arg];
 	}
@@ -71,9 +71,10 @@ t_bool		get_arg_dir_four(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg)
 void		change_position(t_vm *vm, t_car *car, int32_t step)
 {
 	car->position = get_new_pos(car->position, step);
-	car->code = read_byte(vm, car->position) - 1;
-	if (car->code >= 0 && car->code < OP_NUM)
-		car->cycle_to_action = vm->operations.op_cycles[car->code];
+	(void)vm->current_cycle;
+//	car->code = read_byte(vm, car->position) - 1;
+//	if (car->code >= 0 && car->code < OP_NUM)
+//		car->cycle_to_action = vm->operations.op_cycles[car->code];
 	car->step = OP_BYTE;
 }
 

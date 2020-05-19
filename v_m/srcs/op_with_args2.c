@@ -110,7 +110,7 @@ t_bool 	valid_args(t_vm *vm, t_car *car, int8_t args)
 	arg2 = check_arg(args << 2);
 	arg3 = check_arg(args << 4);
 	res = FALSE;
-	if ((arg1 == REG_CODE || arg1 == DIR_CODE ||	arg1 == IND_CODE) &&
+	if ((arg1 == REG_CODE || arg1 == DIR_CODE || arg1 == IND_CODE) &&
 	(arg2 == REG_CODE || arg2 == DIR_CODE) && (arg3 == REG_CODE))
 		res = TRUE;
 	if (arg1 == REG_CODE && invalid_reg(vm, car, args, 0))

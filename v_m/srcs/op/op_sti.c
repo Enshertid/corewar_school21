@@ -20,7 +20,7 @@ static t_bool	get_third(t_vm *vm, t_car *car, int8_t *sw_arg, int32_t *value)
 	if (*sw_arg == REG)
 	{
 		*value = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
-		if (*value < 0 && *value >= REG_NUMBER)
+		if (*value < 0 || *value >= REG_NUMBER)
 			return (FALSE);
 		*value = car->registers[*value];
 	}
