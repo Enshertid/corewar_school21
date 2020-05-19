@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/25 12:57:45 by user              #+#    #+#             */
-/*   Updated: 2020/05/12 22:31:43 by user             ###   ########.fr       */
+/*   Updated: 2020/04/25 14:12:24 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_token		token_determinator(const char **lineptr, t_validation *validation)
 	token_determined = false;
 	token_determined = is_separator(lineptr, &token);
 	if (!token_determined)
+		token_determined = is_empty(lineptr, &token);
+	if (!token_determined)
 		token_determined = is_label(lineptr, &token);
 	if (!token_determined)
 		token_determined = is_instruction(lineptr, &token, validation);
@@ -45,8 +47,8 @@ t_token		token_determinator(const char **lineptr, t_validation *validation)
 		validation->error = 1;
 		if (validation->dbl_c == 0 && validation->dbl_n == 0)
 		{
-			warning_add(ERROR, 2, "token_determinator Syntax error. Line: ", validation->line_index);
-			printf("%s\n", *lineptr);
+			warning_add(ERROR, 3, "syntax error in line №", ft_itoa_static(*validation->line_index + 1, 10), ".");
+//			printf("s:%s\n", *lineptr);
 		}
 		skip_unknown_token(lineptr);
 	}

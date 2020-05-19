@@ -43,14 +43,16 @@ void				assembler(const char * const *files, t_validation *validation)
 			if (file.fd >= 0)
 			{
 				file.name = *files;
-				printf("File: %s\n", file.name);
 				if (is_file_extension_correct(*files) == false)
 					warning_add(WARNING, 2, "Incorrect extension: ", *files);
 				assembly(&file, validation);
 				close(file.fd);
 			}
 			else
+			{
+				validation->not_file = 1;
 				warning_add(ERROR, 3, "Can\'t open file \"", *files, "\"");
+			}
 		}
 		files += 1;
 	} // перенес варнинг на функцию выше

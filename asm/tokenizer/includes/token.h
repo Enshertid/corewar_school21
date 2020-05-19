@@ -13,7 +13,8 @@ enum	e_token_types
 	SEPARATOR,
 	NAME,
 	COMMENT,
-	UNKNOWN
+	UNKNOWN,
+	EMPTY
 };
 
 typedef struct			s_token

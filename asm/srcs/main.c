@@ -21,7 +21,9 @@ int			main(int argc, const char * const *argv)
 	{
 		check_op_h();
 		if (ft_validation(argv) == 0)
+		{
 			exit (0);
+		}
 	}
 	else
 		usage();

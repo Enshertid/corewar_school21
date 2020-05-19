@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/25 13:01:16 by user              #+#    #+#             */
-/*   Updated: 2020/05/12 22:11:34 by user             ###   ########.fr       */
+/*   Updated: 2020/05/05 13:11:36 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ bool	is_instruction(const char **lineptr, t_token *token, t_validation	*val)
 				val->no_n_start = 1;
 				val->error = 1;
 				warning_add(ERROR, 1, "no name before code.");
+//				val->name = 1;
 			}
 			if (val->no_c_start == 0 && val->comment == 0)
 			{
 				val->no_c_start = 1;
 				val->error = 1;
 				warning_add(ERROR, 1, "no comment before code.");
+//				val->comment = 1;
 			}
 			val->have_instructions = 1; // флаг для проверки файла на наличие инструкций
 			token->type = INSTRUCTION;

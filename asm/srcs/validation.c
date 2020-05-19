@@ -45,7 +45,8 @@ int 	ft_check_closed_quote(char *str, t_validation *val)
 	{
 		if (str[i] == '"')
 		{
-			if (i == (int)ft_strlen(str) - 1)
+//			printf ("str: %s, i: %d, len:%d\n", str, i, (int)ft_strlen(str));
+			if (i == (int)ft_strlen(str) - 1) // проверка на то что после ковычек ничего нет типо "123"123""
 				return (1);
 			else
 			{
@@ -65,7 +66,8 @@ void	ft_check_one_arg(t_check_args *checker, t_validation *val, int row)
 		if (checker->arg[0][0] != 'r')
 		{
 			val->error = 1;
-			warning_add(ERROR, 2, "wrong types of argument in line: ", ft_itoa_static(row + 1, 10));
+			warning_add(ERROR, 3, "wrong types of argument in line №", ft_itoa_static(row + 1, 10), ".");
+//			printf("instr aff, arg is not REG\n");
 		}
 	}
 	else if (ft_strcmp(checker->instr, "zjmp") == 0 || ft_strcmp(checker->instr, "live") == 0 ||
@@ -74,13 +76,15 @@ void	ft_check_one_arg(t_check_args *checker, t_validation *val, int row)
 		if (checker->arg[0][0] != '%')
 		{
 			val->error = 1;
-			warning_add(ERROR, 2, "wrong types of argument in line: ", ft_itoa_static(row + 1, 10));
+			warning_add(ERROR, 3, "wrong types of argument in line №", ft_itoa_static(row + 1, 10), ".");
+//			printf("instr zjmp/live/fork/lfork, arg is not REG\n");
 		}
 	}
 	else
 	{
 		val->error = 1;
-		warning_add(ERROR, 2, "wrong types of argument in line: ", ft_itoa_static(row + 1, 10));
+		warning_add(ERROR, 3, "wrong types of argument in line №", ft_itoa_static(row + 1, 10), ".");
+//		printf ("some instr with wrong 1 arg\n");
 	}
 }
 
@@ -91,7 +95,8 @@ void	ft_check_two_arg(t_check_args *checker, t_validation *val, int row)
 		if (checker->arg[0][0] != 'r' || checker->arg[1][0] == '%')
 		{
 			val->error = 1;
-			warning_add(ERROR, 2, "wrong types of argument in line: ", ft_itoa_static(row + 1, 10));
+			warning_add(ERROR, 3, "wrong types of argument in line №", ft_itoa_static(row + 1, 10), ".");
+//			printf("instr st, arg 1 is not REG or arg 2 is T_DIR\n");
 		}
 	}
 	else if (ft_strcmp(checker->instr, "ld") == 0 || ft_strcmp(checker->instr, "lld") == 0)
@@ -99,13 +104,15 @@ void	ft_check_two_arg(t_check_args *checker, t_validation *val, int row)
 		if (checker->arg[0][0] == 'r' || checker->arg[1][0] != 'r')
 		{
 			val->error = 1;
-			warning_add(ERROR, 2, "wrong types of argument in line: ", ft_itoa_static(row + 1, 10));
+			warning_add(ERROR, 3, "wrong types of argument in line №", ft_itoa_static(row + 1, 10), ".");
+//			printf("instr ld/lld, arg 1 is REG or arg 2 isn't REG\n");
 		}
 	}
 	else
 	{
 		val->error = 1;
-		warning_add(ERROR, 2, "wrong types of argument in line: ", ft_itoa_static(row + 1, 10));
+		warning_add(ERROR, 3, "wrong types of argument in line №", ft_itoa_static(row + 1, 10), ".");
+//		printf ("some instr with wrong 2 arg\n");
 	}
 }
 
@@ -116,7 +123,8 @@ void	ft_check_three_arg(t_check_args *checker, t_validation *val, int row)
 		if (checker->arg[0][0] != 'r' || checker->arg[1][0] != 'r' || checker->arg[2][0] != 'r')
 		{
 			val->error = 1;
-			warning_add(ERROR, 2, "wrong types of argument in line: ", ft_itoa_static(row + 1, 10));
+			warning_add(ERROR, 3, "wrong types of argument in line №", ft_itoa_static(row + 1, 10), ".");
+//			printf("instr add/sub, args not REG\n");
 		}
 	}
 	else if (ft_strcmp(checker->instr, "and") == 0 || ft_strcmp(checker->instr, "or") == 0 ||
@@ -125,8 +133,8 @@ void	ft_check_three_arg(t_check_args *checker, t_validation *val, int row)
 		if (checker->arg[2][0] != 'r')
 		{
 			val->error = 1;
-			warning_add(ERROR, 2, "wrong types of argument in line: ", ft_itoa_static(row + 1, 10));
-
+			warning_add(ERROR, 3, "wrong types of argument in line №", ft_itoa_static(row + 1, 10), ".");
+//			printf("instr and/or/xor, arg 3 isn't REG\n");
 		}
 	}
 	else if (ft_strcmp(checker->instr, "ldi") == 0 || ft_strcmp(checker->instr, "lldi") == 0)
@@ -134,7 +142,8 @@ void	ft_check_three_arg(t_check_args *checker, t_validation *val, int row)
 		if (checker->arg[1][0] == ':' || ft_isdigit(checker->arg[1][0]) == 1 || checker->arg[2][0] != 'r')
 		{
 			val->error = 1;
-			warning_add(ERROR, 2, "wrong types of argument in line: ", ft_itoa_static(row + 1, 10));
+			warning_add(ERROR, 3, "wrong types of argument in line №", ft_itoa_static(row + 1, 10), ".");
+//			printf("instr ldi/lldi, arg 2 is IND or 3 not REG\n");
 		}
 	}
 	else if (ft_strcmp(checker->instr, "sti") == 0)
@@ -142,13 +151,15 @@ void	ft_check_three_arg(t_check_args *checker, t_validation *val, int row)
 		if (checker->arg[0][0] != 'r' || checker->arg[2][0] == ':' || ft_isdigit(checker->arg[2][0]) == 1)
 		{
 			val->error = 1;
-			warning_add(ERROR, 2, "wrong types of argument in line: ", ft_itoa_static(row + 1, 10));
+			warning_add(ERROR, 3, "wrong types of argument in line №", ft_itoa_static(row + 1, 10), ".");
+//			printf("instr ldi/lldi, arg 2 is IND or 3 not REG\n");
 		}
 	}
 	else
 	{
 		val->error = 1;
-		warning_add(ERROR, 2, "wrong types of argument in line: ", ft_itoa_static(row + 1, 10));
+		warning_add(ERROR, 3, "wrong types of argument in line №", ft_itoa_static(row + 1, 10), ".");
+//		printf ("some instr with wrong 3 arg\n");
 	}
 }
 
@@ -159,7 +170,7 @@ void	ft_check_arg(t_check_args *checker, t_validation *val, int row)
 	if (checker->i == -1)
 	{
 		val->error = 1;
-		warning_add(ERROR, 2, "no arguments in line: ", ft_itoa_static(row + 1, 10));
+		warning_add(ERROR, 3, "no arguments in line №", ft_itoa_static(row + 1, 10), ".");
 		return ;
 	}
 	i = checker->i;
@@ -171,27 +182,51 @@ void	ft_check_arg(t_check_args *checker, t_validation *val, int row)
 		ft_check_three_arg(checker, val, row);
 	else
 	{
-		warning_add(ERROR, 2, "ft_check_arg лишняя проверка? too many arguments in line: ", ft_itoa_static(row + 1, 10)); // ЛИШНЯЯ ПРОВЕРКА
+//		warning_add(ERROR, 2, "ft_check_arg лишняя проверка? too many arguments in line: ", ft_itoa_static(row + 1, 10)); // ЛИШНЯЯ ПРОВЕРКА
 		val->error = 1;
 	}
+	while (i > -1) // ЧТО ЭТО? =)
+	{
+		free(checker->arg[i]);
+//		printf("i:%d, str:%s\n", i, checker->arg[i]);
+		i--;
+	}
+}
+
+static bool	useless_line(const char *line)
+{
+	while (*line && (*line == ' ' || *line == '\t'))
+		++line;
+	if (!*line || *line == COMMENT_CHAR)
+		return (true);
+	else
+		return (false);
 }
 
 void	ft_check_instructions(t_vector_token *tokens, t_validation *val)
 {
 	int 			row;
 	int 			col;
+	int 			i;
 	t_check_args	*checker;
 
 	checker = (t_check_args*)malloc(sizeof(t_check_args));
 	checker->arg = (char**)malloc(sizeof(char*) * 3);
 	row = 0;
+	i = 0;
 	while (row < vec_size(&tokens))
 	{
+//		if (useless_line(lines[i]) == true)
+//		{
+//			printf("useless line: %s\n", lines[i]);
+//			i++;
+//		}
 		col = 0;
 		while (col < vec_size(&tokens[row]))
 		{
 			if (tokens[row][col].type == 1)
 			{
+//				printf("Instr:%s; ", tokens[row][col].value);
 				checker->instr = tokens[row][col].value;
 				col++;
 				checker->i = -1; // сделать -1 и ++ в цикле
@@ -200,17 +235,29 @@ void	ft_check_instructions(t_vector_token *tokens, t_validation *val)
 					if (tokens[row][col].type == 2)
 					{
 						checker->i++;
+//						checker->i = i;
 						checker->arg[checker->i] = ft_strdup(tokens[row][col].value);
 					}
 					col++;
 				}
 				ft_check_arg(checker, val, row);
+//				printf("\n");
 			}
 			col++;
 		}
+		col--;
+		col--;
+		if (tokens[row][col].type != 2 && tokens[row][0].type != 4 && tokens[row][0].type != 5 && col != -1) // проверка что в конце аргумент стоит, добавить когда на строке один LABEL
+		{
+			val->error = 1;
+			warning_add(ERROR, 3, "last token in line №", ft_itoa_static(i + 1, 10), " is not argument.");
+		}
 		row++;
+		i++;
 	}
+//	printf("cheker->i:%d\n", checker->i);
 	free(checker->arg);
+	free(checker);
 }
 
 void 	ft_check_sizes(t_vector_token *tokens, t_validation *val)
@@ -251,10 +298,13 @@ void	ft_check_string(t_vector_token *tokens, int row, t_validation *val)
 	int 	col;
 	int		prev;
 
+//	if (vec_size(&tokens[row]) > 7 || (vec_size(&tokens[row]) == 1 && tokens[row][0].type != 0 &&
+//			tokens[row][0].type != 4 && tokens[row][0].type != 5))
 	if (vec_size(&tokens[row]) > 7)
 	{
+//		printf("vec_size:%d\n", vec_size(&tokens[row]));
 		val->error = 1;
-		warning_add(ERROR, 2, "ft_check_string Syntax error in line: ", ft_itoa_static(row + 1, 10));
+		warning_add(ERROR, 2, "syntax error in line: ", ft_itoa_static(row + 1, 10));
 	}
 	else
 	{
@@ -263,7 +313,7 @@ void	ft_check_string(t_vector_token *tokens, int row, t_validation *val)
 			col++;
 		if (col < vec_size(&tokens[row]))
 		{
-			if (tokens[row][col].type != 1)
+			if (tokens[row][col].type != 1 && tokens[row][col].type != 7) // если не инструкция и не пустая строка
 			{
 				val->error = 1;
 				warning_add(ERROR, 2, "1 wrong tokens in line: ", ft_itoa_static(row + 1, 10));
@@ -275,7 +325,9 @@ void	ft_check_string(t_vector_token *tokens, int row, t_validation *val)
 				{
 					if (tokens[row][col].type != 2 && tokens[row][0].type != 4 && tokens[row][0].type != 5) // если не арг
 					{
+//						printf("type: %d, row: %d, col: %d, value: %s\n", tokens[row][col].type, row, col, tokens[row][col].value);
 						val->error =1;
+//						warning_add(ERROR, 2, "2 wrong tokens in line: ", ft_itoa_static(row + 1, 10));
 					}
 					else
 					{
@@ -349,15 +401,17 @@ void	ft_check_labels(t_vector_token *tokens, t_validation *val)
 	{
 		flag = 0;
 		row = 0;
-		while (row < vec_size(&tokens))
+		while (row < vec_size(&tokens) && flag == 0)
 		{
+//			printf("tokens[row][0].value:|%s|, labels[i]:|%s|\n", tokens[row][0].value, labels[i]);
 			if (tokens[row][0].type == 0 && ft_strcmp(labels[i], tokens[row][0].value) == 0)
 				flag = 1;
 			row++;
 		}
 		if (flag == 0)
 		{
-			warning_add(ERROR, 4, "Nonexistent label \"", labels[i], "\" in line: ", ft_itoa_static(row, 10));
+//			warning_add(ERROR, 4, "Nonexistent label \"", labels[i], "\" in line: ", ft_itoa_static(row, 10)); // не работает номер строки
+			warning_add(ERROR, 3, "Nonexistent label \"", labels[i], "\".");
 			val->error = 1;
 		}
 		free(labels[i]);
@@ -365,7 +419,23 @@ void	ft_check_labels(t_vector_token *tokens, t_validation *val)
 	free(labels);
 }
 
-bool	is_name(const char **str, t_token *token, t_validation	*val)
+bool	is_empty(const char **str, t_token *token)
+{
+	bool		argument;
+
+	argument = false;
+	if (useless_line(*str) == true)
+	{
+		argument = true;
+		token->type = EMPTY;
+		token->value = ft_strndup("\0", 1);
+		*str = *str + 1;
+		return (argument);
+	}
+	return (argument);
+}
+
+bool	is_name(const char **str, t_token *token, t_validation *val)
 {
 	bool		argument;
 
@@ -386,6 +456,11 @@ bool	is_name(const char **str, t_token *token, t_validation	*val)
 		val->lines[*val->line_index] += ft_strlen(NAME_CMD_STRING) + 1;
 		while (*val->lines[*val->line_index] == ' ' || *val->lines[*val->line_index] == '\t') // скипаем пробелы
 			val->lines[*val->line_index]++;
+
+
+		char 	*tmp;
+		char	*tmp2;
+		char 	*tmp3;
 		if (*val->lines[*val->line_index] == '"') // проверяем на открытие ковычек, иначе невалидно
 		{
 			val->lines[*val->line_index]++; // пропускаем открытую ковычку
@@ -394,10 +469,26 @@ bool	is_name(const char **str, t_token *token, t_validation	*val)
 				if (token->value != NULL)
 				{
 					if (ft_check_closed_quote(val->lines[*val->line_index], val) == 1) // если на одной строке, то стрдап все кроме последнего символа (Ковычек)
-						token->value = ft_strjoin(token->value, ft_strndup(val->lines[*val->line_index], ft_strlen(val->lines[*val->line_index])-1)); //проверить утечки
+					{
+						tmp = token->value;
+						tmp2 = ft_strndup(val->lines[*val->line_index], ft_strlen(val->lines[*val->line_index])-1);
+						token->value = ft_strjoin(token->value, tmp2); //проверить утечки
+						free(tmp);
+						free(tmp2);
+					}
 					else
-						token->value = ft_strjoin(ft_strjoin(token->value, ft_strndup(val->lines[*val->line_index], ft_strlen(val->lines[*val->line_index]))), "\n"); //проверить утечки
+					{
+						tmp = token->value;
+						tmp2 = ft_strndup(val->lines[*val->line_index], ft_strlen(val->lines[*val->line_index]));
+						tmp3 = ft_strjoin(token->value, tmp2);
+						token->value = ft_strjoin(tmp3, "\n"); //проверить утечки
+						free(tmp);
+						free(tmp2);
+						free(tmp3);
+					}
 				}
+				if (ft_strlen(val->lines[*val->line_index]) == 0)
+					token->value = ft_strndup("\n", 1);
 				while (*val->lines[*val->line_index]) // пока есть символы в строке
 				{
 					if (token->value == NULL) // заполняем value
@@ -405,7 +496,11 @@ bool	is_name(const char **str, t_token *token, t_validation	*val)
 						if (ft_check_closed_quote(val->lines[*val->line_index], val) == 1) // если на одной строке, то стрдап все кроме последнего символа (Ковычек)
 							token->value = ft_strndup(val->lines[*val->line_index], ft_strlen(val->lines[*val->line_index])-1);
 						else
-							token->value = ft_strndup(ft_strjoin(val->lines[*val->line_index], "\n"), ft_strlen(val->lines[*val->line_index])+1);
+						{
+							tmp = ft_strjoin(val->lines[*val->line_index], "\n");
+							token->value = ft_strndup(tmp, ft_strlen(val->lines[*val->line_index])+1);
+							free(tmp);
+						}
 					}
 					if (*val->lines[*val->line_index] == '"')
 					{
@@ -438,7 +533,7 @@ bool	is_name(const char **str, t_token *token, t_validation	*val)
 	return (argument);
 }
 
-bool	is_comment(const char **str, t_token *token, t_validation	*val)
+bool	is_comment(const char **str, t_token *token, t_validation *val)
 {
 	bool		argument;
 
@@ -459,6 +554,11 @@ bool	is_comment(const char **str, t_token *token, t_validation	*val)
 		val->lines[*val->line_index] += ft_strlen(COMMENT_CMD_STRING) + 1;
 		while (*val->lines[*val->line_index] == ' ' || *val->lines[*val->line_index] == '\t') // скипаем пробелы
 			val->lines[*val->line_index]++;
+
+
+		char 	*tmp;
+		char	*tmp2;
+		char 	*tmp3;
 		if (*val->lines[*val->line_index] == '"') // проверяем на открытие ковычек, иначе невалидно
 		{
 			val->lines[*val->line_index]++; // пропускаем открытую ковычку
@@ -467,10 +567,28 @@ bool	is_comment(const char **str, t_token *token, t_validation	*val)
 				if (token->value != NULL)
 				{
 					if (ft_check_closed_quote(val->lines[*val->line_index], val) == 1) // если на одной строке, то стрдап все кроме последнего символа (Ковычек)
-						token->value = ft_strjoin(token->value, ft_strndup(val->lines[*val->line_index], ft_strlen(val->lines[*val->line_index])-1)); //проверить утечки
+					{
+//						token->value = ft_strjoin(token->value, ft_strndup(val->lines[*val->line_index], ft_strlen(val->lines[*val->line_index])-1)); //проверить утечки
+						tmp = token->value;
+						tmp2 = ft_strndup(val->lines[*val->line_index], ft_strlen(val->lines[*val->line_index])-1);
+						token->value = ft_strjoin(token->value, tmp2); //проверить утечки
+						free(tmp);
+						free(tmp2);
+					}
 					else
-						token->value = ft_strjoin(ft_strjoin(token->value, ft_strndup(val->lines[*val->line_index], ft_strlen(val->lines[*val->line_index]))), "\n"); //проверить утечки
+					{
+//						token->value = ft_strjoin(ft_strjoin(token->value, ft_strndup(val->lines[*val->line_index], ft_strlen(val->lines[*val->line_index]))), "\n"); //проверить утечки
+						tmp = token->value;
+						tmp2 = ft_strndup(val->lines[*val->line_index], ft_strlen(val->lines[*val->line_index]));
+						tmp3 = ft_strjoin(token->value, tmp2);
+						token->value = ft_strjoin(tmp3, "\n"); //проверить утечки
+						free(tmp);
+						free(tmp2);
+						free(tmp3);
+					}
 				}
+				if (ft_strlen(val->lines[*val->line_index]) == 0)
+					token->value = ft_strndup("\n", 1);
 				while (*val->lines[*val->line_index]) // пока есть символы в строке
 				{
 					if (token->value == NULL) // заполняем value
@@ -478,7 +596,12 @@ bool	is_comment(const char **str, t_token *token, t_validation	*val)
 						if (ft_check_closed_quote(val->lines[*val->line_index], val) == 1) // если на одной строке, то стрдап все кроме последнего символа (Ковычек)
 							token->value = ft_strndup(val->lines[*val->line_index], ft_strlen(val->lines[*val->line_index])-1);
 						else
-							token->value = ft_strndup(ft_strjoin(val->lines[*val->line_index], "\n"), ft_strlen(val->lines[*val->line_index])+1);
+						{
+//							token->value = ft_strndup(ft_strjoin(val->lines[*val->line_index], "\n"), ft_strlen(val->lines[*val->line_index])+1);
+							tmp = ft_strjoin(val->lines[*val->line_index], "\n");
+							token->value = ft_strndup(tmp, ft_strlen(val->lines[*val->line_index])+1);
+							free(tmp);
+						}
 					}
 					if (*val->lines[*val->line_index] == '"')
 					{
@@ -513,34 +636,38 @@ bool	is_comment(const char **str, t_token *token, t_validation	*val)
 
 int 	ft_validation(const char * const *argv)
 {
-	t_validation	*validation;
+	t_validation	*val;
 
 	warning_create();
-	validation = (t_validation*)malloc(sizeof(*validation));
-	validation->have_instructions = 0;
-	validation->name = 0;
-	validation->comment = 0;
-	validation->error = 0;
-	validation->dbl_c = 0;
-	validation->dbl_n = 0;
-	validation->no_n_start = 0;
-	validation->no_c_start = 0;
-	assembler(argv + 1, validation);
-	if (validation->have_instructions == 0 || validation->name == 0 || validation->comment == 0 || validation->error == 1)
+	val = (t_validation*)malloc(sizeof(*val));
+	val->have_instructions = 0;
+	val->name = 0;
+	val->comment = 0;
+	val->error = 0;
+	val->dbl_c = 0;
+	val->dbl_n = 0;
+	val->no_n_start = 0;
+	val->no_c_start = 0;
+	val->no_newline_empty = 0;
+	val->not_file = 0;
+	assembler(argv + 1, val);
+	if (val->not_file == 0 && ((val->have_instructions == 0 || val->name == 0 || val->comment == 0 || val->error == 1) && val->no_newline_empty == 0))
 	{
-		if (validation->name == 0)
+		if (val->name == 0 && val->no_n_start == 0)
 			warning_add(ERROR, 1, "no name found.");
-		if (validation->comment == 0)
+		if (val->comment == 0 && val->no_c_start == 0)
 			warning_add(ERROR, 1, "no comment found.");
-		if (validation->have_instructions == 0)
+		if (val->have_instructions == 0)
 			warning_add(ERROR, 1, "no instruction found.");
 		write(1, "fail\n", 5);
-		free(validation);
+		free(val);
 		warning_print();
 		warning_destroy();
 		return (0);
 	}
-	free(validation);
+	else
+		write(1, "OK\n", 3);
+	free(val);
 	warning_print();
 	warning_destroy();
 	return (1);

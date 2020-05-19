@@ -13,6 +13,8 @@ typedef struct			s_validation
 	int					error;
 	int 				dbl_n;
 	int 				dbl_c;
+	int					no_newline_empty;
+	int 				not_file;
 }						t_validation;
 
 typedef struct			s_check_args
@@ -24,6 +26,6 @@ typedef struct			s_check_args
 
 int 					ft_validation(const char * const *argv);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
-void					ft_name_validation(const char **str, t_validation	*validation);
+void					ft_name_validation(const char **str, t_validation *validation);
 
 #endif
