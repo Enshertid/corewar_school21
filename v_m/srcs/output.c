@@ -16,7 +16,7 @@ void		print_arena(const void *arena, size_t size)
 	while (i < size)
 	{
 		j = 0;
-		write(1, "0x", 3);
+		write(1, "0x", 2);
 		write(1, &str[((i >> 8) / 16) % 16], 1);
 		write(1, &str[(i >> 8) % 16], 1);
 		write(1, &str[(i / 16) % 16], 1);

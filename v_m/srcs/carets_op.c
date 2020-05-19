@@ -19,10 +19,8 @@ t_car		*create_caret(int position_on_arena, int id)
 t_car		*copy_caret(t_car *parent, int32_t position, int32_t id)
 {
 	t_car		*node;
-	int i;
 	
 	node = ft_calloc(1, sizeof(t_car));
-	i = 0;
 	ft_memcpy(node,parent, sizeof(t_car));
 	node->position = position;
 	node->id = id;

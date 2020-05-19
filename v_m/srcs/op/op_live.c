@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:53:09 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/18 16:47:06 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/19 20:40:41 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ void 			op_live(t_vm *vm, t_car *car)
 	car->position = (car->position + 5) % MEM_SIZE;
 	if (vm->debug)
 		printf("End pos: %d\n", car->position);
+	car->step = OP_BYTE;
 }

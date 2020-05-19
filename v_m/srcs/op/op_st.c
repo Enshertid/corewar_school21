@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:58:35 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/18 16:48:43 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/19 20:48:45 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,12 @@ void		op_st(t_vm *vm, t_car *car)
 			if (sec == REG)
 				car->registers[second_value] = car->registers[first_value];
 			else
+			{
+				if (vm->debug)
+				printf(" write to = %d ", get_new_pos(car->position, second_value));
 				write_reg_to_arena(vm, car->registers[first_value],
 						get_new_pos(car->position, second_value));
+			}
 		}
 	}
 	change_position(vm, car, OP_BYTE + ARG_CHECK + first + sec);
