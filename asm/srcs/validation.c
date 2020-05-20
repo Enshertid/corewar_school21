@@ -651,13 +651,13 @@ int 	ft_validation(const char * const *argv)
 	val->no_newline_empty = 0;
 	val->not_file = 0;
 	assembler(argv + 1, val);
-	if (val->not_file == 0 && ((val->have_instructions == 0 || val->name == 0 || val->comment == 0 || val->error == 1) && val->no_newline_empty == 0))
+	if ((val->not_file == 1 || val->no_newline_empty == 1) && ((val->have_instructions == 0 || val->name == 0 || val->comment == 0 || val->error == 1)))
 	{
-		if (val->name == 0 && val->no_n_start == 0)
+		if (val->name == 0 && val->no_n_start == 0 && val->not_file == 0)
 			warning_add(ERROR, 1, "no name found.");
-		if (val->comment == 0 && val->no_c_start == 0)
+		if (val->comment == 0 && val->no_c_start == 0 && val->not_file == 0)
 			warning_add(ERROR, 1, "no comment found.");
-		if (val->have_instructions == 0)
+		if (val->have_instructions == 0 && val->not_file == 0)
 			warning_add(ERROR, 1, "no instruction found.");
 		write(1, "fail\n", 5);
 		free(val);
