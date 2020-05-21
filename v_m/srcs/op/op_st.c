@@ -33,6 +33,7 @@ static bool		get_second(t_vm *vm, t_car *car, int8_t type, int32_t *arg)
 void		op_st(t_vm *vm, t_car *car, t_arg *arg)
 {
 	int32_t		reg;
+	int32_t 	pos;
 	
 	// printf("ST(%d) Cycle = %d\n", car->id, vm->current_cycle);
 	arg->first = determine_arg(vm->arena[get_pos(car, car->step)], 0);
@@ -44,8 +45,11 @@ void		op_st(t_vm *vm, t_car *car, t_arg *arg)
 		if (arg->sec_d == REG)
 			car->registers[arg->sec_d_val] = car->registers[reg];
 		else
-			write_reg_to_arena(vm, car->registers[reg], get_pos(car,
-																arg->sec_d_val));
+		{
+			pos = get_pos(car, arg->sec_d_val);
+			write_reg_to_arena(vm, car->registers[reg], pos);
+			mark_area(car->registers[0], pos);
+		}
 	}
 	change_position(vm, car, arg, TWO);
 }

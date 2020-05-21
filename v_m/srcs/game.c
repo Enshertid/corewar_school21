@@ -1,5 +1,6 @@
 
 #include "game.h"
+#include "vis.h"
 
 void			cycle_of_game(t_vm *vm)
 {
@@ -16,5 +17,6 @@ void			cycle_of_game(t_vm *vm)
 			tmp = check_caret(vm, tmp);
 		if (++vm->iter >= vm->cycle_to_die && !check_live(vm))
 			flag_of_end = end_game(&vm->players);
+		draw();
 	}
 }

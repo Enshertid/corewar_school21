@@ -9,6 +9,7 @@
 #include "libft.h"
 #include "players.h"
 #include "operations.h"
+#include "vis.h"
 
 static void		init_carriages(t_vm *vm, int iter)
 {
@@ -58,4 +59,5 @@ void			init_data(t_vm *vm, int ac, char **av)
 	init_players(&vm->players);
 	parsing(&vm->players, ac, av);
 	init_vm(vm, &vm->players);
+	init_vis();
 }
