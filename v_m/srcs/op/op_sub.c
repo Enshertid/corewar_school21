@@ -15,15 +15,10 @@
 
 void 		op_sub(t_vm *vm, t_car *car, t_arg *arg)
 {
-	int8_t first;
-	int8_t sec;
-	int8_t third;
-	
-	(void)arg->first;
-	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
-	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
-	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);
-	if (first == REG && sec == REG && third == REG)
-		write_to_reg_a_s(vm, car, MINUS);
-	change_position(vm, car, OP_BYTE + ARG_CHECK + first + sec + third);
+	arg->first = determine_arg(vm->arena[get_pos(car, car->step)], 0);
+	arg->sec_d = determine_arg(vm->arena[get_pos(car, car->step)], 1);
+	arg->third = determine_arg(vm->arena[get_pos(car, car->step)], 2);
+	if (arg->first == REG && arg->sec_d == REG && arg->third == REG)
+		write_to_reg_a_s(vm, car, arg, MINUS);
+	change_position(vm, car, arg, THREE);
 }

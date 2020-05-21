@@ -16,17 +16,18 @@
 
 void 		op_aff(t_vm *vm, t_car *car, t_arg *arg)
 {
-	int8_t		args;
-	int8_t		reg;
+	int32_t	val;
 	
-	(void)arg->first;
-	args = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
+	arg->first = determine_arg(vm->arena[get_pos(car, car->step)], 0);
 	car->step += ARG_CHECK;
-	if (args == REG)
+	if (arg->first == REG && vm->aff)
 	{
-		reg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
-		if (reg >= 0 && reg < REG_NUMBER)
-			printf ("%c", (char)car->registers[reg]);
+		arg->first_val = read_byte(vm, get_pos(car, car->step)) - 1;
+		val = (char)car->registers[arg->first_val];
+		write(1, "AFF: ", 5);
+		if (arg->first_val >= 0 && arg->first_val < REG_NUMBER)
+			write(1, &val, 1);
+		write(1, "\n", 1);
 	}
-	change_position(vm, car, OP_BYTE + ARG_CHECK + args);
+	change_position(vm, car, arg, ONE);
 }

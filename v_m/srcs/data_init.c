@@ -39,6 +39,7 @@ static void	 	init_vm(t_vm *vm, t_players *players)
 	init_vm_arena(vm, players);
 	init_carriages(vm, players->size);
 	vm->dump_value = players->dump_num >= 0 ? players->dump_num : -1;
+	vm->aff = players->aff;
 }
 
 static void			init_players(t_players *players)

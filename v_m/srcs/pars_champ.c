@@ -73,6 +73,7 @@ static void			check_comment(t_pars *pars, t_players *players)
 	buf[COMMENT_LENGTH] = '\0';
 	ln = ft_strlen(buf);
 	comment = ft_calloc(ln + 1, sizeof(char));
+	comment[ln] = '\0';
 	ft_memcpy(comment, buf, ln);
 	players->arr[players->iter]->comment = comment;
 	if ((read(pars->fd, buf, 4)) != 4)

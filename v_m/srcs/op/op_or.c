@@ -15,20 +15,18 @@
 
 void 		op_or(t_vm *vm, t_car *car, t_arg *arg)
 {
-	int8_t	first;
-	int8_t	sec;
-	int8_t	third;
-	int32_t	first_arg;
-	int32_t	second_arg;
+	int32_t value;
 	
-	(void)arg->first;
-	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
-	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
-	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);
+	arg->first = determine_arg(vm->arena[get_pos(car, car->step)], 0);
+	arg->sec_d = determine_arg(vm->arena[get_pos(car, car->step)], 1);
+	arg->third = determine_arg(vm->arena[get_pos(car, car->step)], 2);
 	car->step += ARG_CHECK;
-	if (first != 0 && sec != 0 && third != 0)
-		if (get_arg_dir_four(vm, car, first, &first_arg))
-			if (get_arg_dir_four(vm, car, sec, &second_arg))
-				write_to_reg(vm, car, (first_arg | second_arg), third);
-	change_position(vm, car, OP_BYTE + ARG_CHECK + first + sec + third);
+	if (arg->first != 0 && arg->sec_d != 0 && arg->third != 0 &&
+		get_arg_dir_four(vm, car, arg->first, &arg->first_val) &&
+		get_arg_dir_four(vm, car, arg->sec_d, &arg->sec_d_val))
+	{
+		value = arg->first_val | arg->sec_d_val;
+		write_to_reg(vm, car, value, arg->third);
+	}
+	change_position(vm, car, arg, THREE);
 }

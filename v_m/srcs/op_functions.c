@@ -52,13 +52,3 @@ void	set_array_of_cycles_to_op(t_vm *vm)
 	vm->operations.op_cycles[14] = 1000;
 	vm->operations.op_cycles[15] = 2;
 }
-
-int32_t			get_new_pos(int32_t position, int32_t step)
-{
-	position += step;
-	if (position >= MEM_SIZE || -position >= MEM_SIZE)
-		position %= MEM_SIZE;
-	if (position < 0)
-		position += MEM_SIZE;
-	return (position);
-}

@@ -33,6 +33,7 @@ typedef struct		s_vm
 	size_t				id_cars;
 	t_car				*carriages;
 	t_op				operations;
+	bool				aff;
 	bool 				debug;
 }					t_vm;
 

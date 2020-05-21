@@ -32,7 +32,7 @@ typedef struct			s_players
 	int8_t				size;
 	int8_t				iter;
 	int32_t				dump_num;
-	bool				dump_flag;
+	bool				aff;
 	bool				debug_mode;
 }						t_players;
 

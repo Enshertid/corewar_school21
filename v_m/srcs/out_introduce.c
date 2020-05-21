@@ -47,8 +47,7 @@ void			introduce(t_players *players)
 		write (1, " bytes, \"", 9);
 		write(1, players->arr[i]->name, ft_strlen(players->arr[i]->name));
 		write (1, "\" (\"", 4);
-		if (players->arr[i]->comment != NULL)
-			write(1, players->arr[i]->comment, ft_strlen(players->arr[i]->comment));
+		write(1, players->arr[i]->comment, ft_strlen(players->arr[i]->comment));
 		write(1, "\") !\n", 5);
 		free(weight);
 	}

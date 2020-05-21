@@ -72,8 +72,6 @@ int 		get_arg_step(int args, int num, int dir_size)
 	return (++sum);
 }
 
-
-
 bool 		valid_args(t_vm *vm, t_car *car, int8_t args)
 {
 	bool res;

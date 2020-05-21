@@ -35,7 +35,7 @@ t_car			*check_caret(t_vm *vm, t_car *caret)
 		if (caret->code >= 0 && caret->code < REG_NUMBER)
 			caret->cycle_to_action = vm->operations.op_cycles[caret->code] - 1;
 		else
-			caret->position = get_new_pos(caret->position, OP_BYTE);
+			caret->position = get_pos(caret, OP_BYTE);
 	}
 	else if (!(--caret->cycle_to_action))
 		vm->operations.func[caret->code](vm, caret, &vm->operations.arg);

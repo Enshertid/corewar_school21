@@ -12,6 +12,16 @@
 
 #include "pars.h"
 
+static bool			valid_aff(t_pars *pars, t_players *players)
+{
+	pars->i++;
+	if (!players->aff)
+		players->aff = true;
+	else
+		ft_error("second aff flag", "valid aff", 2);
+	return (true);
+}
+
 static void			finish_players(t_players *players, int8_t new_size)
 {
 	t_player	**new_array;
@@ -48,6 +58,8 @@ void				parsing(t_players *players, int ac, char **av)
 	while (pars.i < pars.ac)
 	{
 		if (ft_strequ(pars.av[pars.i], "-dump") && valid_dump(&pars, players))
+			continue ;
+		if (ft_strequ(pars.av[pars.i], "-a") && valid_aff(&pars, players))
 			continue ;
 		else if (ft_strequ(pars.av[pars.i], "-n"))
 			valid_flag(&pars, players);
