@@ -15,7 +15,8 @@ NAME = corewar
 SRCS =	main.c	pars.c pars_argv.c	pars_champ.c	op_with_args.c			\
 game.c	carets_op_delete.c	op_functions.c	data_init.c	vm_init.c			\
 carets_op.c	output.c	data_destroy.c	game_checks.c	game_end.c			\
-op_with_dif_args.c		op_with_args2.c	pars_dump.c		out_introduce.c		\
+op_with_dif_args.c		op_with_args2.c op_with_args3.c	pars_dump.c			\
+out_introduce.c																\
 op/op_live.c	op/op_ld.c		op/op_st.c	op/op_add.c		op/op_ldi.c		\
 op/op_sub.c		op/op_and.c		op/op_or.c	op/op_xor.c		op/op_zjmp.c	\
 op/op_sti.c		op/op_fork.c	op/op_lld.c	op/op_lldi.c	op/op_lfork.c	\
@@ -39,7 +40,7 @@ FLAGS =			-g -Wall -Werror -Wextra $(addprefix -I , $(HEAD_LIB)) $(addprefix -I 
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	# @make -C $(LIB_DIR) -s
+	@make -C $(LIB_DIR) -s
 	@gcc $(FLAGS) $(OBJ) $(LIB_DIR)libft.a -o $(NAME)
 
 $(OBJ_DIR):
@@ -51,11 +52,11 @@ $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	# @make c -C $(LIB_DIR) -s
+	@make c -C $(LIB_DIR) -s
 
 fclean: clean
 	@rm -f $(NAME)
-	# @make f -C $(LIB_DIR) -s
+	@make f -C $(LIB_DIR) -s
 
 re: fclean all
 
