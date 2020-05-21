@@ -30,6 +30,7 @@ int 		get_arg_n(t_vm *vm, t_car *car, int8_t args)
 	int32_t res;
 	int32_t value;
 
+	res = 0;
 	if (check_arg(args) == REG_CODE)
 	{
 		value = (vm->arena[(car->position + car->step) % MEM_SIZE]);

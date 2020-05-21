@@ -21,7 +21,7 @@ typedef struct			s_player
 	char				*comment;
 	char				*ex_code;
 	int					id;
-	t_bool				flag_of_n;
+	bool				flag_of_n;
 	size_t				ex_size;
 	size_t 				live;
 }						t_player;
@@ -32,8 +32,8 @@ typedef struct			s_players
 	int8_t				size;
 	int8_t				iter;
 	int32_t				dump_num;
-	t_bool				dump_flag;
-	t_bool				debug_mode;
+	bool				dump_flag;
+	bool				debug_mode;
 }						t_players;
 
 #endif

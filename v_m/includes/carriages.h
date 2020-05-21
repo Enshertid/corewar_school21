@@ -25,7 +25,7 @@ typedef struct 			s_car
 	int32_t				id;
 	int8_t				code;
 	uint8_t				step;
-	t_bool				carry;
+	bool				carry;
 	int32_t				position;
 	int32_t				last_live_cycle;
 	int32_t				cycle_to_action;

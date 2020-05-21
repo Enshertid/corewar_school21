@@ -3,10 +3,10 @@
 
 void			cycle_of_game(t_vm *vm)
 {
-	t_bool		flag_of_end;
+	bool		flag_of_end;
 	t_car		*tmp;
 
-	flag_of_end = FALSE;
+	flag_of_end = false;
 	while (!flag_of_end)
 	{
 		if (vm->current_cycle++ == vm->dump_value && end_dump(vm))

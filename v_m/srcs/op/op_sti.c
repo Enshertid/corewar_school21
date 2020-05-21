@@ -13,15 +13,15 @@
 #include "operations.h"
 #include "vm.h"
 
-static t_bool	get_third(t_vm *vm, t_car *car, int8_t *sw_arg, int32_t *value)
+static bool	get_third(t_vm *vm, t_car *car, int8_t *sw_arg, int32_t *value)
 {
 	if (*sw_arg != REG && *sw_arg != DIR)
-		return (FALSE);
+		return (false);
 	if (*sw_arg == REG)
 	{
 		*value = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 		if (*value < 0 || *value >= REG_NUMBER)
-			return (FALSE);
+			return (false);
 		*value = car->registers[*value];
 	}
 	else
@@ -30,19 +30,19 @@ static t_bool	get_third(t_vm *vm, t_car *car, int8_t *sw_arg, int32_t *value)
 		*sw_arg = DIR / 2;
 	}
 	car->step += *sw_arg;
-	return (TRUE);
+	return (true);
 }
 
-static t_bool 	check_reg(t_vm *vm, t_car *car, int8_t arg, int8_t *val)
+static bool 	check_reg(t_vm *vm, t_car *car, int8_t arg, int8_t *val)
 {
 	if (arg != REG)
-		return (FALSE);
+		return (false);
 	*val = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 	car->step += REG;
 	if (*val >= 0 && *val < REG_NUMBER)
-		return (TRUE);
+		return (true);
 	else
-		return (FALSE);
+		return (false);
 }
 
 void			op_sti(t_vm *vm, t_car *car, t_arg *arg)

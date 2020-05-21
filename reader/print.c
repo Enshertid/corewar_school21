@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include "reader.h"
 
-static t_bool	is_dir(const char *filename)
+static bool	is_dir(const char *filename)
 {
 	struct stat	statbuf;
 
@@ -23,10 +23,10 @@ static t_bool	is_dir(const char *filename)
 		if (S_ISDIR(statbuf.st_mode))
 		{
 			warning_add(ERROR, 3, "\"", filename, "\" is directory");
-			return (TRUE);
+			return (true);
 		}
 	}
-	return (FALSE);
+	return (false);
 }
 
 void			print(const char *filename)

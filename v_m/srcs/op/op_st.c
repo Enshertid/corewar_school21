@@ -13,33 +13,33 @@
 #include "operations.h"
 #include "vm.h"
 
-static t_bool		get_second(t_vm *vm, t_car *car, int8_t type, int16_t *arg)
+static bool		get_second(t_vm *vm, t_car *car, int8_t type, int16_t *arg)
 {
 	if (type != REG && type != IND)
-		return (FALSE);
+		return (false);
 	if (type == REG)
 	{
 		*arg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 		if (*arg < 0 || *arg >= REG_NUMBER)
-			return (FALSE);
+			return (false);
 	}
 	else
 		*arg = read_two_bytes(vm,
 				get_new_pos(car->position, car->step)) % IDX_MOD;
 	car->step += type;
-	return (TRUE);
+	return (true);
 }
 
-static t_bool		check_reg(t_vm *vm, t_car *car, int8_t byte, int8_t *arg)
+static bool		check_reg(t_vm *vm, t_car *car, int8_t byte, int8_t *arg)
 {
 	if (byte != REG)
-		return (FALSE);
+		return (false);
 	*arg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 	car->step += REG;
 	if (*arg >= 0 && *arg < REG_NUMBER)
-		return (TRUE);
+		return (true);
 	else
-		return (FALSE);
+		return (false);
 }
 
 void		op_st(t_vm *vm, t_car *car, t_arg *arg)

@@ -13,7 +13,7 @@
 #include "operations.h"
 #include "vm.h"
 
-int 		get_pos(t_car *car, int pos)
+int 		mget_pos(t_car *car, int pos)
 {
 	int32_t		new_pos;
 	

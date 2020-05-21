@@ -67,8 +67,8 @@ int16_t				read_two_bytes(t_vm *vm, int position);
 int32_t				read_four_bytes(t_vm *vm, int position);
 int32_t				get_new_pos(int32_t position, int32_t step);
 
-t_bool				get_arg_dir_four(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg);
-t_bool				get_arg_dir_two(t_vm *vm, t_car *car, int8_t *sw_arg,
+bool				get_arg_dir_four(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg);
+bool				get_arg_dir_two(t_vm *vm, t_car *car, int8_t *sw_arg,
 		int32_t *arg);
 void				change_position(t_vm *vm, t_car *car, int32_t step);
 void				write_to_reg_a_s(t_vm *vm, t_car *car, int8_t type);
@@ -79,13 +79,13 @@ void				write_reg_to_arena(t_vm *vm, int value, int position);
 
 int 				check_arg(uint8_t arg);
 int 				get_arg_n(t_vm *vm, t_car *car, int8_t args);
-void		 		set_reg(t_car *car, int8_t reg, int32_t value, t_bool edit_carry);
+void		 		set_reg(t_car *car, int8_t reg, int32_t value, bool edit_carry);
 int 				get_arg_step(int args, int num, int dir_size);
-t_bool 				valid_args(t_vm *vm, t_car *car, int8_t args);
-// t_bool 				valid_args2(t_vm *vm, t_car *car, int8_t args);
-t_bool		 		invalid_reg(t_vm *vm, t_car *car, int8_t args, int num);
+bool 				valid_args(t_vm *vm, t_car *car, int8_t args);
+// bool 				valid_args2(t_vm *vm, t_car *car, int8_t args);
+bool		 		invalid_reg(t_vm *vm, t_car *car, int8_t args, int num);
 int 				get_idx(int position);
-t_bool			 	valid_args2(t_vm *vm, t_car *car, int8_t args);
-int			 		calc_pos(t_car *car, int pos);
+bool			 	valid_args2(t_vm *vm, t_car *car, int8_t args);
+int			 		get_pos(t_car *car, int pos);
 
 #endif

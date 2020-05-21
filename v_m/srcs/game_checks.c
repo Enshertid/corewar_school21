@@ -23,7 +23,7 @@ bool			check_live(t_vm *vm)
 	vm->iter = 0;
 	vm->count_checks++;
 	vm->count_live = 0;
-	return (vm->carriages ? TRUE : FALSE);
+	return (vm->carriages ? true : false);
 }
 
 t_car			*check_caret(t_vm *vm, t_car *caret)

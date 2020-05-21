@@ -45,6 +45,6 @@ bool			end_game(t_players *players)
 	write(1, &winner->id, 1);
 	write(1, ", \"", 3);
 	write(1, winner->name, ft_strlen(winner->name));
-	write(1, "\", has won!\n", 12);
+	write(1, "\", has won !\n", 13);
 	return (true);
 }
