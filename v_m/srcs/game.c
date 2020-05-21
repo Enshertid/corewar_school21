@@ -7,17 +7,14 @@ void			cycle_of_game(t_vm *vm)
 	t_car		*tmp;
 
 	flag_of_end = FALSE;
-	if (vm->players.debug_mode)
-		vm->debug = TRUE;
-	vm->current_cycle = 0;
 	while (!flag_of_end)
 	{
+		if (vm->current_cycle++ == vm->dump_value && end_dump(vm))
+			break ;
 		tmp = vm->carriages;
 		while(tmp)
 			tmp = check_caret(vm, tmp);
-		if (++vm->current_cycle == vm->dump_value && vm->dump_flag)
-			flag_of_end = end_dump(vm, &vm->players);
-		else if (++vm->iter >= vm->cycle_to_die && !check_live(vm))
+		if (++vm->iter >= vm->cycle_to_die && !check_live(vm))
 			flag_of_end = end_game(&vm->players);
 	}
 }

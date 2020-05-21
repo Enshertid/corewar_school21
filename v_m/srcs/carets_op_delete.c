@@ -33,7 +33,7 @@ t_car			*delete_from_begin(t_car **head, t_car *cur_car)
 t_car			*delete_from_body(t_car *cur_car)
 {
 	t_car			*tmp;
-
+	
 	tmp = cur_car;
 	cur_car = cur_car->next;
 	cur_car->prev = tmp->prev;
@@ -43,7 +43,7 @@ t_car			*delete_from_body(t_car *cur_car)
 }
 
 t_car			*try_to_kill_the_carret(t_vm *vm, t_car **head, t_car *cur_car,
-													int cycle_to_die)
+										 int cycle_to_die)
 {
 	if (cur_car->last_live_cycle >= cycle_to_die)
 	{

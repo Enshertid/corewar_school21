@@ -25,32 +25,37 @@ static int64_t		ft_atotoi(const char *str)
 	return (res * sign);
 }
 
-void			valid_dump(t_pars *pars, t_players *players)
+static void		check_dump(t_pars *pars)
 {
 	char		*str;
-	int64_t		long_dump_number;
-	int32_t 	dump_number;
 	
 	if (!pars->dump_flag)
-		pars->dump_flag = TRUE;
-	else
-		ft_error("second dump flag, error", "valid dump", 2);
-	str = pars->av[++pars->i];
+		pars->dump_flag = true;
+	else if (pars->dump_flag)
+		ft_error("dump flag is repeat", "valid dump", 2);
+	if (!pars->av[++pars->i])
+		ft_error("dump flag is incorrect", "valid dump", 2);
+	str = pars->av[pars->i];
 	while(*str)
 	{
 		if (!ft_isdigit(*str))
 			ft_error("dump flag is incorrect", "valid dump", 2);
 		str++;
 	}
+}
+
+bool			valid_dump(t_pars *pars, t_players *players)
+{
+	int64_t		long_dump_number;
+	int32_t 	dump_number;
+	
+	check_dump(pars);
 	long_dump_number = ft_atotoi(pars->av[pars->i]);
 	dump_number = long_dump_number;
 	if ((int64_t)dump_number != long_dump_number)
 		ft_error("overflow of int in dump flag, are you WSTYGG?",
 				 "valid dump", 2);
-	if (dump_number > 0)
-	{
-		players->dump_flag = TRUE;
-		players->dump_num = dump_number;
-	}
-	pars->i++;
+	players->dump_num = dump_number >= 0 ? dump_number : -1;
+	++pars->i;
+	return (true);
 }

@@ -15,7 +15,7 @@ t_player		*define_winner(t_players *players)
 	live_cycle = players->arr[iter]->live;
 	while (++iter < players->size)
 	{
-		if (live_cycle <= players->arr[iter]->live)
+		if (live_cycle < players->arr[iter]->live)
 		{
 			winner_id = iter;
 			live_cycle = players->arr[iter]->live;
@@ -24,37 +24,27 @@ t_player		*define_winner(t_players *players)
 	return(players->arr[winner_id]);
 }
 
-void			print_car(t_vm *vm)
+bool			end_dump(t_vm *vm)
 {
-	t_car *car;
-
-	car = vm->carriages;
-	while(car)
-	{
-		//printf(" OP:%d(%d) POS = %d \n", (car->code + 1), car->id, car->position);
-		car = car->next;
-	}
+	t_car *tmp;
+	
+	print_arena(vm->arena, MEM_SIZE);
+	tmp = vm->carriages;
+	while (tmp)
+		tmp = delete_from_begin(&vm->carriages, tmp);
+	return (true);
 }
 
-t_bool			end_dump(t_vm *vm, t_players *players)
+bool			end_game(t_players *players)
 {
 	t_player	*winner;
 	
 	winner = define_winner(players);
-	if (vm->debug)
-		print_car(vm);
-	print_arena(vm->arena, MEM_SIZE / 1);
-//	printf("Contestant %d, \"%s\", has won!\n", winner->id, winner->name);
-	return (TRUE);
-}
-
-t_bool			end_game(t_players *players)
-{
-	t_player	*winner;
-	
-//	write(1, "game has been end and the winner is bla-bla-bla\n", 49);
-	winner = define_winner(players);
-//	print_arena(vm->arena, MEM_SIZE / 8);
-	printf("Contestant %d, \"%s\", has won!\n", winner->id, winner->name);
-	return (TRUE);
+	write(1,"Contestant ", 11);
+	winner->id += '0';
+	write(1, &winner->id, 1);
+	write(1, ", \"", 3);
+	write(1, winner->name, ft_strlen(winner->name));
+	write(1, "\", has won!\n", 12);
+	return (true);
 }

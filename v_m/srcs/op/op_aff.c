@@ -14,18 +14,19 @@
 #include "vm.h"
 #include "stdio.h"
 
-void 		op_aff(t_vm *vm, t_car *car)
+void 		op_aff(t_vm *vm, t_car *car, t_arg *arg)
 {
-	int8_t		arg;
+	int8_t		args;
 	int8_t		reg;
 	
-	arg = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
+	(void)arg->first;
+	args = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	car->step += ARG_CHECK;
-	if (arg == REG)
+	if (args == REG)
 	{
 		reg = read_byte(vm, get_new_pos(car->position, car->step)) - 1;
 		if (reg >= 0 && reg < REG_NUMBER)
 			printf ("%c", (char)car->registers[reg]);
 	}
-	change_position(vm, car, OP_BYTE + ARG_CHECK + arg);
+	change_position(vm, car, OP_BYTE + ARG_CHECK + args);
 }

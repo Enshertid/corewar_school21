@@ -13,13 +13,14 @@
 #include "operations.h"
 #include "vm.h"
 
-void 		op_zjmp(t_vm *vm, t_car *car)
+void 		op_zjmp(t_vm *vm, t_car *car, t_arg *arg)
 {
 	int dir;
 	int new_pos;
-
+	
+	(void)arg->first;
 	if (vm->debug)
-		printf("ZJMP(%d): Cycle = %ld Pos = %d", car->id, vm->current_cycle, car->position);
+		printf("ZJMP(%d): Cycle: %d Pos = %d", car->id, vm->current_cycle, car->position);
 	if (car->carry)
 	{
 		dir = read_two_bytes(vm, (car->position + 1) % MEM_SIZE);

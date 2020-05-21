@@ -12,16 +12,17 @@
 
 #include "corewar.h"
 
-void 		op_lldi(t_vm *vm, t_car *car)
+void 		op_lldi(t_vm *vm, t_car *car, t_arg *arg)
 {
 	int8_t args;
 	int32_t sum;
 	int32_t pos;
 	int32_t value;
 	int32_t reg3;
-
+	
+	(void)arg->first;
 	if (vm->debug)
-		printf("LLDI(%d): Cycle = %ld  POS = %d ", car->id, vm->current_cycle, car->position);
+		printf("LLDI(%d): Cycle: %d  POS = %d ", car->id, vm->current_cycle, car->position);
 	car->step = 2;
 	args = vm->arena[(car->position + 1) % MEM_SIZE];
 	if (valid_args(vm, car, args))

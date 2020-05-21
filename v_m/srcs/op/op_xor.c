@@ -13,7 +13,7 @@
 #include "operations.h"
 #include "vm.h"
 
-void 		op_xor(t_vm *vm, t_car *car)
+void 		op_xor(t_vm *vm, t_car *car, t_arg *arg)
 {
 	int8_t	first;
 	int8_t	sec;
@@ -21,8 +21,9 @@ void 		op_xor(t_vm *vm, t_car *car)
 	int32_t	first_arg;
 	int32_t	second_arg;
 	
+	(void)arg->first;
 	if (vm->debug)
-		printf ("XOR(%d):cycle=%zu \n", car->id, vm->current_cycle);
+		printf ("XOR(%d):Cycle: %d \n", car->id, vm->current_cycle);
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);

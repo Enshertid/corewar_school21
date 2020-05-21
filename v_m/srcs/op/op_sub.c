@@ -13,12 +13,13 @@
 #include "operations.h"
 #include "vm.h"
 
-void 		op_sub(t_vm *vm, t_car *car)
+void 		op_sub(t_vm *vm, t_car *car, t_arg *arg)
 {
 	int8_t first;
 	int8_t sec;
 	int8_t third;
 	
+	(void)arg->first;
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);

@@ -38,17 +38,15 @@ static void	 	init_vm(t_vm *vm, t_players *players)
 {
 	init_vm_arena(vm, players);
 	init_carriages(vm, players->size);
-	if (players->dump_flag)
-	{
-		vm->dump_value = players->dump_num;
-		vm->dump_flag = TRUE;
-	}
+	vm->dump_value = players->dump_num >= 0 ? players->dump_num : -1;
 }
 
 static void			init_players(t_players *players)
 {
 	players->arr = ft_calloc(MAX_PLAYERS, sizeof(t_player*));
+	players->dump_num = -1;
 	players->size = MAX_PLAYERS;
+	players->debug_mode = false;
 }
 
 void			init_data(t_vm *vm, int ac, char **av)

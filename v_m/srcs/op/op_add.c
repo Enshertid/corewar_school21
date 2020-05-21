@@ -13,14 +13,15 @@
 #include "operations.h"
 #include "vm.h"
 
-void			op_add(t_vm *vm, t_car *car) 
+void			op_add(t_vm *vm, t_car *car, t_arg *arg)
 {
 	int8_t first;
 	int8_t sec;
 	int8_t third;
 	
+	(void)arg->first;
 	if (vm->debug)
-		printf("ADD(%d) Cycle = %ld Pos = %d ", car->id, vm->current_cycle, car->position);
+		printf("ADD(%d) Cycle: %d Pos = %d ", car->id, vm->current_cycle, car->position);
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);

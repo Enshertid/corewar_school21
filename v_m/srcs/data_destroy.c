@@ -12,7 +12,7 @@ void			destroy_data(t_vm *vm)
 	{
 		free(vm->players.arr[i]->name);
 		free(vm->players.arr[i]->comment);
-		// free(vm->players.arr[i]->ex_code);
+		free(vm->players.arr[i]->ex_code);
 		free(vm->players.arr[i]);
 		i++;
 	}

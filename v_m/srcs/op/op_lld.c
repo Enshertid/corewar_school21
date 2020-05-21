@@ -13,15 +13,16 @@
 #include "operations.h"
 #include "vm.h"
 
-void 		op_lld(t_vm *vm, t_car *car)
+void 		op_lld(t_vm *vm, t_car *car, t_arg *arg)
 {
 	int32_t value;
 	int8_t reg;
 	int ind;
 	int8_t args;
-
+	
+	(void)arg->first;
 	if (vm->debug)
-		printf("LLD(%d): Cycle = %ld  POS = %d ", car->id, vm->current_cycle, car->position);
+		printf("LLD(%d): Cycle: %d  POS = %d ", car->id, vm->current_cycle, car->position);
 	args = vm->arena[(car->position + 1) % MEM_SIZE];
 	if (check_arg(args) == DIR_CODE && check_arg(args << 2) == REG_CODE)
 	{

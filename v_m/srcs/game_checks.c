@@ -6,7 +6,7 @@
 #include "carriages.h"
 #include "stdio.h"
 
-t_bool			check_live(t_vm *vm)
+bool			check_live(t_vm *vm)
 {
 	t_car *tmp;
 	
@@ -38,6 +38,6 @@ t_car			*check_caret(t_vm *vm, t_car *caret)
 			caret->position = get_new_pos(caret->position, OP_BYTE);
 	}
 	else if (!(--caret->cycle_to_action))
-		vm->operations.func[caret->code](vm, caret);
+		vm->operations.func[caret->code](vm, caret, &vm->operations.arg);
 	return(caret->next);
 }

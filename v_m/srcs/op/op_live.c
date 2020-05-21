@@ -20,7 +20,7 @@
 // 	arg = read_four_bytes(vm, get_new_pos(car->position, car->step)) * -1;
 // 	if (arg > 0 && arg < vm->players.size)
 // 		vm->players.arr[arg - 1]->live = vm->current_cycle;
-// 	printf("LIFE: Id = %d Cycle = %ld Car->pos = %d player = %d", car->id, vm->current_cycle, car->position, arg);
+// 	printf("LIFE: Id = %d Cycle: %d Car->pos = %d player = %d", car->id, vm->current_cycle, car->position, arg);
 // }
 
 // void 		op_live(t_vm *vm, t_car *car)
@@ -53,10 +53,11 @@ static void 	check_player(t_vm *vm, t_car *car)
 		vm->players.arr[player - 1]->live = vm->current_cycle;
 }
 
-void 			op_live(t_vm *vm, t_car *car)
+void 			op_live(t_vm *vm, t_car *car, t_arg *arg)
 {
+	(void)arg->first;
 	if (vm->debug)		
-		printf("Live(%d) Cycle = %ld Pos = %d ", car->id, vm->current_cycle, car->position);
+		printf("Live(%d) Cycle: %d Pos = %d ", car->id, vm->current_cycle, car->position);
 	vm->count_live++;
 	car->last_live_cycle = 0;
 	check_player(vm, car);

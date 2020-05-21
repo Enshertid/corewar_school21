@@ -45,7 +45,7 @@ static t_bool 	check_reg(t_vm *vm, t_car *car, int8_t arg, int8_t *val)
 		return (FALSE);
 }
 
-void			op_sti(t_vm *vm, t_car *car)
+void			op_sti(t_vm *vm, t_car *car, t_arg *arg)
 {
 	int8_t		first;
 	int8_t		sec;
@@ -53,9 +53,10 @@ void			op_sti(t_vm *vm, t_car *car)
 	int8_t		first_val;
 	int32_t		sec_val;
 	int32_t		third_val;
-
+	
+	(void)arg->first;
 	if (vm->debug)
-		printf("STI(%d): Cycle = %ld POS = %d", car->id, vm->current_cycle, car->position);
+		printf("STI(%d): Cycle: %d POS = %d", car->id, vm->current_cycle, car->position);
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	third = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 2);

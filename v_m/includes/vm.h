@@ -21,20 +21,19 @@
 
 typedef struct		s_vm
 {
-	t_players 		players;
-	char			arena[MEM_SIZE];
-	int				count_live;
-	int				count_checks;
-	int				cycle_to_die;
-	int				iter;
-	int				num_of_car;
-	size_t			dump_value;
-	size_t			current_cycle;
-	t_bool			dump_flag;
-	size_t 			id_cars;
-	t_car			*carriages;
-	t_op			operations;
-	t_bool 			debug;
+	t_players 			players;
+	char				arena[MEM_SIZE];
+	int32_t				count_live;
+	int32_t				count_checks;
+	int32_t				cycle_to_die;
+	int32_t				iter;
+	int32_t				num_of_car;
+	int32_t				dump_value;
+	int32_t 			current_cycle;
+	size_t				id_cars;
+	t_car				*carriages;
+	t_op				operations;
+	bool 				debug;
 }					t_vm;
 
 void		print_arena(const void *arena, size_t size);

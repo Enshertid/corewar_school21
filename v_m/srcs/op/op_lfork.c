@@ -13,14 +13,15 @@
 #include "operations.h"
 #include "vm.h"
 
-void 		op_lfork(t_vm *vm, t_car *car)
+void 		op_lfork(t_vm *vm, t_car *car, t_arg *arg)
 {
 	t_car	*new;
 	int32_t pos;
 	int32_t x;
-
+	
+	(void)arg->first;
 	if (vm->debug)
-		printf("LFORK(%d): Cycle = %ld Car->pos = %d carry = %d ", car->id, vm->current_cycle, car->position, car->carry);
+		printf("LFORK(%d): Cycle: %d Car->pos = %d carry = %d ", car->id, vm->current_cycle, car->position, car->carry);
 	x = read_two_bytes(vm, (car->position + 1) % MEM_SIZE);
 	pos = calc_pos(car, x);
 	new = copy_caret(car, pos, ++vm->id_cars);

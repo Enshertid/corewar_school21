@@ -42,15 +42,16 @@ static t_bool		check_reg(t_vm *vm, t_car *car, int8_t byte, int8_t *arg)
 		return (FALSE);
 }
 
-void		op_st(t_vm *vm, t_car *car)
+void		op_st(t_vm *vm, t_car *car, t_arg *arg)
 {
 	int8_t		first;
 	int8_t 		sec;
 	int8_t		first_value;
 	int16_t		second_value;
 	
+	(void)arg->first;
 	if (vm->debug)
-		printf("ST(%d): Cycle = %ld POS = %d", car->id, vm->current_cycle, car->position);
+		printf("ST(%d): Cycle: %d POS = %d", car->id, vm->current_cycle, car->position);
 	first = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 0);
 	sec = determine_arg(vm->arena[get_new_pos(car->position, car->step)], 1);
 	car->step += ARG_CHECK;
