@@ -23,11 +23,13 @@ void 		op_aff(t_vm *vm, t_car *car, t_arg *arg)
 	if (arg->first == REG && vm->aff)
 	{
 		arg->first_val = read_byte(vm, get_pos(car, car->step)) - 1;
-		val = (char)car->registers[arg->first_val];
-		write(1, "AFF: ", 5);
 		if (arg->first_val >= 0 && arg->first_val < REG_NUMBER)
+		{
+			val = (char) car->registers[arg->first_val];
+			write(1, "AFF: ", 5);
 			write(1, &val, 1);
-		write(1, "\n", 1);
+			write(1, "\n", 1);
+		}
 	}
 	change_position(vm, car, arg, ONE);
 }

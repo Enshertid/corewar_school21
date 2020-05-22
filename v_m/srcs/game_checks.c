@@ -10,6 +10,7 @@ bool			check_live(t_vm *vm)
 {
 	t_car *tmp;
 	
+	vm->count_checks++;
 	//printf("cycles to live==>%d\n", vm->cycle_to_die);
 	//printf("count live ==> %d\n", vm->count_live);
 	tmp = vm->carriages;
@@ -21,7 +22,6 @@ bool			check_live(t_vm *vm)
 		vm->count_checks = 0;
 	}
 	vm->iter = 0;
-	vm->count_checks++;
 	vm->count_live = 0;
 	return (vm->carriages ? true : false);
 }
