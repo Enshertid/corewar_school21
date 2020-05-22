@@ -4,26 +4,6 @@
 
 #include "game.h"
 
-t_player		*define_winner(t_players *players)
-{
-	int8_t		iter;
-	int8_t		winner_id;
-	size_t		live_cycle;
-	
-	iter = 0;
-	winner_id = iter;
-	live_cycle = players->arr[iter]->live;
-	while (++iter < players->size)
-	{
-		if (live_cycle < players->arr[iter]->live)
-		{
-			winner_id = iter;
-			live_cycle = players->arr[iter]->live;
-		}
-	}
-	return(players->arr[winner_id]);
-}
-
 bool			end_dump(t_vm *vm)
 {
 	t_car *tmp;
@@ -35,15 +15,17 @@ bool			end_dump(t_vm *vm)
 	return (true);
 }
 
-bool			end_game(t_players *players)
+bool			end_game(t_vm *vm, t_players *players)
 {
-	t_player	*winner;
+	t_player *winner;
+	int8_t  id;
 	
-	winner = define_winner(players);
+	id = vm->winner_id + '0';
+	winner = players->arr[vm->winner_id - 1];
 	write(1,"Contestant ", 11);
-	winner->id += '0';
-	write(1, &winner->id, 1);
+	write(1, &id, 1);
 	write(1, ", \"", 3);
+	id -= '0';
 	write(1, winner->name, ft_strlen(winner->name));
 	write(1, "\", has won !\n", 13);
 	return (true);

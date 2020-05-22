@@ -59,5 +59,5 @@ void			init_data(t_vm *vm, int ac, char **av)
 	init_players(&vm->players);
 	parsing(&vm->players, ac, av);
 	init_vm(vm, &vm->players);
-	init_vis();
+//	init_vis();
 }

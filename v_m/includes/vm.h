@@ -23,6 +23,7 @@ typedef struct		s_vm
 {
 	t_players 			players;
 	char				arena[MEM_SIZE];
+	int8_t				winner_id;
 	int32_t				count_live;
 	int32_t				count_checks;
 	int32_t				cycle_to_die;

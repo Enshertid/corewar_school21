@@ -16,7 +16,7 @@ void			cycle_of_game(t_vm *vm)
 		while(tmp)
 			tmp = check_caret(vm, tmp);
 		if (++vm->iter >= vm->cycle_to_die && !check_live(vm))
-			flag_of_end = end_game(&vm->players);
-		draw();
+			flag_of_end = end_game(vm, &vm->players);
+//		draw();
 	}
 }

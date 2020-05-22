@@ -48,7 +48,7 @@ void		op_st(t_vm *vm, t_car *car, t_arg *arg)
 		{
 			pos = get_pos(car, arg->sec_d_val);
 			write_reg_to_arena(vm, car->registers[reg], pos);
-			mark_area(car->registers[0], pos);
+//			mark_area(car->registers[0], pos);
 		}
 	}
 	change_position(vm, car, arg, TWO);

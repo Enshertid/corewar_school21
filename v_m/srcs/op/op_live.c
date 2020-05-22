@@ -19,7 +19,7 @@ static void 	check_player(t_vm *vm, t_car *car)
 
 	player = read_four_bytes(vm, (car->position + 1) % MEM_SIZE) * - 1;
 	if (player > 0 && player <= vm->players.size)
-		vm->players.arr[player - 1]->live = vm->current_cycle;
+		vm->winner_id = player;
 }
 
 void 			op_live(t_vm *vm, t_car *car, t_arg *arg)

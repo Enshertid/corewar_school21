@@ -33,19 +33,12 @@ static bool	get_third(t_vm *vm, t_car *car, int8_t *sw_arg, int32_t *value)
 	car->step += *sw_arg;
 	return (true);
 }
-/*
- *
- * id player
- * pos to write
- *
- */
 
 void			op_sti(t_vm *vm, t_car *car, t_arg *arg)
 {
 	int32_t	reg;
 	int32_t	p;
 	
-	// printf("STI(%d) Cycle = %d\n", car->id, vm->current_cycle);
 	arg->first = determine_arg(vm->arena[get_pos(car, car->step)], 0);
 	arg->sec_d = determine_arg(vm->arena[get_pos(car, car->step)], 1);
 	arg->third = determine_arg(vm->arena[get_pos(car, car->step)], 2);
@@ -57,7 +50,7 @@ void			op_sti(t_vm *vm, t_car *car, t_arg *arg)
 		{
 			p = get_pos(car, get_idx(arg->sec_d_val + arg->third_val));
 			write_reg_to_arena(vm, car->registers[reg], p);
-			mark_area(car->registers[0], p);
+//			mark_area(car->registers[0], p);
 		}
 	arg->first = arg->first == DIR ? DIR / 2 : arg->first;
 	arg->sec_d = arg->sec_d == DIR ? DIR / 2 : arg->sec_d;
