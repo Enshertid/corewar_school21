@@ -18,5 +18,4 @@ void			destroy_data(t_vm *vm)
 		i++;
 	}
 	free(vm->players.arr);
-//	destroy_vis();
 }

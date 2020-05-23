@@ -20,7 +20,6 @@ bool			end_game(t_vm *vm, t_players *players)
 	t_player *winner;
 	int8_t  id;
 	
-	// printf("Cycle = %d", vm->current_cycle);25974
 	id = vm->winner_id + '0';
 	winner = players->arr[vm->winner_id - 1];
 	write(1,"Contestant ", 11);

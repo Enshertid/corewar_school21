@@ -35,7 +35,6 @@ void		op_st(t_vm *vm, t_car *car, t_arg *arg)
 	int32_t		reg;
 	int32_t 	pos;
 	
-	// printf("ST(%d) Cycle = %d\n", car->id, vm->current_cycle);
 	arg->first = determine_arg(vm->arena[get_pos(car, car->step)], 0);
 	arg->sec_d = determine_arg(vm->arena[get_pos(car, car->step)], 1);
 	car->step += ARG_CHECK;
@@ -48,7 +47,6 @@ void		op_st(t_vm *vm, t_car *car, t_arg *arg)
 		{
 			pos = get_pos(car, arg->sec_d_val);
 			write_reg_to_arena(vm, car->registers[reg], pos);
-//			mark_area(car->registers[0], pos);
 		}
 	}
 	change_position(vm, car, arg, TWO);

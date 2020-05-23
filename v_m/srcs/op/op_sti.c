@@ -50,7 +50,6 @@ void			op_sti(t_vm *vm, t_car *car, t_arg *arg)
 		{
 			p = get_pos(car, get_idx(arg->sec_d_val + arg->third_val));
 			write_reg_to_arena(vm, car->registers[reg], p);
-//			mark_area(car->registers[0], p);
 		}
 	arg->first = arg->first == DIR ? DIR / 2 : arg->first;
 	arg->sec_d = arg->sec_d == DIR ? DIR / 2 : arg->sec_d;

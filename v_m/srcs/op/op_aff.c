@@ -20,7 +20,7 @@ void 		op_aff(t_vm *vm, t_car *car, t_arg *arg)
 	
 	arg->first = determine_arg(vm->arena[get_pos(car, car->step)], 0);
 	car->step += ARG_CHECK;
-	if (arg->first == REG && vm->aff)
+	if (arg->first == REG && vm->aff != 0)
 	{
 		arg->first_val = read_byte(vm, get_pos(car, car->step)) - 1;
 		if (arg->first_val >= 0 && arg->first_val < REG_NUMBER)

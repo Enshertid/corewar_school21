@@ -41,6 +41,7 @@ static void	 	init_vm(t_vm *vm, t_players *players)
 	init_carriages(vm, players->size);
 	vm->dump_value = players->dump_num >= 0 ? players->dump_num : -1;
 	vm->aff = players->aff;
+	vm->winner_id = players->size;
 }
 
 static void			init_players(t_players *players)
@@ -59,5 +60,4 @@ void			init_data(t_vm *vm, int ac, char **av)
 	init_players(&vm->players);
 	parsing(&vm->players, ac, av);
 	init_vm(vm, &vm->players);
-//	init_vis();
 }

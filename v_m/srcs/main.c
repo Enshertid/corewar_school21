@@ -18,7 +18,6 @@ int				main(int ac, char **av)
 	
 	init_data(&vm, ac, av);
 	introduce(&vm.players);
-	vm.debug = false;
 	cycle_of_game(&vm);
 	destroy_data(&vm);
 	return (0);

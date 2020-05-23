@@ -35,7 +35,6 @@ typedef struct		s_vm
 	t_car				*carriages;
 	t_op				operations;
 	bool				aff;
-	bool 				debug;
 }					t_vm;
 
 void		print_arena(const void *arena, size_t size);
