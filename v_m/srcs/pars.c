@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 19:21:59 by enshertid         #+#    #+#             */
-/*   Updated: 2020/05/20 00:02:56 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/22 22:58:13 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void				parsing(t_players *players, int ac, char **av)
 		ft_error("To many arguments", NULL, 1);
 	while (pars.i < pars.ac)
 	{
-		if (ft_strequ(pars.av[pars.i], "-dump") && valid_dump(&pars, players))
+		if (ft_strequ(pars.av[pars.i], "-d") && valid_dump(&pars, players))
 			continue ;
 		if (ft_strequ(pars.av[pars.i], "-a") && valid_aff(&pars, players))
 			continue ;
