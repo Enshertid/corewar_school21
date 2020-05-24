@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   op_with_dif_args.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/24 12:33:17 by enshertid         #+#    #+#             */
-/*   Updated: 2020/05/24 12:33:17 by enshertid        ###   ########.fr       */
+/*   Created: 2020/05/24 14:15:37 by ediego            #+#    #+#             */
+/*   Updated: 2020/05/24 14:15:40 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "operations.h"
 #include "vm.h"

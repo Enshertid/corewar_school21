@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   op_reg_work.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/24 12:33:02 by enshertid         #+#    #+#             */
-/*   Updated: 2020/05/24 12:33:02 by enshertid        ###   ########.fr       */
+/*   Created: 2020/05/24 14:12:00 by ediego            #+#    #+#             */
+/*   Updated: 2020/05/24 14:12:03 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "operations.h"
 #include "vm.h"

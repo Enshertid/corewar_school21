@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   out_introduce.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/24 12:33:22 by enshertid         #+#    #+#             */
-/*   Updated: 2020/05/24 12:33:22 by enshertid        ###   ########.fr       */
+/*   Created: 2020/05/24 14:16:01 by ediego            #+#    #+#             */
+/*   Updated: 2020/05/24 14:16:05 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "corewar.h"
 
