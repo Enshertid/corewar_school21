@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 14:19:28 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/24 15:17:21 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/05/24 16:19:22 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,18 @@ static void			finish_players(t_players *players, int8_t new_size)
 
 	players->iter = 0;
 	players->size = new_size;
-	new_array = ft_calloc(new_size, sizeof(t_player*));
-	while(players->iter != new_size)
+	if (!(new_array = ft_calloc(new_size, sizeof(t_player*))))
+		ft_error("error in malloc", "finish_players", 3);
+	else
 	{
-		new_array[players->iter] = players->arr[players->iter];
-		players->iter++;
+		while (players->iter != new_size)
+		{
+			new_array[players->iter] = players->arr[players->iter];
+			players->iter++;
+		}
+		free(players->arr);
+		players->arr = new_array;
 	}
-	free(players->arr);
-	players->arr = new_array;
 }
 
 static void			init_pars(t_pars *pars, int ac, char **av)
@@ -48,12 +52,12 @@ static void			init_pars(t_pars *pars, int ac, char **av)
 
 void				parsing(t_players *players, int ac, char **av)
 {
-	t_pars		pars;
+	t_pars			pars;
 
 	init_pars(&pars, ac, av);
 	if (pars.ac < 2)
 		ft_error("Have no champions", NULL, 1);
-	else if (pars.ac > (MAX_PLAYERS * 3) + DUMP)
+	else if (pars.ac > MAX_PLAYERS * 3 + DUMP)
 		ft_error("To many arguments", NULL, 1);
 	while (pars.i < pars.ac)
 	{

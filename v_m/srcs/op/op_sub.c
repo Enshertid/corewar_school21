@@ -6,14 +6,14 @@
 /*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 12:31:50 by enshertid         #+#    #+#             */
-/*   Updated: 2020/05/24 13:20:24 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/05/24 14:01:11 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "vm.h"
 
-void 		op_sub(t_vm *vm, t_car *car, t_arg *arg)
+void				op_sub(t_vm *vm, t_car *car, t_arg *arg)
 {
 	arg->first = determine_arg(vm->arena[get_pos(car, car->step)], 0);
 	arg->sec_d = determine_arg(vm->arena[get_pos(car, car->step)], 1);

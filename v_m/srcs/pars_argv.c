@@ -6,22 +6,22 @@
 /*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/03 18:44:19 by enshertid         #+#    #+#             */
-/*   Updated: 2020/05/24 13:22:02 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/05/24 16:12:16 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 
-static bool		is_dir_pars(const char *filename)
+static bool			is_dir_pars(const char *filename)
 {
 	struct stat		statbuf;
-	
+
 	if (stat(filename, &statbuf) == 0)
 	{
 		if (S_ISDIR(statbuf.st_mode))
 		{
 			ft_error("you try to give me some directory, are you are "
-					 "WSTYGG?", "is_dir", 2);
+													"WSTYGG?", "is_dir", 2);
 			return (true);
 		}
 	}
@@ -32,7 +32,7 @@ static void			sort_id(t_players *players, int i, int j)
 {
 	t_player		*tmp;
 	t_player		**ar;
-	
+
 	ar = ft_calloc(MAX_PLAYERS, sizeof(t_player*));
 	while (++i < players->iter)
 		if (!players->arr[i]->flag_of_n)
@@ -41,7 +41,7 @@ static void			sort_id(t_players *players, int i, int j)
 	while (++i < players->iter)
 		while (players->arr[i]->flag_of_n && i != players->arr[i]->id - 1)
 		{
-			tmp = players->arr[players->arr[i]->id - 1];;
+			tmp = players->arr[players->arr[i]->id - 1];
 			players->arr[players->arr[i]->id - 1] = players->arr[i];
 			players->arr[i] = tmp;
 		}
@@ -58,14 +58,14 @@ static void			sort_id(t_players *players, int i, int j)
 
 void				validate_id(t_players *players)
 {
-	int			i;
-	int			j;
-	
+	int				i;
+	int				j;
+
 	i = -1;
 	while (++i < players->iter)
 	{
 		if (players->arr[i]->id > players->iter)
-			ft_error ("too large id", "validate_id", 2);
+			ft_error("too large id", "validate_id", 2);
 		j = i;
 		while (++j < players->iter)
 			if (players->arr[i]->flag_of_n && players->arr[j]->
@@ -80,7 +80,7 @@ void				validate_id(t_players *players)
 void				valid_name(t_pars *pars, t_players *players)
 {
 	char			*ptr;
-	
+
 	if (pars->i == pars->ac)
 		ft_error("have no champ after flag", "valid_name", 2);
 	ptr = pars->av[pars->i] + (ft_strlen(pars->av[pars->i]) - 4);
@@ -100,8 +100,9 @@ void				valid_name(t_pars *pars, t_players *players)
 void				valid_flag(t_pars *pars, t_players *players)
 {
 	size_t			iter;
-	int				id;
-	
+	int64_t			long_id;
+	int32_t			id;
+
 	iter = 0;
 	pars->i++;
 	if (pars->i == pars->ac)
@@ -112,9 +113,12 @@ void				valid_flag(t_pars *pars, t_players *players)
 			ft_error("id is incorrect", "pars_id", 2);
 		iter++;
 	}
-	id = ft_atoi(pars->av[pars->i++]);
+	long_id = ft_atotoi(pars->av[pars->i++]);
+	id = long_id;
+	if ((int64_t)id != long_id)
+		ft_error("overflow of int in n flag", "valid flag", 2);
 	if ((id > MAX_PLAYERS) || (id < 1))
-		ft_error ("id is incorrect", "pars id", 2);
+		ft_error("id is incorrect", "pars id", 2);
 	valid_name(pars, players);
 	players->arr[players->iter]->flag_of_n = true;
 	players->arr[players->iter]->id = id;

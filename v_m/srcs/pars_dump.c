@@ -6,17 +6,17 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 14:19:18 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/24 14:19:19 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/24 15:59:25 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 
-static int64_t		ft_atotoi(const char *str)
+int64_t			ft_atotoi(const char *str)
 {
-	int64_t			res;
-	short int		sign;
-	
+	int64_t		res;
+	short int	sign;
+
 	while (ft_isspace(*str))
 		++str;
 	sign = 1;
@@ -36,7 +36,7 @@ static int64_t		ft_atotoi(const char *str)
 static void		check_dump(t_pars *pars)
 {
 	char		*str;
-	
+
 	if (!pars->dump_flag)
 		pars->dump_flag = true;
 	else if (pars->dump_flag)
@@ -44,7 +44,7 @@ static void		check_dump(t_pars *pars)
 	if (!pars->av[++pars->i])
 		ft_error("dump flag is incorrect", "valid dump", 2);
 	str = pars->av[pars->i];
-	while(*str)
+	while (*str)
 	{
 		if (!ft_isdigit(*str))
 			ft_error("dump flag is incorrect", "valid dump", 2);
@@ -55,14 +55,14 @@ static void		check_dump(t_pars *pars)
 bool			valid_dump(t_pars *pars, t_players *players)
 {
 	int64_t		long_dump_number;
-	int32_t 	dump_number;
-	
+	int32_t		dump_number;
+
 	check_dump(pars);
 	long_dump_number = ft_atotoi(pars->av[pars->i]);
 	dump_number = long_dump_number;
 	if ((int64_t)dump_number != long_dump_number)
 		ft_error("overflow of int in dump flag, are you WSTYGG?",
-				 "valid dump", 2);
+												"valid dump", 2);
 	players->dump_num = dump_number >= 0 ? dump_number : -1;
 	++pars->i;
 	return (true);

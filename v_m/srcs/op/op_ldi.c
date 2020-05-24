@@ -6,21 +6,21 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:40:20 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/24 13:22:02 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/05/24 16:35:07 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "vm.h"
 
-void 		op_ldi(t_vm *vm, t_car *car, t_arg *arg)
+void				op_ldi(t_vm *vm, t_car *car, t_arg *arg)
 {
-	int8_t args;
-	int32_t sum;
-	int32_t pos;
-	int32_t value;
-	int32_t reg;
-	
+	int8_t			args;
+	int32_t			sum;
+	int32_t			pos;
+	int32_t			value;
+	int32_t			reg;
+
 	(void)arg->first;
 	car->step = OP_BYTE + ARG_CHECK;
 	args = vm->arena[(car->position + 1) % MEM_SIZE];
@@ -32,6 +32,6 @@ void 		op_ldi(t_vm *vm, t_car *car, t_arg *arg)
 		reg = vm->arena[(car->position + car->step) % MEM_SIZE];
 		set_reg(car, reg, value, 0);
 	}
-	car->position = get_pos(car , get_arg_step(args, 3, DIR_SIZE / 2));
+	car->position = get_pos(car, get_arg_step(args, 3, DIR_SIZE / 2));
 	car->step = OP_BYTE;
 }

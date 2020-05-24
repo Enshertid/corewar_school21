@@ -6,17 +6,17 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 17:58:35 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/19 21:49:41 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/24 16:42:49 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "vm.h"
 
-void 		op_xor(t_vm *vm, t_car *car, t_arg *arg)
+void				op_xor(t_vm *vm, t_car *car, t_arg *arg)
 {
-	int32_t value;
-	
+	int32_t			value;
+
 	arg->first = determine_arg(vm->arena[get_pos(car, car->step)], 0);
 	arg->sec_d = determine_arg(vm->arena[get_pos(car, car->step)], 1);
 	arg->third = determine_arg(vm->arena[get_pos(car, car->step)], 2);
@@ -24,9 +24,9 @@ void 		op_xor(t_vm *vm, t_car *car, t_arg *arg)
 	if (arg->first != 0 && arg->sec_d != 0 && arg->third != 0 &&
 		get_arg_dir_four(vm, car, arg->first, &arg->first_val) &&
 		get_arg_dir_four(vm, car, arg->sec_d, &arg->sec_d_val))
-		{
-			value = arg->first_val ^ arg->sec_d_val;
-			write_to_reg(vm, car, value, arg->third);
-		}
+	{
+		value = arg->first_val ^ arg->sec_d_val;
+		write_to_reg(vm, car, value, arg->third);
+	}
 	change_position(car, arg, THREE);
 }

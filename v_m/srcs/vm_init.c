@@ -6,31 +6,32 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 14:19:35 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/24 14:19:37 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/24 16:13:57 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static void		copy_excode(t_vm *vm, t_players *players)
+static void			copy_excode(t_vm *vm, t_players *players)
 {
-	int i;
-	int pos;
-	
+	int				i;
+	int				pos;
+
 	i = 0;
 	while (i < (int)players->iter)
 	{
-		pos = ((MEM_SIZE)/(int)players->iter) * i;
-		ft_memcpy(&(vm->arena[pos]), players->arr[i]->ex_code, players->arr[i]->ex_size);
+		pos = ((MEM_SIZE) / (int)players->iter) * i;
+		ft_memcpy(&(vm->arena[pos]), players->arr[i]->ex_code,
+											players->arr[i]->ex_size);
 		i++;
 	}
 }
 
-static void		init_carriages(t_vm *vm, int iter)
+static void			init_carriages(t_vm *vm, int iter)
 {
-	int i;
-	t_car *list;
-	
+	int				i;
+	t_car			*list;
+
 	i = 0;
 	list = create_caret(0, 1);
 	vm->id_cars++;
@@ -44,13 +45,13 @@ static void		init_carriages(t_vm *vm, int iter)
 	vm->carriages = list;
 }
 
-static void		init_vm_arena(t_vm *vm, t_players *players)
+static void			init_vm_arena(t_vm *vm, t_players *players)
 {
 	vm->cycle_to_die = CYCLE_TO_DIE;
 	copy_excode(vm, players);
 }
 
-void	 	init_vm(t_vm *vm, t_players *players)
+void				init_vm(t_vm *vm, t_players *players)
 {
 	init_vm_arena(vm, players);
 	init_carriages(vm, players->size);

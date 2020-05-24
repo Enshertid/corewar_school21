@@ -6,17 +6,17 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 17:52:16 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/02 17:53:51 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/24 14:01:11 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "vm.h"
 
-void 		op_and(t_vm *vm, t_car *car, t_arg *arg)
+void			op_and(t_vm *vm, t_car *car, t_arg *arg)
 {
-	int32_t value;
-	
+	int32_t		value;
+
 	arg->first = determine_arg(vm->arena[get_pos(car, car->step)], 0);
 	arg->sec_d = determine_arg(vm->arena[get_pos(car, car->step)], 1);
 	arg->third = determine_arg(vm->arena[get_pos(car, car->step)], 2);

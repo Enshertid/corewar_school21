@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:47:13 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/13 15:30:14 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/24 16:21:42 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "vm.h"
 #include "stdio.h"
 
-void 		op_aff(t_vm *vm, t_car *car, t_arg *arg)
+void				op_aff(t_vm *vm, t_car *car, t_arg *arg)
 {
-	int32_t	val;
-	
+	int32_t			val;
+
 	arg->first = determine_arg(vm->arena[get_pos(car, car->step)], 0);
 	car->step += ARG_CHECK;
 	if (arg->first == REG && vm->aff != 0)
@@ -25,7 +25,7 @@ void 		op_aff(t_vm *vm, t_car *car, t_arg *arg)
 		arg->first_val = read_byte(vm, get_pos(car, car->step)) - 1;
 		if (arg->first_val >= 0 && arg->first_val < REG_NUMBER)
 		{
-			val = (char) car->registers[arg->first_val];
+			val = (char)car->registers[arg->first_val];
 			write(1, "AFF: ", 5);
 			write(1, &val, 1);
 			write(1, "\n", 1);

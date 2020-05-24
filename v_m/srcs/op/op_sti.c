@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 13:30:32 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/21 14:25:32 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/24 16:39:47 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "vm.h"
 #include "vis.h"
 
-static bool	get_third(t_vm *vm, t_car *car, int8_t *sw_arg, int32_t *value)
+static bool			get_third(t_vm *vm, t_car *car, int8_t *sw_arg,
+														int32_t *value)
 {
 	if (*sw_arg != REG && *sw_arg != DIR)
 		return (false);
@@ -34,11 +35,11 @@ static bool	get_third(t_vm *vm, t_car *car, int8_t *sw_arg, int32_t *value)
 	return (true);
 }
 
-void			op_sti(t_vm *vm, t_car *car, t_arg *arg)
+void				op_sti(t_vm *vm, t_car *car, t_arg *arg)
 {
-	int32_t	reg;
-	int32_t	p;
-	
+	int32_t			reg;
+	int32_t			p;
+
 	arg->first = determine_arg(vm->arena[get_pos(car, car->step)], 0);
 	arg->sec_d = determine_arg(vm->arena[get_pos(car, car->step)], 1);
 	arg->third = determine_arg(vm->arena[get_pos(car, car->step)], 2);

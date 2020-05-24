@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/03 19:31:10 by enshertid         #+#    #+#             */
-/*   Updated: 2020/05/24 13:22:02 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/05/24 16:08:34 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void			check_m_h(t_pars *pars)
 {
 	char			buf[5];
-	int				m_h = 0;
-	
+	int				m_h;
+
 	if ((read(pars->fd, &buf, 4)) < 4)
 		ft_error("magic header is wrong", "check_m_h", 2);
 	buf[4] = '\0';
@@ -28,31 +28,13 @@ static void			check_m_h(t_pars *pars)
 		ft_error("magic header is wrong", "check_m_h", 2);
 }
 
-static void			valid_champ_name(t_pars *pars, t_players *players)
-{
-	char			buf[PROG_NAME_LENGTH + 1];
-	char			*name;
-	size_t			size;
-	
-	if ((read(pars->fd, buf, PROG_NAME_LENGTH)) != PROG_NAME_LENGTH)
-		ft_error ("wrong size of champion's name", "valid_champ_name", 2);
-	buf[PROG_NAME_LENGTH] = '\0';
-	size = ft_strlen(buf);
-	name = ft_calloc(size + 1, sizeof(char));
-	name[size] = '\0';
-	ft_memcpy(name, buf, size);
-	players->arr[players->iter]->name = name;
-	if ((read(pars->fd, buf, 4)) != 4)
-		ft_error("NULL oktet's are invalid", "valid_champ_name", 2);
-}
-
 static void			valid_exc_size(t_pars *pars, t_players *players)
 {
 	char			buf[5];
-	int			exc_size;
-	
+	int				exc_size;
+
 	if ((read(pars->fd, buf, 4)) != 4)
-		ft_error ("ex_code size is wrong", "valid_exc_size", 2);
+		ft_error("ex_code size is wrong", "valid_exc_size", 2);
 	buf[4] = '\0';
 	*((char*)&exc_size) = buf[3];
 	*((char*)&exc_size + 1) = buf[2];
@@ -62,14 +44,15 @@ static void			valid_exc_size(t_pars *pars, t_players *players)
 		ft_error("ex code is too large", "valid_ex_size", 2);
 	players->arr[players->iter]->ex_size = exc_size;
 }
+
 static void			check_comment(t_pars *pars, t_players *players)
 {
 	char			buf[COMMENT_LENGTH + 1];
 	char			*comment;
 	int32_t			ln;
-	
+
 	if ((read(pars->fd, buf, COMMENT_LENGTH)) != COMMENT_LENGTH)
-		ft_error ("wrong size of champion's name", "valid_champ_name", 2);
+		ft_error("wrong size of champion's name", "valid_champ_name", 2);
 	buf[COMMENT_LENGTH] = '\0';
 	ln = ft_strlen(buf);
 	comment = ft_calloc(ln + 1, sizeof(char));
@@ -84,10 +67,10 @@ static void			valid_ex_code(t_pars *pars, t_players *players)
 {
 	char			buf[players->arr[players->iter]->ex_size];
 	char			*ex_code;
-	
+
 	if ((read(pars->fd, buf, players->arr[players->iter]->ex_size)) !=
 		(ssize_t)players->arr[players->iter]->ex_size)
-		ft_error ("wrong size of champion's name", "valid_champ_name", 2);
+		ft_error("wrong size of champion's name", "valid_champ_name", 2);
 	ex_code = ft_calloc(players->arr[players->iter]->ex_size, sizeof(char));
 	ft_memcpy(ex_code, buf, players->arr[players->iter]->ex_size);
 	players->arr[players->iter]->ex_code = ex_code;
@@ -99,7 +82,7 @@ void				pars_champ(t_pars *pars, t_players *players)
 	valid_champ_name(pars, players);
 	valid_exc_size(pars, players);
 	check_comment(pars, players);
-	valid_ex_code(pars,players);
+	valid_ex_code(pars, players);
 	players->iter++;
 	pars->i++;
 }

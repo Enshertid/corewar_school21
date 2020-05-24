@@ -6,20 +6,20 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:44:25 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/24 13:22:02 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/05/24 13:22:57 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void 		op_lldi(t_vm *vm, t_car *car, t_arg *arg)
+void				op_lldi(t_vm *vm, t_car *car, t_arg *arg)
 {
-	int8_t args;
-	int32_t sum;
-	int32_t pos;
-	int32_t value;
-	int32_t reg3;
-	
+	int8_t			args;
+	int32_t			sum;
+	int32_t			pos;
+	int32_t			value;
+	int32_t			reg3;
+
 	(void)arg->first;
 	car->step = 2;
 	args = vm->arena[(car->position + 1) % MEM_SIZE];

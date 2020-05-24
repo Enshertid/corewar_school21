@@ -21,7 +21,8 @@
 
 static void		init_players(t_players *players)
 {
-	players->arr = ft_calloc(MAX_PLAYERS, sizeof(t_player*));
+	if (!(players->arr = ft_calloc(MAX_PLAYERS, sizeof(t_player*))))
+		ft_error("error in malloc", "init_players", 3);
 	players->dump_num = -1;
 	players->size = MAX_PLAYERS;
 	players->debug_mode = false;

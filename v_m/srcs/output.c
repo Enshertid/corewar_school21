@@ -6,16 +6,16 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 14:16:15 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/24 14:16:17 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/24 16:46:33 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void 	print_addr(int i)
+static void			print_addr(int i)
 {
-	char 			*str;
-	
+	char			*str;
+
 	str = "0123456789abcdef";
 	write(1, "0x", 2);
 	write(1, &str[((i >> 8) / 16) % 16], 1);
@@ -25,13 +25,13 @@ static void 	print_addr(int i)
 	write(1, " : ", 3);
 }
 
-void			print_arena(const void *arena, size_t size)
+void				print_arena(const void *arena, size_t size)
 {
 	size_t			i;
-	size_t 			j;
+	size_t			j;
 	unsigned char	*p;
-	char 			*str;
-	
+	char			*str;
+
 	str = "0123456789abcdef";
 	p = (unsigned char *)arena;
 	i = 0;
@@ -41,7 +41,7 @@ void			print_arena(const void *arena, size_t size)
 		j = 0;
 		while (j < 64 && i + j < size)
 		{
-			write(1, &str[(*(p + i + j)/16) % 16], 1);
+			write(1, &str[(*(p + i + j) / 16) % 16], 1);
 			write(1, &str[*(p + i + j) % 16], 1);
 			write(1, " ", 1);
 			j++;
@@ -50,4 +50,3 @@ void			print_arena(const void *arena, size_t size)
 		i += 64;
 	}
 }
-
