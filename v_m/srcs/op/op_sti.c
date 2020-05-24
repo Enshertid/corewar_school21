@@ -54,5 +54,5 @@ void			op_sti(t_vm *vm, t_car *car, t_arg *arg)
 	arg->first = arg->first == DIR ? DIR / 2 : arg->first;
 	arg->sec_d = arg->sec_d == DIR ? DIR / 2 : arg->sec_d;
 	arg->third = arg->third == DIR ? DIR / 2 : arg->third;
-	change_position(vm, car, arg, THREE);
+	change_position(car, arg, THREE);
 }

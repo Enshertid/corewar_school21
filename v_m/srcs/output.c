@@ -12,7 +12,20 @@
 
 #include "corewar.h"
 
-void		print_arena(const void *arena, size_t size)
+static void 	print_addr(int i)
+{
+	char 			*str;
+	
+	str = "0123456789abcdef";
+	write(1, "0x", 2);
+	write(1, &str[((i >> 8) / 16) % 16], 1);
+	write(1, &str[(i >> 8) % 16], 1);
+	write(1, &str[(i / 16) % 16], 1);
+	write(1, &str[i % 16], 1);
+	write(1, " : ", 3);
+}
+
+void			print_arena(const void *arena, size_t size)
 {
 	size_t			i;
 	size_t 			j;
@@ -24,13 +37,8 @@ void		print_arena(const void *arena, size_t size)
 	i = 0;
 	while (i < size)
 	{
+		print_addr(i);
 		j = 0;
-		write(1, "0x", 2);
-		write(1, &str[((i >> 8) / 16) % 16], 1);
-		write(1, &str[(i >> 8) % 16], 1);
-		write(1, &str[(i / 16) % 16], 1);
-		write(1, &str[i % 16], 1);
-		write(1, " : ", 3);
 		while (j < 64 && i + j < size)
 		{
 			write(1, &str[(*(p + i + j)/16) % 16], 1);
@@ -42,3 +50,4 @@ void		print_arena(const void *arena, size_t size)
 		i += 64;
 	}
 }
+

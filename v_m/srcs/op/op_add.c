@@ -20,5 +20,5 @@ void			op_add(t_vm *vm, t_car *car, t_arg *arg)
 	arg->third = determine_arg(vm->arena[get_pos(car, car->step)], 2);
 	if (arg->first == REG && arg->sec_d == REG && arg->third == REG)
 		write_to_reg_a_s(vm, car, arg, PLUS);
-	change_position(vm, car, arg, THREE);
+	change_position(car, arg, THREE);
 }

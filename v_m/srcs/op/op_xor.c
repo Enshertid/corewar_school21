@@ -28,5 +28,5 @@ void 		op_xor(t_vm *vm, t_car *car, t_arg *arg)
 			value = arg->first_val ^ arg->sec_d_val;
 			write_to_reg(vm, car, value, arg->third);
 		}
-	change_position(vm, car, arg, THREE);
+	change_position(car, arg, THREE);
 }

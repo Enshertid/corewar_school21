@@ -82,7 +82,7 @@ int32_t				get_new_pos(int32_t position, int32_t step);
 bool				get_arg_dir_four(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg);
 bool				get_arg_dir_two(t_vm *vm, t_car *car, int8_t *sw_arg,
 		int32_t *arg);
-void				change_position(t_vm *vm, t_car *car, t_arg *args, int8_t type);
+void				change_position(t_car *car, t_arg *args, int8_t type);
 void				write_to_reg_a_s(t_vm *vm, t_car *car, t_arg *arg, int8_t type);
 bool				check_reg(t_vm *vm, t_car *car, int8_t byte, int32_t *arg);
 void				write_to_reg(t_vm *vm, t_car *car, int32_t result, int8_t

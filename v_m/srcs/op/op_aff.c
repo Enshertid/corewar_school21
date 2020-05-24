@@ -31,5 +31,5 @@ void 		op_aff(t_vm *vm, t_car *car, t_arg *arg)
 			write(1, "\n", 1);
 		}
 	}
-	change_position(vm, car, arg, ONE);
+	change_position(car, arg, ONE);
 }

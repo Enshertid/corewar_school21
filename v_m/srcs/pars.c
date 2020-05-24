@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 14:19:28 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/24 14:19:29 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/24 15:17:21 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool			valid_aff(t_pars *pars, t_players *players)
 {
 	pars->i++;
-	if (!players->aff)
+	if (players->aff == false)
 		players->aff = true;
 	else
 		ft_error("second aff flag", "valid aff", 2);
@@ -24,8 +24,8 @@ static bool			valid_aff(t_pars *pars, t_players *players)
 
 static void			finish_players(t_players *players, int8_t new_size)
 {
-	t_player	**new_array;
-	
+	t_player		**new_array;
+
 	players->iter = 0;
 	players->size = new_size;
 	new_array = ft_calloc(new_size, sizeof(t_player*));
@@ -49,7 +49,7 @@ static void			init_pars(t_pars *pars, int ac, char **av)
 void				parsing(t_players *players, int ac, char **av)
 {
 	t_pars		pars;
-	
+
 	init_pars(&pars, ac, av);
 	if (pars.ac < 2)
 		ft_error("Have no champions", NULL, 1);
@@ -57,7 +57,7 @@ void				parsing(t_players *players, int ac, char **av)
 		ft_error("To many arguments", NULL, 1);
 	while (pars.i < pars.ac)
 	{
-		if (ft_strequ(pars.av[pars.i], "-d") && valid_dump(&pars, players))
+		if (ft_strequ(pars.av[pars.i], "-dump") && valid_dump(&pars, players))
 			continue ;
 		if (ft_strequ(pars.av[pars.i], "-a") && valid_aff(&pars, players))
 			continue ;

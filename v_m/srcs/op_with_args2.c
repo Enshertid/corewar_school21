@@ -6,14 +6,14 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 21:28:51 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/21 21:37:09 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/24 14:21:36 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "vm.h"
 
-int 		check_arg(uint8_t arg)
+int				check_arg(uint8_t arg)
 {
 	arg = (arg >> 6) & 0x03;
 	if ((uint8_t)0x01 == arg)
@@ -25,10 +25,10 @@ int 		check_arg(uint8_t arg)
 	return (0);
 }
 
-int 		get_arg_n(t_vm *vm, t_car *car, int8_t args)
+int				get_arg_n(t_vm *vm, t_car *car, int8_t args)
 {
-	int32_t res;
-	int32_t value;
+	int32_t		res;
+	int32_t		value;
 
 	res = 0;
 	if (check_arg(args) == REG_CODE)
@@ -51,11 +51,10 @@ int 		get_arg_n(t_vm *vm, t_car *car, int8_t args)
 	return (res);
 }
 
-
-int 		get_arg_step(int args, int num, int dir_size)
+int				get_arg_step(int args, int num, int dir_size)
 {
-	int sum;
-	int bit;
+	int			sum;
+	int			bit;
 
 	sum = 1;
 	bit = 0;
@@ -72,13 +71,13 @@ int 		get_arg_step(int args, int num, int dir_size)
 	return (++sum);
 }
 
-bool 		valid_args(t_vm *vm, t_car *car, int8_t args)
+bool			valid_args(t_vm *vm, t_car *car, int8_t args)
 {
-	bool res;
-	int8_t arg1;
-	int8_t arg2;
-	int8_t arg3;
-	
+	bool		res;
+	int8_t		arg1;
+	int8_t		arg2;
+	int8_t		arg3;
+
 	arg1 = check_arg(args);
 	arg2 = check_arg(args << 2);
 	arg3 = check_arg(args << 4);
@@ -93,5 +92,5 @@ bool 		valid_args(t_vm *vm, t_car *car, int8_t args)
 	if (arg3 == REG_CODE && invalid_reg(vm, car, args, 2))
 		res = false;
 	car->step = 2;
-	return(res);
+	return (res);
 }
