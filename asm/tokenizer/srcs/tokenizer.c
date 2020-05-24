@@ -11,14 +11,11 @@ static bool	useless_line(const char *line)
 		return (false);
 }
 
-t_vector_token		line_to_tokens(const char *line, t_validation	*validation)
-//t_vector_token		line_to_tokens(t_vector_char *lines, int *line_index, t_validation	*validation)
+t_vector_token		line_to_tokens(const char *line, t_validation *validation)
 {
 	t_vector_token	tokens;
 	t_token			token;
-//	const char 		*line;
 
-//	line = lines[*line_index];
 	tokens = vec_create(8, sizeof(t_token));
 	if (useless_line(line) == true)
 	{

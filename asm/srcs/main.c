@@ -15,15 +15,13 @@ static void	check_op_h(void)
 		ft_error("LABEL CHAR exist in LABEL_CHARS", "check_op_h", 0);
 }
 
-int			main(int argc, const char * const *argv)
+int			main(int argc, const char *const *argv)
 {
 	if (argc > 1)
 	{
 		check_op_h();
 		if (ft_validation(argv) == 0)
-		{
-			exit (0);
-		}
+			exit(0);
 	}
 	else
 		usage();

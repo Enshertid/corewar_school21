@@ -20,7 +20,17 @@ static void	skip_unknown_token(const char **lineptr)
 		line += 1;
 	*lineptr = line;
 }
-#include <stdio.h> // DELETE
+
+void		ft_mark_error_token(t_token *token, t_validation *val)
+{
+	token->type = UNKNOWN;
+	token->value = NULL;
+	val->error = 1;
+	if (val->dbl_c == 0 && val->dbl_n == 0)
+		warning_add(ERROR, 3, "syntax error in line №",
+				ft_itoa_static(*val->line_index + 1, 10), ".");
+}
+
 t_token		token_determinator(const char **lineptr, t_validation *validation)
 {
 	t_token	token;
@@ -42,14 +52,7 @@ t_token		token_determinator(const char **lineptr, t_validation *validation)
 		token_determined = is_comment(lineptr, &token, validation);
 	if (!token_determined)
 	{
-		token.type = UNKNOWN;
-		token.value = NULL;
-		validation->error = 1;
-		if (validation->dbl_c == 0 && validation->dbl_n == 0)
-		{
-			warning_add(ERROR, 3, "syntax error in line №", ft_itoa_static(*validation->line_index + 1, 10), ".");
-//			printf("s:%s\n", *lineptr);
-		}
+		ft_mark_error_token(&token, validation);
 		skip_unknown_token(lineptr);
 	}
 	return (token);

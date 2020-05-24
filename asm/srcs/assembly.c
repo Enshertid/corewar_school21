@@ -32,12 +32,8 @@ static void	free_file(t_file *file)
 	line = 0;
 	while (line < lines_amount)
 	{
-//		printf("line before free: %s\n", file->lines[line]);
-		if (file->lines[line][0] != '\0') // иначе фришится то, что не замолочено (.name / .comment == '\0')
-		{
-//			printf("freed line:%s\n", file->lines[line]);
+		if (file->lines[line][0] != '\0')
 			free(file->lines[line]);
-		}
 		line += 1;
 	}
 	vec_destroy(&file->lines);
@@ -45,7 +41,6 @@ static void	free_file(t_file *file)
 	while (token_line < tokens_amount)
 	{
 		for (int i = 0; i < vec_size(&file->tokens[token_line]); ++i) {
-//			printf("value before free:%s\n", file->tokens[token_line][i].value);
 			free(file->tokens[token_line][i].value);
 		}
 		vec_destroy(&file->tokens[token_line]);
@@ -122,14 +117,11 @@ void		assembly(t_file *file, t_validation	*validation)
 		error_handle(file, validation);
 	else
 	{
-//		printf("1.line[0]:%s\n", file->lines[0]);
 		file->tokens = tokenizer(file->lines, validation);
-//		printf("2.line[0]:%s\n", file->lines[0]);
-		print(file->lines, file->tokens);
 		ft_check_labels(file->tokens, validation);
 		ft_check_sizes(file->tokens, validation);
 		ft_check_instructions(file->tokens, validation);
-//		print(file->lines, file->tokens);
+		print(file->lines, file->tokens); // УДАЛИТЬ
 		// tokens_analysis(file);
 //		if (file->status == FILE_OK)
 //		{
