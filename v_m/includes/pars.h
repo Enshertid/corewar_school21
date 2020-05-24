@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef PARS_H
+# define PARS_H
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include "players.h"
-#include "libft.h"
-#include "op.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include "players.h"
+# include "libft.h"
+# include "op.h"
 
 # define DUMP 2
 

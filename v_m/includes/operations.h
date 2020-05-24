@@ -6,7 +6,7 @@
 /*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 12:35:44 by enshertid         #+#    #+#             */
-/*   Updated: 2020/05/24 12:35:44 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/05/24 17:12:31 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@
 # define TWO 2
 # define THREE 3
 
-# define OP_NUM 16
+# include "libft.h"
+# include "carriages.h"
+# include <stdio.h>
 
-#include "libft.h"
-#include "carriages.h"
-#include <stdio.h>
-
-typedef struct		s_vm t_vm;
+typedef struct s_vm	t_vm;
 
 typedef struct		s_arg
 {
@@ -69,35 +67,34 @@ void				op_lldi(t_vm *vm, t_car *car, t_arg *arg);
 void				op_lfork(t_vm *vm, t_car *car, t_arg *arg);
 void				op_aff(t_vm *vm, t_car *car, t_arg *arg);
 
-
-int					determine_arg(unsigned char byte, unsigned int index);
-void				set_array_of_operations(t_vm *vm);
-void				set_array_of_cycles_to_op(t_vm *vm);
-
 unsigned char		read_byte(t_vm *vm, int position);
 int16_t				read_two_bytes(t_vm *vm, int position);
 int32_t				read_four_bytes(t_vm *vm, int position);
-int32_t				get_new_pos(int32_t position, int32_t step);
 
-bool				get_arg_dir_four(t_vm *vm, t_car *car, int8_t sw_arg, int32_t *arg);
+bool				get_arg_dir_four(t_vm *vm, t_car *car, int8_t sw_arg,
+																int32_t *arg);
 bool				get_arg_dir_two(t_vm *vm, t_car *car, int8_t *sw_arg,
-		int32_t *arg);
-void				change_position(t_car *car, t_arg *args, int8_t type);
-void				write_to_reg_a_s(t_vm *vm, t_car *car, t_arg *arg, int8_t type);
+																int32_t *arg);
 bool				check_reg(t_vm *vm, t_car *car, int8_t byte, int32_t *arg);
-void				write_to_reg(t_vm *vm, t_car *car, int32_t result, int8_t
-third);
-void				write_reg_to_arena(t_vm *vm, int value, int position);
+bool				valid_args(t_vm *vm, t_car *car, int8_t args);
+bool				invalid_reg(t_vm *vm, t_car *car, int8_t args, int num);
 
-int 				check_arg(uint8_t arg);
-int 				get_arg_n(t_vm *vm, t_car *car, int8_t args);
-void		 		set_reg(t_car *car, int8_t reg, int32_t value, bool edit_carry);
-int 				get_arg_step(int args, int num, int dir_size);
-bool 				valid_args(t_vm *vm, t_car *car, int8_t args);
-// bool 				valid_args2(t_vm *vm, t_car *car, int8_t args);
-bool		 		invalid_reg(t_vm *vm, t_car *car, int8_t args, int num);
-int 				get_idx(int position);
-bool			 	valid_args2(t_vm *vm, t_car *car, int8_t args);
-int			 		get_pos(t_car *car, int pos);
+void				write_to_reg(t_vm *vm, t_car *car, int32_t result,
+																int8_t third);
+void				write_reg_to_arena(t_vm *vm, int value, int position);
+void				set_reg(t_car *car, int8_t reg, int32_t value,
+															bool edit_carry);
+void				change_position(t_car *car, t_arg *args, int8_t type);
+void				write_to_reg_a_s(t_vm *vm, t_car *car, t_arg *arg,
+																int8_t type);
+void				set_array_of_operations(t_vm *vm);
+void				set_array_of_cycles_to_op(t_vm *vm);
+
+int					check_arg(uint8_t arg);
+int					get_arg_n(t_vm *vm, t_car *car, int8_t args);
+int					get_arg_step(int args, int num, int dir_size);
+int					get_idx(int position);
+int					get_pos(t_car *car, int pos);
+int					determine_arg(unsigned char byte, unsigned int index);
 
 #endif

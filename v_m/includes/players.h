@@ -1,4 +1,4 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   players.h                                          :+:      :+:    :+:   */
@@ -13,7 +13,7 @@
 #ifndef PLAYERS_H
 # define PLAYERS_H
 
-#include "libft.h"
+# include "libft.h"
 
 typedef struct			s_player
 {
@@ -23,7 +23,6 @@ typedef struct			s_player
 	int					id;
 	bool				flag_of_n;
 	size_t				ex_size;
-	size_t 				live;
 }						t_player;
 
 typedef struct			s_players
@@ -33,7 +32,6 @@ typedef struct			s_players
 	int8_t				iter;
 	int32_t				dump_num;
 	bool				aff;
-	bool				debug_mode;
 }						t_players;
 
 #endif

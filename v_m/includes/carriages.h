@@ -6,29 +6,23 @@
 /*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 12:35:57 by enshertid         #+#    #+#             */
-/*   Updated: 2020/05/24 12:35:57 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/05/24 17:05:56 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COREWAR_CARETS_H
-# define COREWAR_CARETS_H
+#ifndef CARRIAGES_H
+# define CARRIAGES_H
 
-#include "libft.h"
-#include "op.h"
+# include "libft.h"
+# include "op.h"
 
 # define OP_BYTE 1
 
-#if (REG_SIZE == 4)
-	typedef int32_t reg_type;
-#elif (REG_SIZE == 2)
-	typedef int16_t reg_type;
-#elif (REG_SIZE == 8)
-	typedef int64_t reg_type;
-#endif
+typedef int32_t			t_reg_type;
 
-typedef struct s_vm t_vm;
+typedef struct s_vm		t_vm;
 
-typedef struct 			s_car
+typedef struct			s_car
 {
 	int32_t				id;
 	int8_t				code;
@@ -37,19 +31,20 @@ typedef struct 			s_car
 	int32_t				position;
 	int32_t				last_live_cycle;
 	int32_t				cycle_to_action;
-	reg_type			registers[REG_NUMBER];
+	t_reg_type			registers[REG_NUMBER];
 	struct s_car		*next;
 	struct s_car		*prev;
 }						t_car;
 
-t_car			*delete_from_begin(t_car **head, t_car *cur_car);
-t_car			*delete_from_end(t_car *cur_car);
-t_car			*delete_from_body(t_car *cur_car);
-t_car			*try_to_kill_the_carret(t_vm *vm, t_car **head, t_car *cur_car,
-													int cycle_to_die);
-t_car			*create_caret(int position_on_arena, int id);
-t_car			*copy_caret(t_car *parent, int32_t position, int32_t id);
+t_car					*delete_from_begin(t_car **head, t_car *cur_car);
+t_car					*delete_from_end(t_car *cur_car);
+t_car					*delete_from_body(t_car *cur_car);
+t_car					*try_to_kill_the_carret(t_vm *vm, t_car **head,
+											t_car *cur_car, int cycle_to_die);
+t_car					*create_caret(int position_on_arena, int id);
+t_car					*copy_caret(t_car *parent, int32_t position,
+																int32_t id);
 
-void			add_caret(t_car **head, t_car *new_node);
+void					add_caret(t_car **head, t_car *new_node);
 
 #endif
