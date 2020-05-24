@@ -38,6 +38,6 @@ typedef struct		s_vm
 }					t_vm;
 
 void		print_arena(const void *arena, size_t size);
-void		copy_excode(t_vm *vm, t_players *players);
+void	 	init_vm(t_vm *vm, t_players *players);
 
 #endif

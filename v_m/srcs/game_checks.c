@@ -1,6 +1,14 @@
-//
-// Created by Daniil&Ekaterina Naumenko on 05/05/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_checks.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/24 12:30:59 by enshertid         #+#    #+#             */
+/*   Updated: 2020/05/24 13:02:29 by enshertid        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "game.h"
 #include "carriages.h"
@@ -8,8 +16,8 @@
 
 bool			check_live(t_vm *vm)
 {
-	t_car *tmp;
-	
+	t_car		*tmp;
+
 	vm->count_checks++;
 	tmp = vm->carriages;
 	while (tmp)
@@ -37,5 +45,5 @@ t_car			*check_caret(t_vm *vm, t_car *caret)
 	}
 	else if (!(--caret->cycle_to_action))
 		vm->operations.func[caret->code](vm, caret, &vm->operations.arg);
-	return(caret->next);
+	return (caret->next);
 }

@@ -1,8 +1,16 @@
-//
-// Created by Daniil&Ekaterina Naumenko on 01/05/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   carets_op_delete.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/24 12:32:14 by enshertid         #+#    #+#             */
+/*   Updated: 2020/05/24 12:54:37 by enshertid        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <vm.h>
-#include "stdio.h"
 #include "carriages.h"
 
 t_car			*delete_from_end(t_car *cur_car)
@@ -27,23 +35,23 @@ t_car			*delete_from_begin(t_car **head, t_car *cur_car)
 		cur_car = NULL;
 		*head = NULL;
 	}
-	return cur_car;
+	return (cur_car);
 }
 
 t_car			*delete_from_body(t_car *cur_car)
 {
 	t_car			*tmp;
-	
+
 	tmp = cur_car;
 	cur_car = cur_car->next;
 	cur_car->prev = tmp->prev;
 	cur_car->prev->next = cur_car;
 	free(tmp);
-	return cur_car;
+	return (cur_car);
 }
 
 t_car			*try_to_kill_the_carret(t_vm *vm, t_car **head, t_car *cur_car,
-										 int cycle_to_die)
+															int cycle_to_die)
 {
 	if (cur_car->last_live_cycle >= cycle_to_die)
 	{

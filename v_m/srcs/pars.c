@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/02 19:21:59 by enshertid         #+#    #+#             */
-/*   Updated: 2020/05/22 22:58:13 by ediego           ###   ########.fr       */
+/*   Created: 2020/05/24 12:28:11 by enshertid         #+#    #+#             */
+/*   Updated: 2020/05/24 12:28:11 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void				parsing(t_players *players, int ac, char **av)
 			continue ;
 		if (ft_strequ(pars.av[pars.i], "-a") && valid_aff(&pars, players))
 			continue ;
-		else if (ft_strequ(pars.av[pars.i], "-n"))
+		if (ft_strequ(pars.av[pars.i], "-n"))
 			valid_flag(&pars, players);
 		else
 			valid_name(&pars, players);
