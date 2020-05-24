@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 14:09:27 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/24 14:09:31 by ediego           ###   ########.fr       */
+/*   Updated: 2020/05/24 16:19:22 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void		init_players(t_players *players)
 		ft_error("error in malloc", "init_players", 3);
 	players->dump_num = -1;
 	players->size = MAX_PLAYERS;
-	players->debug_mode = false;
 }
 
 void			init_data(t_vm *vm, int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 18:45:07 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/24 16:37:43 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/05/24 17:33:14 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static void			ind_reg(t_vm *vm, t_car *car)
 	int8_t			reg;
 
 	ind = get_pos(car, (read_two_bytes(vm, (car->position + 2) % MEM_SIZE)));
-	// value = read_four_bytes(vm, ind); // original VM use read_two_bytes
-	value = read_two_bytes(vm, ind);// delete this and use upline
+	value = read_two_bytes(vm, ind);
 	reg = vm->arena[(car->position + 4) % MEM_SIZE];
 	if (reg > 0 && reg <= REG_NUMBER)
 		set_reg(car, reg, value, 1);
