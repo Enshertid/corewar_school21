@@ -35,6 +35,7 @@ void		ft_collect_labels(t_vector_token *t, char **labels, int *i,
 	int		col;
 	char	*line;
 
+	line = NULL;
 	row = 0;
 	while (row < vec_size(&t))
 	{
@@ -103,7 +104,7 @@ void		ft_parse_args(t_vector_token *t, int r, int *c, t_validation *val)
 		{
 			val->error = 1;
 			warning_add(ERROR, 3, "wrong tokens order in line №",
-						ft_itoa_static(row + 1, 10), ".");
+						ft_itoa_static(r + 1, 10), ".");
 			break ;
 		}
 	}
