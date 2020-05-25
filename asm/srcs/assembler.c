@@ -11,18 +11,6 @@ static bool			is_file_extension_correct(const char *file_name)
 	return (true);
 }
 
-static bool			is_dir(const char *filename)
-{
-	struct stat	statbuf;
-
-	if (stat(filename, &statbuf) != 0)
-		return (false);
-	if (S_ISDIR(statbuf.st_mode))
-		return (true);
-	else
-		return (false);
-}
-
 static inline void	file_reset(t_file *file)
 {
 	ft_memset(file, 0, sizeof(t_file));

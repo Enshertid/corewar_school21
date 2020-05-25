@@ -89,25 +89,6 @@ static void	error_handle(const t_file *file, t_validation	*val)
  	}
  }
 
-int	determine_args(uint8_t args_byte, uint8_t *first,
-					  uint8_t *second, uint8_t *third)
-{
-	const uint8_t first_arg = ((args_byte & 0b11000000) >> 6);
-	const uint8_t second_arg = ((args_byte & 0b00110000) >> 4);
-	const uint8_t third_arg = ((args_byte & 0b00001100) >> 2);
-
-	if (!first_arg)
-		return (0);
-	*first = first_arg;
-	if (!second_arg)
-		return (1);
-	*second = second_arg;
-	if (!third_arg)
-		return (2);
-	*third = third_arg;
-	return (3);
-}
-
 void		assembly(t_file *file, t_validation	*validation)
 {
 	t_vector_char *bytecode;
@@ -122,12 +103,11 @@ void		assembly(t_file *file, t_validation	*validation)
 		ft_check_sizes(file->tokens, validation);
 		ft_check_instructions(file->tokens, validation);
 		print(file->lines, file->tokens); // УДАЛИТЬ
-		// tokens_analysis(file);
-//		if (file->status == FILE_OK)
-//		{
-//			bytecode = convert_to_bytecode(file->tokens);
-//			write_to_file(file, bytecode, file->tokens);
-//		}
+		if (!ft_any_error(validation))
+		{
+			bytecode = convert_to_bytecode(file->tokens);
+			write_to_file(file, bytecode);
+		}
 
 	}
 	free_file(file);

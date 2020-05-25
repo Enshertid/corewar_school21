@@ -1,7 +1,7 @@
 #ifndef FILE_H
 # define FILE_H
 
-#include "../tokenizer/includes/token.h"
+#include "token.h"
 
 enum	e_file_status
 {
