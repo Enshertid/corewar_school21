@@ -13,13 +13,14 @@
 #ifndef BYTE_TOKEN_H
 # define BYTE_TOKEN_H
 
+# include <stdint.h>
 # include "token.h"
 
 typedef struct			s_byte_token
 {
 	const t_token		*token;
-	int32_t			value;
-	short				value_size;
+	int32_t				value;
+	int					value_size;
 }						t_byte_token;
 
 typedef t_byte_token*	t_vector_bytetoken;

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_jumps.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/25 22:31:16 by user              #+#    #+#             */
+/*   Updated: 2020/05/25 22:32:59 by user             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "byte_tokenizer_utils.h"
 
-static
-const t_label *find_label(const char *label_name, const t_vector_label labels)
+static const t_label	*find_label(const char *label_name,
+									t_vector_label labels)
 {
-	const int	labels_count = vec_size((t_vector)&labels);
+	const int	labels_count = vec_size(&labels);
 	int			cur_label;
 
 	cur_label = 0;
@@ -13,14 +25,10 @@ const t_label *find_label(const char *label_name, const t_vector_label labels)
 			return (&labels[cur_label]);
 		cur_label += 1;
 	}
-	return (NULL);	// never used
+	return (NULL);
 }
 
-/*
- * returns label name if arg is link to the label, else returns NULL
- */
-static
-const char	*is_label_link(const t_token *arg)
+static const char		*is_label_link(const t_token *arg)
 {
 	int pos;
 
@@ -29,14 +37,13 @@ const char	*is_label_link(const t_token *arg)
 	else
 		pos = 0;
 	if (arg->value[pos] == LABEL_CHAR)
-		return (arg->value + pos + 1); // skips DIRECT_CHAR and LABEL_CHAR
+		return (arg->value + pos + 1);
 	else
 		return (NULL);
 }
 
-static
-void		fill_label_links(t_byteline *byteline,
-							const t_vector_label labels)
+static void				fill_label_links(t_byteline *byteline,
+										t_vector_label labels)
 {
 	const int		tokens_count = vec_size(&byteline->bytetokens);
 	int				cur_token;
@@ -60,8 +67,8 @@ void		fill_label_links(t_byteline *byteline,
 	}
 }
 
-void			fill_jumps(t_vector_byteline bytelines,
-							t_vector_label labels)
+void					fill_jumps(t_vector_byteline bytelines,
+									t_vector_label labels)
 {
 	const int	lines_count = vec_size(&bytelines);
 	int			line;

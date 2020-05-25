@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/25 22:39:22 by user              #+#    #+#             */
+/*   Updated: 2020/05/25 22:39:30 by user             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TOKEN_H
 # define TOKEN_H
 
- # include "libft.h"
- # include "op.h"
- # include "valid.h"
+# include "libft.h"
+# include "op.h"
+# include "valid.h"
 
 enum	e_token_types
 {
@@ -24,9 +36,9 @@ typedef struct			s_token
 
 }						t_token;
 
-typedef	t_token*	t_vector_token;
+typedef	t_token*		t_vector_token;
 
-t_vector_token	*tokenizer(t_vector_char *lines, t_validation *validation);
-t_token			token_create(const char *str, size_t *symbols_skip);
+t_vector_token			*tokenizer(t_vector_char *lines,
+									t_validation *validation);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/25 12:59:07 by user              #+#    #+#             */
-/*   Updated: 2020/04/25 13:51:51 by user             ###   ########.fr       */
+/*   Updated: 2020/05/25 22:27:12 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ bool	is_label(const char **lineptr, t_token *token)
 		name_exist = true;
 		++line;
 	}
-	// while (*line == ' ' || *line == '\t')
-	// 	++line;
 	if (name_exist && *line == LABEL_CHAR)
 	{
 		token->type = LABEL;

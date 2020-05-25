@@ -1,4 +1,4 @@
-;/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   byte_tokenizer.h                                   :+:      :+:    :+:   */
@@ -13,8 +13,9 @@
 #ifndef BYTE_TOKENIZER_H
 # define BYTE_TOKENIZER_H
 
+# include "token.h"
 # include "byteline.h"
 
-t_vector_byteline	byte_tokenizer(const t_vector_token *tokens);
+t_vector_byteline	byte_tokenizer(t_vector_token *tokens);
 
 #endif

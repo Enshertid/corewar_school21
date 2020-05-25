@@ -1,17 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write_to_file.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/25 22:21:27 by user              #+#    #+#             */
+/*   Updated: 2020/05/25 22:24:14 by user             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <unistd.h>
-//#include "op.h"
-                   #include <stdio.h>
-
 #include "assembler.h"
 
-static
-char 		*build_cor_name(const char *s_name)
+static char			*build_cor_name(const char *s_name)
 {
 	const size_t	s_len = ft_strlen(s_name);
 	const char		*dot_pos = ft_memrchr(s_name, '.', s_len);
 	size_t			cor_len;
-	char 			*cor_name;
+	char			*cor_name;
 
 	if (dot_pos == NULL)
 		cor_len = s_len + 4;
@@ -31,7 +39,7 @@ char 		*build_cor_name(const char *s_name)
 	return (cor_name);
 }
 
-static int	count_exec_code_size(const t_vector_char *bytecode)
+static int			count_exec_code_size(t_vector_char *bytecode)
 {
 	const int	lines = vec_size(&bytecode);
 	int			line;
@@ -41,13 +49,13 @@ static int	count_exec_code_size(const t_vector_char *bytecode)
 	line = 0;
 	while (line < lines)
 	{
-		size += vec_size((t_vector)&bytecode[line]);
+		size += vec_size(&bytecode[line]);
 		line += 1;
 	}
 	return (size);
 }
 
-static void	write_num(const int fd, int32_t num)
+static void			write_num(const int fd, int32_t num)
 {
 	if (bytes_order() == FT_LITTLE_ENDIAN)
 	{
@@ -65,17 +73,17 @@ static void	write_num(const int fd, int32_t num)
 	}
 }
 
-static void	write_name_comment(const int fd,
-								const t_file *file,
-								int exec_code_size)
+static void			write_name_comment(const int fd,
+										const t_file *file,
+										int exec_code_size)
 {
-	const char		*name = file->tokens[0][0].value;
-	size_t	name_len = ft_strlen(name);
-	const char		*comment = file->tokens[1][0].value;
-	size_t	comment_len = ft_strlen(comment);
+	const char	*name = file->tokens[0][0].value;
+	size_t		name_len;
+	const char	*comment = file->tokens[1][0].value;
+	size_t		comment_len;
 
-	printf("NAME: %s\nCOMMENT: %s\n", name, comment);
-
+	name_len = ft_strlen(name);
+	comment_len = ft_strlen(comment);
 	write_num(fd, COREWAR_EXEC_MAGIC);
 	write(fd, name, name_len);
 	if (name_len < PROG_NAME_LENGTH)
@@ -90,22 +98,10 @@ static void	write_name_comment(const int fd,
 	write_num(fd, 0);
 }
 
-static void	write_exec_code(const int fd, const t_vector_char *bytecode)
+void				write_to_file(const t_file *file, t_vector_char *bytecode)
 {
 	const int	lines = vec_size(&bytecode);
 	int			line;
-
-	line = 0;
-	while (line < lines)
-	{
-		write(fd, bytecode[line], vec_size((t_vector)&bytecode[line]));
-		line += 1;
-	}
-}
-
-void		write_to_file(const t_file *file,
-						const t_vector_char *bytecode)
-{
 	const int	exec_code_size = count_exec_code_size(bytecode);
 	char		*cor_name;
 	int			fd;
@@ -115,7 +111,12 @@ void		write_to_file(const t_file *file,
 	if (fd > 0)
 	{
 		write_name_comment(fd, file, exec_code_size);
-		write_exec_code(fd, bytecode);
+		line = 0;
+		while (line < lines)
+		{
+			write(fd, bytecode[line], vec_size(&bytecode[line]));
+			line += 1;
+		}
 		close(fd);
 	}
 	else

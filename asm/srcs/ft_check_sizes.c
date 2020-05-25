@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_sizes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgroleo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/05/24 12:58:18 by jgroleo          ###   ########.fr       */
+/*   Updated: 2020/05/25 17:17:06 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ bool		is_empty(const char **str, t_token *token)
 	{
 		argument = true;
 		token->type = EMPTY;
-		token->value = ft_strndup("\0", 1);
+		token->value = ft_strdup("");
 		*str = *str + 1;
 		return (argument);
 	}

@@ -6,18 +6,14 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 19:18:18 by user              #+#    #+#             */
-/*   Updated: 2020/05/16 00:20:19 by user             ###   ########.fr       */
+/*   Updated: 2020/05/25 22:34:32 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-   #include <stdio.h>
 #include "libft.h"
 #include "byte_tokenizer.h"
 #include "converter_utils.h"
 #include "converter.h"
-
-
 
 static void		destroy_bytelines(t_vector_byteline lines)
 {
@@ -33,15 +29,13 @@ static void		destroy_bytelines(t_vector_byteline lines)
 	vec_destroy(&lines);
 }
 
-
-t_vector_char	*convert_to_bytecode(const t_vector_token *tokens)
+t_vector_char	*convert_to_bytecode(t_vector_token *tokens)
 {
 	t_vector_byteline	bytelines;
 	t_vector_char		*bytecode;
 
 	bytelines = byte_tokenizer(tokens);
 	bytecode = generate_bytecode(bytelines);
-	// print(bytecode);
 	destroy_bytelines(bytelines);
 	return (bytecode);
 }

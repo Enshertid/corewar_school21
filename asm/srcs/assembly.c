@@ -1,19 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   assembly.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/25 22:28:46 by user              #+#    #+#             */
+/*   Updated: 2020/05/25 22:32:01 by user             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "assembler.h"
 #include "converter.h"
 
-static void	read_file(t_file *file)
+static void		read_file(t_file *file)
 {
 	char	*line;
 	bool	final_newline_exist;
 
-	int i = 0;
 	file->lines = vec_create(80, sizeof(t_vector_char));
 	while ((gnl(file->fd, &line, &final_newline_exist)) == GNL_OK)
 	{
-		i += 1;
-//		if (useless_line(line))
-//			free(line);
-//		else
 		vec_pushback(&file->lines, &line);
 	}
 	if (vec_size(&file->lines) == 0)
@@ -22,12 +29,13 @@ static void	read_file(t_file *file)
 		file->status = FILE_NO_FINAL_NEWLINE;
 }
 
-static void	free_file(t_file *file)
+static void		free_file(t_file *file)
 {
 	const size_t	lines_amount = vec_size(&file->lines);
 	const size_t	tokens_amount = vec_size(&file->tokens);
 	size_t			line;
 	size_t			token_line;
+	int				i;
 
 	line = 0;
 	while (line < lines_amount)
@@ -40,16 +48,16 @@ static void	free_file(t_file *file)
 	token_line = 0;
 	while (token_line < tokens_amount)
 	{
-		for (int i = 0; i < vec_size(&file->tokens[token_line]); ++i) {
+		i = -1;
+		while (++i < vec_size(&file->tokens[token_line]))
 			free(file->tokens[token_line][i].value);
-		}
 		vec_destroy(&file->tokens[token_line]);
 		token_line += 1;
 	}
 	vec_destroy(&file->tokens);
 }
 
-static void	error_handle(const t_file *file, t_validation	*val)
+static void		error_handle(const t_file *file, t_validation *val)
 {
 	if (file->status == FILE_NO_FINAL_NEWLINE)
 	{
@@ -64,34 +72,50 @@ static void	error_handle(const t_file *file, t_validation	*val)
 	}
 }
 
- static void print(t_vector_char *lines, t_vector_token *tokens)
- {
- 	const char types[10][15] = {
- 		"LABEL",
- 		"INSTRUCTION",
- 		"ARGUMENT",
- 		"SEPARATOR",
- 		"NAME",
- 		"COMMENT",
- 		"UNKNOWN",
- 		"EMPTY"
- 	};
+/*
+** static void print(t_vector_char *lines, t_vector_token *tokens)
+** {
+** 	const char types[10][15] = {
+** 		"LABEL",
+** 		"INSTRUCTION",
+** 		"ARGUMENT",
+** 		"SEPARATOR",
+** 		"NAME",
+** 		"COMMENT",
+** 		"UNKNOWN",
+** 		"EMPTY"
+** 	};
+**
+** 	for (int row = 0; row < vec_size(&tokens); ++row)
+** 	{
+** 		printf("Line %d: %s\n", row, lines[row]);
+** 		printf("Tokens:\n");
+** 		for (int col = 0; col < vec_size(&tokens[row]); ++col) {
+** 			printf("\tType: %s, value: \"%s\"\n", types[tokens[row][col].type],
+** 											tokens[row][col].value);
+** 		}
+** 		printf("\n");
+** 	}
+** }
+*/
 
- 	for (int row = 0; row < vec_size(&tokens); ++row)
- 	{
- 		printf("Line %d: %s\n", row, lines[row]);
- 		printf("Tokens:\n");
- 		for (int col = 0; col < vec_size(&tokens[row]); ++col) {
- 			printf("\tType: %s, value: \"%s\"\n", types[tokens[row][col].type],
- 											tokens[row][col].value);
- 		}
- 		printf("\n");
- 	}
- }
+static void		destroy_bytecode(t_vector_char *bytecode)
+{
+	const int	lines = vec_size(&bytecode);
+	int			line;
 
-void		assembly(t_file *file, t_validation	*validation)
+	line = 0;
+	while (line < lines)
+	{
+		vec_destroy(&bytecode[line]);
+		line += 1;
+	}
+}
+
+void			assembly(t_file *file, t_validation *validation)
 {
 	t_vector_char *bytecode;
+
 	file->status = FILE_OK;
 	read_file(file);
 	if (file->status != FILE_OK)
@@ -102,13 +126,12 @@ void		assembly(t_file *file, t_validation	*validation)
 		ft_check_labels(file->tokens, validation);
 		ft_check_sizes(file->tokens, validation);
 		ft_check_instructions(file->tokens, validation);
-		print(file->lines, file->tokens); // УДАЛИТЬ
 		if (!ft_any_error(validation))
 		{
 			bytecode = convert_to_bytecode(file->tokens);
 			write_to_file(file, bytecode);
+			destroy_bytecode(bytecode);
 		}
-
 	}
 	free_file(file);
 }

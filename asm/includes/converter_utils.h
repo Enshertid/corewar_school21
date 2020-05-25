@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 14:16:39 by user              #+#    #+#             */
-/*   Updated: 2020/05/10 14:55:10 by user             ###   ########.fr       */
+/*   Updated: 2020/05/25 22:34:02 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "libft.h"
 # include "byteline.h"
 
-t_vector_char	*generate_bytecode(const t_vector_byteline bytelines);
+t_vector_char	*generate_bytecode(t_vector_byteline bytelines);
 
 #endif

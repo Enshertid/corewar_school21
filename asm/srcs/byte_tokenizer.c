@@ -1,12 +1,21 @@
-    #include <stdio.h>
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   byte_tokenizer.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/25 22:18:58 by user              #+#    #+#             */
+/*   Updated: 2020/05/25 22:30:50 by user             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "byte_tokenizer.h"
 #include "byte_tokenizer_utils.h"
 
-static int			byteline_lenght(const t_byteline *byteline)
+static int			byteline_lenght(t_byteline *byteline)
 {
-	const int	tokens_count = vec_size((t_vector)&byteline->bytetokens);
+	const int	tokens_count = vec_size(&byteline->bytetokens);
 	int			cur_token;
 	int			lenght;
 
@@ -22,17 +31,18 @@ static int			byteline_lenght(const t_byteline *byteline)
 
 static bool			add_byteline(t_vector_byteline *bytelines,
 								t_vector_label *labels_list,
-								const t_vector_token tokens,
+								t_vector_token tokens,
 								int bytes_before)
 {
-	const int	tokens_count = vec_size((t_vector)&tokens);
+	const int	tokens_count = vec_size(&tokens);
 	int			cur_token;
 	t_label		label;
 	t_byteline	byteline;
 
 	label.bytes_before = bytes_before;
 	cur_token = 0;
-	while (cur_token < tokens_count && tokens[cur_token].type == LABEL)
+	while (cur_token < tokens_count && (tokens[cur_token].type == LABEL ||
+										tokens[cur_token].type == EMPTY))
 	{
 		label.name = tokens[cur_token].value;
 		vec_pushback(labels_list, &label);
@@ -48,15 +58,7 @@ static bool			add_byteline(t_vector_byteline *bytelines,
 	return (true);
 }
 
-// static void print(t_vector_label labels)
-// {
-// 	for (int i = 0; i < vec_size(&labels); ++i) {
-// 		printf("NAME:  %s\n", labels[i].name);
-// 		printf("BYTES: %d\n", labels[i].bytes_before);
-// 	}
-// }
-
-t_vector_byteline	byte_tokenizer(const t_vector_token *tokens)
+t_vector_byteline	byte_tokenizer(t_vector_token *tokens)
 {
 	const int			lines_count = vec_size(&tokens);
 	int					line;
@@ -67,16 +69,14 @@ t_vector_byteline	byte_tokenizer(const t_vector_token *tokens)
 	bytelines = vec_create(lines_count, sizeof(t_byteline));
 	labels_list = vec_create(50, sizeof(t_label));
 	bytes_before = 0;
-	line = 2;		// cause 0 - name and 1 - comment
+	line = 2;
 	while (line < lines_count)
 	{
 		if (add_byteline(&bytelines, &labels_list, tokens[line], bytes_before))
 			bytes_before +=
 						byteline_lenght(&bytelines[vec_size(&bytelines) - 1]);
-		// printf("line %d ok\n", line);
 		line += 1;
 	}
-	// print(labels_list);
 	fill_jumps(bytelines, labels_list);
 	vec_destroy(&labels_list);
 	return (bytelines);

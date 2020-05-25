@@ -6,13 +6,13 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 14:16:14 by user              #+#    #+#             */
-/*   Updated: 2020/05/10 14:55:25 by user             ###   ########.fr       */
+/*   Updated: 2020/05/25 22:26:06 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "converter_utils.h"
 
-static int		count_byteline_len(const t_byte_token *tokens,
+static int		count_byteline_len(t_byte_token *tokens,
 									int tokens_count)
 {
 	int			token;
@@ -29,7 +29,7 @@ static int		count_byteline_len(const t_byte_token *tokens,
 }
 
 static void		big_gen(t_vector_char bytecode,
-						const t_byte_token *tokens,
+						t_byte_token *tokens,
 						int tokens_count)
 {
 	int			cur_token;
@@ -54,7 +54,7 @@ static void		big_gen(t_vector_char bytecode,
 }
 
 static void		lit_gen(t_vector_char bytecode,
-						const t_byte_token *tokens,
+						t_byte_token *tokens,
 						int tokens_count)
 {
 	int			cur_token;
@@ -78,7 +78,7 @@ static void		lit_gen(t_vector_char bytecode,
 	}
 }
 
-static char		*generate_line(const t_byte_token *tokens)
+static char		*generate_line(t_byte_token *tokens)
 {
 	const int	tokens_count = vec_size(&tokens);
 	const int	bytes = count_byteline_len(tokens, tokens_count);
@@ -93,38 +93,9 @@ static char		*generate_line(const t_byte_token *tokens)
 	return (bytecode);
 }
 
-
-//static char		*generate_line(const t_byte_token *tokens)
-//{
-//	const int	tokens_count = vec_size(&tokens);
-//	const int	bytes = count_byteline_len(tokens, tokens_count);
-//	char		*bytecode;
-//	char		*value_bytes;
-//	int			token;
-//	int pos = 0;
-//
-//	bytecode = vec_create(bytes, 1);
-//	vec_reserve(&bytecode, bytes);
-//	token = 0;
-//	while (token < tokens_count)
-//	{
-//		value_bytes = (char*)&tokens[token].value;
-//		if (tokens[token].value_size == 4)
-//		{
-//			bytecode[pos++] = value_bytes[3];
-//			bytecode[pos++] = value_bytes[2];
-//		}
-//		if (tokens[token].value_size > 1)
-//			bytecode[pos++] = value_bytes[1];
-//		bytecode[pos++] = value_bytes[0];
-//		token += 1;
-//	}
-//	return (bytecode);
-//}
-
-t_vector_char	*generate_bytecode(const t_vector_byteline bytelines)
+t_vector_char	*generate_bytecode(t_vector_byteline bytelines)
 {
-	const int		lines_count = vec_size((t_vector)&bytelines);
+	const int		lines_count = vec_size(&bytelines);
 	t_vector_char	*bytecode;
 	char			*bytecode_line;
 	int				line;

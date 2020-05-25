@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/05/25 13:22:51 by user             ###   ########.fr       */
+/*   Updated: 2020/05/25 22:46:01 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 # include "libft.h"
 # include "file.h"
 # include "valid.h"
-
-//  #include "op.h"
-// #include "token.h"
 
 void				assembler(const char *const *files,
 		t_validation *validation);
@@ -104,8 +101,7 @@ void				mark_c(const char **str, t_validation *v,
 void				ft_fill_value(t_token *token, t_validation *v);
 t_validation		*ft_create_val(void);
 int					ft_validation(const char *const *argv);
-void				write_to_file(const t_file *file,
-								const t_vector_char *bytecode);
+void				write_to_file(const t_file *file, t_vector_char *bytecode);
 int					ft_any_error(t_validation *val);
 
 #endif

@@ -1,20 +1,19 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   add_command.c                                      :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2020/05/08 19:53:05 by user              #+#    #+#             */
-// /*   Updated: 2020/05/09 14:59:10 by user             ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_command.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/08 19:53:05 by user              #+#    #+#             */
+/*   Updated: 2020/05/25 22:33:34 by user             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "byte_tokenizer_utils.h"
 #include "commands.h"
 
-static
-uint8_t		get_command_code(const char *command)
+static uint8_t	get_command_code(const char *command)
 {
 	int i;
 
@@ -28,8 +27,7 @@ uint8_t		get_command_code(const char *command)
 	return (g_commands_codes[i]);
 }
 
-static
-uint8_t		determine_arg(const t_token *arg)
+static uint8_t	determine_arg(const t_token *arg)
 {
 	if (arg->value[0] == DIRECT_CHAR)
 		return (DIR_CODE);
@@ -39,24 +37,23 @@ uint8_t		determine_arg(const t_token *arg)
 		return (IND_CODE);
 }
 
-static
-uint8_t		build_args_byte(t_vector_token const tokens, int pos)
+static uint8_t	build_args_byte(t_vector_token tokens, int pos)
 {
 	uint8_t	args_byte;
 
 	args_byte = 0;
 	args_byte |= ((determine_arg(tokens + pos)) << 6);
 	pos += 2;
-	if (pos < vec_size((t_vector)&tokens))
+	if (pos < vec_size(&tokens))
 		args_byte |= ((determine_arg(tokens + pos)) << 4);
 	pos += 2;
-	if (pos < vec_size((t_vector)&tokens))
+	if (pos < vec_size(&tokens))
 		args_byte |= ((determine_arg(tokens + pos)) << 2);
 	return (args_byte);
 }
 
-void		add_command(t_byteline *byteline,
-						const t_vector_token tokens, int pos)
+void			add_command(t_byteline *byteline,
+							t_vector_token tokens, int pos)
 {
 	const char		*command = tokens[pos].value;
 	t_byte_token	byte_token;

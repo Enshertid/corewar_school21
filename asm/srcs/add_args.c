@@ -6,13 +6,13 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 19:55:50 by user              #+#    #+#             */
-/*   Updated: 2020/05/10 17:53:45 by user             ###   ########.fr       */
+/*   Updated: 2020/05/25 22:35:18 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "byte_tokenizer_utils.h"
 
-static int	determine_dir_size(const char *command)
+static int			determine_dir_size(const char *command)
 {
 	if (ft_strequ(command, "ldi") || ft_strequ(command, "zjmp") ||
 		ft_strequ(command, "sti") || ft_strequ(command, "fork") ||
@@ -22,7 +22,7 @@ static int	determine_dir_size(const char *command)
 		return (4);
 }
 
-static uint8_t	determine_arg(const t_token *arg)
+static uint8_t		determine_arg(const t_token *arg)
 {
 	if (arg->value[0] == DIRECT_CHAR)
 		return (DIR_CODE);
@@ -32,7 +32,7 @@ static uint8_t	determine_arg(const t_token *arg)
 		return (IND_CODE);
 }
 
-static int32_t	get_arg_value(const t_token *arg)
+static int32_t		get_arg_value(const t_token *arg)
 {
 	int pos;
 
@@ -44,9 +44,9 @@ static int32_t	get_arg_value(const t_token *arg)
 	return (ft_atoi(arg->value + pos));
 }
 
-static t_byte_token	get_arg(const t_token *token, int dir_size)
+static t_byte_token	get_arg(t_token *token, int dir_size)
 {
-	const uint8_t		arg_type = determine_arg(token);
+	const uint8_t	arg_type = determine_arg(token);
 	t_byte_token	byte_token;
 
 	byte_token.token = token;
@@ -60,10 +60,10 @@ static t_byte_token	get_arg(const t_token *token, int dir_size)
 	return (byte_token);
 }
 
-void		add_args(t_byteline *byteline,
-					const t_vector_token tokens, int pos)
+void				add_args(t_byteline *byteline,
+							t_vector_token tokens, int pos)
 {
-	const int		tokens_count = vec_size((t_vector)&tokens);
+	const int		tokens_count = vec_size(&tokens);
 	const int		dir_size = determine_dir_size(tokens[pos].value);
 	t_byte_token	arg_token;
 	int				arg_num;

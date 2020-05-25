@@ -1,4 +1,15 @@
-#include <sys/stat.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   assembler.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/25 22:16:40 by user              #+#    #+#             */
+/*   Updated: 2020/05/25 22:36:42 by user             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "assembler.h"
 
 static bool			is_file_extension_correct(const char *file_name)
@@ -16,9 +27,10 @@ static inline void	file_reset(t_file *file)
 	ft_memset(file, 0, sizeof(t_file));
 }
 
-void				assembler(const char * const *files, t_validation *validation)
+void				assembler(const char *const *files,
+							t_validation *validation)
 {
-	t_file		file;
+	t_file	file;
 
 	while (*files)
 	{
@@ -27,8 +39,7 @@ void				assembler(const char * const *files, t_validation *validation)
 		else
 		{
 			file_reset(&file);
-			file.fd = open(*files, O_RDONLY);
-			if (file.fd >= 0)
+			if ((file.fd = open(*files, O_RDONLY)) >= 0)
 			{
 				file.name = *files;
 				if (is_file_extension_correct(*files) == false)
@@ -43,5 +54,5 @@ void				assembler(const char * const *files, t_validation *validation)
 			}
 		}
 		files += 1;
-	} // перенес варнинг на функцию выше
+	}
 }
