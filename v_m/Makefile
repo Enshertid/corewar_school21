@@ -6,7 +6,7 @@
 #    By: ediego <ediego@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/26 12:26:50 by ediego            #+#    #+#              #
-#    Updated: 2020/05/26 12:26:51 by ediego           ###   ########.fr        #
+#    Updated: 2020/05/26 12:28:59 by ediego           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,11 +52,11 @@ $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	# @make c -C $(LIB_DIR) -s
+	@make c -C $(LIB_DIR) -s
 
 fclean: clean
 	@rm -f $(NAME)
-	# @make f -C $(LIB_DIR) -s
+	@make f -C $(LIB_DIR) -s
 
 re: fclean all
 
