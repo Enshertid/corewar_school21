@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   op_aff.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediego  <ediego@student.42.fr>             +#+  +:+       +#+        */
+/*   By: ediego <ediego@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/02 18:47:13 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/24 16:21:42 by enshertid        ###   ########.fr       */
+/*   Created: 2020/05/26 12:14:10 by ediego            #+#    #+#             */
+/*   Updated: 2020/05/26 12:14:23 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "vm.h"
-#include "stdio.h"
 
 void				op_aff(t_vm *vm, t_car *car, t_arg *arg)
 {
