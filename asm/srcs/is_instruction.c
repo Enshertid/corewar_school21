@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/25 13:01:16 by user              #+#    #+#             */
-/*   Updated: 2020/05/25 22:38:30 by user             ###   ########.fr       */
+/*   Updated: 2020/05/27 16:16:34 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ bool	is_instruction(const char **lineptr, t_token *token, t_validation *val)
 	while (iter < 16)
 	{
 		if (ft_strnequ(line, g_instructions[iter],
-						g_instructions_lenghts[iter]) &&
-						ft_isspace(line[g_instructions_lenghts[iter]]))
+						g_instructions_lenghts[iter]))
 		{
 			validate(val, token, lineptr, iter);
 			return (true);

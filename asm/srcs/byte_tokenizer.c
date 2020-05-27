@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 22:18:58 by user              #+#    #+#             */
-/*   Updated: 2020/05/25 22:30:50 by user             ###   ########.fr       */
+/*   Updated: 2020/05/27 18:59:20 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ static bool			add_byteline(t_vector_byteline *bytelines,
 	label.bytes_before = bytes_before;
 	cur_token = 0;
 	while (cur_token < tokens_count && (tokens[cur_token].type == LABEL ||
-										tokens[cur_token].type == EMPTY))
+										tokens[cur_token].type == EMPTY ||
+										tokens[cur_token].type == NAME ||
+										tokens[cur_token].type == COMMENT))
 	{
 		label.name = tokens[cur_token].value;
 		vec_pushback(labels_list, &label);
@@ -69,7 +71,7 @@ t_vector_byteline	byte_tokenizer(t_vector_token *tokens)
 	bytelines = vec_create(lines_count, sizeof(t_byteline));
 	labels_list = vec_create(50, sizeof(t_label));
 	bytes_before = 0;
-	line = 2;
+	line = 0;
 	while (line < lines_count)
 	{
 		if (add_byteline(&bytelines, &labels_list, tokens[line], bytes_before))

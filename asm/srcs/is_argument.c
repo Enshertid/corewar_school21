@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/25 13:03:53 by user              #+#    #+#             */
-/*   Updated: 2020/05/25 22:24:47 by user             ###   ########.fr       */
+/*   Updated: 2020/05/27 16:22:58 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static bool	if_register_skip(const char **lineptr)
 
 	if (line[0] == 'r' && ft_isdigit(line[1]))
 	{
-		if (line[1] == '0')
-			return (false);
 		line += 1;
 		while (ft_isdigit(*line))
 			line += 1;

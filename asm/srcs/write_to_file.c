@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 22:21:27 by user              #+#    #+#             */
-/*   Updated: 2020/05/25 22:24:14 by user             ###   ########.fr       */
+/*   Updated: 2020/05/27 19:32:36 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,18 @@ static void			write_num(const int fd, int32_t num)
 	}
 }
 
+  #include <stdio.h>
+
 static void			write_name_comment(const int fd,
 										const t_file *file,
 										int exec_code_size)
 {
-	const char	*name = file->tokens[0][0].value;
+	const char	*name = find_name(file->tokens);
 	size_t		name_len;
-	const char	*comment = file->tokens[1][0].value;
+	const char	*comment = find_comment(file->tokens);
 	size_t		comment_len;
+
+	// printf("NAME: %s\nCOMMENT: %s\n", name, comment);
 
 	name_len = ft_strlen(name);
 	comment_len = ft_strlen(comment);
@@ -107,7 +111,7 @@ void				write_to_file(const t_file *file, t_vector_char *bytecode)
 	int			fd;
 
 	cor_name = build_cor_name(file->name);
-	fd = open(cor_name, O_CREAT | O_TRUNC | O_WRONLY, S_IRWXU);
+	fd = open(cor_name, O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR | S_IWUSR);
 	if (fd > 0)
 	{
 		write_name_comment(fd, file, exec_code_size);

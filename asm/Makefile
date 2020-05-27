@@ -27,7 +27,9 @@ SRCS =				add_args.c							\
 					main.c								\
 					token_determinator.c				\
 					tokenizer.c							\
-					write_to_file.c
+					write_to_file.c						\
+					free_file.c							\
+					finders.c
 
 
 

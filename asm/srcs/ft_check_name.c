@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_name.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgroleo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/05/24 12:58:18 by jgroleo          ###   ########.fr       */
+/*   Updated: 2020/05/27 13:55:29 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int		ft_check_n_string(t_validation *v)
 {
+	while (*(v->lines[*v->line_index]) == ' ' ||
+			*(v->lines[*v->line_index]) == '\t')
+		v->lines[*v->line_index]++;
 	if (ft_strncmp(v->lines[*v->line_index], NAME_CMD_STRING,
-			ft_strlen(NAME_CMD_STRING)) == 0 &&
-		(v->lines[*v->line_index][ft_strlen(NAME_CMD_STRING)] == ' '
-		|| v->lines[*v->line_index][ft_strlen(NAME_CMD_STRING)] == '\t'))
+			ft_strlen(NAME_CMD_STRING)) == 0)
 		return (1);
 	else
 		return (0);
@@ -79,7 +80,7 @@ bool	is_name(const char **str, t_token *token, t_validation *v)
 		if (ft_dbl_n(str, v) == 1)
 			return (argument);
 		token->value = 0;
-		v->lines[*v->line_index] += ft_strlen(NAME_CMD_STRING) + 1;
+		v->lines[*v->line_index] += ft_strlen(NAME_CMD_STRING);
 		while (*v->lines[*v->line_index] == ' ' ||
 		*v->lines[*v->line_index] == '\t')
 			v->lines[*v->line_index]++;

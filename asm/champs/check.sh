@@ -1,38 +1,34 @@
 #!/bin/bash
 
-folder="files"
-path="./$folder"
-array=($(ls $path | grep ".s$"))
+filesDir="files"
+myCors="myCors"
+origCors="origCors"
+asmFiles=($(ls $filesDir | grep ".s$"))
 
-validf="/home/user/aa/asm/champs/$folder/valid.txt"
-error="/home/user/aa/asm/champs/$folder/errors.txt"
 
-touch $validf
-touch $error
+mkdir $myCors
+mkdir $origCors
 
-# for ELEMENT in ${array[@]}
-# do
-# echo File: $ELEMENT.
-# done
 
-for FileToCheck in "${array[@]}"
+for file in "${asmFiles[@]}"
 do
-	need_check=$(cat $validf | grep "$FileToCheck" | wc -l)
-	if [ "$need_check" -eq "0" ]
-	then
-		echo $FileToCheck
-		valgrind ./asm $path/$FileToCheck
-		sleep 2
-		clear
-		# my=$(./asm $path/$FileToCheck)
-		# notmy=$(./asm1 $path/FileToCheck)
-		# if [ "$my" == "$notmy" ]
-		# 	then
-		# 		echo "$file1 $file2     $num: идентичны."
-		# 	else
-		# 		echo "$path/$file1 $path/$file2 $num: имеют различия."
-		# 		echo "$file1 $file2" >> $save1
-		# fi
-		# echo "$file1 $file2" >> $save
+	fileName=${file%.*}
+
+	corName=${fileName}.cor
+
+	./asm $filesDir/$file
+	mv $filesDir/$corName $myCors/
+
+	./asm1 $filesDir/$file > /dev/null
+	mv $filesDir/$corName $origCors/
+
+	myCor=$myCors/$corName
+	origCor=$origCors/$corName
+
+	if cmp -s "$myCor" "$origCor"
+		then
+			printf "%-35s\t\t\033[32mOK\033[0m\n" "$corName"
+		else
+			printf "%-35s\t\t\033[31mKO\033[0m\n" "$corName"
 	fi
 done

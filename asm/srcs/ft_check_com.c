@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/05/26 11:37:55 by user             ###   ########.fr       */
+/*   Updated: 2020/05/27 13:56:03 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int		ft_check_com_string(t_validation *v)
 {
+	while (*(v->lines[*v->line_index]) == ' ' ||
+			*(v->lines[*v->line_index]) == '\t')
+		v->lines[*v->line_index]++;
 	if (ft_strncmp(v->lines[*v->line_index], COMMENT_CMD_STRING,
-			ft_strlen(COMMENT_CMD_STRING)) == 0 &&
-		(v->lines[*v->line_index][ft_strlen(COMMENT_CMD_STRING)] == ' '
-		|| v->lines[*v->line_index][ft_strlen(COMMENT_CMD_STRING)] == '\t'))
+			ft_strlen(COMMENT_CMD_STRING)) == 0)
 		return (1);
 	else
 		return (0);
@@ -79,7 +80,7 @@ bool	is_comment(const char **str, t_token *token, t_validation *v)
 		if (ft_dbl_c(str, v) == 1)
 			return (argument);
 		token->value = 0;
-		v->lines[*v->line_index] += ft_strlen(COMMENT_CMD_STRING) + 1;
+		v->lines[*v->line_index] += ft_strlen(COMMENT_CMD_STRING);
 		while (*v->lines[*v->line_index] == ' ' ||
 		*v->lines[*v->line_index] == '\t')
 			v->lines[*v->line_index]++;

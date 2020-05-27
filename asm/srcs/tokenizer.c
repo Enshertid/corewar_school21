@@ -5,7 +5,7 @@ static bool	useless_line(const char *line)
 {
 	while (*line && (*line == ' ' || *line == '\t'))
 		++line;
-	if (!*line || *line == COMMENT_CHAR)
+	if (!*line || *line == COMMENT_CHAR || *line == ALT_COMMENT_CHAR)
 		return (true);
 	else
 		return (false);
@@ -27,7 +27,7 @@ t_vector_token		line_to_tokens(const char *line, t_validation *validation)
 	{
 		while (*line && (*line == ' ' || *line == '\t'))
 			++line;
-		if (*line == COMMENT_CHAR)
+		if (*line == '\0' || *line == COMMENT_CHAR || *line == ALT_COMMENT_CHAR)
 			break ;
 		token = token_determinator(&line, validation);
 		vec_pushback(&tokens, &token);

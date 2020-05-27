@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_instrs_two.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgroleo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/05/24 12:58:18 by jgroleo          ###   ########.fr       */
+/*   Updated: 2020/05/27 14:17:54 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool				useless_line(const char *line)
 {
 	while (*line && (*line == ' ' || *line == '\t'))
 		++line;
-	if (!*line || *line == COMMENT_CHAR)
+	if (!*line || *line == COMMENT_CHAR || *line == ALT_COMMENT_CHAR)
 		return (true);
 	else
 		return (false);
