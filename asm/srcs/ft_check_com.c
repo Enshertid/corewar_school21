@@ -59,8 +59,8 @@ int		ft_parse_com(const char **str, t_validation *v, t_token *t, bool *a)
 {
 	if (t->value != NULL)
 		ft_keep_fill_value(t, v);
-	if (ft_strlen(v->lines[*v->line_index]) == 0)
-		t->value = ft_strndup("\n", 1);
+//	if (ft_strlen(v->lines[*v->line_index]) == 0)
+//		t->value = ft_strndup("\n", 1);
 	while (*v->lines[*v->line_index])
 	{
 		if (ft_fill_com(str, v, t, a) == 1)

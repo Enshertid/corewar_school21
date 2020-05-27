@@ -50,7 +50,7 @@ static void	error_handle(const t_file *file, t_validation	*val)
 //  		"UNKNOWN",
 //  		"EMPTY"
 //  	};
-
+//
 //  	for (int row = 0; row < vec_size(&tokens); ++row)
 //  	{
 //  		printf("Line %d: %s\n", row, lines[row]);
@@ -77,7 +77,7 @@ void		assembly(t_file *file, t_validation	*validation)
 	else
 	{
 		file->tokens = tokenizer(file->lines, validation);
-		// print(file->copy, file->tokens);
+//		 print(file->copy, file->tokens);
 		ft_check_labels(file->tokens, validation);
 		ft_check_sizes(file->tokens, validation);
 		ft_check_instructions(file->tokens, validation);
