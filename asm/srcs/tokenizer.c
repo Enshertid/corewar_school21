@@ -1,19 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/25 22:26:59 by user              #+#    #+#             */
-/*   Updated: 2020/05/25 22:27:05 by user             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../includes/tokenizer.h"
+#include "../includes/token_determinator.h"
 
-#include "tokenizer.h"
-#include "token_determinator.h"
-
-static bool			useless_line(const char *line)
+static bool	useless_line(const char *line)
 {
 	while (*line && (*line == ' ' || *line == '\t'))
 		++line;
@@ -47,7 +35,7 @@ t_vector_token		line_to_tokens(const char *line, t_validation *validation)
 	return (tokens);
 }
 
-t_vector_token		*tokenizer(t_vector_char *lines, t_validation *validation)
+t_vector_token		*tokenizer(t_vector_char *lines, t_validation	*validation)
 {
 	const size_t	lines_count = vec_size(&lines);
 	int				line_index;
