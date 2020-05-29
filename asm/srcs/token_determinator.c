@@ -24,6 +24,8 @@ static void	skip_unknown_token(const char **lineptr)
 void		ft_mark_error_token(t_token *token, t_validation *val)
 {
 	token->type = UNKNOWN;
+	if (token->value != NULL && ft_strlen(token->value) > 0)
+		free(token->value);
 	token->value = NULL;
 	val->error = 1;
 	if (val->dbl_c == 0 && val->dbl_n == 0)
@@ -36,6 +38,7 @@ t_token		token_determinator(const char **lineptr, t_validation *validation)
 	t_token	token;
 	bool	token_determined;
 
+	token.value = NULL;
 	token_determined = false;
 	token_determined = is_separator(lineptr, &token);
 	if (!token_determined)

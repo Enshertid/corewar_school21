@@ -71,7 +71,8 @@ t_check_args		*ft_malloc_checker(int *row, int *i)
 	t_check_args	*checker;
 
 	checker = (t_check_args*)malloc(sizeof(t_check_args));
-	checker->arg = (char**)malloc(sizeof(char*) * 3);
+	checker->arg = (char**)malloc(sizeof(char*) * 4);
+	checker->arg[3] = NULL;
 	*row = 0;
 	*i = 0;
 	return (checker);

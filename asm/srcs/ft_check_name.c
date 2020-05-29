@@ -59,7 +59,7 @@ int		ft_parse_name(const char **str, t_validation *v, t_token *t, bool *a)
 {
 	if (t->value != NULL)
 		ft_keep_fill_value(t, v);
-	if (ft_strlen(v->lines[*v->line_index]) == 0 && *v->line_index == 0)
+	if (ft_strlen(v->lines[*v->line_index]) == 0 && t->value == NULL)
 		t->value = ft_strndup("\n", 1);
 	while (*v->lines[*v->line_index])
 	{
