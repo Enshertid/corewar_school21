@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   assembly.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/29 15:02:43 by user              #+#    #+#             */
+/*   Updated: 2020/05/29 15:05:10 by user             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "assembler.h"
 #include "converter.h"
 
@@ -7,12 +19,10 @@ static void	read_file(t_file *file)
 	bool	newline_exist;
 	bool	final_newline_exist;
 
-	int i = 0;
 	final_newline_exist = false;
 	file->lines = vec_create(80, sizeof(t_vector_char));
 	while ((gnl(file->fd, &line, &newline_exist)) == GNL_OK)
 	{
-		i += 1;
 		vec_pushback(&file->lines, &line);
 		if (!useless_line(line))
 			final_newline_exist = newline_exist;
@@ -23,7 +33,7 @@ static void	read_file(t_file *file)
 		file->status = FILE_NO_FINAL_NEWLINE;
 }
 
-static void	error_handle(const t_file *file, t_validation	*val)
+static void	error_handle(const t_file *file, t_validation *val)
 {
 	if (file->status == FILE_NO_FINAL_NEWLINE)
 	{
@@ -38,32 +48,7 @@ static void	error_handle(const t_file *file, t_validation	*val)
 	}
 }
 
-  static void print(t_vector_char *lines, t_vector_token *tokens)
-  {
-  	const char types[10][15] = {
-  		"LABEL",
-  		"INSTRUCTION",
-  		"ARGUMENT",
-  		"SEPARATOR",
-  		"NAME",
-  		"COMMENT",
-  		"UNKNOWN",
-  		"EMPTY"
-  	};
-
-  	for (int row = 0; row < vec_size(&tokens); ++row)
-  	{
-  		printf("Line %d: %s\n", row, lines[row]);
-  		printf("Tokens:\n");
-  		for (int col = 0; col < vec_size(&tokens[row]); ++col) {
-  			printf("\tType: %s, value: \"%s\"\n", types[tokens[row][col].type],
-  											tokens[row][col].value);
-  		}
-  		printf("\n");
-  	}
-  }
-
-void		assembly(t_file *file, t_validation	*validation)
+void		assembly(t_file *file, t_validation *validation)
 {
 	file->bytecode = NULL;
 	file->copy = NULL;
@@ -77,7 +62,6 @@ void		assembly(t_file *file, t_validation	*validation)
 	else
 	{
 		file->tokens = tokenizer(file->lines, validation);
-		 print(file->copy, file->tokens);
 		ft_check_labels(file->tokens, validation);
 		ft_check_sizes(file->tokens, validation);
 		ft_check_instructions(file->tokens, validation);

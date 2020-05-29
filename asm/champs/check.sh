@@ -6,8 +6,8 @@ origCors="origCors"
 asmFiles=($(ls $filesDir | grep ".s$"))
 
 
-mkdir $myCors
-mkdir $origCors
+mkdir -p $myCors
+mkdir -p $origCors
 
 
 for file in "${asmFiles[@]}"
@@ -16,7 +16,7 @@ do
 
 	corName=${fileName}.cor
 
-	./asm $filesDir/$file
+	valgrind ../a.out $filesDir/$file
 	mv $filesDir/$corName $myCors/
 
 	./asm1 $filesDir/$file > /dev/null

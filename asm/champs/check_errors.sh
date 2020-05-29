@@ -10,7 +10,7 @@ do
 
 	echo FILE: $File
 
-	valgrind ./asm $folder/$File
+	valgrind ../a.out $folder/$File
 	echo  "" #newline
 
 done

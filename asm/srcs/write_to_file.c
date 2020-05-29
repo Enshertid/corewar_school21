@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 22:21:27 by user              #+#    #+#             */
-/*   Updated: 2020/05/27 19:32:36 by user             ###   ########.fr       */
+/*   Updated: 2020/05/29 15:03:20 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ static void			write_num(const int fd, int32_t num)
 	}
 }
 
-  #include <stdio.h>
-
 static void			write_name_comment(const int fd,
 										const t_file *file,
 										int exec_code_size)
@@ -83,8 +81,6 @@ static void			write_name_comment(const int fd,
 	size_t		name_len;
 	const char	*comment = find_comment(file->tokens);
 	size_t		comment_len;
-
-	// printf("NAME: %s\nCOMMENT: %s\n", name, comment);
 
 	name_len = ft_strlen(name);
 	comment_len = ft_strlen(comment);
