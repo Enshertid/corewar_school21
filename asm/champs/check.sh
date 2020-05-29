@@ -16,7 +16,7 @@ do
 
 	corName=${fileName}.cor
 
-	valgrind ../a.out $filesDir/$file
+	../a.out $filesDir/$file
 	mv $filesDir/$corName $myCors/
 
 	./asm1 $filesDir/$file > /dev/null
