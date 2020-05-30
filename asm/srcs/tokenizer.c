@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/29 15:03:08 by user              #+#    #+#             */
-/*   Updated: 2020/05/29 15:05:58 by user             ###   ########.fr       */
+/*   Updated: 2020/05/30 01:16:00 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_vector_token		line_to_tokens(const char *line, t_validation *validation)
 		token = token_determinator(&line, validation);
 		vec_pushback(&tokens, &token);
 	}
+	vec_shrink_to_fit(&tokens);
 	return (tokens);
 }
 

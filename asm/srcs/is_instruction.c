@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/25 13:01:16 by user              #+#    #+#             */
-/*   Updated: 2020/05/27 16:16:34 by user             ###   ########.fr       */
+/*   Updated: 2020/05/29 22:43:20 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ const size_t	g_instructions_lenghts[16] = {
 	4, 3, 3, 3, 3, 3, 5, 2, 4, 3, 4, 3, 2, 2, 3, 4
 };
 
-void	validate(t_validation *val, t_token *token, const char **lineptr,
+static void	validate(t_validation *val, t_token *token, const char **lineptr,
 				size_t iter)
 {
 	if (val->no_n_start == 0 && val->name == 0)
@@ -41,7 +41,22 @@ void	validate(t_validation *val, t_token *token, const char **lineptr,
 	*lineptr += g_instructions_lenghts[iter];
 }
 
-bool	is_instruction(const char **lineptr, t_token *token, t_validation *val)
+static bool	instr_equ(const char *name, const char *instruction,
+						size_t symbols)
+{
+	while (symbols)
+	{
+		if (*name != *instruction)
+			return (false);
+		name += 1;
+		instruction += 1;
+		symbols -= 1;
+	}
+	return (true);
+}
+
+bool		is_instruction(const char **lineptr, t_token *token,
+							t_validation *val)
 {
 	const char	*line = *lineptr;
 	size_t		iter;
@@ -49,7 +64,7 @@ bool	is_instruction(const char **lineptr, t_token *token, t_validation *val)
 	iter = 0;
 	while (iter < 16)
 	{
-		if (ft_strnequ(line, g_instructions[iter],
+		if (instr_equ(line, g_instructions[iter],
 						g_instructions_lenghts[iter]))
 		{
 			validate(val, token, lineptr, iter);

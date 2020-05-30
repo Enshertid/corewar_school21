@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 22:25:22 by user              #+#    #+#             */
-/*   Updated: 2020/05/25 22:25:23 by user             ###   ########.fr       */
+/*   Updated: 2020/05/29 22:27:34 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	check_op_h(void)
 
 int			main(int argc, const char *const *argv)
 {
-	if (argc > 1)
+	if (argc == 2)
 	{
 		check_op_h();
 		if (ft_validation(argv) == 0)
