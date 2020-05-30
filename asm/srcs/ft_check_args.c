@@ -25,7 +25,7 @@ void	ft_check_one_arg(t_check_args *checker, t_validation *val, int row)
 	{
 		val->error = 1;
 		warning_add(ERROR, 3, "wrong types of argument in line №",
-					ft_itoa_static(row + 1, 10), ".");
+					ft_itoa_static(row + val->extr + 1, 10), ".");
 	}
 }
 
@@ -40,14 +40,14 @@ void	ft_check_two_arg(t_check_args *checker, t_validation *val, int row)
 		{
 			val->error = 1;
 			warning_add(ERROR, 3, "wrong types of argument in line №",
-						ft_itoa_static(row + 1, 10), ".");
+						ft_itoa_static(row + val->extr + 1, 10), ".");
 		}
 	}
 	else
 	{
 		val->error = 1;
 		warning_add(ERROR, 3, "wrong types of argument in line №",
-					ft_itoa_static(row + 1, 10), ".");
+					ft_itoa_static(row + val->extr + 1, 10), ".");
 	}
 }
 
@@ -69,7 +69,7 @@ void	ft_check_three_arg(t_check_args *checker, t_validation *val, int row)
 	{
 		val->error = 1;
 		warning_add(ERROR, 3, "wrong types of argument in line №",
-					ft_itoa_static(row + 1, 10), ".");
+					ft_itoa_static(row + val->extr + 1, 10), ".");
 	}
 }
 
@@ -81,7 +81,7 @@ void	ft_check_arg(t_check_args *checker, t_validation *val, int row)
 	{
 		val->error = 1;
 		warning_add(ERROR, 3, "no arguments in line №",
-					ft_itoa_static(row + 1, 10), ".");
+					ft_itoa_static(row + val->extr + 1, 10), ".");
 		return ;
 	}
 	i = checker->i;

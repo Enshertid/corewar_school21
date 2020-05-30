@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/token_determinator.h"
+#include "assembler.h"
 
 static void	skip_unknown_token(const char **lineptr)
 {
@@ -21,16 +22,17 @@ static void	skip_unknown_token(const char **lineptr)
 	*lineptr = line;
 }
 
-void		ft_mark_error_token(t_token *token, t_validation *val)
+void		ft_mark_error_token(const char **s, t_token *t, t_validation *v)
 {
-	token->type = UNKNOWN;
-	if (token->value != NULL && ft_strlen(token->value) > 0)
-		free(token->value);
-	token->value = NULL;
-	val->error = 1;
-	if (val->dbl_c == 0 && val->dbl_n == 0)
+	t->type = UNKNOWN;
+	if (t->value != NULL && ft_strlen(t->value) > 0)
+		free(t->value);
+	t->value = NULL;
+	v->error = 1;
+	if (v->dbl_c == 0 && v->dbl_n == 0)
 		warning_add(ERROR, 3, "syntax error in line №",
-				ft_itoa_static(*val->line_index + 1, 10), ".");
+				ft_itoa_static(*v->line_index + 1, 10), ".");
+	ft_scroll_line(s, v->lines, *v->line_index);
 }
 
 t_token		token_determinator(const char **lineptr, t_validation *validation)
@@ -55,7 +57,7 @@ t_token		token_determinator(const char **lineptr, t_validation *validation)
 		token_determined = is_comment(lineptr, &token, validation);
 	if (!token_determined)
 	{
-		ft_mark_error_token(&token, validation);
+		ft_mark_error_token(lineptr, &token, validation);
 		skip_unknown_token(lineptr);
 	}
 	return (token);

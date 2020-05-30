@@ -23,10 +23,12 @@ typedef struct			s_validation
 	char				**lines;
 	int					*line_index;
 	int					error;
+	int					trash_aft_name;
 	int					dbl_n;
 	int					dbl_c;
 	int					no_newline_empty;
 	int					not_file;
+	int					extr;
 }						t_validation;
 
 typedef struct			s_check_args
@@ -34,6 +36,7 @@ typedef struct			s_check_args
 	int					i;
 	char				*instr;
 	char				**arg;
+	int					col;
 }						t_check_args;
 
 #endif

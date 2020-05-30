@@ -104,7 +104,7 @@ void		ft_parse_args(t_vector_token *t, int r, int *c, t_validation *val)
 		{
 			val->error = 1;
 			warning_add(ERROR, 3, "wrong tokens order in line №",
-						ft_itoa_static(r + 1, 10), ".");
+						ft_itoa_static(r + val->extr + 1, 10), ".");
 			break ;
 		}
 	}

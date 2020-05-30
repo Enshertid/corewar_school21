@@ -26,16 +26,8 @@ int		ft_check_com_string(t_validation *v)
 
 int		ft_fill_com(const char **str, t_validation *v, t_token *t, bool *a)
 {
-	if (t->value == NULL)
-		ft_fill_value(t, v);
-	if (*v->lines[*v->line_index] == '"')
+	if (ft_fill_value(t, v, str) == 1)
 	{
-		if (ft_strlen(v->lines[*v->line_index] + 1) > 0)
-		{
-			v->lines[*v->line_index]++;
-			ft_scroll_line(str, v->lines, *v->line_index);
-			return (1);
-		}
 		mark_c(str, v, t, a);
 		return (1);
 	}
@@ -47,7 +39,7 @@ int		ft_dbl_c(const char **str, t_validation *v)
 	if (v->comment == 1)
 	{
 		warning_add(ERROR, 3, "Extra comment in line №",
-					ft_itoa_static(*v->line_index + 1, 10), ".");
+					ft_itoa_static(*v->line_index + v->extr + 1, 10), ".");
 		ft_scroll_line(str, v->lines, *v->line_index);
 		v->dbl_c = 1;
 		return (1);
@@ -58,14 +50,21 @@ int		ft_dbl_c(const char **str, t_validation *v)
 int		ft_parse_com(const char **str, t_validation *v, t_token *t, bool *a)
 {
 	if (t->value != NULL)
-		ft_keep_fill_value(t, v);
-	if (ft_strlen(v->lines[*v->line_index]) == 0 && t->value == NULL)
+	{
+		if (ft_keep_fill_value(t, v) == 1)
+		{
+			mark_c(str, v, t, a);
+			return (1);
+		}
+		else
+			return (0);
+	}
+	else if (ft_strlen(v->lines[*v->line_index]) == 0)
 		t->value = ft_strndup("\n", 1);
-	while (*v->lines[*v->line_index])
+	else
 	{
 		if (ft_fill_com(str, v, t, a) == 1)
 			return (1);
-		v->lines[*v->line_index]++;
 	}
 	return (0);
 }
@@ -87,12 +86,10 @@ bool	is_comment(const char **str, t_token *token, t_validation *v)
 		if (*v->lines[*v->line_index] == '"')
 		{
 			v->lines[*v->line_index]++;
-			while (v->lines[*v->line_index])
-			{
-				if (ft_parse_com(str, v, token, &argument) == 1)
-					return (argument);
+			while (ft_parse_com(str, v, token, &argument) != 1)
 				*v->line_index += 1;
-			}
+			ft_scroll_line(str, v->lines, *v->line_index);
+			return (argument);
 		}
 		ft_scroll_line(str, v->lines, *v->line_index);
 	}

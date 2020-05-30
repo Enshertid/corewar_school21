@@ -19,7 +19,7 @@ void				ft_check_ldi_lldi(t_check_args *ch, t_validation *v, int r)
 	{
 		v->error = 1;
 		warning_add(ERROR, 3, "wrong types of argument in line №",
-					ft_itoa_static(r + 1, 10), ".");
+					ft_itoa_static(r + v->extr + 1, 10), ".");
 	}
 }
 
@@ -30,7 +30,7 @@ void				ft_check_sti(t_check_args *ch, t_validation *val, int row)
 	{
 		val->error = 1;
 		warning_add(ERROR, 3, "wrong types of argument in line №",
-					ft_itoa_static(row + 1, 10), ".");
+					ft_itoa_static(row + val->extr + 1, 10), ".");
 	}
 }
 
@@ -44,6 +44,23 @@ bool				useless_line(const char *line)
 		return (false);
 }
 
+int					ft_check_after_quote(char *s)
+{
+	int		i;
+
+	i = 1;
+	while (s[i] != '\0')
+	{
+		if (s[i] != ' ' && s[i] != '\t' && s[i]
+		!= COMMENT_CHAR && s[i] != ALT_COMMENT_CHAR)
+			return (0);
+		if (s[i] == COMMENT_CHAR || s[i] == ALT_COMMENT_CHAR)
+			return (1);
+		i++;
+	}
+	return (1);
+}
+
 int					ft_check_closed_quote(char *str, t_validation *val)
 {
 	int	i;
@@ -53,27 +70,15 @@ int					ft_check_closed_quote(char *str, t_validation *val)
 	{
 		if (str[i] == '"')
 		{
-			if (i == (int)ft_strlen(str) - 1)
+			if (ft_check_after_quote(str + i) == 1)
 				return (1);
 			else
 			{
-				val->error = 1;
+				val->trash_aft_name = 1;
 				return (0);
 			}
 		}
 		i++;
 	}
 	return (0);
-}
-
-t_check_args		*ft_malloc_checker(int *row, int *i)
-{
-	t_check_args	*checker;
-
-	checker = (t_check_args*)malloc(sizeof(t_check_args));
-	checker->arg = (char**)malloc(sizeof(char*) * 4);
-	checker->arg[3] = NULL;
-	*row = 0;
-	*i = 0;
-	return (checker);
 }

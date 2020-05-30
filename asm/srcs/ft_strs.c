@@ -55,18 +55,24 @@ void	ft_scroll_line(const char **str, char **lines, int line_index)
 
 void	ft_parse_string(t_vector_token *t, int row, int *col, t_validation *val)
 {
+	int		a;
+
 	if (t[row][*col].type != 1 && t[row][*col].type != 6)
 		ft_synt_error(val, row);
 	else
 	{
-		(*col)++;
-		if (t[row][*col].value)
+		a = *col;
+		if (vec_size(&t[row]) - 1 >= a + 1)
 		{
-			if (t[row][*col].type != 2 && t[row][0].type != 4 &&
+			(*col)++;
+			if (t[row][*col].value)
+			{
+				if (t[row][*col].type != 2 && t[row][0].type != 4 &&
 				t[row][0].type != 5)
-				ft_synt_error(val, row);
-			else
-				ft_parse_args(t, row, col, val);
+					ft_synt_error(val, row);
+				else
+					ft_parse_args(t, row, col, val);
+			}
 		}
 	}
 }

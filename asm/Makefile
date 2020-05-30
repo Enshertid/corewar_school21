@@ -29,6 +29,8 @@ SRCS =				add_args.c							\
 					tokenizer.c							\
 					write_to_file.c						\
 					free_file.c							\
+					ft_fills.c							\
+					ft_check_dup_inst.c					\
 					finders.c
 
 

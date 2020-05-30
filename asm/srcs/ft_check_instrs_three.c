@@ -16,22 +16,22 @@ void		ft_last_t_not_arg(t_validation *val, int i)
 {
 	val->error = 1;
 	warning_add(ERROR, 3, "last token in line №",
-				ft_itoa_static(i + 1, 10), " is not argument.");
+				ft_itoa_static(i + val->extr + 1, 10), " is not argument.");
 }
 
-void		ft_parse_i(t_vector_token *t, int row, int *col, t_check_args *ch)
+void		ft_parse_i(t_vector_token *t, int row, t_check_args *ch)
 {
-	ch->instr = t[row][*col].value;
-	(*col)++;
+	ch->instr = t[row][ch->col].value;
+	(ch->col)++;
 	ch->i = -1;
-	while (*col < vec_size(&t[row]))
+	while (ch->col < vec_size(&t[row]))
 	{
-		if (t[row][*col].type == 2)
+		if (t[row][ch->col].type == 2)
 		{
 			ch->i++;
-			ch->arg[ch->i] = ft_strdup(t[row][*col].value);
+			ch->arg[ch->i] = ft_strdup(t[row][ch->col].value);
 		}
-		(*col)++;
+		(ch->col)++;
 	}
 }
 
@@ -44,26 +44,25 @@ void		ft_inc_i_row(int *i, int *row)
 void		ft_check_instructions(t_vector_token *tokens, t_validation *val)
 {
 	int				row;
-	int				col;
 	int				i;
 	t_check_args	*checker;
 
 	checker = ft_malloc_checker(&row, &i);
 	while (row < vec_size(&tokens))
 	{
-		col = 0;
-		while (col < vec_size(&tokens[row]))
+		checker->col = 0;
+		while (checker->col < vec_size(&tokens[row]))
 		{
-			if (tokens[row][col].type == 1)
-			{
-				ft_parse_i(tokens, row, &col, checker);
-				ft_check_arg(checker, val, row);
-			}
-			col++;
+			if (tokens[row][checker->col].type == 1)
+				ft_parse_i_and_check_arg(tokens, val, checker, row);
+			checker->col++;
 		}
-		col -= 2;
-		if (ft_check_last_arg(tokens, row, col) == 1)
-			ft_last_t_not_arg(val, i);
+		if (checker->col - 2 >= 0)
+		{
+			checker->col -= 2;
+			if (ft_check_last_arg(tokens, row, checker->col) == 1)
+				ft_last_t_not_arg(val, i);
+		}
 		ft_inc_i_row(&i, &row);
 	}
 	free(checker->arg);
@@ -74,5 +73,5 @@ void		ft_synt_error(t_validation *val, int row)
 {
 	val->error = 1;
 	warning_add(ERROR, 3, "syntax error in line №",
-				ft_itoa_static(row + 1, 10), ".");
+				ft_itoa_static(row + val->extr + 1, 10), ".");
 }

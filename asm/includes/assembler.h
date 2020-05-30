@@ -52,10 +52,12 @@ void				ft_check_arg(t_check_args *checker, t_validation *val,
 		int row);
 int					ft_check_last_arg(t_vector_token *t, int row, int col);
 void				ft_last_t_not_arg(t_validation *val, int i);
-void				ft_parse_i(t_vector_token *t, int row, int *col,
+void				ft_parse_i(t_vector_token *t, int row,
 		t_check_args *checker);
 void				ft_inc_i_row(int *i, int *row);
 void				ft_check_instructions(t_vector_token *tokens,
+		t_validation *val);
+void				ft_check_dup_lab(t_vector_token *tokens,
 		t_validation *val);
 void				ft_synt_error(t_validation *val, int row);
 void				ft_large_n(t_validation *val);
@@ -93,12 +95,13 @@ int					ft_parse_com(const char **str, t_validation *v,
 		t_token *t, bool *a);
 bool				is_comment(const char **str, t_token *token,
 		t_validation *v);
-void				ft_keep_fill_value(t_token *token, t_validation *v);
+int					ft_keep_fill_value(t_token *token, t_validation *v);
 void				mark_name(const char **str, t_validation *v,
 		t_token *t, bool *a);
 void				mark_c(const char **str, t_validation *v,
 		t_token *t, bool *a);
-void				ft_fill_value(t_token *token, t_validation *v);
+int					ft_fill_value(t_token *token, t_validation *v,
+		const char **str);
 t_validation		*ft_create_val(void);
 int					ft_validation(const char *const *argv);
 void				write_to_file(const t_file *file, t_vector_char *bytecode);
@@ -106,5 +109,11 @@ int					ft_any_error(t_validation *val);
 void				free_file(t_file *file);
 const char			*find_name(t_vector_token *tokens);
 const char			*find_comment(t_vector_token *tokens);
+int					ft_check_after_quote(char *s);
+int					ft_find_last_quote(char *s);
+void				ft_mark_error_token(const char **str, t_token *token,
+		t_validation *val);
+void				ft_parse_i_and_check_arg(t_vector_token *t, t_validation *v,
+		t_check_args *ch, int r);
 
 #endif
