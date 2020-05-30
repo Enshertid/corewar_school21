@@ -48,9 +48,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 void	ft_scroll_line(const char **str, char **lines, int line_index)
 {
-	while (*lines[line_index])
-		lines[line_index]++;
-	*str = lines[line_index];
+	if (lines[line_index] != NULL)
+	{
+		while (*lines[line_index] != '\0')
+			lines[line_index]++;
+		*str = lines[line_index];
+	}
 }
 
 void	ft_parse_string(t_vector_token *t, int row, int *col, t_validation *val)

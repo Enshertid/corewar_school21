@@ -65,6 +65,8 @@ int					ft_check_closed_quote(char *str, t_validation *val)
 {
 	int	i;
 
+	if (str == NULL)
+		return (0);
 	i = 0;
 	while (str[i] != '\0')
 	{

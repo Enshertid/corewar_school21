@@ -14,6 +14,8 @@
 
 int		ft_check_com_string(t_validation *v)
 {
+	if (v->lines[*v->line_index] == NULL)
+		return (0);
 	while (*(v->lines[*v->line_index]) == ' ' ||
 			*(v->lines[*v->line_index]) == '\t')
 		v->lines[*v->line_index]++;
@@ -86,7 +88,7 @@ bool	is_comment(const char **str, t_token *token, t_validation *v)
 		if (*v->lines[*v->line_index] == '"')
 		{
 			v->lines[*v->line_index]++;
-			while (ft_parse_com(str, v, token, &argument) != 1)
+			while (ft_parse_com(str, v, token, &argument) != 1 && *v->line_index <= v->lines_count)
 				*v->line_index += 1;
 			ft_scroll_line(str, v->lines, *v->line_index);
 			return (argument);

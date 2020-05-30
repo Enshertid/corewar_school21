@@ -61,5 +61,6 @@ t_validation	*ft_create_val(void)
 	val->not_file = 0;
 	val->trash_aft_name = 0;
 	val->extr = 0;
+	val->lines_count = 0;
 	return (val);
 }

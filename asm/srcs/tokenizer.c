@@ -46,6 +46,7 @@ t_vector_token		*tokenizer(t_vector_char *lines, t_validation *validation)
 	tokens = vec_create(lines_count, sizeof(t_vector_token));
 	line_index = 0;
 	validation->line_index = &line_index;
+	validation->lines_count = lines_count;
 	while (line_index < (int)lines_count)
 	{
 		tokens_line = line_to_tokens(lines[line_index], validation);

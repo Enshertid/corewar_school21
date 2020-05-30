@@ -30,8 +30,14 @@ void		ft_mark_error_token(const char **s, t_token *t, t_validation *v)
 	t->value = NULL;
 	v->error = 1;
 	if (v->dbl_c == 0 && v->dbl_n == 0)
-		warning_add(ERROR, 3, "syntax error in line №",
-				ft_itoa_static(*v->line_index + 1, 10), ".");
+	{
+		if (*v->line_index >= v->lines_count)
+			warning_add(ERROR, 3, "syntax error in line №",
+					ft_itoa_static(*v->line_index , 10), ".");
+		else
+			warning_add(ERROR, 3, "syntax error in line №",
+					ft_itoa_static(*v->line_index + 1, 10), ".");
+	}
 	ft_scroll_line(s, v->lines, *v->line_index);
 }
 

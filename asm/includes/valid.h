@@ -29,6 +29,7 @@ typedef struct			s_validation
 	int					no_newline_empty;
 	int					not_file;
 	int					extr;
+	size_t				lines_count;
 }						t_validation;
 
 typedef struct			s_check_args
