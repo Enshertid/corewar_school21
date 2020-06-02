@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgroleo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/05/24 12:58:18 by jgroleo          ###   ########.fr       */
+/*   Updated: 2020/06/03 01:08:14 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-void	ft_scroll_line(const char **str, char **lines, int line_index)
+void	ft_scroll_line(char **str, char **lines, int line_index)
 {
 	if (lines[line_index] != NULL)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assembler.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/06/02 22:44:53 by user             ###   ########.fr       */
+/*   Updated: 2020/06/03 01:11:39 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,19 @@ int					ft_fill_name(const char **str, t_validation *v,
 int					ft_dbl_n(char **str, t_validation *v);
 int					ft_parse_name(const char **str, t_validation *v,
 		t_token *t, bool *a);
-bool				is_name(char **str, t_token *token, t_validation *v);
+bool				is_name(const char **str, t_token *token, t_validation *v);
 int					ft_check_com_string(t_validation *v);
 int					ft_fill_com(const char **str, t_validation *v,
 		t_token *t, bool *a);
 int					ft_dbl_c(char **str, t_validation *v);
 int					ft_parse_com(const char **str, t_validation *v,
 		t_token *t, bool *a);
-bool				is_comment(char **str, t_token *token,
+bool				is_comment(const char **str, t_token *token,
 		t_validation *v);
 int					ft_keep_fill_value(t_token *token, t_validation *v);
-void				mark_name(const char **str, t_validation *v,
+void				mark_name(char **str, t_validation *v,
 		t_token *t, bool *a);
-void				mark_c(const char **str, t_validation *v,
+void				mark_c(char **str, t_validation *v,
 		t_token *t, bool *a);
 int					ft_fill_value(t_token *token, t_validation *v,
 		const char **str);

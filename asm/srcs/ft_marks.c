@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_marks.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgroleo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/05/24 12:58:18 by jgroleo          ###   ########.fr       */
+/*   Updated: 2020/06/03 01:07:02 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-void			mark_name(const char **s, t_validation *v, t_token *t, bool *a)
+void			mark_name(char **s, t_validation *v, t_token *t, bool *a)
 {
 	*a = true;
 	t->type = NAME;
@@ -21,7 +21,7 @@ void			mark_name(const char **s, t_validation *v, t_token *t, bool *a)
 	ft_scroll_line(s, v->lines, *v->line_index);
 }
 
-void			mark_c(const char **str, t_validation *v, t_token *t, bool *a)
+void			mark_c(char **str, t_validation *v, t_token *t, bool *a)
 {
 	*a = true;
 	t->type = COMMENT;

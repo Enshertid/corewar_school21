@@ -1,4 +1,4 @@
-NAME =				a.out
+NAME =				asm
 
 
 SRCS =				add_args.c							\
@@ -8,17 +8,7 @@ SRCS =				add_args.c							\
 					byte_tokenizer.c					\
 					converter.c							\
 					fill_jumps.c						\
-					ft_check_args.c						\
-					ft_check_com.c						\
-					ft_check_instrs_three.c				\
-					ft_check_instrs_two.c				\
-					ft_check_instrs.c					\
-					ft_check_labels.c					\
-					ft_check_name.c						\
-					ft_check_sizes.c					\
-					ft_marks.c							\
-					ft_strs.c 							\
-					ft_validation.c						\
+					finders.c							\
 					generate_bytecode.c					\
 					is_argument.c						\
 					is_instruction.c					\
@@ -31,11 +21,17 @@ SRCS =				add_args.c							\
 					free_file.c							\
 					ft_fills.c							\
 					ft_check_dup_inst.c					\
-					finders.c
-
-
-
-
+					ft_check_args.c						\
+					ft_check_com.c						\
+					ft_check_instrs_three.c				\
+					ft_check_instrs_two.c				\
+					ft_check_instrs.c					\
+					ft_check_labels.c					\
+					ft_check_name.c						\
+					ft_check_sizes.c					\
+					ft_marks.c							\
+					ft_strs.c 							\
+					ft_validation.c						\
 
 
 LIBFT =				$(addprefix $(DIR_LIBFT)/, libft.a)

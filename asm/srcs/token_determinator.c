@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_determinator.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/25 12:57:45 by user              #+#    #+#             */
-/*   Updated: 2020/06/02 23:45:34 by user             ###   ########.fr       */
+/*   Updated: 2020/06/03 01:12:36 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		ft_mark_error_token(const char **s, t_token *t, t_validation *v)
 			warning_add(ERROR, 3, "syntax error in line №",
 					ft_itoa_static(*v->line_index + 1, 10), ".");
 	}
-	ft_scroll_line(s, v->lines, *v->line_index);
+	ft_scroll_line((char**)s, v->lines, *v->line_index);
 }
 
 t_token		token_determinator(const char **lineptr, t_validation *validation)

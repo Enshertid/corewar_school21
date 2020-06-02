@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fills.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgroleo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/05/24 12:58:18 by jgroleo          ###   ########.fr       */
+/*   Updated: 2020/06/03 01:13:20 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int					ft_fill_value(t_token *t, t_validation *v, const char **str)
 	{
 		t->value = ft_strndup(v->lines[*v->line_index],
 				ft_find_last_quote(v->lines[*v->line_index]));
-		ft_scroll_line(str, v->lines, *v->line_index);
+		ft_scroll_line((char**)str, v->lines, *v->line_index);
 		return (1);
 	}
 	else
@@ -59,7 +59,7 @@ int					ft_fill_value(t_token *t, t_validation *v, const char **str)
 		tmp = ft_strjoin(v->lines[*v->line_index], "\n");
 		t->value = ft_strndup(tmp, ft_strlen(v->lines[*v->line_index]) + 1);
 		free(tmp);
-		ft_scroll_line(str, v->lines, *v->line_index);
+		ft_scroll_line((char**)str, v->lines, *v->line_index);
 		return (0);
 	}
 }

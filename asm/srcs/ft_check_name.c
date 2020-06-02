@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_name.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/06/02 23:42:20 by user             ###   ########.fr       */
+/*   Updated: 2020/06/03 01:17:53 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,20 @@ bool		parse_name(t_validation *v, t_token *token, char **str)
 	return (done);
 }
 
-bool		is_name(char **str, t_token *token, t_validation *v)
+bool		is_name(const char **str, t_token *token, t_validation *v)
 {
 	if (ft_strnequ(NAME_CMD_STRING, *str, ft_strlen(NAME_CMD_STRING)))
 	{
-		if (ft_dbl_c(str, v) == 1)
+		if (ft_dbl_c((char**)str, v) == 1)
 			return (false);
-		v->lines[*v->line_index] = *str + ft_strlen(NAME_CMD_STRING);
+		v->lines[*v->line_index] = *(char**)str + ft_strlen(NAME_CMD_STRING);
 		while (*v->lines[*v->line_index] == ' ' ||
 		*v->lines[*v->line_index] == '\t')
 			v->lines[*v->line_index]++;
 		if (*v->lines[*v->line_index] == '"')
 		{
 			v->lines[*v->line_index]++;
-			return (parse_name(v, token, str));
+			return (parse_name(v, token, (char**)str));
 		}
 		else
 			return (false);

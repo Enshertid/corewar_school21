@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 22:25:22 by user              #+#    #+#             */
-/*   Updated: 2020/06/02 22:21:10 by user             ###   ########.fr       */
+/*   Updated: 2020/06/03 01:28:40 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	usage(void)
 {
-	write(1, "usage: ./asm [files]\n", 21);
+	write(1, "usage: ./asm [file]\n", 20);
 }
 
 static void	check_op_h(void)
