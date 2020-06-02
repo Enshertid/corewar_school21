@@ -6,37 +6,13 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/05/27 13:56:03 by user             ###   ########.fr       */
+/*   Updated: 2020/06/02 23:43:08 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-int		ft_check_com_string(t_validation *v)
-{
-	if (v->lines[*v->line_index] == NULL)
-		return (0);
-	while (*(v->lines[*v->line_index]) == ' ' ||
-			*(v->lines[*v->line_index]) == '\t')
-		v->lines[*v->line_index]++;
-	if (ft_strncmp(v->lines[*v->line_index], COMMENT_CMD_STRING,
-			ft_strlen(COMMENT_CMD_STRING)) == 0)
-		return (1);
-	else
-		return (0);
-}
-
-int		ft_fill_com(const char **str, t_validation *v, t_token *t, bool *a)
-{
-	if (ft_fill_value(t, v, str) == 1)
-	{
-		mark_c(str, v, t, a);
-		return (1);
-	}
-	return (0);
-}
-
-int		ft_dbl_c(const char **str, t_validation *v)
+int			ft_dbl_c(char **str, t_validation *v)
 {
 	if (v->comment == 1)
 	{
@@ -49,51 +25,65 @@ int		ft_dbl_c(const char **str, t_validation *v)
 	return (0);
 }
 
-int		ft_parse_com(const char **str, t_validation *v, t_token *t, bool *a)
+static void	add(t_dstr *comment, const char *close_quote, t_validation *v)
 {
-	if (t->value != NULL)
-	{
-		if (ft_keep_fill_value(t, v) == 1)
-		{
-			mark_c(str, v, t, a);
-			return (1);
-		}
-		else
-			return (0);
-	}
-	else if (ft_strlen(v->lines[*v->line_index]) == 0)
-		t->value = ft_strndup("\n", 1);
+	if (!*comment)
+		*comment = dstr_create_from_srcn(v->lines[*v->line_index],
+		close_quote ? (size_t)(close_quote - v->lines[*v->line_index]) :
+		ft_strlen(v->lines[*v->line_index]));
 	else
-	{
-		if (ft_fill_com(str, v, t, a) == 1)
-			return (1);
-	}
-	return (0);
+		dstr_add_strn(comment, v->lines[*v->line_index], close_quote ?
+					(size_t)(close_quote - v->lines[*v->line_index]) :
+					ft_strlen(v->lines[*v->line_index]));
 }
 
-bool	is_comment(const char **str, t_token *token, t_validation *v)
+bool		parse_comment(t_validation *v, t_token *token, char **str)
 {
-	bool		argument;
+	t_dstr		comment;
+	const char	*close_quote = NULL;
+	bool		done;
 
-	argument = false;
-	if (ft_check_com_string(v) == 1)
+	comment = NULL;
+	done = false;
+	while (*v->line_index < vec_size(&v->lines) && !close_quote)
 	{
-		if (ft_dbl_c(str, v) == 1)
-			return (argument);
-		token->value = 0;
-		v->lines[*v->line_index] += ft_strlen(COMMENT_CMD_STRING);
+		close_quote = ft_strchr(v->lines[*v->line_index], '\"');
+		add(&comment, close_quote, v);
+		if (!close_quote)
+		{
+			*v->line_index += 1;
+			dstr_add_chr(&comment, '\n');
+		}
+		else
+		{
+			done = true;
+			token->type = COMMENT;
+			token->value = dstr_to_str(comment);
+			v->name = 1;
+			*str = (char*)close_quote + 1;
+		}
+	}
+	return (done);
+}
+
+bool		is_comment(char **str, t_token *token, t_validation *v)
+{
+	if (ft_strnequ(COMMENT_CMD_STRING, *str, ft_strlen(COMMENT_CMD_STRING)))
+	{
+		if (ft_dbl_n(str, v) == 1)
+			return (false);
+		v->lines[*v->line_index] = *str + ft_strlen(COMMENT_CMD_STRING);
 		while (*v->lines[*v->line_index] == ' ' ||
 		*v->lines[*v->line_index] == '\t')
 			v->lines[*v->line_index]++;
 		if (*v->lines[*v->line_index] == '"')
 		{
 			v->lines[*v->line_index]++;
-			while (ft_parse_com(str, v, token, &argument) != 1 && *v->line_index <= v->lines_count)
-				*v->line_index += 1;
-			ft_scroll_line(str, v->lines, *v->line_index);
-			return (argument);
+			return (parse_comment(v, token, str));
 		}
-		ft_scroll_line(str, v->lines, *v->line_index);
+		else
+			return (false);
 	}
-	return (argument);
+	else
+		return (false);
 }

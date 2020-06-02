@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/25 12:57:45 by user              #+#    #+#             */
-/*   Updated: 2020/05/27 16:16:28 by user             ###   ########.fr       */
+/*   Updated: 2020/06/02 23:45:34 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void		ft_mark_error_token(const char **s, t_token *t, t_validation *v)
 	v->error = 1;
 	if (v->dbl_c == 0 && v->dbl_n == 0)
 	{
-		if (*v->line_index >= v->lines_count)
+		if (*v->line_index >= (int)v->lines_count)
 			warning_add(ERROR, 3, "syntax error in line №",
-					ft_itoa_static(*v->line_index , 10), ".");
+					ft_itoa_static(*v->line_index, 10), ".");
 		else
 			warning_add(ERROR, 3, "syntax error in line №",
 					ft_itoa_static(*v->line_index + 1, 10), ".");
@@ -49,8 +49,6 @@ t_token		token_determinator(const char **lineptr, t_validation *validation)
 	token.value = NULL;
 	token_determined = false;
 	token_determined = is_separator(lineptr, &token);
-	if (!token_determined)
-		token_determined = is_empty(lineptr, &token);
 	if (!token_determined)
 		token_determined = is_label(lineptr, &token);
 	if (!token_determined)

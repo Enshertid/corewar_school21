@@ -16,6 +16,7 @@ do
 
 	corName=${fileName}.cor
 
+	# ../a.out $filesDir/$file
 	valgrind ../a.out $filesDir/$file
 	mv $filesDir/$corName $myCors/
 

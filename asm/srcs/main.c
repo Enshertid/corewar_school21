@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 22:25:22 by user              #+#    #+#             */
-/*   Updated: 2020/05/29 22:27:34 by user             ###   ########.fr       */
+/*   Updated: 2020/06/02 22:21:10 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ static void	check_op_h(void)
 		ft_error("SEPARATOR CHAR exist in LABEL_CHARS", "check_op_h", 0);
 	if (ft_strchr(LABEL_CHARS, DIRECT_CHAR))
 		ft_error("LABEL CHAR exist in LABEL_CHARS", "check_op_h", 0);
+	if (REG_SIZE != 4)
+		ft_error("REG_SIZE must be equal to 4", "check_op_h", 0);
+	if (IND_SIZE != 2)
+		ft_error("IND_SIZE must be equal to 2", "check_op_h", 0);
 }
 
 int			main(int argc, const char *const *argv)

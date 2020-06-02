@@ -6,27 +6,13 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/05/27 13:55:29 by user             ###   ########.fr       */
+/*   Updated: 2020/06/02 23:42:20 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assembler.h"
 
-int		ft_check_n_string(t_validation *v)
-{
-	if (v->lines[*v->line_index] == NULL)
-		return (0);
-	while (*(v->lines[*v->line_index]) == ' ' ||
-			*(v->lines[*v->line_index]) == '\t')
-		v->lines[*v->line_index]++;
-	if (ft_strncmp(v->lines[*v->line_index], NAME_CMD_STRING,
-			ft_strlen(NAME_CMD_STRING)) == 0)
-		return (1);
-	else
-		return (0);
-}
-
-int		ft_dbl_n(const char **str, t_validation *v)
+int			ft_dbl_n(char **str, t_validation *v)
 {
 	if (v->name == 1)
 	{
@@ -39,61 +25,65 @@ int		ft_dbl_n(const char **str, t_validation *v)
 	return (0);
 }
 
-int		ft_fill_name(const char **str, t_validation *v, t_token *t, bool *a)
+static void	add(t_dstr *name, const char *close_quote, t_validation *v)
 {
-	if (ft_fill_value(t, v, str) == 1)
-	{
-		mark_name(str, v, t, a);
-		return (1);
-	}
-	return (0);
+	if (!*name)
+		*name = dstr_create_from_srcn(v->lines[*v->line_index],
+		close_quote ? (size_t)(close_quote - v->lines[*v->line_index]) :
+		ft_strlen(v->lines[*v->line_index]));
+	else
+		dstr_add_strn(name, v->lines[*v->line_index], close_quote ?
+					(size_t)(close_quote - v->lines[*v->line_index]) :
+					ft_strlen(v->lines[*v->line_index]));
 }
 
-int		ft_parse_name(const char **str, t_validation *v, t_token *t, bool *a)
+bool		parse_name(t_validation *v, t_token *token, char **str)
 {
-	if (t->value != NULL)
+	t_dstr		name;
+	const char	*close_quote = NULL;
+	bool		done;
+
+	name = NULL;
+	done = false;
+	while (*v->line_index < vec_size(&v->lines) && !close_quote)
 	{
-		if (ft_keep_fill_value(t, v) == 1)
+		close_quote = ft_strchr(v->lines[*v->line_index], '\"');
+		add(&name, close_quote, v);
+		if (!close_quote)
 		{
-			mark_name(str, v, t, a);
-			return (1);
+			*v->line_index += 1;
+			dstr_add_chr(&name, '\n');
 		}
 		else
-			return (0);
+		{
+			done = true;
+			token->type = NAME;
+			token->value = dstr_to_str(name);
+			v->comment = 1;
+			*str = (char*)close_quote + 1;
+		}
 	}
-	else if (ft_strlen(v->lines[*v->line_index]) == 0)
-		t->value = ft_strndup("\n", 1);
-	else
-	{
-		if (ft_fill_name(str, v, t, a) == 1)
-			return (1);
-	}
-	return (0);
+	return (done);
 }
 
-bool	is_name(const char **str, t_token *token, t_validation *v)
+bool		is_name(char **str, t_token *token, t_validation *v)
 {
-	bool		argument;
-
-	argument = false;
-	if (ft_check_n_string(v) == 1)
+	if (ft_strnequ(NAME_CMD_STRING, *str, ft_strlen(NAME_CMD_STRING)))
 	{
-		if (ft_dbl_n(str, v) == 1)
-			return (argument);
-		token->value = 0;
-		v->lines[*v->line_index] += ft_strlen(NAME_CMD_STRING);
+		if (ft_dbl_c(str, v) == 1)
+			return (false);
+		v->lines[*v->line_index] = *str + ft_strlen(NAME_CMD_STRING);
 		while (*v->lines[*v->line_index] == ' ' ||
 		*v->lines[*v->line_index] == '\t')
 			v->lines[*v->line_index]++;
 		if (*v->lines[*v->line_index] == '"')
 		{
 			v->lines[*v->line_index]++;
-			while (ft_parse_name(str, v, token, &argument) != 1 && *v->line_index <= (int)v->lines_count)
-				*v->line_index += 1;
-			ft_scroll_line(str, v->lines, *v->line_index);
-			return (argument);
+			return (parse_name(v, token, str));
 		}
-//		ft_scroll_line(str, v->lines, *v->line_index); //лишнее?
+		else
+			return (false);
 	}
-	return (argument);
+	else
+		return (false);
 }

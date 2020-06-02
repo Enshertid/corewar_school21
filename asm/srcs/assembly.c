@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   assembly.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/02 23:45:49 by user              #+#    #+#             */
+/*   Updated: 2020/06/02 23:45:56 by user             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "assembler.h"
 #include "converter.h"
 
@@ -39,31 +51,6 @@ static void	error_handle(const t_file *file, t_validation *val)
 	}
 }
 
-//  static void print(t_vector_char *lines, t_vector_token *tokens)
-//  {
-//  	const char types[10][15] = {
-//  		"LABEL",
-//  		"INSTRUCTION",
-//  		"ARGUMENT",
-//  		"SEPARATOR",
-//  		"NAME",
-//  		"COMMENT",
-//  		"UNKNOWN",
-//  		"EMPTY"
-//  	};
-//
-//  	for (int row = 0; row < vec_size(&tokens); ++row)
-//  	{
-//  		printf("Line %d: %s\n", row, lines[row]);
-//  		printf("Tokens:\n");
-//  		for (int col = 0; col < vec_size(&tokens[row]); ++col) {
-//  			printf("\tType: %s, value: \"%s\"\n", types[tokens[row][col].type],
-//  											tokens[row][col].value);
-//  		}
-//  		printf("\n");
-//  	}
-//  }
-
 void		assembly(t_file *file, t_validation *validation)
 {
 	file->bytecode = NULL;
@@ -78,7 +65,6 @@ void		assembly(t_file *file, t_validation *validation)
 	else
 	{
 		file->tokens = tokenizer(file->lines, validation);
-//		 print(file->copy, file->tokens);
 		ft_check_labels(file->tokens, validation);
 		ft_check_sizes(file->tokens, validation);
 		ft_check_instructions(file->tokens, validation);

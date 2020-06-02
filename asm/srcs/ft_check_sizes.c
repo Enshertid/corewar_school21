@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/05/25 17:17:06 by user             ###   ########.fr       */
+/*   Updated: 2020/06/02 21:59:35 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,4 @@ void		ft_nonexist_l(t_validation *val, char **labels, int i)
 {
 	warning_add(ERROR, 3, "Nonexistent label \"", labels[i], "\".");
 	val->error = 1;
-}
-
-bool		is_empty(const char **str, t_token *token)
-{
-	bool		argument;
-
-	argument = false;
-	if (useless_line(*str) == true)
-	{
-		argument = true;
-		token->type = EMPTY;
-		token->value = ft_strdup("");
-		*str = *str + 1;
-		return (argument);
-	}
-	return (argument);
 }

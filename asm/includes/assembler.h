@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/05/27 19:18:40 by user             ###   ########.fr       */
+/*   Updated: 2020/06/02 22:44:53 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void				ft_large_n(t_validation *val);
 void				ft_large_c(t_validation *val);
 void				ft_check_sizes(t_vector_token *tokens, t_validation *val);
 void				ft_nonexist_l(t_validation *val, char **labels, int i);
-void				ft_scroll_line(const char **str, char **lines,
+void				ft_scroll_line(char **str, char **lines,
 		int line_index);
 void				ft_parse_string(t_vector_token *t, int row, int *col,
 		t_validation *val);
@@ -83,17 +83,17 @@ void				ft_parse_args(t_vector_token *t, int row, int *col,
 int					ft_check_n_string(t_validation *v);
 int					ft_fill_name(const char **str, t_validation *v,
 		t_token *t, bool *a);
-int					ft_dbl_n(const char **str, t_validation *v);
+int					ft_dbl_n(char **str, t_validation *v);
 int					ft_parse_name(const char **str, t_validation *v,
 		t_token *t, bool *a);
-bool				is_name(const char **str, t_token *token, t_validation *v);
+bool				is_name(char **str, t_token *token, t_validation *v);
 int					ft_check_com_string(t_validation *v);
 int					ft_fill_com(const char **str, t_validation *v,
 		t_token *t, bool *a);
-int					ft_dbl_c(const char **str, t_validation *v);
+int					ft_dbl_c(char **str, t_validation *v);
 int					ft_parse_com(const char **str, t_validation *v,
 		t_token *t, bool *a);
-bool				is_comment(const char **str, t_token *token,
+bool				is_comment(char **str, t_token *token,
 		t_validation *v);
 int					ft_keep_fill_value(t_token *token, t_validation *v);
 void				mark_name(const char **str, t_validation *v,
