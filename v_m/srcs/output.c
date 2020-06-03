@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediego <ediego@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ediego  <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 12:23:02 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/26 12:23:02 by ediego           ###   ########.fr       */
+/*   Updated: 2020/06/03 11:54:51 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void				print_arena(const void *arena, size_t size)
 	str = "0123456789abcdef";
 	p = (unsigned char *)arena;
 	i = 0;
-	while (i < size)
+	while (i < MEM_SIZE)
 	{
 		print_addr(i);
 		j = 0;
-		while (j < 64 && i + j < size)
+		while (j < size && i + j < MEM_SIZE)
 		{
 			write(1, &str[(*(p + i + j) / 16) % 16], 1);
 			write(1, &str[*(p + i + j) % 16], 1);
@@ -47,6 +47,6 @@ void				print_arena(const void *arena, size_t size)
 			j++;
 		}
 		write(1, "\n", 1);
-		i += 64;
+		i += size;
 	}
 }
