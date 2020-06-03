@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_live.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediego  <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/26 12:16:13 by ediego            #+#    #+#             */
-/*   Updated: 2020/06/03 16:11:13 by ediego           ###   ########.fr       */
+/*   Created: 2020/06/03 20:53:33 by user              #+#    #+#             */
+/*   Updated: 2020/06/03 20:53:43 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void			check_player(t_vm *vm, t_car *car)
 {
 	int8_t				player;
 	int8_t				id;
-	char 				*name;
+	char				*name;
 
 	player = read_four_bytes(vm, (car->position + 1) % MEM_SIZE) * -1;
 	if (player > 0 && player <= vm->players.size)
