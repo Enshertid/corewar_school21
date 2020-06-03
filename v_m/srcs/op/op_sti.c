@@ -6,13 +6,12 @@
 /*   By: ediego  <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 12:18:18 by ediego            #+#    #+#             */
-/*   Updated: 2020/06/03 11:57:32 by ediego           ###   ########.fr       */
+/*   Updated: 2020/06/03 13:37:07 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "vm.h"
-#include "vis.h"
 
 static bool			get_third(t_vm *vm, t_car *car, int8_t *sw_arg,
 														int32_t *value)

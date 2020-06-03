@@ -6,7 +6,7 @@
 /*   By: ediego  <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 23:45:49 by user              #+#    #+#             */
-/*   Updated: 2020/06/03 12:57:28 by ediego           ###   ########.fr       */
+/*   Updated: 2020/06/03 13:30:31 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,8 @@ static void	error_handle(const t_file *file, t_validation *val)
 	}
 	else if (file->status == FILE_EMPTY)
 	{
-		//printf("Line %zu: %s\n", row, lines[row]);
-		//printf("Tokens:\n");
-		for (size_t col = 0; col < vec_size(&tokens[row]); ++col) {
-			//printf("\tType: %s, value: \"%s\"\n", types[tokens[row][col].type],
-											tokens[row][col].value);
-		}
-		//printf("\n");
+		warning_add(ERROR, 3, "File \"", file->name, "\" is empty");
+		val->no_newline_empty = 1;
 	}
 }
 

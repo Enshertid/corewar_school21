@@ -6,7 +6,7 @@
 /*   By: ediego  <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 12:20:12 by ediego            #+#    #+#             */
-/*   Updated: 2020/06/03 11:57:42 by ediego           ###   ########.fr       */
+/*   Updated: 2020/06/03 13:36:44 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include "libft.h"
 #include "players.h"
 #include "operations.h"
-#include "vis.h"
 
 static void		init_players(t_players *players)
 {
