@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   players.h                                          :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ediego <ediego@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/26 12:26:15 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/26 12:26:16 by ediego           ###   ########.fr       */
+/*   Created: 2020/05/26 12:25:28 by ediego            #+#    #+#             */
+/*   Updated: 2020/05/26 12:25:30 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYERS_H
-# define PLAYERS_H
+#ifndef GAME_H
+# define GAME_H
 
-# include "libft.h"
+# include "carriages.h"
+# include "vm.h"
+# include "op.h"
 
-typedef struct			s_player
-{
-	char				*name;
-	char				*comment;
-	char				*ex_code;
-	int					id;
-	bool				flag_of_n;
-	size_t				ex_size;
-}						t_player;
+t_car				*check_caret(t_vm *vm, t_car *caret);
+bool				check_live(t_vm *vm);
 
-typedef struct			s_players
-{
-	t_player			**arr;
-	int8_t				size;
-	int8_t				iter;
-	int32_t				dump_num;
-	bool				aff;
-}						t_players;
+bool				end_dump(t_vm *vm);
+bool				end_game(t_vm *vm, t_players *players);
 
 #endif

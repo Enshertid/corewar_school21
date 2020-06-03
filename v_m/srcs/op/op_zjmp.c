@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   players.h                                          :+:      :+:    :+:   */
+/*   op_zjmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ediego <ediego@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/26 12:26:15 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/26 12:26:16 by ediego           ###   ########.fr       */
+/*   Created: 2020/05/26 12:19:02 by ediego            #+#    #+#             */
+/*   Updated: 2020/05/26 12:19:04 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYERS_H
-# define PLAYERS_H
+#include "operations.h"
+#include "vm.h"
 
-# include "libft.h"
-
-typedef struct			s_player
+void				op_zjmp(t_vm *vm, t_car *car, t_arg *arg)
 {
-	char				*name;
-	char				*comment;
-	char				*ex_code;
-	int					id;
-	bool				flag_of_n;
-	size_t				ex_size;
-}						t_player;
+	int				dir;
 
-typedef struct			s_players
-{
-	t_player			**arr;
-	int8_t				size;
-	int8_t				iter;
-	int32_t				dump_num;
-	bool				aff;
-}						t_players;
-
-#endif
+	(void)arg->first;
+	if (car->carry)
+	{
+		dir = read_two_bytes(vm, (car->position + 1) % MEM_SIZE);
+		car->position = get_pos(car, get_idx(dir));
+	}
+	else
+		car->position = (car->position + 3) % MEM_SIZE;
+}

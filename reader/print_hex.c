@@ -14,21 +14,21 @@
 #include <stdlib.h>
 #include "reader.h"
 
-static t_bool	line_equal_to_prev(const char *line, size_t lenght)
+static bool	line_equal_to_prev(const char *line, size_t lenght)
 {
 	static char		prev_line[17];
 	static size_t	prev_lenght = 0;
 	size_t			pos;
-	t_bool			equals;
+	bool			equals;
 
-	equals = TRUE;
+	equals = true;
 	if (!prev_lenght || lenght != prev_lenght)
-		equals = FALSE;
+		equals = false;
 	pos = 0;
-	while (equals != FALSE && pos < lenght)
+	while (equals != false && pos < lenght)
 	{
 		if (line[pos] != prev_line[pos])
-			equals = FALSE;
+			equals = false;
 		++pos;
 	}
 	ft_memcpy(prev_line, line, lenght + 1);
@@ -65,7 +65,7 @@ static void		print_total_symbols(size_t symbols)
 
 	if (symbols > 0xfffffe && ((symbols + 1) & symbols) == 0)
 		field_width += 1;
-	sprintf(a, "%0*lx ", field_width, symbols);
+	s//printf(a, "%0*lx ", field_width, symbols);
 	buf_add_str(a);
 }
 
@@ -74,10 +74,10 @@ void		print_hex(const int fd)
 	char	cur_line[17];
 	size_t	ret;
 	size_t	printed_symbols;
-	t_bool	prev_line_is_equal;
+	bool	prev_line_is_equal;
 
 	printed_symbols = 0;
-	prev_line_is_equal = FALSE;
+	prev_line_is_equal = false;
 	while ((ret = read(fd, cur_line, 16)) > 0)
 	{
 		cur_line[ret] = '\0';
@@ -87,12 +87,12 @@ void		print_hex(const int fd)
 			if (prev_line_is_equal)
 			{
 				buf_add_strn("*\n", 2);
-				prev_line_is_equal = FALSE;
+				prev_line_is_equal = false;
 			}
 			print_total_symbols(printed_symbols);
 			print_line(cur_line, (ret + 1) & ~1);
 		}
 		else
-			prev_line_is_equal = TRUE;
+			prev_line_is_equal = true;
 	}
 }

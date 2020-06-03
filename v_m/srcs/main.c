@@ -3,45 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ediego <ediego@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/02 18:58:47 by enshertid         #+#    #+#             */
-/*   Updated: 2020/04/05 14:07:23 by enshertid        ###   ########.fr       */
+/*   Created: 2020/05/26 12:21:16 by ediego            #+#    #+#             */
+/*   Updated: 2020/05/26 12:21:17 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "stdio.h"
-
-void			init_data(t_data *data, int ac, char **av)
-{
-	ft_memset(data, 0, sizeof(t_data));
-	init_players(&data->players);
-	data->pars.ac = ac;
-	data->pars.av = av;
-	data->pars.i = 1;
-}
-
-void			destroy_data(t_data *data)
-{
-	size_t i = 0;
-	while(i < data->players.iter)
-	{
-		free(data->players.arr[i]->name);
-		free(data->players.arr[i]->comment);
-		// free(data->players.arr[i]->ex_code);
-		free(data->players.arr[i]);
-		i++;
-	}
-	free(data->players.arr);
-}
 
 int				main(int ac, char **av)
 {
-	t_data			data;
+	t_vm		vm;
 
-	init_data(&data, ac, av);
-	parsing(&data.pars, &data.players);
-	destroy_data(&data);
+	init_data(&vm, ac, av);
+	introduce(&vm.players);
+	cycle_of_game(&vm);
+	destroy_data(&vm);
 	return (0);
 }
