@@ -2,6 +2,5 @@
 *cmake*
 *.o
 a.out
-file*
 .*
 *.dSYM
