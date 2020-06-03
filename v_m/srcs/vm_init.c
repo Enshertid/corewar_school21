@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediego <ediego@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ediego  <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 12:24:40 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/26 12:24:41 by ediego           ###   ########.fr       */
+/*   Updated: 2020/06/03 20:51:52 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void				init_vm(t_vm *vm, t_players *players)
 	init_vm_arena(vm, players);
 	init_carriages(vm, players->size);
 	vm->dump_value = players->dump_num >= 0 ? players->dump_num : -1;
+	vm->dump_size = players->dump_size;
 	vm->aff = players->aff;
 	vm->winner_id = players->size;
 }

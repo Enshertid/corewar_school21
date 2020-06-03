@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediego <ediego@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ediego  <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 12:24:29 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/26 12:24:30 by ediego           ###   ########.fr       */
+/*   Updated: 2020/06/03 20:23:44 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void				parsing(t_players *players, int ac, char **av)
 		ft_error("To many arguments", NULL, 1);
 	while (pars.i < pars.ac)
 	{
-		if (ft_strequ(pars.av[pars.i], "-dump") && valid_dump(&pars, players))
+		if ((ft_strequ(pars.av[pars.i], "-dump") ||
+		ft_strequ(pars.av[pars.i], "-d")) && valid_dump(&pars, players))
 			continue ;
 		if (ft_strequ(pars.av[pars.i], "-a") && valid_aff(&pars, players))
 			continue ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediego <ediego@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ediego  <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 12:26:30 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/26 12:26:31 by ediego           ###   ########.fr       */
+/*   Updated: 2020/06/03 19:55:50 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct			s_vm
 	t_players			players;
 	char				arena[MEM_SIZE];
 	int8_t				winner_id;
+	int8_t 				dump_size;
 	int32_t				count_live;
 	int32_t				count_checks;
 	int32_t				cycle_to_die;

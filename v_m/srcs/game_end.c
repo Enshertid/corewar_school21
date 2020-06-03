@@ -6,7 +6,7 @@
 /*   By: ediego  <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 12:20:45 by ediego            #+#    #+#             */
-/*   Updated: 2020/06/03 11:54:48 by ediego           ###   ########.fr       */
+/*   Updated: 2020/06/03 19:56:24 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool			end_dump(t_vm *vm)
 {
 	t_car		*tmp;
 
-	print_arena(vm->arena, 32);
+	print_arena(vm->arena, vm->dump_size);
 	tmp = vm->carriages;
 	while (tmp)
 		tmp = delete_from_begin(&vm->carriages, tmp);

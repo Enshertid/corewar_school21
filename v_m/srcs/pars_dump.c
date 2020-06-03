@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_dump.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ediego <ediego@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ediego  <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 12:23:52 by ediego            #+#    #+#             */
-/*   Updated: 2020/05/26 12:23:53 by ediego           ###   ########.fr       */
+/*   Updated: 2020/06/03 20:12:57 by ediego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ bool			valid_dump(t_pars *pars, t_players *players)
 	if ((int64_t)dump_number != long_dump_number)
 		ft_error("overflow of int in dump flag, are you WSTYGG?",
 												"valid dump", 2);
+	if (ft_strequ(pars->av[(pars->i) - 1], "-d"))
+		players->dump_size = 64;
+	else
+		players->dump_size = 32;
 	players->dump_num = dump_number >= 0 ? dump_number : -1;
 	++pars->i;
 	return (true);
