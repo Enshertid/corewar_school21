@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_com.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/06/03 01:16:52 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/06/03 20:39:41 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ static void	add(t_dstr *comment, const char *close_quote, t_validation *v)
 					ft_strlen(v->lines[*v->line_index]));
 }
 
+bool		prepare(t_token *token, t_dstr comment, t_validation *v)
+{
+	token->type = COMMENT;
+	token->value = dstr_to_str(comment);
+	v->name = 1;
+	return (true);
+}
+
 bool		parse_comment(t_validation *v, t_token *token, char **str)
 {
 	t_dstr		comment;
@@ -56,13 +64,12 @@ bool		parse_comment(t_validation *v, t_token *token, char **str)
 		}
 		else
 		{
-			done = true;
-			token->type = COMMENT;
-			token->value = dstr_to_str(comment);
-			v->name = 1;
+			done = prepare(token, comment, v);
 			*str = (char*)close_quote + 1;
 		}
 	}
+	if (!done)
+		dstr_destroy(comment);
 	return (done);
 }
 

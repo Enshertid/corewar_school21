@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 15:21:15 by jgroleo           #+#    #+#             */
-/*   Updated: 2020/06/03 01:08:14 by enshertid        ###   ########.fr       */
+/*   Updated: 2020/06/03 20:31:59 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 void	ft_scroll_line(char **str, char **lines, int line_index)
 {
-	if (lines[line_index] != NULL)
+	if (line_index < vec_size(&lines))
 	{
-		while (*lines[line_index] != '\0')
-			lines[line_index]++;
-		*str = lines[line_index];
+		if (lines[line_index] != NULL)
+		{
+			while (*lines[line_index] != '\0')
+				lines[line_index]++;
+			*str = lines[line_index];
+		}
 	}
 }
 
