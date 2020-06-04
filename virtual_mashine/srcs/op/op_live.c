@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_live.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/03 20:53:33 by user              #+#    #+#             */
-/*   Updated: 2020/06/03 20:53:43 by user             ###   ########.fr       */
+/*   Updated: 2020/06/04 15:55:55 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@ static void			check_player(t_vm *vm, t_car *car)
 		vm->winner_id = player;
 		id = player + '0';
 		name = vm->players.arr[player - 1]->name;
-		write(1, "A process shows that player ", 28);
-		write(1, &id, 1);
-		write(1, " (", 2);
-		write(1, name, ft_strlen(name));
-		write(1, ") is alive\n", 11);
+		if (vm->aff)
+		{
+			write(1, "A process shows that player ", 28);
+			write(1, &id, 1);
+			write(1, " (", 2);
+			write(1, name, ft_strlen(name));
+			write(1, ") is alive\n", 11);
+		}
 	}
 }
 
