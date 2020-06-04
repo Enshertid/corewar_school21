@@ -12,6 +12,7 @@
 
 #include "operations.h"
 #include "vm.h"
+		#include <stdio.h>
 
 static void			check_player(t_vm *vm, t_car *car)
 {
@@ -30,6 +31,7 @@ static void			check_player(t_vm *vm, t_car *car)
 		write(1, " (", 2);
 		write(1, name, ft_strlen(name));
 		write(1, ") is alive\n", 11);
+		printf("cycle: %d\n", vm->current_cycle);
 	}
 }
 
