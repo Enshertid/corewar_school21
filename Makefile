@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user <user@student.42.fr>                  +#+  +:+       +#+         #
+#    By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/03 01:36:05 by enshertid         #+#    #+#              #
-#    Updated: 2020/06/03 20:49:49 by user             ###   ########.fr        #
+#    Updated: 2020/06/04 15:10:10 by enshertid        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ ASM_NAME =	asm
 VM_NAME =	corewar
 
 ASM_DIR =	assembler
-VM_DIR =	vm
+VM_DIR =	virtual_mashine
 
 all:
 	make -C libft

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   op_live.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: enshertid <enshertid@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/03 20:53:33 by user              #+#    #+#             */
-/*   Updated: 2020/06/03 20:53:43 by user             ###   ########.fr       */
+/*   Updated: 2020/06/04 15:55:55 by enshertid        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operations.h"
 #include "vm.h"
-		#include <stdio.h>
 
 static void			check_player(t_vm *vm, t_car *car)
 {
