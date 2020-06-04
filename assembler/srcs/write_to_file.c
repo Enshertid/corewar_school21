@@ -118,6 +118,9 @@ void				write_to_file(const t_file *file, t_vector_char *bytecode)
 			line += 1;
 		}
 		close(fd);
+		write(1, "Writing output program to ", 26);
+		write(1, cor_name, ft_strlen(cor_name));
+		write(1, "\n", 1);
 	}
 	else
 		warning_add(ERROR, 3, "Can\'t create cor file \"", cor_name, "\'");
